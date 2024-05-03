@@ -165,6 +165,7 @@ tcti_device_receive (
     uint8_t header[TPM_HEADER_SIZE];
     size_t offset = 2;
     UINT32 partial_size;
+    uint8_t *response_tmp = NULL,
 
     rc = tcti_common_receive_checks (tcti_common,
                                      response_size,
@@ -200,9 +201,15 @@ tcti_device_receive (
             //         return TSS2_TCTI_RC_IO_ERROR;
             //     }
             // }
-            usleep(timeout);
+            usleep(5000);
+            TEMP_RETRY (size, read (tcti_dev->fd, header, TPM_HEADER_SIZE));
+            if (size < 0 || size != TPM_HEADER_SIZE) {
+                LOG_ERROR ("Failed to get response size fd %d, got errno %d: %s",
+                        tcti_dev->fd, errno, strerror (errno));
+                return TSS2_TCTI_RC_IO_ERROR;
+            }
             LOG_DEBUG("Partial read - received header");
-            rc = Tss2_MU_UINT32_Unmarshal(header, TPM_HEADER_SIZE,
+            rc = Tss2_MU_UINT32_Unmarshal(header + 1, TPM_HEADER_SIZE,
                                           &offset, &partial_size);
             if (rc != TSS2_RC_SUCCESS) {
                 LOG_ERROR ("Failed to unmarshal response size.");
@@ -217,7 +224,7 @@ tcti_device_receive (
             LOG_DEBUG("Partial read - received response size %d.", partial_size);
             tcti_common->partial = true;
             *response_size = partial_size;
-            memcpy(&tcti_common->header, header, TPM_HEADER_SIZE);
+            memcpy(&tcti_common->header, header + 1, TPM_HEADER_SIZE);
             return rc;
         }
     }
@@ -266,11 +273,13 @@ tcti_device_receive (
     //     }
     // }
 
-    usleep(timeout);
+    usleep(5000);
+    response_tmp = calloc(*response_size - TPM_HEADER_SIZE, 1);
+    
     if (tcti_common->partial == true) {
         memcpy(response_buffer, &tcti_common->header, TPM_HEADER_SIZE);
-        TEMP_RETRY (size, read (tcti_dev->fd, response_buffer +
-                    TPM_HEADER_SIZE, *response_size - TPM_HEADER_SIZE));
+        TEMP_RETRY (size, read (tcti_dev->fd, response_tmp, *response_size - TPM_HEADER_SIZE));
+        memcpy(response_buffer + TPM_HEADER_SIZE, response_tmp + 1, *response_size - TPM_HEADER_SIZE);
     } else {
         TEMP_RETRY (size, read (tcti_dev->fd, response_buffer,
                                 *response_size));
@@ -322,7 +331,9 @@ tcti_device_receive (
      */
 out:
     tcti_common->state = TCTI_STATE_TRANSMIT;
-
+    if (response_tmp) {
+        free(response_tmp);
+    }
     return rc;
 }
 
@@ -407,8 +418,7 @@ static int open_tpm (
 #else
         file = open (pathname, O_RDWR | O_NONBLOCK);
         if (ioctl(file, I2C_SLAVE, addr) < 0) {
-            printf("Failed to acquire bus access and/or talk to slave.\n");
-            exit(1);
+            LOG_TRACE("Failed to acquire bus access and/or talk to slave.\n");
         }
         return file;
 #endif
