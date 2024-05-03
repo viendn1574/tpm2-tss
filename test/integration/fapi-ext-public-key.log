@@ -1,0 +1,25 @@
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.dCj0As/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.dCj0As/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.dCj0As",
+     "tcti": "none",
+}
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.dCj0As/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.dCj0As/system_dir/policy does not exist, creating 
+
+PathList:
+/ext/myExtPubKey
+info:test:test/integration/main-fapi.c:504:main() Test returned 0 
+Script returned 0
+PASS test/integration/fapi-ext-public-key.fint (exit status: 0)

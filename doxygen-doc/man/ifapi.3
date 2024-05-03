@@ -1,0 +1,75 @@
+.TH "ifapi" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ifapi
+.SH SYNOPSIS
+.br
+.PP
+.SS "Modules"
+
+.in +1c
+.ti -1c
+.RI "\fBInternal Cryptographic Backend\fP"
+.br
+.ti -1c
+.RI "\fBPolicy instantiation module\fP"
+.br
+.ti -1c
+.RI "\fBPolicy calculation module\fP"
+.br
+.ti -1c
+.RI "\fBPolicy callback functions\&.\fP"
+.br
+.ti -1c
+.RI "\fBPolicy execution functions\&.\fP"
+.br
+.ti -1c
+.RI "\fBPolicy utilitiy module\fP"
+.br
+.ti -1c
+.RI "\fBHelper functions module\fP"
+.br
+.ti -1c
+.RI "\fBUtility module\fP"
+.br
+.ti -1c
+.RI "\fBBasic IO module\fP"
+.br
+.ti -1c
+.RI "\fBKey store module\fP"
+.br
+.ti -1c
+.RI "\fBPolicy store module\fP"
+.br
+.ti -1c
+.RI "\fBConfiguration utilities\&.\fP"
+.br
+.ti -1c
+.RI "\fBEvent log utilities\&.\fP"
+.br
+.ti -1c
+.RI "\fBProfile module\fP"
+.br
+.ti -1c
+.RI "\fBFAPI object serialization module\fP"
+.br
+.ti -1c
+.RI "\fBFAPI object deserialization module\fP"
+.br
+.ti -1c
+.RI "\fBVendor specific module\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+This module holds internal APIs of the FAPI implementation\&.
+.PP
+Async programming style:
+.PP
+The tss2-fapi implementation uses an asynchronous programming style internally\&. This means that whenever a piece of code performs a potentially blocking operation it will instead return TSS2_FAPI_RC_TRY_AGAIN (similarly to ESAPI)\&. Then this function is called again once the Poll returns ok\&. In order to carry the state of execution information over between the different invocation of the same function, the current state is stored in a state variable and all variables are stored in some kind of context variables\&. On the next entry to the function the state is evaluated using a swtich() statement and execution is resumed\&.
+.PP
+In order to understand the functional flow of code in FAPI, one can read the functions continuously over all fallthrough; and statecase(); statements\&. The statecase statements are the re-entry points of each function\&. The return_try_again() and FAPI_SYNC() statements are the preempt statements\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

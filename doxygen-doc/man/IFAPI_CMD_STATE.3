@@ -1,0 +1,80 @@
+.TH "IFAPI_CMD_STATE" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_CMD_STATE
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <fapi_int\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "\fBIFAPI_Provision\fP \fBProvision\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_Key_Create\fP \fBKey_Create\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_Key_SetCertificate\fP \fBKey_SetCertificate\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_Entity_ChangeAuth\fP \fBEntity_ChangeAuth\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_Entity_Delete\fP \fBEntity_Delete\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_GetEsysBlob\fP \fBGetEsysBlob\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_Entities_List\fP \fBEntities_List\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_Key_VerifySignature\fP \fBKey_VerifySignature\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_Data_EncryptDecrypt\fP \fBData_EncryptDecrypt\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_PCR\fP \fBpcr\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_INITIALIZE\fP \fBInitialize\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_Path_SetDescription\fP \fBpath_set_info\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_Fapi_AuthorizePolicy\fP \fBPolicy_AuthorizeNewPolicy\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_api_WriteAuthorizeNv\fP \fBWriteAuthorizeNV\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_ExportKey\fP \fBExportKey\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_ImportKey\fP \fBImportKey\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_Unseal\fP \fBUnseal\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_GetInfo\fP \fBGetInfo\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_ExportPolicy\fP \fBExportPolicy\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Union for all input parameters\&.
+.PP
+The input parameters of a command need to be stored in order to enable resubmission\&. This type provides the corresponding facilities\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

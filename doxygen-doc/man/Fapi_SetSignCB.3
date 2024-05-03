@@ -1,0 +1,95 @@
+.TH "Fapi_SetSignCB" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Fapi_SetSignCB \- FAPI functions to invoke SetSignCB\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef TSS2_RC(* \fBFapi_CB_Sign\fP) (char const *objectPath, char const *description, char const *publicKey, char const *publicKeyHint, uint32_t hashAlg, uint8_t const *dataToSign, size_t dataToSignSize, uint8_t const **signature, size_t *signatureSize, void *userData)"
+.br
+.ti -1c
+.RI "typedef TSS2_RC(* \fBFapi_CB_PolicyAction\fP) (char const *objectPath, char const *action, void *userData)"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC \fBFapi_SetSignCB\fP (\fBFAPI_CONTEXT\fP *context, Fapi_CB_Sign callback, void *userData)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBFapi_SetPolicyActionCB\fP (\fBFAPI_CONTEXT\fP *context, Fapi_CB_PolicyAction callback, void *userData)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+FAPI functions to invoke SetSignCB\&. 
+
+
+.SH "Function Documentation"
+.PP 
+.SS "Fapi_SetPolicyActionCB (\fBFAPI_CONTEXT\fP * context, Fapi_CB_PolicyAction callback, void * userData)"
+Fapi_SetActionCB() registers an application-defined function as a callback that shall be called back upon encountering a policy action element\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP 
+.br
+\fIcallback\fP The callback function for branch selection 
+.br
+\fIuserData\fP A pointer that is provided to all callback invocations
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if the context is NULL\&. 
+.br
+\fITSS2_FAPI_RC_BAD_CONTEXT\fP if context corruption is detected\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_FAPI_RC_BAD_SEQUENCE\fP if the synchronous or Async functions are called while the context has another asynchronous operation outstanding, or the Finish function is called while the context does not have an appropriate asynchronous operation outstanding\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if the data cannot be saved\&. 
+.RE
+.PP
+
+.SS "Fapi_SetSignCB (\fBFAPI_CONTEXT\fP * context, Fapi_CB_Sign callback, void * userData)"
+\fBFapi_SetSignCB()\fP registers an application-defined function as a callback to allow the FAPI to get signatures authorizing use of TPM objects\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP 
+.br
+\fIcallback\fP The callback function for signing selection 
+.br
+\fIuserData\fP A pointer that is provided to all callback invocations
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if the context is NULL\&. 
+.br
+\fITSS2_FAPI_RC_BAD_CONTEXT\fP if context corruption is detected\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_FAPI_RC_BAD_SEQUENCE\fP if the synchronous or Async functions are called while the context has another asynchronous operation outstanding, or the Finish function is called while the context does not have an appropriate asynchronous operation outstanding\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if the data cannot be saved\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

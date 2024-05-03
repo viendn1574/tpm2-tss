@@ -1,0 +1,700 @@
+[==========] Running 116 test(s).
+[ RUN      ] check_Startup
+ERROR:esys:src/tss2-esys/api/Esys_Startup.c:112:Esys_Startup_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Startup.c:55:Esys_Startup() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_Startup.c:112:Esys_Startup_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Startup.c:169:Esys_Startup_Finish() esyscontext is NULL. 
+[       OK ] check_Startup
+[ RUN      ] check_Shutdown
+ERROR:esys:src/tss2-esys/api/Esys_Shutdown.c:146:Esys_Shutdown_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Shutdown.c:72:Esys_Shutdown() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_Shutdown.c:146:Esys_Shutdown_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Shutdown.c:226:Esys_Shutdown_Finish() esyscontext is NULL. 
+[       OK ] check_Shutdown
+[ RUN      ] check_SelfTest
+ERROR:esys:src/tss2-esys/api/Esys_SelfTest.c:146:Esys_SelfTest_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_SelfTest.c:72:Esys_SelfTest() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_SelfTest.c:146:Esys_SelfTest_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_SelfTest.c:226:Esys_SelfTest_Finish() esyscontext is NULL. 
+[       OK ] check_SelfTest
+[ RUN      ] check_IncrementalSelfTest
+ERROR:esys:src/tss2-esys/api/Esys_IncrementalSelfTest.c:149:Esys_IncrementalSelfTest_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_IncrementalSelfTest.c:75:Esys_IncrementalSelfTest() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_IncrementalSelfTest.c:149:Esys_IncrementalSelfTest_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_IncrementalSelfTest.c:232:Esys_IncrementalSelfTest_Finish() esyscontext is NULL. 
+[       OK ] check_IncrementalSelfTest
+[ RUN      ] check_GetTestResult
+ERROR:esys:src/tss2-esys/api/Esys_GetTestResult.c:140:Esys_GetTestResult_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_GetTestResult.c:71:Esys_GetTestResult() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_GetTestResult.c:140:Esys_GetTestResult_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_GetTestResult.c:225:Esys_GetTestResult_Finish() esyscontext is NULL. 
+[       OK ] check_GetTestResult
+[ RUN      ] check_StartAuthSession
+ERROR:esys:src/tss2-esys/api/Esys_StartAuthSession.c:203:Esys_StartAuthSession_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_StartAuthSession.c:113:Esys_StartAuthSession() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_StartAuthSession.c:203:Esys_StartAuthSession_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_StartAuthSession.c:329:Esys_StartAuthSession_Finish() esyscontext is NULL. 
+[       OK ] check_StartAuthSession
+[ RUN      ] check_PolicyRestart
+ERROR:esys:src/tss2-esys/api/Esys_PolicyRestart.c:153:Esys_PolicyRestart_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyRestart.c:75:Esys_PolicyRestart() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyRestart.c:153:Esys_PolicyRestart_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyRestart.c:239:Esys_PolicyRestart_Finish() esyscontext is NULL. 
+[       OK ] check_PolicyRestart
+[ RUN      ] check_Create
+ERROR:esys:src/tss2-esys/api/Esys_Create.c:195:Esys_Create_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Create.c:110:Esys_Create() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_Create.c:195:Esys_Create_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Create.c:316:Esys_Create_Finish() esyscontext is NULL. 
+[       OK ] check_Create
+[ RUN      ] check_Load
+ERROR:esys:src/tss2-esys/api/Esys_Load.c:167:Esys_Load_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Load.c:89:Esys_Load() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_Load.c:167:Esys_Load_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Load.c:261:Esys_Load_Finish() esyscontext is NULL. 
+[       OK ] check_Load
+[ RUN      ] check_LoadExternal
+ERROR:esys:src/tss2-esys/api/Esys_LoadExternal.c:159:Esys_LoadExternal_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_LoadExternal.c:85:Esys_LoadExternal() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_LoadExternal.c:159:Esys_LoadExternal_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_LoadExternal.c:251:Esys_LoadExternal_Finish() esyscontext is NULL. 
+[       OK ] check_LoadExternal
+[ RUN      ] check_ReadPublic
+ERROR:esys:src/tss2-esys/api/Esys_ReadPublic.c:156:Esys_ReadPublic_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ReadPublic.c:81:Esys_ReadPublic() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_ReadPublic.c:156:Esys_ReadPublic_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ReadPublic.c:253:Esys_ReadPublic_Finish() esyscontext is NULL. 
+[       OK ] check_ReadPublic
+[ RUN      ] check_ActivateCredential
+ERROR:esys:src/tss2-esys/api/Esys_ActivateCredential.c:165:Esys_ActivateCredential_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ActivateCredential.c:82:Esys_ActivateCredential() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_ActivateCredential.c:165:Esys_ActivateCredential_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ActivateCredential.c:270:Esys_ActivateCredential_Finish() esyscontext is NULL. 
+[       OK ] check_ActivateCredential
+[ RUN      ] check_MakeCredential
+ERROR:esys:src/tss2-esys/api/Esys_MakeCredential.c:159:Esys_MakeCredential_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_MakeCredential.c:81:Esys_MakeCredential() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_MakeCredential.c:159:Esys_MakeCredential_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_MakeCredential.c:253:Esys_MakeCredential_Finish() esyscontext is NULL. 
+[       OK ] check_MakeCredential
+[ RUN      ] check_Unseal
+ERROR:esys:src/tss2-esys/api/Esys_Unseal.c:150:Esys_Unseal_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Unseal.c:75:Esys_Unseal() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_Unseal.c:150:Esys_Unseal_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Unseal.c:244:Esys_Unseal_Finish() esyscontext is NULL. 
+[       OK ] check_Unseal
+[ RUN      ] check_ObjectChangeAuth
+ERROR:esys:src/tss2-esys/api/Esys_ObjectChangeAuth.c:154:Esys_ObjectChangeAuth_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ObjectChangeAuth.c:76:Esys_ObjectChangeAuth() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_ObjectChangeAuth.c:154:Esys_ObjectChangeAuth_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ObjectChangeAuth.c:255:Esys_ObjectChangeAuth_Finish() esyscontext is NULL. 
+[       OK ] check_ObjectChangeAuth
+[ RUN      ] check_CreateLoaded
+ERROR:esys:src/tss2-esys/api/Esys_CreateLoaded.c:188:Esys_CreateLoaded_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_CreateLoaded.c:105:Esys_CreateLoaded() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_CreateLoaded.c:188:Esys_CreateLoaded_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_CreateLoaded.c:303:Esys_CreateLoaded_Finish() esyscontext is NULL. 
+[       OK ] check_CreateLoaded
+[ RUN      ] check_Duplicate
+ERROR:esys:src/tss2-esys/api/Esys_Duplicate.c:175:Esys_Duplicate_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Duplicate.c:92:Esys_Duplicate() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_Duplicate.c:175:Esys_Duplicate_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Duplicate.c:287:Esys_Duplicate_Finish() esyscontext is NULL. 
+[       OK ] check_Duplicate
+[ RUN      ] check_Rewrap
+ERROR:esys:src/tss2-esys/api/Esys_Rewrap.c:170:Esys_Rewrap_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Rewrap.c:86:Esys_Rewrap() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_Rewrap.c:170:Esys_Rewrap_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Rewrap.c:274:Esys_Rewrap_Finish() esyscontext is NULL. 
+[       OK ] check_Rewrap
+[ RUN      ] check_Import
+ERROR:esys:src/tss2-esys/api/Esys_Import.c:175:Esys_Import_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Import.c:87:Esys_Import() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_Import.c:175:Esys_Import_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Import.c:272:Esys_Import_Finish() esyscontext is NULL. 
+[       OK ] check_Import
+[ RUN      ] check_RSA_Encrypt
+ERROR:esys:src/tss2-esys/api/Esys_RSA_Encrypt.c:161:Esys_RSA_Encrypt_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_RSA_Encrypt.c:80:Esys_RSA_Encrypt() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_RSA_Encrypt.c:161:Esys_RSA_Encrypt_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_RSA_Encrypt.c:251:Esys_RSA_Encrypt_Finish() esyscontext is NULL. 
+[       OK ] check_RSA_Encrypt
+[ RUN      ] check_RSA_Decrypt
+ERROR:esys:src/tss2-esys/api/Esys_RSA_Decrypt.c:159:Esys_RSA_Decrypt_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_RSA_Decrypt.c:79:Esys_RSA_Decrypt() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_RSA_Decrypt.c:159:Esys_RSA_Decrypt_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_RSA_Decrypt.c:254:Esys_RSA_Decrypt_Finish() esyscontext is NULL. 
+[       OK ] check_RSA_Decrypt
+[ RUN      ] check_ECDH_KeyGen
+ERROR:esys:src/tss2-esys/api/Esys_ECDH_KeyGen.c:153:Esys_ECDH_KeyGen_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ECDH_KeyGen.c:78:Esys_ECDH_KeyGen() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_ECDH_KeyGen.c:153:Esys_ECDH_KeyGen_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ECDH_KeyGen.c:245:Esys_ECDH_KeyGen_Finish() esyscontext is NULL. 
+[       OK ] check_ECDH_KeyGen
+[ RUN      ] check_ECDH_ZGen
+ERROR:esys:src/tss2-esys/api/Esys_ECDH_ZGen.c:149:Esys_ECDH_ZGen_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ECDH_ZGen.c:75:Esys_ECDH_ZGen() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_ECDH_ZGen.c:149:Esys_ECDH_ZGen_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ECDH_ZGen.c:244:Esys_ECDH_ZGen_Finish() esyscontext is NULL. 
+[       OK ] check_ECDH_ZGen
+[ RUN      ] check_ECC_Parameters
+ERROR:esys:src/tss2-esys/api/Esys_ECC_Parameters.c:149:Esys_ECC_Parameters_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ECC_Parameters.c:75:Esys_ECC_Parameters() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_ECC_Parameters.c:149:Esys_ECC_Parameters_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ECC_Parameters.c:232:Esys_ECC_Parameters_Finish() esyscontext is NULL. 
+[       OK ] check_ECC_Parameters
+[ RUN      ] check_ZGen_2Phase
+ERROR:esys:src/tss2-esys/api/Esys_ZGen_2Phase.c:167:Esys_ZGen_2Phase_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ZGen_2Phase.c:85:Esys_ZGen_2Phase() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_ZGen_2Phase.c:167:Esys_ZGen_2Phase_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ZGen_2Phase.c:267:Esys_ZGen_2Phase_Finish() esyscontext is NULL. 
+[       OK ] check_ZGen_2Phase
+[ RUN      ] check_EncryptDecrypt
+ERROR:esys:src/tss2-esys/api/Esys_EncryptDecrypt.c:173:Esys_EncryptDecrypt_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_EncryptDecrypt.c:87:Esys_EncryptDecrypt() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_EncryptDecrypt.c:173:Esys_EncryptDecrypt_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_EncryptDecrypt.c:271:Esys_EncryptDecrypt_Finish() esyscontext is NULL. 
+[       OK ] check_EncryptDecrypt
+[ RUN      ] check_EncryptDecrypt2
+ERROR:esys:src/tss2-esys/api/Esys_EncryptDecrypt2.c:167:Esys_EncryptDecrypt2_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_EncryptDecrypt2.c:84:Esys_EncryptDecrypt2() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_EncryptDecrypt2.c:167:Esys_EncryptDecrypt2_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_EncryptDecrypt2.c:265:Esys_EncryptDecrypt2_Finish() esyscontext is NULL. 
+[       OK ] check_EncryptDecrypt2
+[ RUN      ] check_Hash
+ERROR:esys:src/tss2-esys/api/Esys_Hash.c:153:Esys_Hash_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Hash.c:78:Esys_Hash() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_Hash.c:153:Esys_Hash_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Hash.c:249:Esys_Hash_Finish() esyscontext is NULL. 
+[       OK ] check_Hash
+[ RUN      ] check_HMAC
+ERROR:esys:src/tss2-esys/api/Esys_HMAC.c:155:Esys_HMAC_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_HMAC.c:77:Esys_HMAC() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_HMAC.c:155:Esys_HMAC_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_HMAC.c:249:Esys_HMAC_Finish() esyscontext is NULL. 
+[       OK ] check_HMAC
+[ RUN      ] check_GetRandom
+ERROR:esys:src/tss2-esys/api/Esys_GetRandom.c:143:Esys_GetRandom_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_GetRandom.c:72:Esys_GetRandom() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_GetRandom.c:143:Esys_GetRandom_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_GetRandom.c:226:Esys_GetRandom_Finish() esyscontext is NULL. 
+[       OK ] check_GetRandom
+[ RUN      ] check_StirRandom
+ERROR:esys:src/tss2-esys/api/Esys_StirRandom.c:140:Esys_StirRandom_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_StirRandom.c:69:Esys_StirRandom() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_StirRandom.c:140:Esys_StirRandom_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_StirRandom.c:220:Esys_StirRandom_Finish() esyscontext is NULL. 
+[       OK ] check_StirRandom
+[ RUN      ] check_HMAC_Start
+ERROR:esys:src/tss2-esys/api/Esys_HMAC_Start.c:169:Esys_HMAC_Start_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_HMAC_Start.c:89:Esys_HMAC_Start() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_HMAC_Start.c:169:Esys_HMAC_Start_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_HMAC_Start.c:262:Esys_HMAC_Start_Finish() esyscontext is NULL. 
+[       OK ] check_HMAC_Start
+[ RUN      ] check_HashSequenceStart
+ERROR:esys:src/tss2-esys/api/Esys_HashSequenceStart.c:145:Esys_HashSequenceStart_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_HashSequenceStart.c:72:Esys_HashSequenceStart() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_HashSequenceStart.c:145:Esys_HashSequenceStart_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_HashSequenceStart.c:226:Esys_HashSequenceStart_Finish() esyscontext is NULL. 
+[       OK ] check_HashSequenceStart
+[ RUN      ] check_SequenceUpdate
+ERROR:esys:src/tss2-esys/api/Esys_SequenceUpdate.c:151:Esys_SequenceUpdate_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_SequenceUpdate.c:74:Esys_SequenceUpdate() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_SequenceUpdate.c:151:Esys_SequenceUpdate_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_SequenceUpdate.c:244:Esys_SequenceUpdate_Finish() esyscontext is NULL. 
+[       OK ] check_SequenceUpdate
+[ RUN      ] check_SequenceComplete
+ERROR:esys:src/tss2-esys/api/Esys_SequenceComplete.c:166:Esys_SequenceComplete_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_SequenceComplete.c:88:Esys_SequenceComplete() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_SequenceComplete.c:166:Esys_SequenceComplete_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_SequenceComplete.c:276:Esys_SequenceComplete_Finish() esyscontext is NULL. 
+[       OK ] check_SequenceComplete
+[ RUN      ] check_EventSequenceComplete
+ERROR:esys:src/tss2-esys/api/Esys_EventSequenceComplete.c:160:Esys_EventSequenceComplete_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_EventSequenceComplete.c:79:Esys_EventSequenceComplete() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_EventSequenceComplete.c:160:Esys_EventSequenceComplete_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_EventSequenceComplete.c:266:Esys_EventSequenceComplete_Finish() esyscontext is NULL. 
+[       OK ] check_EventSequenceComplete
+[ RUN      ] check_Certify
+ERROR:esys:src/tss2-esys/api/Esys_Certify.c:166:Esys_Certify_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Certify.c:84:Esys_Certify() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_Certify.c:166:Esys_Certify_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Certify.c:274:Esys_Certify_Finish() esyscontext is NULL. 
+[       OK ] check_Certify
+[ RUN      ] check_CertifyCreation
+ERROR:esys:src/tss2-esys/api/Esys_CertifyCreation.c:180:Esys_CertifyCreation_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_CertifyCreation.c:90:Esys_CertifyCreation() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_CertifyCreation.c:180:Esys_CertifyCreation_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_CertifyCreation.c:284:Esys_CertifyCreation_Finish() esyscontext is NULL. 
+[       OK ] check_CertifyCreation
+[ RUN      ] check_Quote
+ERROR:esys:src/tss2-esys/api/Esys_Quote.c:162:Esys_Quote_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Quote.c:82:Esys_Quote() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_Quote.c:162:Esys_Quote_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Quote.c:260:Esys_Quote_Finish() esyscontext is NULL. 
+[       OK ] check_Quote
+[ RUN      ] check_GetSessionAuditDigest
+ERROR:esys:src/tss2-esys/api/Esys_GetSessionAuditDigest.c:176:Esys_GetSessionAuditDigest_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_GetSessionAuditDigest.c:88:Esys_GetSessionAuditDigest() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_GetSessionAuditDigest.c:176:Esys_GetSessionAuditDigest_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_GetSessionAuditDigest.c:286:Esys_GetSessionAuditDigest_Finish() esyscontext is NULL. 
+[       OK ] check_GetSessionAuditDigest
+[ RUN      ] check_GetCommandAuditDigest
+ERROR:esys:src/tss2-esys/api/Esys_GetCommandAuditDigest.c:167:Esys_GetCommandAuditDigest_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_GetCommandAuditDigest.c:84:Esys_GetCommandAuditDigest() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_GetCommandAuditDigest.c:167:Esys_GetCommandAuditDigest_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_GetCommandAuditDigest.c:272:Esys_GetCommandAuditDigest_Finish() esyscontext is NULL. 
+[       OK ] check_GetCommandAuditDigest
+[ RUN      ] check_GetTime
+ERROR:esys:src/tss2-esys/api/Esys_GetTime.c:167:Esys_GetTime_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_GetTime.c:84:Esys_GetTime() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_GetTime.c:167:Esys_GetTime_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_GetTime.c:270:Esys_GetTime_Finish() esyscontext is NULL. 
+[       OK ] check_GetTime
+[ RUN      ] check_Commit
+ERROR:esys:src/tss2-esys/api/Esys_Commit.c:167:Esys_Commit_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Commit.c:87:Esys_Commit() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_Commit.c:167:Esys_Commit_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Commit.c:271:Esys_Commit_Finish() esyscontext is NULL. 
+[       OK ] check_Commit
+[ RUN      ] check_EC_Ephemeral
+ERROR:esys:src/tss2-esys/api/Esys_EC_Ephemeral.c:145:Esys_EC_Ephemeral_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_EC_Ephemeral.c:74:Esys_EC_Ephemeral() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_EC_Ephemeral.c:145:Esys_EC_Ephemeral_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_EC_Ephemeral.c:230:Esys_EC_Ephemeral_Finish() esyscontext is NULL. 
+[       OK ] check_EC_Ephemeral
+[ RUN      ] check_VerifySignature
+ERROR:esys:src/tss2-esys/api/Esys_VerifySignature.c:161:Esys_VerifySignature_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_VerifySignature.c:80:Esys_VerifySignature() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_VerifySignature.c:161:Esys_VerifySignature_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_VerifySignature.c:251:Esys_VerifySignature_Finish() esyscontext is NULL. 
+[       OK ] check_VerifySignature
+[ RUN      ] check_Sign
+ERROR:esys:src/tss2-esys/api/Esys_Sign.c:165:Esys_Sign_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Sign.c:82:Esys_Sign() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_Sign.c:165:Esys_Sign_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Sign.c:260:Esys_Sign_Finish() esyscontext is NULL. 
+[       OK ] check_Sign
+[ RUN      ] check_SetCommandCodeAuditStatus
+ERROR:esys:src/tss2-esys/api/Esys_SetCommandCodeAuditStatus.c:171:Esys_SetCommandCodeAuditStatus_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_SetCommandCodeAuditStatus.c:84:Esys_SetCommandCodeAuditStatus() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_SetCommandCodeAuditStatus.c:171:Esys_SetCommandCodeAuditStatus_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_SetCommandCodeAuditStatus.c:265:Esys_SetCommandCodeAuditStatus_Finish() esyscontext is NULL. 
+[       OK ] check_SetCommandCodeAuditStatus
+[ RUN      ] check_PCR_Extend
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Extend.c:157:Esys_PCR_Extend_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Extend.c:77:Esys_PCR_Extend() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Extend.c:157:Esys_PCR_Extend_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Extend.c:248:Esys_PCR_Extend_Finish() esyscontext is NULL. 
+[       OK ] check_PCR_Extend
+[ RUN      ] check_PCR_Event
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Event.c:154:Esys_PCR_Event_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Event.c:77:Esys_PCR_Event() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Event.c:154:Esys_PCR_Event_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Event.c:248:Esys_PCR_Event_Finish() esyscontext is NULL. 
+[       OK ] check_PCR_Event
+[ RUN      ] check_PCR_Read
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Read.c:156:Esys_PCR_Read_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Read.c:81:Esys_PCR_Read() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Read.c:156:Esys_PCR_Read_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Read.c:247:Esys_PCR_Read_Finish() esyscontext is NULL. 
+[       OK ] check_PCR_Read
+[ RUN      ] check_PCR_Allocate
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Allocate.c:167:Esys_PCR_Allocate_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Allocate.c:86:Esys_PCR_Allocate() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Allocate.c:167:Esys_PCR_Allocate_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Allocate.c:270:Esys_PCR_Allocate_Finish() esyscontext is NULL. 
+[       OK ] check_PCR_Allocate
+[ RUN      ] check_PCR_SetAuthPolicy
+ERROR:esys:src/tss2-esys/api/Esys_PCR_SetAuthPolicy.c:160:Esys_PCR_SetAuthPolicy_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_SetAuthPolicy.c:78:Esys_PCR_SetAuthPolicy() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_SetAuthPolicy.c:160:Esys_PCR_SetAuthPolicy_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_SetAuthPolicy.c:253:Esys_PCR_SetAuthPolicy_Finish() esyscontext is NULL. 
+[       OK ] check_PCR_SetAuthPolicy
+[ RUN      ] check_PCR_SetAuthValue
+ERROR:esys:src/tss2-esys/api/Esys_PCR_SetAuthValue.c:168:Esys_PCR_SetAuthValue_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_SetAuthValue.c:90:Esys_PCR_SetAuthValue() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_SetAuthValue.c:168:Esys_PCR_SetAuthValue_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_SetAuthValue.c:264:Esys_PCR_SetAuthValue_Finish() esyscontext is NULL. 
+[       OK ] check_PCR_SetAuthValue
+[ RUN      ] check_PCR_Reset
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Reset.c:153:Esys_PCR_Reset_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Reset.c:75:Esys_PCR_Reset() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Reset.c:153:Esys_PCR_Reset_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Reset.c:244:Esys_PCR_Reset_Finish() esyscontext is NULL. 
+[       OK ] check_PCR_Reset
+[ RUN      ] check_PolicySigned
+ERROR:esys:src/tss2-esys/api/Esys_PolicySigned.c:185:Esys_PolicySigned_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicySigned.c:94:Esys_PolicySigned() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicySigned.c:185:Esys_PolicySigned_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicySigned.c:286:Esys_PolicySigned_Finish() esyscontext is NULL. 
+[       OK ] check_PolicySigned
+[ RUN      ] check_PolicySecret
+ERROR:esys:src/tss2-esys/api/Esys_PolicySecret.c:181:Esys_PolicySecret_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicySecret.c:92:Esys_PolicySecret() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicySecret.c:181:Esys_PolicySecret_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicySecret.c:286:Esys_PolicySecret_Finish() esyscontext is NULL. 
+[       OK ] check_PolicySecret
+[ RUN      ] check_PolicyTicket
+ERROR:esys:src/tss2-esys/api/Esys_PolicyTicket.c:177:Esys_PolicyTicket_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyTicket.c:86:Esys_PolicyTicket() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyTicket.c:177:Esys_PolicyTicket_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyTicket.c:264:Esys_PolicyTicket_Finish() esyscontext is NULL. 
+[       OK ] check_PolicyTicket
+[ RUN      ] check_PolicyOR
+ERROR:esys:src/tss2-esys/api/Esys_PolicyOR.c:157:Esys_PolicyOR_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyOR.c:77:Esys_PolicyOR() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyOR.c:157:Esys_PolicyOR_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyOR.c:243:Esys_PolicyOR_Finish() esyscontext is NULL. 
+[       OK ] check_PolicyOR
+[ RUN      ] check_PolicyPCR
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPCR.c:158:Esys_PolicyPCR_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPCR.c:77:Esys_PolicyPCR() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPCR.c:158:Esys_PolicyPCR_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPCR.c:245:Esys_PolicyPCR_Finish() esyscontext is NULL. 
+[       OK ] check_PolicyPCR
+[ RUN      ] check_PolicyLocality
+ERROR:esys:src/tss2-esys/api/Esys_PolicyLocality.c:157:Esys_PolicyLocality_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyLocality.c:77:Esys_PolicyLocality() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyLocality.c:157:Esys_PolicyLocality_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyLocality.c:245:Esys_PolicyLocality_Finish() esyscontext is NULL. 
+[       OK ] check_PolicyLocality
+[ RUN      ] check_PolicyNV
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNV.c:175:Esys_PolicyNV_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNV.c:84:Esys_PolicyNV() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNV.c:175:Esys_PolicyNV_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNV.c:275:Esys_PolicyNV_Finish() esyscontext is NULL. 
+[       OK ] check_PolicyNV
+[ RUN      ] check_PolicyCounterTimer
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCounterTimer.c:163:Esys_PolicyCounterTimer_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCounterTimer.c:80:Esys_PolicyCounterTimer() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCounterTimer.c:163:Esys_PolicyCounterTimer_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCounterTimer.c:251:Esys_PolicyCounterTimer_Finish() esyscontext is NULL. 
+[       OK ] check_PolicyCounterTimer
+[ RUN      ] check_PolicyCommandCode
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCommandCode.c:157:Esys_PolicyCommandCode_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCommandCode.c:77:Esys_PolicyCommandCode() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCommandCode.c:157:Esys_PolicyCommandCode_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCommandCode.c:245:Esys_PolicyCommandCode_Finish() esyscontext is NULL. 
+[       OK ] check_PolicyCommandCode
+[ RUN      ] check_PolicyPhysicalPresence
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPhysicalPresence.c:153:Esys_PolicyPhysicalPresence_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPhysicalPresence.c:75:Esys_PolicyPhysicalPresence() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPhysicalPresence.c:153:Esys_PolicyPhysicalPresence_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPhysicalPresence.c:240:Esys_PolicyPhysicalPresence_Finish() esyscontext is NULL. 
+[       OK ] check_PolicyPhysicalPresence
+[ RUN      ] check_PolicyCpHash
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCpHash.c:157:Esys_PolicyCpHash_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCpHash.c:77:Esys_PolicyCpHash() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCpHash.c:157:Esys_PolicyCpHash_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCpHash.c:244:Esys_PolicyCpHash_Finish() esyscontext is NULL. 
+[       OK ] check_PolicyCpHash
+[ RUN      ] check_PolicyNameHash
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNameHash.c:157:Esys_PolicyNameHash_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNameHash.c:77:Esys_PolicyNameHash() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNameHash.c:157:Esys_PolicyNameHash_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNameHash.c:245:Esys_PolicyNameHash_Finish() esyscontext is NULL. 
+[       OK ] check_PolicyNameHash
+[ RUN      ] check_PolicyDuplicationSelect
+ERROR:esys:src/tss2-esys/api/Esys_PolicyDuplicationSelect.c:169:Esys_PolicyDuplicationSelect_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyDuplicationSelect.c:83:Esys_PolicyDuplicationSelect() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyDuplicationSelect.c:169:Esys_PolicyDuplicationSelect_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyDuplicationSelect.c:258:Esys_PolicyDuplicationSelect_Finish() esyscontext is NULL. 
+[       OK ] check_PolicyDuplicationSelect
+[ RUN      ] check_PolicyAuthorize
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthorize.c:174:Esys_PolicyAuthorize_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthorize.c:85:Esys_PolicyAuthorize() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthorize.c:174:Esys_PolicyAuthorize_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthorize.c:263:Esys_PolicyAuthorize_Finish() esyscontext is NULL. 
+[       OK ] check_PolicyAuthorize
+[ RUN      ] check_PolicyAuthValue
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthValue.c:161:Esys_PolicyAuthValue_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthValue.c:83:Esys_PolicyAuthValue() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthValue.c:161:Esys_PolicyAuthValue_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthValue.c:249:Esys_PolicyAuthValue_Finish() esyscontext is NULL. 
+[       OK ] check_PolicyAuthValue
+[ RUN      ] check_PolicyPassword
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPassword.c:161:Esys_PolicyPassword_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPassword.c:83:Esys_PolicyPassword() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPassword.c:161:Esys_PolicyPassword_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPassword.c:249:Esys_PolicyPassword_Finish() esyscontext is NULL. 
+[       OK ] check_PolicyPassword
+[ RUN      ] check_PolicyGetDigest
+ERROR:esys:src/tss2-esys/api/Esys_PolicyGetDigest.c:151:Esys_PolicyGetDigest_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyGetDigest.c:76:Esys_PolicyGetDigest() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyGetDigest.c:151:Esys_PolicyGetDigest_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyGetDigest.c:242:Esys_PolicyGetDigest_Finish() esyscontext is NULL. 
+[       OK ] check_PolicyGetDigest
+[ RUN      ] check_PolicyNvWritten
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNvWritten.c:157:Esys_PolicyNvWritten_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNvWritten.c:77:Esys_PolicyNvWritten() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNvWritten.c:157:Esys_PolicyNvWritten_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNvWritten.c:245:Esys_PolicyNvWritten_Finish() esyscontext is NULL. 
+[       OK ] check_PolicyNvWritten
+[ RUN      ] check_PolicyTemplate
+ERROR:esys:src/tss2-esys/api/Esys_PolicyTemplate.c:157:Esys_PolicyTemplate_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyTemplate.c:77:Esys_PolicyTemplate() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyTemplate.c:157:Esys_PolicyTemplate_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyTemplate.c:245:Esys_PolicyTemplate_Finish() esyscontext is NULL. 
+[       OK ] check_PolicyTemplate
+[ RUN      ] check_PolicyAuthorizeNV
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthorizeNV.c:167:Esys_PolicyAuthorizeNV_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthorizeNV.c:81:Esys_PolicyAuthorizeNV() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthorizeNV.c:167:Esys_PolicyAuthorizeNV_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthorizeNV.c:268:Esys_PolicyAuthorizeNV_Finish() esyscontext is NULL. 
+[       OK ] check_PolicyAuthorizeNV
+[ RUN      ] check_CreatePrimary
+ERROR:esys:src/tss2-esys/api/Esys_CreatePrimary.c:198:Esys_CreatePrimary_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_CreatePrimary.c:110:Esys_CreatePrimary() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_CreatePrimary.c:198:Esys_CreatePrimary_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_CreatePrimary.c:317:Esys_CreatePrimary_Finish() esyscontext is NULL. 
+[       OK ] check_CreatePrimary
+[ RUN      ] check_HierarchyControl
+ERROR:esys:src/tss2-esys/api/Esys_HierarchyControl.c:167:Esys_HierarchyControl_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_HierarchyControl.c:81:Esys_HierarchyControl() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_HierarchyControl.c:167:Esys_HierarchyControl_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_HierarchyControl.c:268:Esys_HierarchyControl_Finish() esyscontext is NULL. 
+[       OK ] check_HierarchyControl
+[ RUN      ] check_SetPrimaryPolicy
+ERROR:esys:src/tss2-esys/api/Esys_SetPrimaryPolicy.c:160:Esys_SetPrimaryPolicy_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_SetPrimaryPolicy.c:78:Esys_SetPrimaryPolicy() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_SetPrimaryPolicy.c:160:Esys_SetPrimaryPolicy_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_SetPrimaryPolicy.c:252:Esys_SetPrimaryPolicy_Finish() esyscontext is NULL. 
+[       OK ] check_SetPrimaryPolicy
+[ RUN      ] check_ChangePPS
+ERROR:esys:src/tss2-esys/api/Esys_ChangePPS.c:153:Esys_ChangePPS_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ChangePPS.c:75:Esys_ChangePPS() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_ChangePPS.c:153:Esys_ChangePPS_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ChangePPS.c:244:Esys_ChangePPS_Finish() esyscontext is NULL. 
+[       OK ] check_ChangePPS
+[ RUN      ] check_ChangeEPS
+ERROR:esys:src/tss2-esys/api/Esys_ChangeEPS.c:153:Esys_ChangeEPS_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ChangeEPS.c:75:Esys_ChangeEPS() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_ChangeEPS.c:153:Esys_ChangeEPS_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ChangeEPS.c:244:Esys_ChangeEPS_Finish() esyscontext is NULL. 
+[       OK ] check_ChangeEPS
+[ RUN      ] check_Clear
+ERROR:esys:src/tss2-esys/api/Esys_Clear.c:152:Esys_Clear_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Clear.c:74:Esys_Clear() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_Clear.c:152:Esys_Clear_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Clear.c:248:Esys_Clear_Finish() esyscontext is NULL. 
+[       OK ] check_Clear
+[ RUN      ] check_ClearControl
+ERROR:esys:src/tss2-esys/api/Esys_ClearControl.c:159:Esys_ClearControl_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ClearControl.c:78:Esys_ClearControl() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_ClearControl.c:159:Esys_ClearControl_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ClearControl.c:250:Esys_ClearControl_Finish() esyscontext is NULL. 
+[       OK ] check_ClearControl
+[ RUN      ] check_HierarchyChangeAuth
+ERROR:esys:src/tss2-esys/api/Esys_HierarchyChangeAuth.c:167:Esys_HierarchyChangeAuth_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_HierarchyChangeAuth.c:89:Esys_HierarchyChangeAuth() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_HierarchyChangeAuth.c:167:Esys_HierarchyChangeAuth_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_HierarchyChangeAuth.c:264:Esys_HierarchyChangeAuth_Finish() esyscontext is NULL. 
+[       OK ] check_HierarchyChangeAuth
+[ RUN      ] check_DictionaryAttackLockReset
+ERROR:esys:src/tss2-esys/api/Esys_DictionaryAttackLockReset.c:153:Esys_DictionaryAttackLockReset_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_DictionaryAttackLockReset.c:75:Esys_DictionaryAttackLockReset() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_DictionaryAttackLockReset.c:153:Esys_DictionaryAttackLockReset_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_DictionaryAttackLockReset.c:245:Esys_DictionaryAttackLockReset_Finish() esyscontext is NULL. 
+[       OK ] check_DictionaryAttackLockReset
+[ RUN      ] check_DictionaryAttackParameters
+ERROR:esys:src/tss2-esys/api/Esys_DictionaryAttackParameters.c:173:Esys_DictionaryAttackParameters_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_DictionaryAttackParameters.c:85:Esys_DictionaryAttackParameters() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_DictionaryAttackParameters.c:173:Esys_DictionaryAttackParameters_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_DictionaryAttackParameters.c:267:Esys_DictionaryAttackParameters_Finish() esyscontext is NULL. 
+[       OK ] check_DictionaryAttackParameters
+[ RUN      ] check_PP_Commands
+ERROR:esys:src/tss2-esys/api/Esys_PP_Commands.c:166:Esys_PP_Commands_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PP_Commands.c:81:Esys_PP_Commands() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_PP_Commands.c:166:Esys_PP_Commands_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_PP_Commands.c:258:Esys_PP_Commands_Finish() esyscontext is NULL. 
+[       OK ] check_PP_Commands
+[ RUN      ] check_SetAlgorithmSet
+ERROR:esys:src/tss2-esys/api/Esys_SetAlgorithmSet.c:159:Esys_SetAlgorithmSet_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_SetAlgorithmSet.c:78:Esys_SetAlgorithmSet() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_SetAlgorithmSet.c:159:Esys_SetAlgorithmSet_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_SetAlgorithmSet.c:251:Esys_SetAlgorithmSet_Finish() esyscontext is NULL. 
+[       OK ] check_SetAlgorithmSet
+[ RUN      ] check_FieldUpgradeStart
+ERROR:esys:src/tss2-esys/api/Esys_FieldUpgradeStart.c:168:Esys_FieldUpgradeStart_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_FieldUpgradeStart.c:82:Esys_FieldUpgradeStart() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_FieldUpgradeStart.c:168:Esys_FieldUpgradeStart_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_FieldUpgradeStart.c:265:Esys_FieldUpgradeStart_Finish() esyscontext is NULL. 
+[       OK ] check_FieldUpgradeStart
+[ RUN      ] check_FieldUpgradeData
+ERROR:esys:src/tss2-esys/api/Esys_FieldUpgradeData.c:146:Esys_FieldUpgradeData_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_FieldUpgradeData.c:75:Esys_FieldUpgradeData() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_FieldUpgradeData.c:146:Esys_FieldUpgradeData_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_FieldUpgradeData.c:232:Esys_FieldUpgradeData_Finish() esyscontext is NULL. 
+[       OK ] check_FieldUpgradeData
+[ RUN      ] check_FirmwareRead
+ERROR:esys:src/tss2-esys/api/Esys_FirmwareRead.c:145:Esys_FirmwareRead_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_FirmwareRead.c:73:Esys_FirmwareRead() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_FirmwareRead.c:145:Esys_FirmwareRead_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_FirmwareRead.c:228:Esys_FirmwareRead_Finish() esyscontext is NULL. 
+[       OK ] check_FirmwareRead
+[ RUN      ] check_ContextSave
+ERROR:esys:src/tss2-esys/api/Esys_ContextSave.c:130:Esys_ContextSave_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ContextSave.c:69:Esys_ContextSave() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_ContextSave.c:130:Esys_ContextSave_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ContextSave.c:198:Esys_ContextSave_Finish() esyscontext is NULL. 
+[       OK ] check_ContextSave
+[ RUN      ] check_ContextLoad
+ERROR:esys:src/tss2-esys/api/Esys_ContextLoad.c:129:Esys_ContextLoad_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ContextLoad.c:70:Esys_ContextLoad() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_ContextLoad.c:129:Esys_ContextLoad_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ContextLoad.c:216:Esys_ContextLoad_Finish() esyscontext is NULL. 
+[       OK ] check_ContextLoad
+[ RUN      ] check_FlushContext
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:127:Esys_FlushContext_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:127:Esys_FlushContext_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:191:Esys_FlushContext_Finish() esyscontext is NULL. 
+[       OK ] check_FlushContext
+[ RUN      ] check_EvictControl
+ERROR:esys:src/tss2-esys/api/Esys_EvictControl.c:176:Esys_EvictControl_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_EvictControl.c:91:Esys_EvictControl() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_EvictControl.c:176:Esys_EvictControl_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_EvictControl.c:279:Esys_EvictControl_Finish() esyscontext is NULL. 
+[       OK ] check_EvictControl
+[ RUN      ] check_ReadClock
+ERROR:esys:src/tss2-esys/api/Esys_ReadClock.c:144:Esys_ReadClock_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ReadClock.c:72:Esys_ReadClock() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_ReadClock.c:144:Esys_ReadClock_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ReadClock.c:227:Esys_ReadClock_Finish() esyscontext is NULL. 
+[       OK ] check_ReadClock
+[ RUN      ] check_ClockSet
+ERROR:esys:src/tss2-esys/api/Esys_ClockSet.c:157:Esys_ClockSet_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ClockSet.c:77:Esys_ClockSet() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_ClockSet.c:157:Esys_ClockSet_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ClockSet.c:248:Esys_ClockSet_Finish() esyscontext is NULL. 
+[       OK ] check_ClockSet
+[ RUN      ] check_ClockRateAdjust
+ERROR:esys:src/tss2-esys/api/Esys_ClockRateAdjust.c:157:Esys_ClockRateAdjust_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ClockRateAdjust.c:77:Esys_ClockRateAdjust() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_ClockRateAdjust.c:157:Esys_ClockRateAdjust_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_ClockRateAdjust.c:248:Esys_ClockRateAdjust_Finish() esyscontext is NULL. 
+[       OK ] check_ClockRateAdjust
+[ RUN      ] check_GetCapability
+ERROR:esys:src/tss2-esys/api/Esys_GetCapability.c:164:Esys_GetCapability_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_GetCapability.c:83:Esys_GetCapability() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_GetCapability.c:164:Esys_GetCapability_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_GetCapability.c:250:Esys_GetCapability_Finish() esyscontext is NULL. 
+[       OK ] check_GetCapability
+[ RUN      ] check_TestParms
+ERROR:esys:src/tss2-esys/api/Esys_TestParms.c:148:Esys_TestParms_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_TestParms.c:72:Esys_TestParms() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_TestParms.c:148:Esys_TestParms_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_TestParms.c:228:Esys_TestParms_Finish() esyscontext is NULL. 
+[       OK ] check_TestParms
+[ RUN      ] check_NV_DefineSpace
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:178:Esys_NV_DefineSpace_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:98:Esys_NV_DefineSpace() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:178:Esys_NV_DefineSpace_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:291:Esys_NV_DefineSpace_Finish() esyscontext is NULL. 
+[       OK ] check_NV_DefineSpace
+[ RUN      ] check_NV_UndefineSpace
+ERROR:esys:src/tss2-esys/api/Esys_NV_UndefineSpace.c:166:Esys_NV_UndefineSpace_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_UndefineSpace.c:85:Esys_NV_UndefineSpace() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_NV_UndefineSpace.c:166:Esys_NV_UndefineSpace_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_UndefineSpace.c:262:Esys_NV_UndefineSpace_Finish() esyscontext is NULL. 
+[       OK ] check_NV_UndefineSpace
+[ RUN      ] check_NV_UndefineSpaceSpecial
+ERROR:esys:src/tss2-esys/api/Esys_NV_UndefineSpaceSpecial.c:166:Esys_NV_UndefineSpaceSpecial_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_UndefineSpaceSpecial.c:85:Esys_NV_UndefineSpaceSpecial() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_NV_UndefineSpaceSpecial.c:166:Esys_NV_UndefineSpaceSpecial_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_UndefineSpaceSpecial.c:272:Esys_NV_UndefineSpaceSpecial_Finish() esyscontext is NULL. 
+[       OK ] check_NV_UndefineSpaceSpecial
+[ RUN      ] check_NV_ReadPublic
+ERROR:esys:src/tss2-esys/api/Esys_NV_ReadPublic.c:161:Esys_NV_ReadPublic_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_ReadPublic.c:86:Esys_NV_ReadPublic() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_NV_ReadPublic.c:161:Esys_NV_ReadPublic_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_ReadPublic.c:256:Esys_NV_ReadPublic_Finish() esyscontext is NULL. 
+[       OK ] check_NV_ReadPublic
+[ RUN      ] check_NV_Write
+ERROR:esys:src/tss2-esys/api/Esys_NV_Write.c:171:Esys_NV_Write_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Write.c:87:Esys_NV_Write() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Write.c:171:Esys_NV_Write_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Write.c:267:Esys_NV_Write_Finish() esyscontext is NULL. 
+[       OK ] check_NV_Write
+[ RUN      ] check_NV_Increment
+ERROR:esys:src/tss2-esys/api/Esys_NV_Increment.c:168:Esys_NV_Increment_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Increment.c:86:Esys_NV_Increment() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Increment.c:168:Esys_NV_Increment_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Increment.c:264:Esys_NV_Increment_Finish() esyscontext is NULL. 
+[       OK ] check_NV_Increment
+[ RUN      ] check_NV_Extend
+ERROR:esys:src/tss2-esys/api/Esys_NV_Extend.c:167:Esys_NV_Extend_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Extend.c:85:Esys_NV_Extend() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Extend.c:167:Esys_NV_Extend_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Extend.c:263:Esys_NV_Extend_Finish() esyscontext is NULL. 
+[       OK ] check_NV_Extend
+[ RUN      ] check_NV_SetBits
+ERROR:esys:src/tss2-esys/api/Esys_NV_SetBits.c:173:Esys_NV_SetBits_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_SetBits.c:88:Esys_NV_SetBits() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_NV_SetBits.c:173:Esys_NV_SetBits_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_SetBits.c:269:Esys_NV_SetBits_Finish() esyscontext is NULL. 
+[       OK ] check_NV_SetBits
+[ RUN      ] check_NV_WriteLock
+ERROR:esys:src/tss2-esys/api/Esys_NV_WriteLock.c:168:Esys_NV_WriteLock_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_WriteLock.c:86:Esys_NV_WriteLock() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_NV_WriteLock.c:168:Esys_NV_WriteLock_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_WriteLock.c:264:Esys_NV_WriteLock_Finish() esyscontext is NULL. 
+[       OK ] check_NV_WriteLock
+[ RUN      ] check_NV_GlobalWriteLock
+ERROR:esys:src/tss2-esys/api/Esys_NV_GlobalWriteLock.c:153:Esys_NV_GlobalWriteLock_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_GlobalWriteLock.c:75:Esys_NV_GlobalWriteLock() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_NV_GlobalWriteLock.c:153:Esys_NV_GlobalWriteLock_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_GlobalWriteLock.c:245:Esys_NV_GlobalWriteLock_Finish() esyscontext is NULL. 
+[       OK ] check_NV_GlobalWriteLock
+[ RUN      ] check_NV_Read
+ERROR:esys:src/tss2-esys/api/Esys_NV_Read.c:166:Esys_NV_Read_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Read.c:82:Esys_NV_Read() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Read.c:166:Esys_NV_Read_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Read.c:264:Esys_NV_Read_Finish() esyscontext is NULL. 
+[       OK ] check_NV_Read
+[ RUN      ] check_NV_ReadLock
+ERROR:esys:src/tss2-esys/api/Esys_NV_ReadLock.c:168:Esys_NV_ReadLock_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_ReadLock.c:86:Esys_NV_ReadLock() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_NV_ReadLock.c:168:Esys_NV_ReadLock_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_ReadLock.c:264:Esys_NV_ReadLock_Finish() esyscontext is NULL. 
+[       OK ] check_NV_ReadLock
+[ RUN      ] check_NV_ChangeAuth
+ERROR:esys:src/tss2-esys/api/Esys_NV_ChangeAuth.c:165:Esys_NV_ChangeAuth_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_ChangeAuth.c:88:Esys_NV_ChangeAuth() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_NV_ChangeAuth.c:165:Esys_NV_ChangeAuth_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_ChangeAuth.c:260:Esys_NV_ChangeAuth_Finish() esyscontext is NULL. 
+[       OK ] check_NV_ChangeAuth
+[ RUN      ] check_NV_Certify
+ERROR:esys:src/tss2-esys/api/Esys_NV_Certify.c:184:Esys_NV_Certify_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Certify.c:92:Esys_NV_Certify() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Certify.c:184:Esys_NV_Certify_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Certify.c:296:Esys_NV_Certify_Finish() esyscontext is NULL. 
+[       OK ] check_NV_Certify
+[ RUN      ] check_Vendor_TCG_Test
+ERROR:esys:src/tss2-esys/api/Esys_Vendor_TCG_Test.c:137:Esys_Vendor_TCG_Test_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Vendor_TCG_Test.c:69:Esys_Vendor_TCG_Test() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_Vendor_TCG_Test.c:137:Esys_Vendor_TCG_Test_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Vendor_TCG_Test.c:220:Esys_Vendor_TCG_Test_Finish() esyscontext is NULL. 
+[       OK ] check_Vendor_TCG_Test
+[ RUN      ] check_AC_GetCapability
+ERROR:esys:src/tss2-esys/api/Esys_AC_GetCapability.c:151:Esys_AC_GetCapability_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_AC_GetCapability.c:69:Esys_AC_GetCapability() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_AC_GetCapability.c:151:Esys_AC_GetCapability_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_AC_GetCapability.c:241:Esys_AC_GetCapability_Finish() esyscontext is NULL. 
+[       OK ] check_AC_GetCapability
+[ RUN      ] check_AC_Send
+ERROR:esys:src/tss2-esys/api/Esys_AC_Send.c:152:Esys_AC_Send_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_AC_Send.c:70:Esys_AC_Send() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_AC_Send.c:152:Esys_AC_Send_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_AC_Send.c:250:Esys_AC_Send_Finish() esyscontext is NULL. 
+[       OK ] check_AC_Send
+[ RUN      ] check_Policy_AC_SendSelect
+ERROR:esys:src/tss2-esys/api/Esys_Policy_AC_SendSelect.c:160:Esys_Policy_AC_SendSelect_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Policy_AC_SendSelect.c:74:Esys_Policy_AC_SendSelect() Error in async function ErrorCode (0x00070005) 
+ERROR:esys:src/tss2-esys/api/Esys_Policy_AC_SendSelect.c:160:Esys_Policy_AC_SendSelect_Async() esyscontext is NULL. 
+ERROR:esys:src/tss2-esys/api/Esys_Policy_AC_SendSelect.c:249:Esys_Policy_AC_SendSelect_Finish() esyscontext is NULL. 
+[       OK ] check_Policy_AC_SendSelect
+[==========] 116 test(s) run.
+[  PASSED  ] 116 test(s).
+PASS test/unit/esys-context-null (exit status: 0)

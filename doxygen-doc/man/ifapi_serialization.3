@@ -1,0 +1,4484 @@
+.TH "ifapi_serialization" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ifapi_serialization
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_FAPI_QUOTE_INFO_serialize\fP (const \fBFAPI_QUOTE_INFO\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_CAP_INFO_serialize\fP (const \fBIFAPI_CAP_INFO\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_DUPLICATE_serialize\fP (const \fBIFAPI_DUPLICATE\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_EVENT_TYPE_serialize\fP (const IFAPI_EVENT_TYPE in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_EVENT_TYPE_serialize_txt\fP (const IFAPI_EVENT_TYPE in, json_object **str_jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_EVENT_UNION_serialize\fP (const \fBIFAPI_EVENT_UNION\fP *in, UINT32 selector, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_EVENT_serialize\fP (const \fBIFAPI_EVENT\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_EXT_PUB_KEY_serialize\fP (const \fBIFAPI_EXT_PUB_KEY\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_HIERARCHY_serialize\fP (const \fBIFAPI_HIERARCHY\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_IMA_EVENT_serialize\fP (const \fBIFAPI_IMA_EVENT\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_INFO_serialize\fP (const \fBIFAPI_INFO\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_KEY_serialize\fP (const \fBIFAPI_KEY\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_NV_serialize\fP (const \fBIFAPI_NV\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_OBJECT_TYPE_CONSTANT_serialize\fP (const IFAPI_OBJECT_TYPE_CONSTANT in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_OBJECT_serialize\fP (const \fBIFAPI_OBJECT\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_TSS_EVENT_serialize\fP (const \fBIFAPI_TSS_EVENT\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_UINT8_ARY_serialize\fP (const \fBUINT8_ARY\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_char_serialize\fP (const char *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_INT32_serialize\fP (const INT32 in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_CREATION_DATA_serialize\fP (const TPM2B_CREATION_DATA *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_DATA_serialize\fP (const TPM2B_DATA *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_DIGEST_serialize\fP (const TPM2B_DIGEST *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_ECC_PARAMETER_serialize\fP (const TPM2B_ECC_PARAMETER *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_ENCRYPTED_SECRET_serialize\fP (const TPM2B_ENCRYPTED_SECRET *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_EVENT_serialize\fP (const TPM2B_EVENT *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_MAX_NV_BUFFER_serialize\fP (const TPM2B_MAX_NV_BUFFER *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_NAME_serialize\fP (const TPM2B_NAME *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_NONCE_serialize\fP (const TPM2B_NONCE *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_NV_PUBLIC_serialize\fP (const TPM2B_NV_PUBLIC *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_OPERAND_serialize\fP (const TPM2B_OPERAND *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_PRIVATE_serialize\fP (const TPM2B_PRIVATE *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_PUBLIC_KEY_RSA_serialize\fP (const TPM2B_PUBLIC_KEY_RSA *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_PUBLIC_serialize\fP (const TPM2B_PUBLIC *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_ALG_ID_serialize\fP (const TPM2_ALG_ID in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_CAP_serialize\fP (const TPM2_CAP in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_CC_serialize\fP (const TPM2_CC in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_ECC_CURVE_serialize\fP (const TPM2_ECC_CURVE in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_EO_serialize\fP (const TPM2_EO in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_GENERATED_serialize\fP (const TPM2_GENERATED in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_HANDLE_serialize\fP (const TPM2_HANDLE in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_NT_serialize\fP (const TPM2_NT in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_PT_PCR_serialize\fP (const TPM2_PT_PCR in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_PT_serialize\fP (const TPM2_PT in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_ST_serialize\fP (const TPM2_ST in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMA_ALGORITHM_serialize\fP (const TPMA_ALGORITHM in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMA_CC_serialize\fP (const TPMA_CC in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMA_LOCALITY_serialize\fP (const TPMA_LOCALITY in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMA_NV_serialize\fP (const TPMA_NV in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMA_OBJECT_serialize\fP (const TPMA_OBJECT in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_AES_KEY_BITS_serialize\fP (const TPMI_AES_KEY_BITS in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_ASYM_SCHEME_serialize\fP (const TPMI_ALG_ASYM_SCHEME in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_ECC_SCHEME_serialize\fP (const TPMI_ALG_ECC_SCHEME in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_HASH_serialize\fP (const TPMI_ALG_HASH in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_KDF_serialize\fP (const TPMI_ALG_KDF in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_KEYEDHASH_SCHEME_serialize\fP (const TPMI_ALG_KEYEDHASH_SCHEME in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_PUBLIC_serialize\fP (const TPMI_ALG_PUBLIC in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_RSA_SCHEME_serialize\fP (const TPMI_ALG_RSA_SCHEME in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_SIG_SCHEME_serialize\fP (const TPMI_ALG_SIG_SCHEME in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_SYM_MODE_serialize\fP (const TPMI_ALG_SYM_MODE in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_CIPHER_MODE_serialize\fP (const TPMI_ALG_CIPHER_MODE in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_SYM_OBJECT_serialize\fP (const TPMI_ALG_SYM_OBJECT in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ECC_CURVE_serialize\fP (const TPMI_ECC_CURVE in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_RH_HIERARCHY_serialize\fP (const TPMI_RH_HIERARCHY in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_RH_NV_INDEX_serialize\fP (const TPMI_RH_NV_INDEX in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_RSA_KEY_BITS_serialize\fP (const TPMI_RSA_KEY_BITS in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ST_ATTEST_serialize\fP (const TPMI_ST_ATTEST in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_YES_NO_serialize\fP (const TPMI_YES_NO in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPML_ALG_PROPERTY_serialize\fP (const TPML_ALG_PROPERTY *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPML_CCA_serialize\fP (const TPML_CCA *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPML_CC_serialize\fP (const TPML_CC *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPML_DIGEST_VALUES_serialize\fP (const TPML_DIGEST_VALUES *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPML_ECC_CURVE_serialize\fP (const TPML_ECC_CURVE *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPML_HANDLE_serialize\fP (const TPML_HANDLE *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPML_PCR_SELECTION_serialize\fP (const TPML_PCR_SELECTION *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPML_TAGGED_PCR_PROPERTY_serialize\fP (const TPML_TAGGED_PCR_PROPERTY *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPML_TAGGED_TPM_PROPERTY_serialize\fP (const TPML_TAGGED_TPM_PROPERTY *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_ALG_PROPERTY_serialize\fP (const TPMS_ALG_PROPERTY *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_ATTEST_serialize\fP (const TPMS_ATTEST *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_CAPABILITY_DATA_serialize\fP (const TPMS_CAPABILITY_DATA *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_CERTIFY_INFO_serialize\fP (const TPMS_CERTIFY_INFO *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_CLOCK_INFO_serialize\fP (const TPMS_CLOCK_INFO *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_COMMAND_AUDIT_INFO_serialize\fP (const TPMS_COMMAND_AUDIT_INFO *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_CREATION_DATA_serialize\fP (const TPMS_CREATION_DATA *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_CREATION_INFO_serialize\fP (const TPMS_CREATION_INFO *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_ECC_PARMS_serialize\fP (const TPMS_ECC_PARMS *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_ECC_POINT_serialize\fP (const TPMS_ECC_POINT *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_EMPTY_serialize\fP (const TPMS_EMPTY *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_ENC_SCHEME_OAEP_serialize\fP (const TPMS_ENC_SCHEME_OAEP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_ENC_SCHEME_RSAES_serialize\fP (const TPMS_ENC_SCHEME_RSAES *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_KEYEDHASH_PARMS_serialize\fP (const TPMS_KEYEDHASH_PARMS *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_KEY_SCHEME_ECDH_serialize\fP (const TPMS_KEY_SCHEME_ECDH *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_NV_CERTIFY_INFO_serialize\fP (const TPMS_NV_CERTIFY_INFO *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_NV_PUBLIC_serialize\fP (const TPMS_NV_PUBLIC *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_PCR_SELECTION_serialize\fP (const TPMS_PCR_SELECTION *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_PCR_SELECT_serialize\fP (const TPMS_PCR_SELECT *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_QUOTE_INFO_serialize\fP (const TPMS_QUOTE_INFO *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_RSA_PARMS_serialize\fP (const TPMS_RSA_PARMS *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SCHEME_ECDAA_serialize\fP (const TPMS_SCHEME_ECDAA *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SCHEME_HASH_serialize\fP (const TPMS_SCHEME_HASH *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SCHEME_HMAC_serialize\fP (const TPMS_SCHEME_HMAC *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SCHEME_KDF1_SP800_108_serialize\fP (const TPMS_SCHEME_KDF1_SP800_108 *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SCHEME_KDF1_SP800_56A_serialize\fP (const TPMS_SCHEME_KDF1_SP800_56A *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SCHEME_MGF1_serialize\fP (const TPMS_SCHEME_MGF1 *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SCHEME_XOR_serialize\fP (const TPMS_SCHEME_XOR *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SESSION_AUDIT_INFO_serialize\fP (const TPMS_SESSION_AUDIT_INFO *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIGNATURE_ECC_serialize\fP (const TPMS_SIGNATURE_ECC *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIGNATURE_ECDAA_serialize\fP (const TPMS_SIGNATURE_ECDAA *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIGNATURE_ECDSA_serialize\fP (const TPMS_SIGNATURE_ECDSA *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIGNATURE_ECSCHNORR_serialize\fP (const TPMS_SIGNATURE_ECSCHNORR *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIGNATURE_RSAPSS_serialize\fP (const TPMS_SIGNATURE_RSAPSS *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIGNATURE_RSASSA_serialize\fP (const TPMS_SIGNATURE_RSASSA *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIGNATURE_RSA_serialize\fP (const TPMS_SIGNATURE_RSA *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIGNATURE_SM2_serialize\fP (const TPMS_SIGNATURE_SM2 *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIG_SCHEME_ECDAA_serialize\fP (const TPMS_SIG_SCHEME_ECDAA *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIG_SCHEME_ECDSA_serialize\fP (const TPMS_SIG_SCHEME_ECDSA *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIG_SCHEME_ECSCHNORR_serialize\fP (const TPMS_SIG_SCHEME_ECSCHNORR *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIG_SCHEME_RSAPSS_serialize\fP (const TPMS_SIG_SCHEME_RSAPSS *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIG_SCHEME_RSASSA_serialize\fP (const TPMS_SIG_SCHEME_RSASSA *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIG_SCHEME_SM2_serialize\fP (const TPMS_SIG_SCHEME_SM2 *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SYMCIPHER_PARMS_serialize\fP (const TPMS_SYMCIPHER_PARMS *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_TAGGED_PCR_SELECT_serialize\fP (const TPMS_TAGGED_PCR_SELECT *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_TAGGED_PROPERTY_serialize\fP (const TPMS_TAGGED_PROPERTY *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_TIME_ATTEST_INFO_serialize\fP (const TPMS_TIME_ATTEST_INFO *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_TIME_INFO_serialize\fP (const TPMS_TIME_INFO *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_ASYM_SCHEME_serialize\fP (const TPMT_ASYM_SCHEME *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_ECC_SCHEME_serialize\fP (const TPMT_ECC_SCHEME *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_HA_serialize\fP (const TPMT_HA *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_KDF_SCHEME_serialize\fP (const TPMT_KDF_SCHEME *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_KEYEDHASH_SCHEME_serialize\fP (const TPMT_KEYEDHASH_SCHEME *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_PUBLIC_serialize\fP (const TPMT_PUBLIC *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_RSA_SCHEME_serialize\fP (const TPMT_RSA_SCHEME *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_SIGNATURE_serialize\fP (const TPMT_SIGNATURE *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_SIG_SCHEME_serialize\fP (const TPMT_SIG_SCHEME *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_SYM_DEF_OBJECT_serialize\fP (const TPMT_SYM_DEF_OBJECT *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_TK_CREATION_serialize\fP (const TPMT_TK_CREATION *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_ASYM_SCHEME_serialize\fP (const TPMU_ASYM_SCHEME *in, UINT32 selector, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_ATTEST_serialize\fP (const TPMU_ATTEST *in, UINT32 selector, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_CAPABILITIES_serialize\fP (const TPMU_CAPABILITIES *in, UINT32 selector, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_HA_serialize\fP (const TPMU_HA *in, UINT32 selector, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_KDF_SCHEME_serialize\fP (const TPMU_KDF_SCHEME *in, UINT32 selector, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_PUBLIC_ID_serialize\fP (const TPMU_PUBLIC_ID *in, UINT32 selector, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_PUBLIC_PARMS_serialize\fP (const TPMU_PUBLIC_PARMS *in, UINT32 selector, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_SCHEME_KEYEDHASH_serialize\fP (const TPMU_SCHEME_KEYEDHASH *in, UINT32 selector, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_SIGNATURE_serialize\fP (const TPMU_SIGNATURE *in, UINT32 selector, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_SIG_SCHEME_serialize\fP (const TPMU_SIG_SCHEME *in, UINT32 selector, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_SYM_KEY_BITS_serialize\fP (const TPMU_SYM_KEY_BITS *in, UINT32 selector, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_SYM_MODE_serialize\fP (const TPMU_SYM_MODE *in, UINT32 selector, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_UINT16_serialize\fP (const UINT16 in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_UINT32_serialize\fP (const UINT32 in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_UINT64_serialize\fP (UINT64 in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_pcr_select_serialize\fP (const UINT8 sizeofSelect, const BYTE pcrSelect[], json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_POLICYTYPE_serialize\fP (const TPMI_POLICYTYPE in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_POLICYTYPE_serialize_txt\fP (const TPMI_POLICYTYPE in, json_object **str_jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPML_PCRVALUES_serialize\fP (const TPML_PCRVALUES *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPML_POLICYBRANCHES_serialize\fP (const \fBTPML_POLICYBRANCHES\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPML_POLICYELEMENTS_serialize\fP (const \fBTPML_POLICYELEMENTS\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_PCRVALUE_serialize\fP (const TPMS_PCRVALUE *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYACTION_serialize\fP (const \fBTPMS_POLICYACTION\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYAUTHORIZATION_serialize\fP (const \fBTPMS_POLICYAUTHORIZATION\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYAUTHORIZENV_serialize\fP (const \fBTPMS_POLICYAUTHORIZENV\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYAUTHORIZE_serialize\fP (const \fBTPMS_POLICYAUTHORIZE\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYAUTHVALUE_serialize\fP (const \fBTPMS_POLICYAUTHVALUE\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYBRANCH_serialize\fP (const \fBTPMS_POLICYBRANCH\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYCOMMANDCODE_serialize\fP (const \fBTPMS_POLICYCOMMANDCODE\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYCOUNTERTIMER_serialize\fP (const \fBTPMS_POLICYCOUNTERTIMER\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYCPHASH_serialize\fP (const \fBTPMS_POLICYCPHASH\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYDUPLICATIONSELECT_serialize\fP (const \fBTPMS_POLICYDUPLICATIONSELECT\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYLOCALITY_serialize\fP (const \fBTPMS_POLICYLOCALITY\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYNAMEHASH_serialize\fP (const \fBTPMS_POLICYNAMEHASH\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYNVWRITTEN_serialize\fP (const \fBTPMS_POLICYNVWRITTEN\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYNV_serialize\fP (const \fBTPMS_POLICYNV\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYOR_serialize\fP (const \fBTPMS_POLICYOR\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYPASSWORD_serialize\fP (const \fBTPMS_POLICYPASSWORD\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYPCR_serialize\fP (const \fBTPMS_POLICYPCR\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYPHYSICALPRESENCE_serialize\fP (const \fBTPMS_POLICYPHYSICALPRESENCE\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYSECRET_serialize\fP (const \fBTPMS_POLICYSECRET\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYSIGNED_serialize\fP (const \fBTPMS_POLICYSIGNED\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYTEMPLATE_serialize\fP (const \fBTPMS_POLICYTEMPLATE\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICY_serialize\fP (const \fBTPMS_POLICY\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_POLICYELEMENT_serialize\fP (const \fBTPMT_POLICYELEMENT\fP *in, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_POLICYELEMENT_serialize\fP (const \fBTPMU_POLICYELEMENT\fP *in, UINT32 selector, json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_CONFIG_serialize\fP (const \fBIFAPI_CONFIG\fP *in, json_object **jso)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Provides functions for the serialization of FAPI objects to JSON\&. 
+.SH "Function Documentation"
+.PP 
+.SS "static TSS2_RC ifapi_json_char_serialize (const char * in, json_object ** jso)"
+Serialize a character string to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_FAPI_QUOTE_INFO_serialize (const \fBFAPI_QUOTE_INFO\fP * in, json_object ** jso)"
+Serialize value of type \fBFAPI_QUOTE_INFO\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBFAPI_QUOTE_INFO\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_CAP_INFO_serialize (const \fBIFAPI_CAP_INFO\fP * in, json_object ** jso)"
+Serialize value of type \fBIFAPI_CAP_INFO\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBIFAPI_INFO\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "ifapi_json_IFAPI_CONFIG_serialize (const \fBIFAPI_CONFIG\fP * in, json_object ** jso)"
+Serializes a configuration JSON object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBIFAPI_KEY\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_DUPLICATE_serialize (const \fBIFAPI_DUPLICATE\fP * in, json_object ** jso)"
+Serialize value of type \fBIFAPI_DUPLICATE\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBIFAPI_DUPLICATE\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_EVENT_serialize (const \fBIFAPI_EVENT\fP * in, json_object ** jso)"
+Serialize value of type \fBIFAPI_EVENT\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBIFAPI_EVENT\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_EVENT_TYPE_serialize (const IFAPI_EVENT_TYPE in, json_object ** jso)"
+Serialize IFAPI_EVENT_TYPE to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP constant to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the constant is not of type IFAPI_EVENT_TYPE\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_EVENT_TYPE_serialize_txt (const IFAPI_EVENT_TYPE in, json_object ** str_jso)"
+Get json object for a constant, if a variable is actually of type IFAPI_EVENT_TYPE\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP binary value of constant\&. 
+.br
+\fIstr_jso\fP object with text representing the constant\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the constant is not of type IFAPI_EVENT_TYPE\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_EVENT_UNION_serialize (const \fBIFAPI_EVENT_UNION\fP * in, UINT32 selector, json_object ** jso)"
+Serialize a \fBIFAPI_EVENT_UNION\fP to json\&.
+.PP
+This function expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP the value to be serialized\&. 
+.br
+\fIselector\fP the type of the event\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBIFAPI_EVENT_UNION\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_EXT_PUB_KEY_serialize (const \fBIFAPI_EXT_PUB_KEY\fP * in, json_object ** jso)"
+Serialize value of type \fBIFAPI_EXT_PUB_KEY\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBIFAPI_EXT_PUB_KEY\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_HIERARCHY_serialize (const \fBIFAPI_HIERARCHY\fP * in, json_object ** jso)"
+Serialize value of type \fBIFAPI_NV\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBIFAPI_NV\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_IMA_EVENT_serialize (const \fBIFAPI_IMA_EVENT\fP * in, json_object ** jso)"
+Serialize value of type \fBIFAPI_IMA_EVENT\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBIFAPI_IMA_EVENT\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_INFO_serialize (const \fBIFAPI_INFO\fP * in, json_object ** jso)"
+Serialize value of type \fBIFAPI_INFO\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBIFAPI_INFO\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_KEY_serialize (const \fBIFAPI_KEY\fP * in, json_object ** jso)"
+Serialize value of type \fBIFAPI_KEY\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBIFAPI_KEY\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_NV_serialize (const \fBIFAPI_NV\fP * in, json_object ** jso)"
+Serialize value of type \fBIFAPI_NV\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBIFAPI_NV\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_OBJECT_serialize (const \fBIFAPI_OBJECT\fP * in, json_object ** jso)"
+Serialize a IFAPI_OBJECT to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type IFAPI_OBJECT\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_OBJECT_TYPE_CONSTANT_serialize (const IFAPI_OBJECT_TYPE_CONSTANT in, json_object ** jso)"
+Serialize value of type IFAPI_OBJECT_TYPE_CONSTANT to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPM2_HANDLE\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_TSS_EVENT_serialize (const \fBIFAPI_TSS_EVENT\fP * in, json_object ** jso)"
+Serialize value of type \fBIFAPI_TSS_EVENT\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBIFAPI_TSS_EVENT\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_INT32_serialize (const INT32 in, json_object ** jso)"
+Serialize a base_type INT32 to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type INT32\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_pcr_select_serialize (const UINT8 sizeofSelect, const BYTE pcrSelect[], json_object ** jso)"
+Serialize a pcr selection to json
+.PP
+\fBParameters\fP
+.RS 4
+\fIsizeofSelect\fP size of selection byte array\&. 
+.br
+\fIpcrSelect\fP selection array\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if sizeofSelect is too big\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_ALG_ID_serialize (const TPM2_ALG_ID in, json_object ** jso)"
+Serialize TPM2_ALG_ID to json\&.
+.PP
+For hash algs lowercase is used because it's required for JSON events in Canonical Event Log specification\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP constant to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the constant is not of type TPM2_ALG_ID\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_CAP_serialize (const TPM2_CAP in, json_object ** jso)"
+Serialize TPM2_CAP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP constant to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the constant is not of type TPM2_CAP\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_CC_serialize (const TPM2_CC in, json_object ** jso)"
+Serialize TPM2_CC to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP constant to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the constant is not of type TPM2_CC\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_ECC_CURVE_serialize (const TPM2_ECC_CURVE in, json_object ** jso)"
+Serialize TPM2_ECC_CURVE to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP constant to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the constant is not of type TPM2_ECC_CURVE\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_EO_serialize (const TPM2_EO in, json_object ** jso)"
+Serialize TPM2_EO to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP constant to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the constant is not of type TPM2_EO\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_GENERATED_serialize (const TPM2_GENERATED in, json_object ** jso)"
+Serialize TPM2_GENERATED to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP constant to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the constant is not of type TPM2_GENERATED\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_HANDLE_serialize (const TPM2_HANDLE in, json_object ** jso)"
+Serialize value of type TPM2_HANDLE to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPM2_HANDLE\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_NT_serialize (const TPM2_NT in, json_object ** jso)"
+Serialize TPM2_NT to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP constant to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the constant is not of type TPM2_NT\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_PT_PCR_serialize (const TPM2_PT_PCR in, json_object ** jso)"
+Serialize TPM2_PT_PCR to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP constant to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the constant is not of type TPM2_PT_PCR\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_PT_serialize (const TPM2_PT in, json_object ** jso)"
+Serialize TPM2_PT to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP constant to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the constant is not of type TPM2_PT\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_ST_serialize (const TPM2_ST in, json_object ** jso)"
+Serialize TPM2_ST to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP constant to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the constant is not of type TPM2_ST\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_CREATION_DATA_serialize (const TPM2B_CREATION_DATA * in, json_object ** jso)"
+Serialize a TPM2B_CREATION_DATA to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPM2B_CREATION_DATA\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_DATA_serialize (const TPM2B_DATA * in, json_object ** jso)"
+Serialize value of type TPM2B_DATA to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPM2B_DATA\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_DIGEST_serialize (const TPM2B_DIGEST * in, json_object ** jso)"
+Serialize value of type TPM2B_DIGEST to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPM2B_DIGEST\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_ECC_PARAMETER_serialize (const TPM2B_ECC_PARAMETER * in, json_object ** jso)"
+Serialize value of type TPM2B_ECC_PARAMETER to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPM2B_ECC_PARAMETER\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_ENCRYPTED_SECRET_serialize (const TPM2B_ENCRYPTED_SECRET * in, json_object ** jso)"
+Serialize value of type TPM2B_ENCRYPTED_SECRET to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPM2B_ENCRYPTED_SECRET\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_EVENT_serialize (const TPM2B_EVENT * in, json_object ** jso)"
+Serialize value of type TPM2B_EVENT to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPM2B_EVENT\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_MAX_NV_BUFFER_serialize (const TPM2B_MAX_NV_BUFFER * in, json_object ** jso)"
+Serialize value of type TPM2B_MAX_NV_BUFFER to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPM2B_MAX_NV_BUFFER\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_NAME_serialize (const TPM2B_NAME * in, json_object ** jso)"
+Serialize value of type TPM2B_NAME to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPM2B_NAME\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_NONCE_serialize (const TPM2B_NONCE * in, json_object ** jso)"
+Serialize a TPM2B_NONCE to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPM2B_NONCE to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPM2B_NONCE\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_NV_PUBLIC_serialize (const TPM2B_NV_PUBLIC * in, json_object ** jso)"
+Serialize a TPM2B_NV_PUBLIC to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPM2B_NV_PUBLIC\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_OPERAND_serialize (const TPM2B_OPERAND * in, json_object ** jso)"
+Serialize a TPM2B_OPERAND to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPM2B_OPERAND to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPM2B_OPERAND\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_PRIVATE_serialize (const TPM2B_PRIVATE * in, json_object ** jso)"
+Serialize value of type TPM2B_PRIVATE to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPM2B_PRIVATE\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_PUBLIC_KEY_RSA_serialize (const TPM2B_PUBLIC_KEY_RSA * in, json_object ** jso)"
+Serialize value of type TPM2B_PUBLIC_KEY_RSA to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPM2B_PUBLIC_KEY_RSA\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_PUBLIC_serialize (const TPM2B_PUBLIC * in, json_object ** jso)"
+Serialize a TPM2B_PUBLIC to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPM2B_PUBLIC\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMA_ALGORITHM_serialize (const TPMA_ALGORITHM in, json_object ** jso)"
+Serialize a TPMA_ALGORITHM to json\&.
+.PP
+This function expects the Bitfield to be encoded as unsigned int in host-endianess\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the constant is not of type TPMA_ALGORITHM\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMA_CC_serialize (const TPMA_CC in, json_object ** jso)"
+Serialize a TPMA_CC to json\&.
+.PP
+This function expects the Bitfield to be encoded as unsigned int in host-endianess\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the constant is not of type TPMA_CC\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMA_LOCALITY_serialize (const TPMA_LOCALITY in, json_object ** jso)"
+Serialize a TPMA_LOCALITY to json\&.
+.PP
+This function expects the Bitfield to be encoded as unsigned int in host-endianess\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the constant is not of type TPMA_LOCALITY\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMA_NV_serialize (const TPMA_NV in, json_object ** jso)"
+Serialize a TPMA_NV to json\&.
+.PP
+This function expects the Bitfield to be encoded as unsigned int in host-endianess\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the constant is not of type TPMA_NV\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMA_OBJECT_serialize (const TPMA_OBJECT in, json_object ** jso)"
+Serialize a TPMA_OBJECT to json\&.
+.PP
+This function expects the Bitfield to be encoded as unsigned int in host-endianess\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the constant is not of type TPMA_OBJECT\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_AES_KEY_BITS_serialize (const TPMI_AES_KEY_BITS in, json_object ** jso)"
+Serialize value of type TPMI_AES_KEY_BITS to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMI_AES_KEY_BITS\&.
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_ASYM_SCHEME_serialize (const TPMI_ALG_ASYM_SCHEME in, json_object ** jso)"
+Serialize TPMI_ALG_ASYM_SCHEME to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP variable to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_CIPHER_MODE_serialize (const TPMI_ALG_CIPHER_MODE in, json_object ** jso)"
+Serialize TPMI_ALG_CIPHER_MODE to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP variable to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_ECC_SCHEME_serialize (const TPMI_ALG_ECC_SCHEME in, json_object ** jso)"
+Serialize TPMI_ALG_ECC_SCHEME to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP variable to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_HASH_serialize (const TPMI_ALG_HASH in, json_object ** jso)"
+Serialize TPMI_ALG_HASH to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP variable to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_KDF_serialize (const TPMI_ALG_KDF in, json_object ** jso)"
+Serialize TPMI_ALG_KDF to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP variable to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_KEYEDHASH_SCHEME_serialize (const TPMI_ALG_KEYEDHASH_SCHEME in, json_object ** jso)"
+Serialize TPMI_ALG_KEYEDHASH_SCHEME to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP variable to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_PUBLIC_serialize (const TPMI_ALG_PUBLIC in, json_object ** jso)"
+Serialize TPMI_ALG_PUBLIC to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP variable to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_RSA_SCHEME_serialize (const TPMI_ALG_RSA_SCHEME in, json_object ** jso)"
+Serialize TPMI_ALG_RSA_SCHEME to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP variable to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_SIG_SCHEME_serialize (const TPMI_ALG_SIG_SCHEME in, json_object ** jso)"
+Serialize TPMI_ALG_SIG_SCHEME to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP variable to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_SYM_MODE_serialize (const TPMI_ALG_SYM_MODE in, json_object ** jso)"
+Serialize TPMI_ALG_SYM_MODE to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP variable to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_SYM_OBJECT_serialize (const TPMI_ALG_SYM_OBJECT in, json_object ** jso)"
+Serialize TPMI_ALG_SYM_OBJECT to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP variable to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ECC_CURVE_serialize (const TPMI_ECC_CURVE in, json_object ** jso)"
+Serialize value of type TPMI_ECC_CURVE to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMI_ECC_CURVE\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_POLICYTYPE_serialize (const TPMI_POLICYTYPE in, json_object ** jso)"
+Serialize TPMI_POLICYTYPE to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP constant to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the constant is not of type TPMI_POLICYTYPE\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_POLICYTYPE_serialize_txt (const TPMI_POLICYTYPE in, json_object ** str_jso)"
+Get json object for a constant, if a variable is actually of type TPMI_POLICYTYPE\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP binary value of constant\&. 
+.br
+\fIstr_jso\fP with text representing the constant\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the constant is not of type TPMI_POLICYTYPE\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_RH_HIERARCHY_serialize (const TPMI_RH_HIERARCHY in, json_object ** jso)"
+Serialize TPMI_RH_HIERARCHY to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP variable to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_RH_NV_INDEX_serialize (const TPMI_RH_NV_INDEX in, json_object ** jso)"
+Serialize value of type TPMI_RH_NV_INDEX to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMI_RH_NV_INDEX\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_RSA_KEY_BITS_serialize (const TPMI_RSA_KEY_BITS in, json_object ** jso)"
+Serialize value of type TPMI_RSA_KEY_BITS to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMI_RSA_KEY_BITS\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ST_ATTEST_serialize (const TPMI_ST_ATTEST in, json_object ** jso)"
+Serialize TPMI_ST_ATTEST to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP variable to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_YES_NO_serialize (const TPMI_YES_NO in, json_object ** jso)"
+Serialize TPMI_YES_NO to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP variable to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPML_ALG_PROPERTY_serialize (const TPML_ALG_PROPERTY * in, json_object ** jso)"
+Serialize value of type TPML_ALG_PROPERTY to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPML_ALG_PROPERTY\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPML_CC_serialize (const TPML_CC * in, json_object ** jso)"
+Serialize value of type TPML_CC to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPML_CC\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPML_CCA_serialize (const TPML_CCA * in, json_object ** jso)"
+Serialize value of type TPML_CCA to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPML_CCA\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPML_DIGEST_VALUES_serialize (const TPML_DIGEST_VALUES * in, json_object ** jso)"
+Serialize value of type TPML_DIGEST_VALUES to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPML_DIGEST_VALUES\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPML_ECC_CURVE_serialize (const TPML_ECC_CURVE * in, json_object ** jso)"
+Serialize value of type TPML_ECC_CURVE to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPML_ECC_CURVE\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPML_HANDLE_serialize (const TPML_HANDLE * in, json_object ** jso)"
+Serialize value of type TPML_HANDLE to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPML_HANDLE\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPML_PCR_SELECTION_serialize (const TPML_PCR_SELECTION * in, json_object ** jso)"
+Serialize value of type TPML_PCR_SELECTION to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPML_PCR_SELECTION\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPML_PCRVALUES_serialize (const TPML_PCRVALUES * in, json_object ** jso)"
+Serialize value of type TPML_PCRVALUES to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPML_PCRVALUES\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPML_POLICYBRANCHES_serialize (const \fBTPML_POLICYBRANCHES\fP * in, json_object ** jso)"
+Serialize value of type \fBTPML_POLICYBRANCHES\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPML_POLICYBRANCHES\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPML_POLICYELEMENTS_serialize (const \fBTPML_POLICYELEMENTS\fP * in, json_object ** jso)"
+Serialize value of type \fBTPML_POLICYELEMENTS\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPML_POLICYELEMENTS\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPML_TAGGED_PCR_PROPERTY_serialize (const TPML_TAGGED_PCR_PROPERTY * in, json_object ** jso)"
+Serialize value of type TPML_TAGGED_PCR_PROPERTY to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPML_TAGGED_PCR_PROPERTY\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPML_TAGGED_TPM_PROPERTY_serialize (const TPML_TAGGED_TPM_PROPERTY * in, json_object ** jso)"
+Serialize value of type TPML_TAGGED_TPM_PROPERTY to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPML_TAGGED_TPM_PROPERTY\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_ALG_PROPERTY_serialize (const TPMS_ALG_PROPERTY * in, json_object ** jso)"
+Serialize value of type TPMS_ALG_PROPERTY to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_ALG_PROPERTY\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_ATTEST_serialize (const TPMS_ATTEST * in, json_object ** jso)"
+Serialize value of type TPMS_ATTEST to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_ATTEST\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_CAPABILITY_DATA_serialize (const TPMS_CAPABILITY_DATA * in, json_object ** jso)"
+Serialize value of type TPMS_CAPABILITY_DATA to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_CAPABILITY_DATA\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_CERTIFY_INFO_serialize (const TPMS_CERTIFY_INFO * in, json_object ** jso)"
+Serialize value of type TPMS_CERTIFY_INFO to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_CERTIFY_INFO\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_CLOCK_INFO_serialize (const TPMS_CLOCK_INFO * in, json_object ** jso)"
+Serialize value of type TPMS_CLOCK_INFO to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_CLOCK_INFO\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_COMMAND_AUDIT_INFO_serialize (const TPMS_COMMAND_AUDIT_INFO * in, json_object ** jso)"
+Serialize value of type TPMS_COMMAND_AUDIT_INFO to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_COMMAND_AUDIT_INFO\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_CREATION_DATA_serialize (const TPMS_CREATION_DATA * in, json_object ** jso)"
+Serialize value of type TPMS_CREATION_DATA to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_CREATION_DATA\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_CREATION_INFO_serialize (const TPMS_CREATION_INFO * in, json_object ** jso)"
+Serialize value of type TPMS_CREATION_INFO to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_CREATION_INFO\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_ECC_PARMS_serialize (const TPMS_ECC_PARMS * in, json_object ** jso)"
+Serialize value of type TPMS_ECC_PARMS to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_ECC_PARMS\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_ECC_POINT_serialize (const TPMS_ECC_POINT * in, json_object ** jso)"
+Serialize value of type TPMS_ECC_POINT to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_ECC_POINT\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_EMPTY_serialize (const TPMS_EMPTY * in, json_object ** jso)"
+Serialize a TPMS_EMPTY\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP not used\&. 
+.br
+\fIjso\fP not used\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP is always returnde\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_ENC_SCHEME_OAEP_serialize (const TPMS_ENC_SCHEME_OAEP * in, json_object ** jso)"
+Serialize a TPMS_ENC_SCHEME_OAEP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPMS_ENC_SCHEME_OAEP to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_ENC_SCHEME_OAEP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_ENC_SCHEME_RSAES_serialize (const TPMS_ENC_SCHEME_RSAES * in, json_object ** jso)"
+Serialize a TPMS_ENC_SCHEME_RSAES to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPMS_ENC_SCHEME_RSAES to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_ENC_SCHEME_RSAES\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_KEY_SCHEME_ECDH_serialize (const TPMS_KEY_SCHEME_ECDH * in, json_object ** jso)"
+Serialize a TPMS_KEY_SCHEME_ECDH to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPMS_KEY_SCHEME_ECDH to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_KEY_SCHEME_ECDH\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_KEYEDHASH_PARMS_serialize (const TPMS_KEYEDHASH_PARMS * in, json_object ** jso)"
+Serialize value of type TPMS_KEYEDHASH_PARMS to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_KEYEDHASH_PARMS\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_NV_CERTIFY_INFO_serialize (const TPMS_NV_CERTIFY_INFO * in, json_object ** jso)"
+Serialize value of type TPMS_NV_CERTIFY_INFO to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_NV_CERTIFY_INFO\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_NV_PUBLIC_serialize (const TPMS_NV_PUBLIC * in, json_object ** jso)"
+Serialize value of type TPMS_NV_PUBLIC to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_NV_PUBLIC\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_PCR_SELECT_serialize (const TPMS_PCR_SELECT * in, json_object ** jso)"
+Serialize a TPMS_PCR_SELECT structure to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_PCR_SELECTION\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_PCR_SELECTION_serialize (const TPMS_PCR_SELECTION * in, json_object ** jso)"
+Serialize a TPMS_PCR_SELECTION structure to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_PCR_SELECTION\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_PCRVALUE_serialize (const TPMS_PCRVALUE * in, json_object ** jso)"
+Serialize value of type TPMS_PCRVALUE to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_PCRVALUE\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICY_serialize (const \fBTPMS_POLICY\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICY\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICY\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYACTION_serialize (const \fBTPMS_POLICYACTION\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYACTION\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYACTION\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYAUTHORIZATION_serialize (const \fBTPMS_POLICYAUTHORIZATION\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYAUTHORIZATION\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYAUTHORIZATION\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYAUTHORIZE_serialize (const \fBTPMS_POLICYAUTHORIZE\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYAUTHORIZE\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYAUTHORIZE\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+< counter for conditional fields
+.SS "TSS2_RC ifapi_json_TPMS_POLICYAUTHORIZENV_serialize (const \fBTPMS_POLICYAUTHORIZENV\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYAUTHORIZENV\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYAUTHORIZENV\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+< counter for conditional fields
+.SS "TSS2_RC ifapi_json_TPMS_POLICYAUTHVALUE_serialize (const \fBTPMS_POLICYAUTHVALUE\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYAUTHVALUE\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYAUTHVALUE\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYBRANCH_serialize (const \fBTPMS_POLICYBRANCH\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYBRANCH\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYBRANCH\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYCOMMANDCODE_serialize (const \fBTPMS_POLICYCOMMANDCODE\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYCOMMANDCODE\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYCOMMANDCODE\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYCOUNTERTIMER_serialize (const \fBTPMS_POLICYCOUNTERTIMER\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYCOUNTERTIMER\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYCOUNTERTIMER\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYCPHASH_serialize (const \fBTPMS_POLICYCPHASH\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYCPHASH\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYCPHASH\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYDUPLICATIONSELECT_serialize (const \fBTPMS_POLICYDUPLICATIONSELECT\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYDUPLICATIONSELECT\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYDUPLICATIONSELECT\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+< counter for conditional fields
+.SS "TSS2_RC ifapi_json_TPMS_POLICYLOCALITY_serialize (const \fBTPMS_POLICYLOCALITY\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYLOCALITY\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYLOCALITY\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYNAMEHASH_serialize (const \fBTPMS_POLICYNAMEHASH\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYNAMEHASH\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYNAMEHASH\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+< counter for conditional fields
+.SS "TSS2_RC ifapi_json_TPMS_POLICYNV_serialize (const \fBTPMS_POLICYNV\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYNV\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYNV\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+< counter for conditional fields
+.SS "TSS2_RC ifapi_json_TPMS_POLICYNVWRITTEN_serialize (const \fBTPMS_POLICYNVWRITTEN\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYNVWRITTEN\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYNVWRITTEN\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYOR_serialize (const \fBTPMS_POLICYOR\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYOR\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYOR\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYPASSWORD_serialize (const \fBTPMS_POLICYPASSWORD\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYPASSWORD\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYPASSWORD\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYPCR_serialize (const \fBTPMS_POLICYPCR\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYPCR\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYPCR\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+< counter for conditional fields
+.SS "TSS2_RC ifapi_json_TPMS_POLICYPHYSICALPRESENCE_serialize (const \fBTPMS_POLICYPHYSICALPRESENCE\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYPHYSICALPRESENCE\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYPHYSICALPRESENCE\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYSECRET_serialize (const \fBTPMS_POLICYSECRET\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYSECRET\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYSECRET\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+< counter for conditional fields
+.SS "TSS2_RC ifapi_json_TPMS_POLICYSIGNED_serialize (const \fBTPMS_POLICYSIGNED\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYSIGNED\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYSIGNED\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+< counter for conditional fields
+.SS "TSS2_RC ifapi_json_TPMS_POLICYTEMPLATE_serialize (const \fBTPMS_POLICYTEMPLATE\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMS_POLICYTEMPLATE\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMS_POLICYTEMPLATE\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+< counter for conditional fields
+.SS "TSS2_RC ifapi_json_TPMS_QUOTE_INFO_serialize (const TPMS_QUOTE_INFO * in, json_object ** jso)"
+Serialize value of type TPMS_QUOTE_INFO to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_QUOTE_INFO\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_RSA_PARMS_serialize (const TPMS_RSA_PARMS * in, json_object ** jso)"
+Serialize value of type TPMS_RSA_PARMS to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_RSA_PARMS\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SCHEME_ECDAA_serialize (const TPMS_SCHEME_ECDAA * in, json_object ** jso)"
+Serialize value of type TPMS_SCHEME_ECDAA to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SCHEME_ECDAA\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SCHEME_HASH_serialize (const TPMS_SCHEME_HASH * in, json_object ** jso)"
+Serialize value of type TPMS_SCHEME_HASH to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SCHEME_HASH\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SCHEME_HMAC_serialize (const TPMS_SCHEME_HMAC * in, json_object ** jso)"
+Serialize a TPMS_SCHEME_HMAC to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPMS_SCHEME_HMAC to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SCHEME_HMAC\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SCHEME_KDF1_SP800_108_serialize (const TPMS_SCHEME_KDF1_SP800_108 * in, json_object ** jso)"
+Serialize a TPMS_SCHEME_KDF1_SP800_108 to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPMS_SCHEME_KDF1_SP800_108 to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SCHEME_KDF1_SP800_108\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SCHEME_KDF1_SP800_56A_serialize (const TPMS_SCHEME_KDF1_SP800_56A * in, json_object ** jso)"
+Serialize a TPMS_SCHEME_KDF1_SP800_56A to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPMS_SCHEME_KDF1_SP800_56A to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SCHEME_KDF1_SP800_56A\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SCHEME_MGF1_serialize (const TPMS_SCHEME_MGF1 * in, json_object ** jso)"
+Serialize a TPMS_SCHEME_MGF1 to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPMS_SCHEME_MGF1 to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SCHEME_MGF1\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SCHEME_XOR_serialize (const TPMS_SCHEME_XOR * in, json_object ** jso)"
+Serialize value of type TPMS_SCHEME_XOR to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SCHEME_XOR\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SESSION_AUDIT_INFO_serialize (const TPMS_SESSION_AUDIT_INFO * in, json_object ** jso)"
+Serialize value of type TPMS_SESSION_AUDIT_INFO to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SESSION_AUDIT_INFO\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIG_SCHEME_ECDAA_serialize (const TPMS_SIG_SCHEME_ECDAA * in, json_object ** jso)"
+Serialize a TPMS_SIG_SCHEME_ECDAA to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPMS_SIG_SCHEME_ECDAA to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SIG_SCHEME_ECDAA\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIG_SCHEME_ECDSA_serialize (const TPMS_SIG_SCHEME_ECDSA * in, json_object ** jso)"
+Serialize a TPMS_SIG_SCHEME_ECDSA to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPMS_SIG_SCHEME_ECDSA to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SIG_SCHEME_ECDSA\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIG_SCHEME_ECSCHNORR_serialize (const TPMS_SIG_SCHEME_ECSCHNORR * in, json_object ** jso)"
+Serialize a TPMS_SIG_SCHEME_ECSCHNORR to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPMS_SIG_SCHEME_ECSCHNORR to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SIG_SCHEME_ECSCHNORR\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIG_SCHEME_RSAPSS_serialize (const TPMS_SIG_SCHEME_RSAPSS * in, json_object ** jso)"
+Serialize a TPMS_SIG_SCHEME_RSAPSS to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPMS_SIG_SCHEME_RSAPSS to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SIG_SCHEME_RSAPSS\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIG_SCHEME_RSASSA_serialize (const TPMS_SIG_SCHEME_RSASSA * in, json_object ** jso)"
+Serialize a TPMS_SIG_SCHEME_RSASSA to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPMS_SIG_SCHEME_RSASSA to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SIG_SCHEME_RSASSA\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIG_SCHEME_SM2_serialize (const TPMS_SIG_SCHEME_SM2 * in, json_object ** jso)"
+Serialize a TPMS_SIG_SCHEME_SM2 to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPMS_SIG_SCHEME_SM2 to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SIG_SCHEME_SM2\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIGNATURE_ECC_serialize (const TPMS_SIGNATURE_ECC * in, json_object ** jso)"
+Serialize value of type TPMS_SIGNATURE_ECC to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SIGNATURE_ECC\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIGNATURE_ECDAA_serialize (const TPMS_SIGNATURE_ECDAA * in, json_object ** jso)"
+Serialize a TPMS_SIGNATURE_ECDAA to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPMS_SIGNATURE_ECDAA to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SIGNATURE_ECDAA\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIGNATURE_ECDSA_serialize (const TPMS_SIGNATURE_ECDSA * in, json_object ** jso)"
+Serialize a TPMS_SIGNATURE_ECDSA to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPMS_SIGNATURE_ECDSA to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SIGNATURE_ECDSA\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIGNATURE_ECSCHNORR_serialize (const TPMS_SIGNATURE_ECSCHNORR * in, json_object ** jso)"
+Serialize a TPMS_SIGNATURE_ECSCHNORR to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPMS_SIGNATURE_ECSCHNORR to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SIGNATURE_ECSCHNORR\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIGNATURE_RSA_serialize (const TPMS_SIGNATURE_RSA * in, json_object ** jso)"
+Serialize value of type TPMS_SIGNATURE_RSA to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SIGNATURE_RSA\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIGNATURE_RSAPSS_serialize (const TPMS_SIGNATURE_RSAPSS * in, json_object ** jso)"
+Serialize a TPMS_SIGNATURE_RSAPSS to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPMS_SIGNATURE_RSAPSS to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SIGNATURE_RSAPSS\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIGNATURE_RSASSA_serialize (const TPMS_SIGNATURE_RSASSA * in, json_object ** jso)"
+Serialize a TPMS_SIGNATURE_RSASSA to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPMS_SIGNATURE_RSASSA to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SIGNATURE_RSASSA\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIGNATURE_SM2_serialize (const TPMS_SIGNATURE_SM2 * in, json_object ** jso)"
+Serialize a TPMS_SIGNATURE_SM2 to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value of type TPMS_SIGNATURE_SM2 to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SIGNATURE_SM2\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SYMCIPHER_PARMS_serialize (const TPMS_SYMCIPHER_PARMS * in, json_object ** jso)"
+Serialize value of type TPMS_SYMCIPHER_PARMS to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_SYMCIPHER_PARMS\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_TAGGED_PCR_SELECT_serialize (const TPMS_TAGGED_PCR_SELECT * in, json_object ** jso)"
+Serialize a TPMS_TAGGED_PCR_SELECT structure to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_TAGGED_PCR_SELECT\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_TAGGED_PROPERTY_serialize (const TPMS_TAGGED_PROPERTY * in, json_object ** jso)"
+Serialize value of type TPMS_TAGGED_PROPERTY to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_TAGGED_PROPERTY\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_TIME_ATTEST_INFO_serialize (const TPMS_TIME_ATTEST_INFO * in, json_object ** jso)"
+Serialize value of type TPMS_TIME_ATTEST_INFO to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_TIME_ATTEST_INFO\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_TIME_INFO_serialize (const TPMS_TIME_INFO * in, json_object ** jso)"
+Serialize value of type TPMS_TIME_INFO to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMS_TIME_INFO\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_ECC_SCHEME_serialize (const TPMT_ECC_SCHEME * in, json_object ** jso)"
+Serialize value of type TPMT_ECC_SCHEME to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMT_ECC_SCHEME\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_HA_serialize (const TPMT_HA * in, json_object ** jso)"
+Serialize value of type TPMT_HA to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMT_HA\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_KDF_SCHEME_serialize (const TPMT_KDF_SCHEME * in, json_object ** jso)"
+Serialize value of type TPMT_KDF_SCHEME to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMT_KDF_SCHEME\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_KEYEDHASH_SCHEME_serialize (const TPMT_KEYEDHASH_SCHEME * in, json_object ** jso)"
+Serialize value of type TPMT_KEYEDHASH_SCHEME to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMT_KEYEDHASH_SCHEME\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_POLICYELEMENT_serialize (const \fBTPMT_POLICYELEMENT\fP * in, json_object ** jso)"
+Serialize value of type \fBTPMT_POLICYELEMENT\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMT_POLICYELEMENT\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_PUBLIC_serialize (const TPMT_PUBLIC * in, json_object ** jso)"
+Serialize value of type TPMT_PUBLIC to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMT_PUBLIC\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_RSA_SCHEME_serialize (const TPMT_RSA_SCHEME * in, json_object ** jso)"
+Serialize value of type TPMT_RSA_SCHEME to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMT_RSA_SCHEME\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_SIG_SCHEME_serialize (const TPMT_SIG_SCHEME * in, json_object ** jso)"
+Serialize value of type TPMT_SIG_SCHEME to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMT_SIG_SCHEME\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_SIGNATURE_serialize (const TPMT_SIGNATURE * in, json_object ** jso)"
+Serialize value of type TPMT_SIGNATURE to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMT_SIGNATURE\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_SYM_DEF_OBJECT_serialize (const TPMT_SYM_DEF_OBJECT * in, json_object ** jso)"
+Serialize value of type TPMT_SYM_DEF_OBJECT to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMT_SYM_DEF_OBJECT\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_TK_CREATION_serialize (const TPMT_TK_CREATION * in, json_object ** jso)"
+Serialize value of type TPMT_TK_CREATION to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMT_TK_CREATION\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_ASYM_SCHEME_serialize (const TPMU_ASYM_SCHEME * in, UINT32 selector, json_object ** jso)"
+Serialize a TPMU_ASYM_SCHEME to json\&.
+.PP
+This function expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP the value to be serialized\&. 
+.br
+\fIselector\fP the type of the scheme\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMU_ASYM_SCHEME\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_ATTEST_serialize (const TPMU_ATTEST * in, UINT32 selector, json_object ** jso)"
+Serialize a TPMU_ATTEST to json\&.
+.PP
+This function expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP the value to be serialized\&. 
+.br
+\fIselector\fP the type of the attest\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMU_ATTEST\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_CAPABILITIES_serialize (const TPMU_CAPABILITIES * in, UINT32 selector, json_object ** jso)"
+Serialize a TPMU_CAPABILITIES to json\&.
+.PP
+This function expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP the value to be serialized\&. 
+.br
+\fIselector\fP the type of the capabilities\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMU_CAPABILITIES\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_HA_serialize (const TPMU_HA * in, UINT32 selector, json_object ** jso)"
+Serialize a TPMU_HA to json\&.
+.PP
+This function expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP the value to be serialized\&. 
+.br
+\fIselector\fP the type of the HA object\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMU_HA\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_KDF_SCHEME_serialize (const TPMU_KDF_SCHEME * in, UINT32 selector, json_object ** jso)"
+Serialize a TPMU_KDF_SCHEME to json\&.
+.PP
+This function expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP the value to be serialized\&. 
+.br
+\fIselector\fP the type of the KDF scheme\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMU_KDF_SCHEME\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_POLICYELEMENT_serialize (const \fBTPMU_POLICYELEMENT\fP * in, UINT32 selector, json_object ** jso)"
+Serialize a \fBTPMU_POLICYELEMENT\fP to json\&.
+.PP
+This function expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP the value to be serialized\&. 
+.br
+\fIselector\fP the type of the policy element\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type \fBTPMU_POLICYELEMENT\fP\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_PUBLIC_ID_serialize (const TPMU_PUBLIC_ID * in, UINT32 selector, json_object ** jso)"
+Serialize a TPMU_PUBLIC_ID to json\&.
+.PP
+This function expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP the value to be serialized\&. 
+.br
+\fIselector\fP the type of the public ID\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMU_PUBLIC_ID\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_PUBLIC_PARMS_serialize (const TPMU_PUBLIC_PARMS * in, UINT32 selector, json_object ** jso)"
+Serialize a TPMU_PUBLIC_PARMS to json\&.
+.PP
+This function expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP the value to be serialized\&. 
+.br
+\fIselector\fP the type of the public parameters\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMU_PUBLIC_PARMS\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_SCHEME_KEYEDHASH_serialize (const TPMU_SCHEME_KEYEDHASH * in, UINT32 selector, json_object ** jso)"
+Serialize a TPMU_SCHEME_KEYEDHASH to json\&.
+.PP
+This function expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP the value to be serialized\&. 
+.br
+\fIselector\fP the type of the keyedhash scheme\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMU_SCHEME_KEYEDHASH\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_SIG_SCHEME_serialize (const TPMU_SIG_SCHEME * in, UINT32 selector, json_object ** jso)"
+Serialize a TPMU_SIG_SCHEME to json\&.
+.PP
+This function expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP the value to be serialized\&. 
+.br
+\fIselector\fP the type of the signature scheme\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMU_SIG_SCHEME\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_SIGNATURE_serialize (const TPMU_SIGNATURE * in, UINT32 selector, json_object ** jso)"
+Serialize a TPMU_SIGNATURE to json\&.
+.PP
+This function expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP the value to be serialized\&. 
+.br
+\fIselector\fP the type of the signature\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMU_SIGNATURE\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_SYM_KEY_BITS_serialize (const TPMU_SYM_KEY_BITS * in, UINT32 selector, json_object ** jso)"
+Serialize a TPMU_SYM_KEY_BITS to json\&.
+.PP
+This function expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP the value to be serialized\&. 
+.br
+\fIselector\fP the type of the symmetric algorithm\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMU_SYM_KEY_BITS\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_SYM_MODE_serialize (const TPMU_SYM_MODE * in, UINT32 selector, json_object ** jso)"
+Serialize a TPMU_SYM_MODE to json\&.
+.PP
+This function expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP the value to be serialized\&. 
+.br
+\fIselector\fP the type of the symmetric mode\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPMU_SYM_MODE\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_UINT16_serialize (const UINT16 in, json_object ** jso)"
+Serialize a base_type UINT16 to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type UINT16\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_UINT32_serialize (const UINT32 in, json_object ** jso)"
+Serialize a base_type UINT32 to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type UINT32\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_UINT64_serialize (UINT64 in, json_object ** jso)"
+Serialize a base_type UINT64 to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP variable to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type UINT64\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_UINT8_ARY_serialize (const \fBUINT8_ARY\fP * in, json_object ** jso)"
+Serialize value of type \fBUINT8_ARY\fP to json\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP value to be serialized\&. 
+.br
+\fIjso\fP pointer to the json object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the value is not of type TPM2B_DIGEST\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

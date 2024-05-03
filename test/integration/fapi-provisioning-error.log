@@ -1,0 +1,26 @@
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC_error",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.83TTrV/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.83TTrV/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.83TTrV",
+     "tcti": "device:/dev/tpmrm0",
+     "ek_cert_less": "yes",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.83TTrV/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.83TTrV/system_dir/policy does not exist, creating 
+WARNING:esys:src/tss2-esys/api/Esys_EvictControl.c:330:Esys_EvictControl_Finish() Received TPM Error 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:1228:Fapi_Provision_Finish() Evict control failed ErrorCode (0x0000014c) 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:427:ifapi_io_remove_directories() Removing: /tmp/fapi_tmpdir.83TTrV/system_dir/P_ECC_error/HE/EK/object.json 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x0000014c) Provision 
+info:test:test/integration/main-fapi.c:504:main() Test returned 0 
+Script returned 0
+PASS test/integration/fapi-provisioning-error.fint (exit status: 0)

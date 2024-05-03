@@ -1,0 +1,67 @@
+[==========] Running 12 test(s).
+[ RUN      ] copyinfo_null_params
+ERROR:tcti:src/tss2-tcti/tctildr.c:311:copy_info() parameters cannot be NULL 
+[       OK ] copyinfo_null_params
+[ RUN      ] copyinfo_strndup1_fail
+ERROR:tcti:src/tss2-tcti/tctildr.c:318:copy_info() strndup failed on name: Cannot allocate memory 
+__wrap_strndup: got known string
+[       OK ] copyinfo_strndup1_fail
+[ RUN      ] copyinfo_strndup2_fail
+ERROR:tcti:src/tss2-tcti/tctildr.c:325:copy_info() strndup failed on description: Cannot allocate memory 
+__wrap_strndup: got known string
+__wrap_strndup: got known string
+__wrap_free: 0x55d2a13320fd
+__wrap_free: got known memory
+[       OK ] copyinfo_strndup2_fail
+[ RUN      ] copyinfo_strndup3_fail
+ERROR:tcti:src/tss2-tcti/tctildr.c:334:copy_info() strndup failed on config_help: Cannot allocate memory 
+__wrap_strndup: got known string
+__wrap_strndup: got known string
+__wrap_strndup: got known string
+__wrap_free: 0x55d2a13320fd
+__wrap_free: got known memory
+__wrap_free: 0x55d2a1332106
+__wrap_free: got known memory
+[       OK ] copyinfo_strndup3_fail
+[ RUN      ] copyinfo_success
+__wrap_strndup: got known string
+__wrap_strndup: got known string
+__wrap_strndup: got known string
+[       OK ] copyinfo_success
+[ RUN      ] getinfo_null_info
+[       OK ] getinfo_null_info
+[ RUN      ] getinfo_get_info_fail
+[       OK ] getinfo_get_info_fail
+[ RUN      ] getinfo_calloc_fail
+ERROR:tcti:src/tss2-tcti/tctildr.c:369:Tss2_TctiLdr_GetInfo() calloc failed: Success 
+__wrap_calloc
+[       OK ] getinfo_calloc_fail
+[ RUN      ] getinfo_copy_info_fail
+ERROR:tcti:src/tss2-tcti/tctildr.c:318:copy_info() strndup failed on name: Cannot allocate memory 
+getinfo_copy_info_fail: pointer 0x55d2a13352c0
+__wrap_calloc
+__wrap_strndup: got known string
+__wrap_free: 0x55d2a13352c0
+__wrap_free: got known memory
+[       OK ] getinfo_copy_info_fail
+[ RUN      ] getinfo_success
+__wrap_calloc
+__wrap_strndup: got known string
+__wrap_strndup: got known string
+__wrap_strndup: got known string
+[       OK ] getinfo_success
+[ RUN      ] freeinfo_null
+[       OK ] freeinfo_null
+[ RUN      ] freeinfo_success
+__wrap_free: 0x55d2a13320fd
+__wrap_free: got known memory
+__wrap_free: 0x55d2a1332106
+__wrap_free: got known memory
+__wrap_free: 0x55d2a1332116
+__wrap_free: got known memory
+__wrap_free: 0x55d2a13352c0
+__wrap_free: got known memory
+[       OK ] freeinfo_success
+[==========] 12 test(s) run.
+[  PASSED  ] 12 test(s).
+PASS test/unit/tctildr-getinfo (exit status: 0)

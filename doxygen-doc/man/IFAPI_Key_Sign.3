@@ -1,0 +1,91 @@
+.TH "IFAPI_Key_Sign" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_Key_Sign
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <fapi_int\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "enum FAPI_SIGN_STATE \fBstate\fP"
+.br
+.ti -1c
+.RI "const char * \fBkeyPath\fP"
+.br
+.ti -1c
+.RI "\fBESYS_TR\fP \fBhandle\fP"
+.br
+.ti -1c
+.RI "TPM2B_DIGEST \fBdigest\fP"
+.br
+.ti -1c
+.RI "TPMT_SIG_SCHEME \fBscheme\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP * \fBkey_object\fP"
+.br
+.ti -1c
+.RI "TPMT_SIGNATURE * \fBtpm_signature\fP"
+.br
+.ti -1c
+.RI "TPMI_YES_NO \fBdecrypt\fP"
+.br
+.ti -1c
+.RI "TPMT_SIGNATURE * \fBsignature\fP"
+.br
+.ti -1c
+.RI "const char * \fBpadding\fP"
+.br
+.ti -1c
+.RI "char * \fBcertificate\fP"
+.br
+.ti -1c
+.RI "uint8_t * \fBret_signature\fP"
+.br
+.ti -1c
+.RI "size_t \fBsignatureSize\fP"
+.br
+.ti -1c
+.RI "char * \fBpublicKey\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The data structure holding internal state of Fapi_Sign\&. 
+.SH "Field Documentation"
+.PP 
+.SS "char* certificate"
+Certificate of the signing key\&. 
+.SS "TPMI_YES_NO decrypt"
+Switch for symmetric algs 
+.SS "TPM2B_DIGEST digest"
+The digest to be signed 
+.SS "\fBESYS_TR\fP handle"
+The ESYS handle of the signing key 
+.SS "\fBIFAPI_OBJECT\fP* key_object"
+The IPAPI object of the signing key 
+.SS "const char* keyPath"
+The implicit key path 
+.SS "const char* padding"
+Optional padding parameter for key sign\&. 
+.SS "char* publicKey"
+Public key of the signing key\&. 
+.SS "uint8_t* ret_signature"
+Result signature 
+.SS "TPMT_SIG_SCHEME scheme"
+The signature scheme from profile 
+.SS "TPMT_SIGNATURE* signature"
+Produced TPM singature 
+.SS "enum FAPI_SIGN_STATE state"
+The state of the signing operation 
+.SS "TPMT_SIGNATURE* tpm_signature"
+The signature in TPM format 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

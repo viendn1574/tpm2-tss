@@ -1,0 +1,6 @@
+[==========] Running 1 test(s).
+[ RUN      ] test
+[       OK ] test
+[==========] 1 test(s) run.
+[  PASSED  ] 1 test(s).
+PASS test/unit/esys-nulltcti (exit status: 0)

@@ -1,0 +1,6 @@
+[==========] Running 1 test(s).
+[ RUN      ] test_ac_send
+[       OK ] test_ac_send
+[==========] 1 test(s) run.
+[  PASSED  ] 1 test(s).
+PASS test/unit/esys-ac-send (exit status: 0)

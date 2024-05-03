@@ -1,0 +1,31 @@
+[==========] Running 12 test(s).
+[ RUN      ] UINT32_marshal_success
+[       OK ] UINT32_marshal_success
+[ RUN      ] UINT32_marshal_success_offset
+[       OK ] UINT32_marshal_success_offset
+[ RUN      ] UINT32_marshal_buffer_null_with_offset
+[       OK ] UINT32_marshal_buffer_null_with_offset
+[ RUN      ] UINT32_marshal_buffer_null_offset_null
+ERROR:marshal:src/tss2-mu/base-types.c:173:Tss2_MU_UINT32_Marshal() buffer and offset parameter are NULL 
+[       OK ] UINT32_marshal_buffer_null_offset_null
+[ RUN      ] UINT32_marshal_buffer_size_lt_data
+[       OK ] UINT32_marshal_buffer_size_lt_data
+[ RUN      ] UINT32_marshal_buffer_size_lt_offset
+[       OK ] UINT32_marshal_buffer_size_lt_offset
+[ RUN      ] UINT32_unmarshal_success
+[       OK ] UINT32_unmarshal_success
+[ RUN      ] UINT32_unmarshal_success_offset
+[       OK ] UINT32_unmarshal_success_offset
+[ RUN      ] UINT32_unmarshal_buffer_null
+ERROR:marshal:src/tss2-mu/base-types.c:174:Tss2_MU_UINT32_Unmarshal() buffer or dest and offset parameter are NULL 
+[       OK ] UINT32_unmarshal_buffer_null
+[ RUN      ] UINT32_unmarshal_dest_null
+ERROR:marshal:src/tss2-mu/base-types.c:174:Tss2_MU_UINT32_Unmarshal() buffer or dest and offset parameter are NULL 
+[       OK ] UINT32_unmarshal_dest_null
+[ RUN      ] UINT32_unmarshal_buffer_size_lt_offset
+[       OK ] UINT32_unmarshal_buffer_size_lt_offset
+[ RUN      ] UINT32_unmarshal_buffer_size_lt_dest
+[       OK ] UINT32_unmarshal_buffer_size_lt_dest
+[==========] 12 test(s) run.
+[  PASSED  ] 12 test(s).
+PASS test/unit/UINT32-marshal (exit status: 0)

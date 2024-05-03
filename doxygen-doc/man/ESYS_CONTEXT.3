@@ -1,0 +1,189 @@
+.TH "ESYS_CONTEXT" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ESYS_CONTEXT
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBESYS_CONTEXT\fP \fBESYS_CONTEXT\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC \fBEsys_Initialize\fP (\fBESYS_CONTEXT\fP **esys_context, TSS2_TCTI_CONTEXT *tcti, TSS2_ABI_VERSION *abiVersion)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBEsys_GetTcti\fP (\fBESYS_CONTEXT\fP *esys_context, TSS2_TCTI_CONTEXT **tcti)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBEsys_GetPollHandles\fP (\fBESYS_CONTEXT\fP *esys_context, TSS2_TCTI_POLL_HANDLE **handles, size_t *count)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBEsys_SetTimeout\fP (\fBESYS_CONTEXT\fP *esys_context, int32_t timeout)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBEsys_GetSysContext\fP (\fBESYS_CONTEXT\fP *esys_context, TSS2_SYS_CONTEXT **sys_context)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBEsys_SetCryptoCallbacks\fP (\fBESYS_CONTEXT\fP *esysContext, \fBESYS_CRYPTO_CALLBACKS\fP *callbacks)"
+.br
+.ti -1c
+.RI "void \fBEsys_Free\fP (void *__ptr)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+An \fBESYS_CONTEXT\fP holds tdata for the connection to the TPM as well as the metadata for TPM Resource; such as Transient key, Persistent objects, NV spaces, Sessions or PCRs\&. 
+.SH "Typedef Documentation"
+.PP 
+.SS "\fBESYS_CONTEXT\fP"
+Reference to the \fBESYS_CONTEXT\fP that holds data for the connection to the TPM as well as the metadata for TPM Resource; such as Transient key, Persistent objects, NV spaces, Sessions or PCRs\&. 
+.SH "Function Documentation"
+.PP 
+.SS "TSS2_RC Esys_GetPollHandles (\fBESYS_CONTEXT\fP * esys_context, TSS2_TCTI_POLL_HANDLE ** handles, size_t * count)"
+Return the poll handles of the used TCTI\&.
+.PP
+The connection to the TPM is held using a TCTI\&. These may optionally provide handles that can be used to poll for incoming data\&. This is useful when using the asynchronous function of ESAPI in an event-loop model\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIesys_context\fP [in] The \fBESYS_CONTEXT\fP\&. 
+.br
+\fIhandles\fP [out] The poll handles (callee-allocated, use free()) 
+.br
+\fIcount\fP [out] The number of poll handles\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on Success\&. 
+.br
+\fITSS2_ESYS_RC_BAD_REFERENCE\fP if esysContext, handles or count is NULL\&. 
+.br
+\fITSS2_RCs\fP produced by lower layers of the software stack\&. 
+.RE
+.PP
+
+.SS "TSS2_RC Esys_GetSysContext (\fBESYS_CONTEXT\fP * esys_context, TSS2_SYS_CONTEXT ** sys_context)"
+Helper function that returns sys contest from the give esys context\&.
+.PP
+Function returns sys contest from the give esys context\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIesys_context\fP [in] ESYS context\&. 
+.br
+\fIsys_context\fP [out] SYS context\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on Success\&. 
+.br
+\fITSS2_ESYS_RC_BAD_REFERENCE\fP if esys_context of sys_context are NULL\&. 
+.RE
+.PP
+
+.SS "TSS2_RC Esys_GetTcti (\fBESYS_CONTEXT\fP * esys_context, TSS2_TCTI_CONTEXT ** tcti)"
+Return the used TCTI context\&.
+.PP
+If a tcti context was passed into Esys_Initialize then this tcti context is return\&. If NULL was passed in, then NULL will be returned\&. This function is useful before Esys_Finalize to retrieve the tcti context and perform a clean Tss2_Tcti_Finalize\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIesys_context\fP [in] The \fBESYS_CONTEXT\fP\&. 
+.br
+\fItcti\fP [out] The TCTI context used to connect to the TPM (may be NULL)\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on Success\&. 
+.br
+\fITSS2_ESYS_RC_BAD_REFERENCE\fP if esysContext or tcti is NULL\&. 
+.RE
+.PP
+
+.SS "TSS2_RC Esys_Initialize (\fBESYS_CONTEXT\fP ** esys_context, TSS2_TCTI_CONTEXT * tcti, TSS2_ABI_VERSION * abiVersion)"
+Initialize an \fBESYS_CONTEXT\fP for further use\&.
+.PP
+Initialize an \fBESYS_CONTEXT\fP that holds all the state and metadata information during an interaction with the TPM\&. If not specified, load a TCTI in this order: Library libtss2-tcti-default\&.so (link to the preferred TCTI) Library libtss2-tcti-tabrmd\&.so (tabrmd) Device /dev/tpmrm0 (kernel resident resource manager) Device /dev/tpm0 (hardware TPM) TCP socket localhost:2321 (TPM simulator) 
+.PP
+\fBParameters\fP
+.RS 4
+\fIesys_context\fP [out] The \fBESYS_CONTEXT\fP\&. 
+.br
+\fItcti\fP [in] The TCTI context used to connect to the TPM (may be NULL)\&. 
+.br
+\fIabiVersion\fP [in,out] The abi version to check and the abi version supported by this implementation (may be NULL)\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_ESYS_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_ESYS_RC_BAD_REFERENCE\fP if esysContext is NULL\&. 
+.br
+\fITSS2_ESYS_RC_MEMORY\fP if the ESAPI cannot allocate enough memory to create the context\&. 
+.br
+\fITSS2_RCs\fP produced by lower layers of the software stack may be returned to the caller unaltered unless handled internally\&. 
+.RE
+.PP
+
+.SS "TSS2_RC Esys_SetCryptoCallbacks (\fBESYS_CONTEXT\fP * esysContext, \fBESYS_CRYPTO_CALLBACKS\fP * callbacks)"
+Set Crypto Callbacks
+.PP
+This is an advanced functionality that should be used with caution and by those who know exactly what they are doing\&. This function provides the ability to set and restore to the original state, the cryptographic callbacks that ESAPI uses internally\&. This is useful for custom builds where runtime configurable cryptography is beneficial over a configure time, --with-crypto=<ossl|mbed> backend\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIesysContext\fP The \fBESYS_CONTEXT\fP\&. 
+.br
+\fIcallbacks\fP The user define crypto callbacks or NULL for a reset to the \&./configure time state\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_ESYS_RC_BAD_REFERENCE\fP is esysContext is NULL\&. 
+.br
+\fITSS2_TSS2_ESYS_RC_CALLBACK_NULL\fP if a required callback pointer is NULL\&. 
+.br
+\fIUSER_DEFINED\fP user defined errors if the user callback fails\&. 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+If \&./configure --with-crypto=none, ESAPI functions that need crypto will fail with TSS2_TSS2_ESYS_RC_CALLBACK_NULL until the application registers callbacks\&. Under the same scenario, It will also fail if the application resets the state back to the original state\&. 
+.RE
+.PP
+
+.SS "TSS2_RC Esys_SetTimeout (\fBESYS_CONTEXT\fP * esys_context, int32_t timeout)"
+Set the timeout of Esys asynchronous functions\&.
+.PP
+Sets the timeout for the _finish() functions in the asynchronous versions of the Esys commands\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIesys_context\fP [in] The \fBESYS_CONTEXT\fP\&. 
+.br
+\fItimeout\fP [in] The timeout in ms or -1 to block indefinately\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on Success\&. 
+.br
+\fITSS2_ESYS_RC_BAD_REFERENCE\fP if esysContext is NULL\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

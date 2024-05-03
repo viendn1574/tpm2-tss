@@ -1,0 +1,43 @@
+.TH "IFAPI_EVENT_UNION" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_EVENT_UNION
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ifapi_eventlog\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "\fBIFAPI_TSS_EVENT\fP \fBtss_event\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_IMA_EVENT\fP \fBima_event\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_FIRMWARE_EVENT\fP \fBfirmware_event\fP"
+.br
+.ti -1c
+.RI "\fBTPMS_EVENT_CELMGT\fP \fBcel_event\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Type for representing sub types of FAPI events 
+.SH "Field Documentation"
+.PP 
+.SS "\fBTPMS_EVENT_CELMGT\fP cel_event"
+Cononical eventlol management event\&. 
+.SS "\fBIFAPI_FIRMWARE_EVENT\fP firmware_event"
+Firmware event information 
+.SS "\fBIFAPI_IMA_EVENT\fP ima_event"
+IMA event information 
+.SS "\fBIFAPI_TSS_EVENT\fP tss_event"
+TSS event information 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

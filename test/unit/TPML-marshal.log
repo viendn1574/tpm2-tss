@@ -1,0 +1,40 @@
+[==========] Running 13 test(s).
+[ RUN      ] tpml_marshal_success
+[       OK ] tpml_marshal_success
+[ RUN      ] tpml_marshal_success_offset
+[       OK ] tpml_marshal_success_offset
+[ RUN      ] tpml_marshal_buffer_null_with_offset
+[       OK ] tpml_marshal_buffer_null_with_offset
+[ RUN      ] tpml_marshal_buffer_null_offset_null
+ERROR:marshal:src/tss2-mu/tpml-types.c:162:Tss2_MU_TPML_HANDLE_Marshal() buffer and offset parameter are NULL 
+ERROR:marshal:src/tss2-mu/tpml-types.c:174:Tss2_MU_TPML_PCR_SELECTION_Marshal() buffer and offset parameter are NULL 
+[       OK ] tpml_marshal_buffer_null_offset_null
+[ RUN      ] tpml_marshal_buffer_size_lt_data_nad_lt_offset
+[       OK ] tpml_marshal_buffer_size_lt_data_nad_lt_offset
+[ RUN      ] tpml_marshal_invalid_count
+WARNING:marshal:src/tss2-mu/tpml-types.c:162:Tss2_MU_TPML_HANDLE_Marshal() count too big 
+WARNING:marshal:src/tss2-mu/tpml-types.c:174:Tss2_MU_TPML_PCR_SELECTION_Marshal() count too big 
+[       OK ] tpml_marshal_invalid_count
+[ RUN      ] tpml_unmarshal_success
+[       OK ] tpml_unmarshal_success
+[ RUN      ] tpml_unmarshal_dest_null_buff_null
+ERROR:marshal:src/tss2-mu/tpml-types.c:163:Tss2_MU_TPML_HANDLE_Unmarshal() buffer or dest and offset parameter are NULL 
+ERROR:marshal:src/tss2-mu/tpml-types.c:175:Tss2_MU_TPML_PCR_SELECTION_Unmarshal() buffer or dest and offset parameter are NULL 
+[       OK ] tpml_unmarshal_dest_null_buff_null
+[ RUN      ] tpml_unmarshal_buffer_null_offset_null
+ERROR:marshal:src/tss2-mu/tpml-types.c:163:Tss2_MU_TPML_HANDLE_Unmarshal() buffer or dest and offset parameter are NULL 
+ERROR:marshal:src/tss2-mu/tpml-types.c:175:Tss2_MU_TPML_PCR_SELECTION_Unmarshal() buffer or dest and offset parameter are NULL 
+[       OK ] tpml_unmarshal_buffer_null_offset_null
+[ RUN      ] tpml_unmarshal_dest_null_offset_valid
+[       OK ] tpml_unmarshal_dest_null_offset_valid
+[ RUN      ] tpml_unmarshal_buffer_size_lt_data_nad_lt_offset
+[       OK ] tpml_unmarshal_buffer_size_lt_data_nad_lt_offset
+[ RUN      ] tpml_unmarshal_invalid_count
+WARNING:marshal:src/tss2-mu/tpml-types.c:163:Tss2_MU_TPML_HANDLE_Unmarshal() count too big 
+WARNING:marshal:src/tss2-mu/tpml-types.c:175:Tss2_MU_TPML_PCR_SELECTION_Unmarshal() count too big 
+[       OK ] tpml_unmarshal_invalid_count
+[ RUN      ] tpml_intel_ptt_marshal_unmarshal
+[       OK ] tpml_intel_ptt_marshal_unmarshal
+[==========] 13 test(s) run.
+[  PASSED  ] 13 test(s).
+PASS test/unit/TPML-marshal (exit status: 0)

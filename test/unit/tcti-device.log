@@ -1,0 +1,42 @@
+[==========] Running 14 test(s).
+[ RUN      ] tcti_device_init_all_null_test
+[       OK ] tcti_device_init_all_null_test
+[ RUN      ] tcti_device_init_size_test
+[       OK ] tcti_device_init_size_test
+[ RUN      ] tcti_device_init_conf_fail
+ERROR:tcti:src/tss2-tcti/tcti-device.c:451:Tss2_Tcti_Device_Init() Failed to open specified TCTI device file /dev/nonexistent: No such file or directory 
+[       OK ] tcti_device_init_conf_fail
+[ RUN      ] tcti_device_init_conf_default_fail
+WARNING:tcti:src/tss2-tcti/tcti-device.c:439:Tss2_Tcti_Device_Init() Failed to open default TCTI device file /dev/tpmrm0: Permission denied 
+WARNING:tcti:src/tss2-tcti/tcti-device.c:439:Tss2_Tcti_Device_Init() Failed to open default TCTI device file /dev/tpm0: Permission denied 
+ERROR:tcti:src/tss2-tcti/tcti-device.c:444:Tss2_Tcti_Device_Init() Could not open any default TCTI device file 
+[       OK ] tcti_device_init_conf_default_fail
+[ RUN      ] tcti_device_init_conf_default_success
+[       OK ] tcti_device_init_conf_default_success
+[ RUN      ] tcti_device_get_poll_handles_test
+[       OK ] tcti_device_get_poll_handles_test
+[ RUN      ] tcti_device_receive_null_size_test
+[       OK ] tcti_device_receive_null_size_test
+[ RUN      ] tcti_device_receive_success
+WARNING:tcti:src/tss2-tcti/tcti-device.c:290:tcti_device_receive() TPM2 response size disagrees with number of bytes read from fd 3. Header says 12 but we read 20 bytes. 
+[       OK ] tcti_device_receive_success
+[ RUN      ] tcti_device_receive_eof_test
+WARNING:tcti:src/tss2-tcti/tcti-device.c:267:tcti_device_receive() Got EOF instead of response. 
+[       OK ] tcti_device_receive_eof_test
+[ RUN      ] tcti_device_receive_buffer_lt_response
+WARNING:tcti:src/tss2-tcti/tcti-device.c:290:tcti_device_receive() TPM2 response size disagrees with number of bytes read from fd 3. Header says 12 but we read 19 bytes. 
+WARNING:tcti:src/tss2-tcti/tcti-device.c:295:tcti_device_receive() TPM2 response size is larger than the provided buffer: future use of this TCTI will likely fail. 
+[       OK ] tcti_device_receive_buffer_lt_response
+[ RUN      ] tcti_device_transmit_success
+[       OK ] tcti_device_transmit_success
+[ RUN      ] tcti_device_poll_success
+WARNING:tcti:src/tss2-tcti/tcti-device.c:290:tcti_device_receive() TPM2 response size disagrees with number of bytes read from fd 3. Header says 12 but we read 20 bytes. 
+[       OK ] tcti_device_poll_success
+[ RUN      ] tcti_device_poll_timeout
+[       OK ] tcti_device_poll_timeout
+[ RUN      ] tcti_device_poll_io_error
+ERROR:tcti:src/tss2-tcti/tcti-device.c:245:tcti_device_receive() Failed to poll for response from fd 3, got errno 9: Bad file descriptor 
+[       OK ] tcti_device_poll_io_error
+[==========] 14 test(s) run.
+[  PASSED  ] 14 test(s).
+PASS test/unit/tcti-device (exit status: 0)

@@ -1,0 +1,76 @@
+.TH "ifapi_configuration" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ifapi_configuration
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC \fBifapi_config_initialize_async\fP (\fBIFAPI_IO\fP *io)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_config_initialize_finish\fP (\fBIFAPI_IO\fP *io, \fBIFAPI_CONFIG\fP *config)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Provides internal fapi functions for deserialization of the configuration data and the initialization of the configuration\&. 
+.SH "Function Documentation"
+.PP 
+.SS "TSS2_RC ifapi_config_initialize_async (\fBIFAPI_IO\fP * io)"
+Starts the initialization of the FAPI configuration\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIio\fP An IO object for file system access
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if io is NULL 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if an error occurred while accessing the object store\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_config_initialize_finish (\fBIFAPI_IO\fP * io, \fBIFAPI_CONFIG\fP * config)"
+Finishes the initialization of the FAPI configuration\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIio\fP An IO object for file system access 
+.br
+\fIconfig\fP The configuration that is initialized
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if config or io is NULL 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the read configuration file does not hold a valid configuration 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if JSON parsing fails 
+.br
+\fITSS2_FAPI_RC_BAD_PATH\fP if the configuration path is invalid 
+.br
+\fITSS2_FAPI_RC_TRY_AGAIN\fP if an I/O operation is not finished yet and this function needs to be called again\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if an error occurred while accessing the object store\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

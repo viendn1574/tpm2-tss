@@ -1,0 +1,189 @@
+.TH "IFAPI_Provision" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_Provision
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <fapi_int\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP \fBhierarchy_lockout\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP \fBhierarchy_hs\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP \fBhierarchy_he\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP \fBhierarchy_hn\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP * \fBhierarchy\fP"
+.br
+.ti -1c
+.RI "\fBTPMS_POLICY\fP * \fBhierarchy_policy\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_KEY_TEMPLATE\fP \fBpublic_templ\fP"
+.br
+.ti -1c
+.RI "TPM2B_PUBLIC \fBpublic\fP"
+.br
+.ti -1c
+.RI "char ** \fBpathlist\fP"
+.br
+.ti -1c
+.RI "size_t \fBnumPaths\fP"
+.br
+.ti -1c
+.RI "size_t \fBnumHierarchyObjects\fP"
+.br
+.ti -1c
+.RI "size_t \fBhiearchy_idx\fP"
+.br
+.ti -1c
+.RI "size_t \fBpath_idx\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP * \fBhierarchies\fP"
+.br
+.ti -1c
+.RI "TPM2B_SENSITIVE_CREATE \fBinSensitive\fP"
+.br
+.ti -1c
+.RI "TPM2B_DATA \fBoutsideInfo\fP"
+.br
+.ti -1c
+.RI "TPML_PCR_SELECTION \fBcreationPCR\fP"
+.br
+.ti -1c
+.RI "\fBESYS_TR\fP \fBhandle\fP"
+.br
+.ti -1c
+.RI "const char * \fBauthValueLockout\fP"
+.br
+.ti -1c
+.RI "const char * \fBauthValueEh\fP"
+.br
+.ti -1c
+.RI "const char * \fBpolicyPathEh\fP"
+.br
+.ti -1c
+.RI "const char * \fBauthValueSh\fP"
+.br
+.ti -1c
+.RI "const char * \fBpolicyPathSh\fP"
+.br
+.ti -1c
+.RI "size_t \fBdigest_idx\fP"
+.br
+.ti -1c
+.RI "size_t \fBhash_size\fP"
+.br
+.ti -1c
+.RI "TPM2_HANDLE \fBcert_nv_idx\fP"
+.br
+.ti -1c
+.RI "TPM2B_NV_PUBLIC * \fBnvPublic\fP"
+.br
+.ti -1c
+.RI "\fBESYS_TR\fP \fBesys_nv_cert_handle\fP"
+.br
+.ti -1c
+.RI "char * \fBpem_cert\fP"
+.br
+.ti -1c
+.RI "TPM2_ALG_ID \fBcert_key_type\fP"
+.br
+.ti -1c
+.RI "size_t \fBcert_count\fP"
+.br
+.ti -1c
+.RI "size_t \fBcert_idx\fP"
+.br
+.ti -1c
+.RI "TPMS_CAPABILITY_DATA * \fBcapabilityData\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP \fBhierarchy_object\fP"
+.br
+.ti -1c
+.RI "TPM2B_AUTH \fBhierarchy_auth\fP"
+.br
+.ti -1c
+.RI "TPM2B_DIGEST \fBpolicy_digest\fP"
+.br
+.ti -1c
+.RI "char * \fBintermed_crt\fP"
+.br
+.ti -1c
+.RI "char * \fBroot_crt\fP"
+.br
+.ti -1c
+.RI "TPMA_PERMANENT \fBauth_state\fP"
+.br
+.ti -1c
+.RI "\fBESYS_TR\fP \fBsrk_esys_handle\fP"
+.br
+.ti -1c
+.RI "\fBESYS_TR\fP \fBek_esys_handle\fP"
+.br
+.ti -1c
+.RI "\fBESYS_TR\fP \fBsrk_tpm_handle\fP"
+.br
+.ti -1c
+.RI "\fBESYS_TR\fP \fBek_tpm_handle\fP"
+.br
+.ti -1c
+.RI "bool \fBsrk_exists\fP"
+.br
+.ti -1c
+.RI "TPM2_HANDLE \fBtemplate_nv_index\fP"
+.br
+.ti -1c
+.RI "TPM2_HANDLE \fBnonce_nv_index\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The data structure holding internal state of Provisioning\&. 
+.SH "Field Documentation"
+.PP 
+.SS "size_t hiearchy_idx"
+Index to the current hierarchy 
+.SS "\fBIFAPI_OBJECT\fP* hierarchies"
+Array of the hierarchies stored in keystore\&. 
+.SS "\fBIFAPI_OBJECT\fP* hierarchy"
+The current hierarchy 
+.SS "\fBIFAPI_OBJECT\fP hierarchy_he"
+The endorsement hierarchy 
+.SS "\fBIFAPI_OBJECT\fP hierarchy_hn"
+The null hierarchy 
+.SS "\fBIFAPI_OBJECT\fP hierarchy_hs"
+The storage hierarchy 
+.SS "\fBIFAPI_OBJECT\fP hierarchy_lockout"
+The lockout hierarchy 
+.SS "\fBTPMS_POLICY\fP* hierarchy_policy"
+Policy of the current used hierarchy\&. 
+.SS "size_t numHierarchyObjects"
+Number of hierarchies stored in keystore 
+.SS "size_t numPaths"
+Size of array with all keystore objects 
+.SS "size_t path_idx"
+Index of array with the object paths 
+.SS "char** pathlist"
+The array with all keystore objects 
+.SS "TPM2B_PUBLIC public"
+The public info of the created primary 
+.SS "\fBIFAPI_KEY_TEMPLATE\fP public_templ"
+The basic template for the keys public data 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

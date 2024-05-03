@@ -1,0 +1,442 @@
+.TH "esys_tpm" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+esys_tpm
+.SH SYNOPSIS
+.br
+.PP
+.SS "Modules"
+
+.in +1c
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_ActivateCredential command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_ActivateCredential command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_Certify command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_Certify command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_CertifyCreation command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_CertifyCreation command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_ChangeEPS command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_ChangeEPS command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_ChangePPS command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_ChangePPS command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_Clear command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_Clear command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_ClearControl command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_ClearControl command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_ClockRateAdjust command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_ClockRateAdjust command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_ClockSet command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_ClockSet command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_Commit command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_Commit command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_ContextLoad command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_ContextLoad command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_ContextSave command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_ContextSave command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_Create command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_Create command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_CreatePrimary command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_CreatePrimary command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_DictionaryAttackLockReset command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_DictionaryAttackLockReset command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_DictionaryAttackParameters command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_DictionaryAttackParameters command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_Duplicate command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_Duplicate command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_ECC_Parameters command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_ECC_Parameters command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_ECDH_KeyGen command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_ECDH_KeyGen command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_ECDH_ZGen command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_ECDH_ZGen command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_EC_Ephemeral command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_EC_Ephemeral command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_EncryptDecrypt command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_EncryptDecrypt command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_EventSequenceComplete command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_EventSequenceComplete command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_EvictControl command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_EvictControl command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_FlushContext command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_FlushContext command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_GetCapability command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_GetCapability command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_GetCommandAuditDigest command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_GetCommandAuditDigest command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_GetRandom command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_GetRandom command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_GetSessionAuditDigest command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_GetSessionAuditDigest command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_GetTestResult command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_GetTestResult command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_GetTime command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_GetTime command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_Hash command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_Hash command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_HashSequenceStart command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_HashSequenceStart command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_HierarchyChangeAuth command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_HierarchyChangeAuth command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_HierarchyControl command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_HierarchyControl command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_HMAC command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_HMAC command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_HMAC_Start command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_HMAC_Start command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_Import command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_Import command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_IncrementalSelfTest command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_IncrementalSelfTest command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_Load command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_Load command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_LoadExternal command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_LoadExternal command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_MakeCredential command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_MakeCredential command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_NV_Certify command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_NV_Certify command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_NV_ChangeAuth command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_NV_ChangeAuth command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_NV_DefineSpace command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_NV_DefineSpace command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_NV_Extend command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_NV_Extend command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_NV_GlobalWriteLock command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_NV_GlobalWriteLock command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_NV_Increment command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_NV_Increment command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_NV_Read command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_NV_Read command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_NV_ReadLock command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_NV_ReadLock command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_NV_ReadPublic command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_NV_ReadPublic command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_NV_SetBits command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_NV_SetBits command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_NV_UndefineSpace command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_NV_UndefineSpace command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_NV_UndefineSpaceSpecial command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_NV_UndefineSpaceSpecial command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_NV_Write command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_NV_Write command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_NV_WriteLock command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_NV_WriteLock command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_ObjectChangeAuth command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_ObjectChangeAuth command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PCR_Allocate command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PCR_Allocate command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PCR_Event command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PCR_Event command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PCR_Extend command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PCR_Extend command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PCR_Read command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PCR_Read command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PCR_Reset command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PCR_Reset command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PCR_SetAuthPolicy command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PCR_SetAuthPolicy command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PCR_SetAuthValue command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PCR_SetAuthValue command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PolicyAuthorize command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PolicyAuthorize command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PolicyAuthValue command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PolicyAuthValue command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PolicyCommandCode command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PolicyCommandCode command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PolicyCounterTimer command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PolicyCounterTimer command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PolicyCpHash command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PolicyCpHash command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PolicyDuplicationSelect command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PolicyDuplicationSelect command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PolicyGetDigest command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PolicyGetDigest command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PolicyLocality command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PolicyLocality command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PolicyNameHash command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PolicyNameHash command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PolicyNV command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PolicyNV command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PolicyNvWritten command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PolicyNvWritten command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PolicyOR command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PolicyOR command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PolicyPassword command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PolicyPassword command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PolicyPCR command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PolicyPCR command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PolicyPhysicalPresence command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PolicyPhysicalPresence command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PolicyRestart command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PolicyRestart command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PolicySecret command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PolicySecret command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PolicySigned command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PolicySigned command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PolicyTicket command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PolicyTicket command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_PP_Commands command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_PP_Commands command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_Quote command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_Quote command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_ReadClock command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_ReadClock command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_ReadPublic command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_ReadPublic command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_Rewrap command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_Rewrap command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_RSA_Decrypt command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_RSA_Decrypt command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_RSA_Encrypt command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_RSA_Encrypt command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_SelfTest command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_SelfTest command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_SequenceComplete command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_SequenceComplete command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_SequenceUpdate command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_SequenceUpdate command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_SetAlgorithmSet command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_SetAlgorithmSet command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_SetCommandCodeAuditStatus command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_SetCommandCodeAuditStatus command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_SetPrimaryPolicy command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_SetPrimaryPolicy command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_Shutdown command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_Shutdown command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_Sign command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_Sign command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_StartAuthSession command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_StartAuthSession command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_Startup command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_Startup command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_StirRandom command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_StirRandom command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_TestParms command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_TestParms command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_Unseal command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_Unseal command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_Vendor_TCG_Test command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_Vendor_TCG_Test command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_VerifySignature command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_VerifySignature command either as a one-call or in an asynchronous manner\&. "
+.ti -1c
+.RI "\fBThe ESAPI function for the TPM2_ZGen_2Phase command\&.\fP"
+.br
+.RI "ESAPI function to invoke the TPM2_ZGen_2Phase command either as a one-call or in an asynchronous manner\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+The following function represent interactions with the corresponding TPM commands\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

@@ -1,0 +1,58 @@
+.TH "TPMS_POLICYNV" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+TPMS_POLICYNV
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ifapi_policy_types\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "char * \fBnvPath\fP"
+.br
+.ti -1c
+.RI "TPMI_RH_NV_INDEX \fBnvIndex\fP"
+.br
+.ti -1c
+.RI "TPMS_NV_PUBLIC \fBnvPublic\fP"
+.br
+.ti -1c
+.RI "TPMI_RH_NV_AUTH \fBauthHandle\fP"
+.br
+.ti -1c
+.RI "TPM2B_OPERAND \fBoperandB\fP"
+.br
+.ti -1c
+.RI "UINT16 \fBoffset\fP"
+.br
+.ti -1c
+.RI "TPM2_EO \fBoperation\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Policy type \fBTPMS_POLICYNV\fP 
+.SH "Field Documentation"
+.PP 
+.SS "TPMI_RH_NV_AUTH authHandle"
+This is determined by FAPI at runtime\&. 
+.SS "TPMI_RH_NV_INDEX nvIndex"
+None 
+.SS "char* nvPath"
+None 
+.SS "TPMS_NV_PUBLIC nvPublic"
+None 
+.SS "UINT16 offset"
+Default value is 0 
+.SS "TPM2B_OPERAND operandB"
+None 
+.SS "TPM2_EO operation"
+Default value is EQUAL 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

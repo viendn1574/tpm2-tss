@@ -1,0 +1,69 @@
+.TH "IFAPI_ExportKey" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_ExportKey
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <fapi_int\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "const char * \fBpathOfKeyToDuplicate\fP"
+.br
+.ti -1c
+.RI "const char * \fBpathToPublicKeyOfNewParent\fP"
+.br
+.ti -1c
+.RI "TPM2B_PUBLIC \fBpublic_parent\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP * \fBkey_object\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP \fBexport_tree\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP \fBpub_key\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP \fBdup_key\fP"
+.br
+.ti -1c
+.RI "struct \fBTPMS_POLICY\fP \fBpolicy\fP"
+.br
+.ti -1c
+.RI "\fBESYS_TR\fP \fBhandle_ext_key\fP"
+.br
+.ti -1c
+.RI "char * \fBexportedData\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The data structure holding internal state of export key\&. 
+.SH "Field Documentation"
+.PP 
+.SS "\fBIFAPI_OBJECT\fP dup_key"
+The key to be duplicated or exported 
+.br
+ 
+.SS "\fBIFAPI_OBJECT\fP export_tree"
+The complete tree to be exported 
+.SS "\fBIFAPI_OBJECT\fP* key_object"
+The IPAPI object of the key to be duplicated 
+.SS "const char* pathOfKeyToDuplicate"
+The relative path of the key to be exported 
+.SS "const char* pathToPublicKeyOfNewParent"
+The relative path of the new parent 
+.SS "\fBIFAPI_OBJECT\fP pub_key"
+The public part of the new parent 
+.SS "TPM2B_PUBLIC public_parent"
+The public key of the new parent 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

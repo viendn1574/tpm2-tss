@@ -1,0 +1,22 @@
+.TH "event_callbacks" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+event_callbacks
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC(* \fBinit_list_cb\fP )(json_object **jso)"
+.br
+.ti -1c
+.RI "TSS2_RC(* \fBadd_header_cb\fP )(size_t recnum, UINT32 pcr, const char *ima_type, UINT8 *digest, size_t digest_size, json_object *jso_list, json_object **jso_current_event)"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

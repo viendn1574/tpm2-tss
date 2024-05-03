@@ -1,0 +1,87 @@
+.TH "IFAPI_Key_Create" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_Key_Create
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <fapi_int\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "enum IFAPI_KEY_CREATE_STATE \fBstate\fP"
+.br
+.ti -1c
+.RI "const char * \fBkeyPath\fP"
+.br
+.ti -1c
+.RI "\fBNODE_STR_T\fP * \fBpath_list\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP \fBparent\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP \fBobject\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_KEY_TEMPLATE\fP \fBpublic_templ\fP"
+.br
+.ti -1c
+.RI "TPM2B_PUBLIC \fBpublic\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP \fBhierarchy\fP"
+.br
+.ti -1c
+.RI "TPM2B_SENSITIVE_CREATE \fBinSensitive\fP"
+.br
+.ti -1c
+.RI "TPM2B_DATA \fBoutsideInfo\fP"
+.br
+.ti -1c
+.RI "TPML_PCR_SELECTION \fBcreationPCR\fP"
+.br
+.ti -1c
+.RI "\fBESYS_TR\fP \fBhandle\fP"
+.br
+.ti -1c
+.RI "const char * \fBauthValue\fP"
+.br
+.ti -1c
+.RI "const char * \fBpolicyPath\fP"
+.br
+.ti -1c
+.RI "const \fBIFAPI_PROFILE\fP * \fBprofile\fP"
+.br
+.ti -1c
+.RI "bool \fBgen_sensitive_random\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The data structure holding internal state of Fapi_CreateKey\&. 
+.SH "Field Documentation"
+.PP 
+.SS "bool gen_sensitive_random"
+Switch whether sensitive ransom data has to be created\&. 
+.SS "\fBIFAPI_OBJECT\fP hierarchy"
+The current used hierarchy for CreatePrimary 
+.SS "const char* keyPath"
+The pathname from the application 
+.SS "\fBIFAPI_OBJECT\fP object"
+The current object\&. 
+.SS "\fBIFAPI_OBJECT\fP parent"
+The parent of the key for used for creation\&. 
+.SS "\fBNODE_STR_T\fP* path_list"
+The computed explicit path 
+.SS "TPM2B_PUBLIC public"
+The public data of the key 
+.SS "\fBIFAPI_KEY_TEMPLATE\fP public_templ"
+The template for the keys public data 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

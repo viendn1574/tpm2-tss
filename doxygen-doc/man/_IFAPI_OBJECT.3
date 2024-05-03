@@ -1,0 +1,59 @@
+.TH "_IFAPI_OBJECT" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+_IFAPI_OBJECT
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ifapi_keystore\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "TSS2_OBJECT \fBpublic\fP"
+.br
+.ti -1c
+.RI "\fBTPMS_POLICY\fP * \fBpolicy\fP"
+.br
+.ti -1c
+.RI "IFAPI_OBJECT_TYPE_CONSTANT \fBobjectType\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT_UNION\fP \fBmisc\fP"
+.br
+.ti -1c
+.RI "TPMI_YES_NO \fBsystem\fP"
+.br
+.ti -1c
+.RI "enum IFAPI_AUTHORIZATION_STATE \fBauthorization_state\fP"
+.br
+.ti -1c
+.RI "enum IFAPI_IO_STATE \fBstate\fP"
+.br
+.ti -1c
+.RI "const char * \fBrel_path\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Type for representing TPM-Resource 
+.SH "Field Documentation"
+.PP 
+.SS "enum IFAPI_AUTHORIZATION_STATE authorization_state"
+State of object authorization state machine 
+.SS "\fBIFAPI_OBJECT_UNION\fP misc"
+Resource specific information 
+.SS "IFAPI_OBJECT_TYPE_CONSTANT objectType"
+Selector for object type 
+.SS "TSS2_OBJECT public"
+public fields of an IFAPI_OBJECT 
+.SS "const char* rel_path"
+The relative path in keystore\&. 
+.SS "TPMI_YES_NO system"
+Store the object in the system wide directory 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

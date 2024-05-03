@@ -1,0 +1,76 @@
+.TH "IFAPI_Entity_Delete" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_Entity_Delete
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <fapi_int\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "bool \fBis_key\fP"
+.br
+.ti -1c
+.RI "bool \fBis_persistent_key\fP"
+.br
+.ti -1c
+.RI "\fBESYS_TR\fP \fBnew_object_handle\fP"
+.br
+.ti -1c
+.RI "TPM2_HANDLE \fBpermanentHandle\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP \fBauth_object\fP"
+.br
+.ti -1c
+.RI "\fBESYS_TR\fP \fBauth_index\fP"
+.br
+.ti -1c
+.RI "char * \fBpath\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP \fBobject\fP"
+.br
+.ti -1c
+.RI "char ** \fBpathlist\fP"
+.br
+.ti -1c
+.RI "size_t \fBnumPaths\fP"
+.br
+.ti -1c
+.RI "size_t \fBpath_idx\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The data structure holding internal state of entity delete\&. 
+.SH "Field Documentation"
+.PP 
+.SS "\fBESYS_TR\fP auth_index"
+The ESAPI handle of the nv authorization object 
+.SS "\fBIFAPI_OBJECT\fP auth_object"
+Object used for authentication 
+.SS "bool is_key"
+Entity to be deleted is a key 
+.SS "bool is_persistent_key"
+Entity to be deleted is a key 
+.SS "size_t numPaths"
+Size of array with the object files to be deleted 
+.SS "\fBIFAPI_OBJECT\fP object"
+Deserialized object 
+.SS "char* path"
+The name of the file to be deleted 
+.SS "size_t path_idx"
+Index of array with the object files to be deleted 
+.SS "char** pathlist"
+The array with the object files to be deleted 
+.SS "TPM2_HANDLE permanentHandle"
+The TPM permanent handle 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

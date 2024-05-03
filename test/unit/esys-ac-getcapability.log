@@ -1,0 +1,6 @@
+[==========] Running 1 test(s).
+[ RUN      ] test_ac_getcapability
+[       OK ] test_ac_getcapability
+[==========] 1 test(s) run.
+[  PASSED  ] 1 test(s).
+PASS test/unit/esys-ac-getcapability (exit status: 0)

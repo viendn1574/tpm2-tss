@@ -1,0 +1,41 @@
+.TH "md_doc_logging" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_doc_logging \- Compile time log levels 
+At compile time the maximum log level can be specified\&. This allows distros to disable the overhead code and reduce overall code size\&.
+.SH "Runtime log level"
+.PP
+At runtime, the log level is determined by an environment variable\&. The default log level is WARNING\&. The level can be changed by setting the \fCTSS2_LOG\fP environment variable\&.
+.PP
+Possible levels are: NONE, ERROR, WARNING, INFO, DEBUG, TRACE
+.PP
+The level can be set for all module using the \fCall\fP module name or individually per module\&. The environment variable is evaluated left to right\&.
+.PP
+Example: \fCTSS2_LOG=all+ERROR,marshal+TRACE,tcti+DEBUG\fP
+.SH "Log file"
+.PP
+By default, logs are written to standard error (\fCstderr\fP)\&. If the environment variable \fCTSS2_LOGFILE\fP is set, the TSS will log to the file at the given path instead\&. If the file does not yet exist, it will be created\&. Otherwise, the TSS will append to it\&.
+.PP
+The special value \fCstderr\fP will result in default behavior while \fCstdout\fP and \fC-\fP will have the TSS write to standard output\&.
+.SH "Implementation"
+.PP
+Each source code file specifies its corresponding module before including log\&.h\&. 
+.PP
+.nf
+#define LOGMODULE tcti
+#include "log\&.h"
+
+.fi
+.PP
+.PP
+Optionally, the default log-level for this module can be set: 
+.PP
+.nf
+#define LOGMODULE tcti
+#define LOGDEFAULT ERROR
+#include "log\&.h"
+
+.fi
+.PP
+ 

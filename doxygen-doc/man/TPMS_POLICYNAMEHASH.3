@@ -1,0 +1,48 @@
+.TH "TPMS_POLICYNAMEHASH" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+TPMS_POLICYNAMEHASH
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ifapi_policy_types\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "UINT32 \fBcount\fP"
+.br
+.ti -1c
+.RI "UINT32 \fBi\fP"
+.br
+.ti -1c
+.RI "TPM2B_NAME \fBobjectNames\fP [3]"
+.br
+.ti -1c
+.RI "char * \fBnamePaths\fP [3]"
+.br
+.ti -1c
+.RI "TPM2B_DIGEST \fBnameHash\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Policy type \fBTPMS_POLICYNAMEHASH\fP 
+.SH "Field Documentation"
+.PP 
+.SS "UINT32 count"
+Computed during instantiation 
+.SS "UINT32 i"
+Temporary index for policy calculation 
+.SS "TPM2B_DIGEST nameHash"
+computed during policy calculation 
+.SS "char* namePaths[3]"
+Paths of objects used for retrieving the names 
+.SS "TPM2B_NAME objectNames[3]"
+computed during instantiation (if not initialized) 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

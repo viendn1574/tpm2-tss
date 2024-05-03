@@ -1,0 +1,42 @@
+[==========] Running 14 test(s).
+[ RUN      ] tpm2b_marshal_success
+[       OK ] tpm2b_marshal_success
+[ RUN      ] tpm2b_marshal_success_offset
+[       OK ] tpm2b_marshal_success_offset
+[ RUN      ] tpm2b_marshal_buffer_null_with_offset
+[       OK ] tpm2b_marshal_buffer_null_with_offset
+[ RUN      ] tpm2b_marshal_buffer_null_offset_null
+WARNING:marshal:src/tss2-mu/tpm2b-types.c:304:Tss2_MU_TPM2B_DIGEST_Marshal() buffer and offset parameter are NULL 
+WARNING:marshal:src/tss2-mu/tpm2b-types.c:354:Tss2_MU_TPM2B_ECC_POINT_Marshal() buffer and offset parameter are NULL 
+[       OK ] tpm2b_marshal_buffer_null_offset_null
+[ RUN      ] tpm2b_marshal_buffer_size_lt_data_nad_lt_offset
+[       OK ] tpm2b_marshal_buffer_size_lt_data_nad_lt_offset
+[ RUN      ] tpm2b_unmarshal_success
+[       OK ] tpm2b_unmarshal_success
+[ RUN      ] tpm2b_unmarshal_success_offset
+[       OK ] tpm2b_unmarshal_success_offset
+[ RUN      ] tpm2b_unmarshal_buffer_null
+WARNING:marshal:src/tss2-mu/tpm2b-types.c:305:Tss2_MU_TPM2B_DIGEST_Unmarshal() buffer or dest and offset parameter are NULL 
+WARNING:marshal:src/tss2-mu/tpm2b-types.c:355:Tss2_MU_TPM2B_ECC_POINT_Unmarshal() buffer or dest and offset parameter are NULL 
+WARNING:marshal:src/tss2-mu/tpm2b-types.c:305:Tss2_MU_TPM2B_DIGEST_Unmarshal() buffer or dest and offset parameter are NULL 
+WARNING:marshal:src/tss2-mu/tpm2b-types.c:355:Tss2_MU_TPM2B_ECC_POINT_Unmarshal() buffer or dest and offset parameter are NULL 
+WARNING:marshal:src/tss2-mu/tpm2b-types.c:305:Tss2_MU_TPM2B_DIGEST_Unmarshal() buffer or dest and offset parameter are NULL 
+WARNING:marshal:src/tss2-mu/tpm2b-types.c:355:Tss2_MU_TPM2B_ECC_POINT_Unmarshal() buffer or dest and offset parameter are NULL 
+[       OK ] tpm2b_unmarshal_buffer_null
+[ RUN      ] tpm2b_unmarshal_dest_null
+WARNING:marshal:src/tss2-mu/tpm2b-types.c:305:Tss2_MU_TPM2B_DIGEST_Unmarshal() buffer or dest and offset parameter are NULL 
+WARNING:marshal:src/tss2-mu/tpm2b-types.c:355:Tss2_MU_TPM2B_ECC_POINT_Unmarshal() buffer or dest and offset parameter are NULL 
+[       OK ] tpm2b_unmarshal_dest_null
+[ RUN      ] tpm2b_unmarshal_dest_null_offset_valid
+[       OK ] tpm2b_unmarshal_dest_null_offset_valid
+[ RUN      ] tpm2b_unmarshal_buffer_size_lt_data_nad_lt_offset
+[       OK ] tpm2b_unmarshal_buffer_size_lt_data_nad_lt_offset
+[ RUN      ] tpm2b_public_rsa_marshal_success
+[       OK ] tpm2b_public_rsa_marshal_success
+[ RUN      ] tpm2b_public_rsa_unique_size_marshal_success
+[       OK ] tpm2b_public_rsa_unique_size_marshal_success
+[ RUN      ] tpm2b_tpm2b_max_cap_buffer_unmarshal_marshal
+[       OK ] tpm2b_tpm2b_max_cap_buffer_unmarshal_marshal
+[==========] 14 test(s) run.
+[  PASSED  ] 14 test(s).
+PASS test/unit/dlopen-TPM2B-marshal (exit status: 0)

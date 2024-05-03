@@ -1,0 +1,98 @@
+.TH "ESYS_CRYPTO_CONTEXT_BLOB" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ESYS_CRYPTO_CONTEXT_BLOB
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum { \fBIESYS_CRYPTMBED_TYPE_HASH\fP = 1, \fBIESYS_CRYPTMBED_TYPE_HMAC\fP }"
+.br
+.ti -1c
+.RI "enum { \fBIESYS_CRYPTOSSL_TYPE_HASH\fP = 1, \fBIESYS_CRYPTOSSL_TYPE_HMAC\fP }"
+.br
+.in -1c
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "enum ESYS_CRYPTO_CONTEXT_BLOB:: { \&.\&.\&. }  \fBtype\fP"
+.br
+.ti -1c
+.RI "union {"
+.br
+.ti -1c
+.RI "   struct {"
+.br
+.ti -1c
+.RI "      mbedtls_md_context_t \fBmbed_context\fP"
+.br
+.ti -1c
+.RI "      size_t \fBhash_len\fP"
+.br
+.ti -1c
+.RI "   } \fBhash\fP"
+.br
+.ti -1c
+.RI "   struct {"
+.br
+.ti -1c
+.RI "      mbedtls_md_context_t \fBmbed_context\fP"
+.br
+.ti -1c
+.RI "      size_t \fBhmac_len\fP"
+.br
+.ti -1c
+.RI "   } \fBhmac\fP"
+.br
+.ti -1c
+.RI "}; "
+.br
+.ti -1c
+.RI "enum ESYS_CRYPTO_CONTEXT_BLOB:: { \&.\&.\&. }  \fBtype\fP"
+.br
+.ti -1c
+.RI "union {"
+.br
+.ti -1c
+.RI "   struct {"
+.br
+.ti -1c
+.RI "      const EVP_MD * \fBossl_hash_alg\fP"
+.br
+.ti -1c
+.RI "      EVP_MD_CTX * \fBossl_context\fP"
+.br
+.ti -1c
+.RI "      size_t \fBhash_len\fP"
+.br
+.ti -1c
+.RI "   } \fBhash\fP"
+.br
+.ti -1c
+.RI "}; "
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Context to hold temporary values for iesys_crypto 
+.SH "Field Documentation"
+.PP 
+.SS "struct { \&.\&.\&. }  hash"
+the state variables for a hash context 
+.SS "struct { \&.\&.\&. }  hash"
+the state variables for a HASH or HMAC context 
+.SS "struct { \&.\&.\&. }  hmac"
+the state variables for an hmac context 
+.SS "enum { \&.\&.\&. }  type"
+The type of context to hold; hash or hmac 
+.SS "enum { \&.\&.\&. }  type"
+The type of context to hold; hash or hmac 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

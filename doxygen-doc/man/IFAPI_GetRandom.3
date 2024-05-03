@@ -1,0 +1,50 @@
+.TH "IFAPI_GetRandom" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_GetRandom
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <fapi_int\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "size_t \fBnumBytes\fP"
+.br
+.ti -1c
+.RI "size_t \fBidx\fP"
+.br
+.ti -1c
+.RI "UINT16 \fBbytesRequested\fP"
+.br
+.ti -1c
+.RI "uint8_t * \fBdata\fP"
+.br
+.ti -1c
+.RI "uint8_t * \fBret_data\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The data structure holding internal state of Fapi_GetRandom\&. 
+.SH "Field Documentation"
+.PP 
+.SS "UINT16 bytesRequested"
+Byted currently requested from TPM 
+.SS "uint8_t* data"
+The buffer for the random data 
+.SS "size_t idx"
+Current position in output buffer\&. 
+.br
+ 
+.SS "size_t numBytes"
+The number of random bytes to be generated 
+.SS "uint8_t* ret_data"
+The result buffer\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

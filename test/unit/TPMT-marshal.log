@@ -1,0 +1,28 @@
+[==========] Running 11 test(s).
+[ RUN      ] tpmt_marshal_success
+[       OK ] tpmt_marshal_success
+[ RUN      ] tpmt_marshal_success_offset
+[       OK ] tpmt_marshal_success_offset
+[ RUN      ] tpmt_marshal_buffer_null_with_offset
+[       OK ] tpmt_marshal_buffer_null_with_offset
+[ RUN      ] tpmt_marshal_buffer_null_offset_null
+[       OK ] tpmt_marshal_buffer_null_offset_null
+[ RUN      ] tpmt_marshal_buffer_size_lt_data_nad_lt_offset
+[       OK ] tpmt_marshal_buffer_size_lt_data_nad_lt_offset
+[ RUN      ] tpmt_marshal_unmarshal_sig_invalid_selector
+[       OK ] tpmt_marshal_unmarshal_sig_invalid_selector
+[ RUN      ] tpmt_unmarshal_success
+[       OK ] tpmt_unmarshal_success
+[ RUN      ] tpmt_unmarshal_dest_null_buff_null
+ERROR:marshal:src/tss2-mu/base-types.c:172:Tss2_MU_UINT16_Unmarshal() buffer or dest and offset parameter are NULL 
+ERROR:marshal:src/tss2-mu/base-types.c:172:Tss2_MU_UINT16_Unmarshal() buffer or dest and offset parameter are NULL 
+[       OK ] tpmt_unmarshal_dest_null_buff_null
+[ RUN      ] tpmt_unmarshal_buffer_null_offset_null
+[       OK ] tpmt_unmarshal_buffer_null_offset_null
+[ RUN      ] tpmt_unmarshal_dest_null_offset_valid
+[       OK ] tpmt_unmarshal_dest_null_offset_valid
+[ RUN      ] tpmt_unmarshal_buffer_size_lt_data_nad_lt_offset
+[       OK ] tpmt_unmarshal_buffer_size_lt_data_nad_lt_offset
+[==========] 11 test(s) run.
+[  PASSED  ] 11 test(s).
+PASS test/unit/TPMT-marshal (exit status: 0)

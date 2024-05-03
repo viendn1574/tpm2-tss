@@ -1,0 +1,1018 @@
+.TH "FapiTestgroup" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+FapiTestgroup \- Testing of FAPI functionality\&. The tested FAPI functions are listed in each of the testcase functions' descriptions\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBtest_fapi_data_crypt\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_duplicate\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_ext_public_key\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_get_random\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_info\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_key_change_auth\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_key_create_ckda_sign\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_key_create_policies_sign\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_key_create_policy_authorize_nv\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_key_create_policy_authorize_sign\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_key_create_policy_nv_sign\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_key_create_policy_or_sign\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_key_create_policy_pcr_sign\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_key_create_policy_secret_nv_sign\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_key_create_policy_signed\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_key_create_sign\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_key_create_sign_password_provision\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_key_create_sign_policy_provision\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_nv_extend\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_nv_increment\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_nv_ordinary\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_nv_set_bits\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_nv_written_policy\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_pcr_test\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_platform_certificates\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_quote\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "int \fBtest_fapi_unseal\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Testing of FAPI functionality\&. The tested FAPI functions are listed in each of the testcase functions' descriptions\&. 
+
+
+.SH "Function Documentation"
+.PP 
+.SS "test_fapi_data_crypt (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI functions for encryption and decryption\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_Import()\fP
+.IP "\(bu" 2
+\fBFapi_CreateKey()\fP
+.IP "\(bu" 2
+\fBFapi_SetSignCB()\fP
+.IP "\(bu" 2
+\fBFapi_Encrypt()\fP
+.IP "\(bu" 2
+\fBFapi_Decrypt()\fP
+.IP "\(bu" 2
+\fBFapi_Free()\fP
+.PP
+.PP
+Tested Policies:
+.IP "\(bu" 2
+PolicySigned
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_duplicate (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI functions for key duplication\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_Import()\fP
+.IP "\(bu" 2
+\fBFapi_CreateKey()\fP
+.IP "\(bu" 2
+\fBFapi_ExportKey()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.PP
+.PP
+Tested Policies:
+.IP "\(bu" 2
+PolicyDuplicationSelect
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_ext_public_key (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI functions use an external public key for signature and quote verify without TPM\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Import()\fP
+.IP "\(bu" 2
+\fBFapi_VerifySignature()\fP
+.IP "\(bu" 2
+\fBFapi_SetCertificate()\fP
+.IP "\(bu" 2
+\fBFapi_GetCertificate()\fP
+.IP "\(bu" 2
+\fBFapi_List()\fP
+.IP "\(bu" 2
+\fBFapi_VerifyQuote()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_get_random (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI function FAPI_GetRandom and async invocations\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_GetRandom_Async()\fP
+.IP "\(bu" 2
+\fBFapi_GetRandom_Finish()\fP
+.IP "\(bu" 2
+\fBFapi_GetPollHandles()\fP
+.IP "\(bu" 2
+\fBFapi_GetRandom()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_info (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI functions for GetInfo\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_GetInfo()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_key_change_auth (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI function for changing key authorizations\&.
+.PP
+The setting of the authorization callback and usage of the key with Fapi_Sign afterwards is also tested\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_CreateKey()\fP
+.IP "\(bu" 2
+\fBFapi_ChangeAuth()\fP
+.IP "\(bu" 2
+\fBFapi_SetAuthCB()\fP
+.IP "\(bu" 2
+\fBFapi_Sign()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_key_create_ckda_sign (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI functions for key creation and usage with noda and da flag\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_CreateKey()\fP
+.IP "\(bu" 2
+\fBFapi_SetAuthCB()\fP
+.IP "\(bu" 2
+\fBFapi_Sign()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_key_create_policies_sign (\fBFAPI_CONTEXT\fP * context)"
+Test several FAPI policies by usage of signing key\&.
+.PP
+Which test case will be executed is determined by the compiler switches: TEST_POLICY_PASSWORD, TEST_POLICY_AUTH_VALUE, TEST_POLICY_LOCALITY TEST_POLICY_PHYSICAL_PRESENCE, TEST_POLICY_COMMAND_CODE, TEST_POLICY_COUNTERTIMER\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_Import()\fP
+.IP "\(bu" 2
+\fBFapi_CreateKey()\fP
+.IP "\(bu" 2
+\fBFapi_SetAuthCB()\fP
+.IP "\(bu" 2
+\fBFapi_Sign()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.PP
+.PP
+Tested Policies:
+.IP "\(bu" 2
+PolicyPassword
+.IP "\(bu" 2
+PolicyAuthValue
+.IP "\(bu" 2
+PolicyLocality
+.IP "\(bu" 2
+PolicyPhysicalPresence
+.IP "\(bu" 2
+PolicyCommandCode
+.IP "\(bu" 2
+PolicyCounterTimer
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_key_create_policy_authorize_sign (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI functions for PolicyAuthoirze with signing\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_SetBranchCB()\fP
+.IP "\(bu" 2
+\fBFapi_Import()\fP
+.IP "\(bu" 2
+\fBFapi_CreateKey()\fP
+.IP "\(bu" 2
+\fBFapi_AuthorizePolicy()\fP
+.IP "\(bu" 2
+\fBFapi_Sign()\fP
+.IP "\(bu" 2
+\fBFapi_List()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.PP
+.PP
+Tested Policies:
+.IP "\(bu" 2
+PolicyNameHash
+.IP "\(bu" 2
+PolicyAuthorize
+.IP "\(bu" 2
+PolicyCpHash (Not entered, only as alternative branch)
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_key_create_policy_nv_sign (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI functions for NV writing and key usage\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_CreateKey()\fP
+.IP "\(bu" 2
+\fBFapi_NvWrite()\fP
+.IP "\(bu" 2
+\fBFapi_Import()\fP
+.IP "\(bu" 2
+\fBFapi_Sign()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.PP
+.PP
+Tested Policies:
+.IP "\(bu" 2
+PolicyNv
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_key_create_policy_or_sign (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI for PolicyOr using signing\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_Import()\fP
+.IP "\(bu" 2
+\fBFapi_CreateKey()\fP
+.IP "\(bu" 2
+\fBFapi_SetBranchCB()\fP
+.IP "\(bu" 2
+\fBFapi_Sign()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.PP
+.PP
+Tested Policies:
+.IP "\(bu" 2
+PolicyOr
+.IP "\(bu" 2
+PolicyPcr
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_key_create_policy_pcr_sign (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI functions for PolicyPCR with key creation and usage\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_Import()\fP
+.IP "\(bu" 2
+\fBFapi_CreateKey()\fP
+.IP "\(bu" 2
+\fBFapi_Sign()\fP
+.IP "\(bu" 2
+\fBFapi_ExportPolicy()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.IP "\(bu" 2
+\fBFapi_Import()\fP
+.IP "\(bu" 2
+\fBFapi_List()\fP
+.PP
+.PP
+Tested Policies:
+.IP "\(bu" 2
+PolicyPcr (with currentPCRs set)
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_key_create_policy_secret_nv_sign (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI PolicySecret and PolicyAuthValue handling\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_Import()\fP
+.IP "\(bu" 2
+\fBFapi_CreateNv()\fP
+.IP "\(bu" 2
+\fBFapi_CreateKey()\fP
+.IP "\(bu" 2
+\fBFapi_Sign()\fP
+.IP "\(bu" 2
+\fBFapi_SetAuthCB()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.PP
+.PP
+Tested Policies:
+.IP "\(bu" 2
+PolicySecret
+.IP "\(bu" 2
+PolicyAuthValue
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_key_create_policy_signed (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI functions for key creation and usage with a PolicySigned\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_Import()\fP
+.IP "\(bu" 2
+\fBFapi_CreateKey()\fP
+.IP "\(bu" 2
+\fBFapi_SetSignCB()\fP
+.IP "\(bu" 2
+\fBFapi_Sign()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.IP "\(bu" 2
+\fBFapi_List()\fP
+.PP
+.PP
+Tested Policies:
+.IP "\(bu" 2
+PolicySigned
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_key_create_sign (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI functions for TpmBlobs and certificates\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_SetAuthCB()\fP
+.IP "\(bu" 2
+\fBFapi_CreateKey()\fP
+.IP "\(bu" 2
+\fBFapi_GetTpmBlobs()\fP
+.IP "\(bu" 2
+\fBFapi_Sign()\fP
+.IP "\(bu" 2
+\fBFapi_VerifySignature()\fP
+.IP "\(bu" 2
+\fBFapi_SetCertificate()\fP
+.IP "\(bu" 2
+\fBFapi_List()\fP
+.IP "\(bu" 2
+\fBFapi_ChangeAuth()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_key_create_sign_password_provision (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI functions for key creation and usage with an SH password\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_SetAuthCB()\fP
+.IP "\(bu" 2
+\fBFapi_CreateKey()\fP
+.IP "\(bu" 2
+\fBFapi_GetTpmBlobs()\fP
+.IP "\(bu" 2
+\fBFapi_Sign()\fP
+.IP "\(bu" 2
+\fBFapi_SetCertificate()\fP
+.IP "\(bu" 2
+\fBFapi_List()\fP
+.IP "\(bu" 2
+\fBFapi_ChangeAuth()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_key_create_sign_policy_provision (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI functions for key creation and usage\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_SetAuthCB()\fP
+.IP "\(bu" 2
+\fBFapi_CreateKey()\fP
+.IP "\(bu" 2
+\fBFapi_GetTpmBlobs()\fP
+.IP "\(bu" 2
+\fBFapi_Sign()\fP
+.IP "\(bu" 2
+\fBFapi_SetCertificate()\fP
+.IP "\(bu" 2
+\fBFapi_List()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_nv_extend (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI function FAPI_NvExtend\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_CreateNv()\fP
+.IP "\(bu" 2
+\fBFapi_NvExtend()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.IP "\(bu" 2
+\fBFapi_SetAuthCB()\fP
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_nv_increment (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI function FAPI_NvIncrement\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_Import()\fP
+.IP "\(bu" 2
+\fBFapi_CreateNv()\fP
+.IP "\(bu" 2
+\fBFapi_SetAuthCB()\fP
+.IP "\(bu" 2
+\fBFapi_ChangeAuth()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.IP "\(bu" 2
+\fBFapi_NvIncrement()\fP
+.PP
+.PP
+Tested Policies:
+.IP "\(bu" 2
+PolicyAuthValue
+.IP "\(bu" 2
+PolicyCommandCode
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_nv_ordinary (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI NV functions\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_Import()\fP
+.IP "\(bu" 2
+\fBFapi_SetPolicyActionCB()\fP
+.IP "\(bu" 2
+\fBFapi_CreateNv()\fP
+.IP "\(bu" 2
+\fBFapi_NvWrite()\fP
+.IP "\(bu" 2
+\fBFapi_NvRead()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.IP "\(bu" 2
+\fBFapi_SetDescription()\fP
+.IP "\(bu" 2
+\fBFapi_GetDescription()\fP
+.IP "\(bu" 2
+\fBFapi_SetAuthCB()\fP
+.PP
+.PP
+Tested Policies:
+.IP "\(bu" 2
+PolicyAction
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_nv_set_bits (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI function Fapi_NvSetBits\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_CreateNv()\fP
+.IP "\(bu" 2
+\fBFapi_NvSetBits()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.IP "\(bu" 2
+\fBFapi_SetAuthCB()\fP
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_nv_written_policy (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI policy PolicyNvWritten\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_CreateNv()\fP
+.IP "\(bu" 2
+\fBFapi_SetAppData()\fP
+.IP "\(bu" 2
+\fBFapi_GetAppData()\fP
+.IP "\(bu" 2
+\fBFapi_NvWrite()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.PP
+.PP
+Tested Policies:
+.IP "\(bu" 2
+PolicyNvWritten
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_pcr_test (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI function FAPI_PcrExtend and Read\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_PcrExtend()\fP
+.IP "\(bu" 2
+\fBFapi_PcrRead()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_platform_certificates (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI functions for platform certificates\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_GetPlatformCertificates()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_quote (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI functions for quote commands\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_CreateKey()\fP
+.IP "\(bu" 2
+\fBFapi_PcrExtend()\fP
+.IP "\(bu" 2
+\fBFapi_Quote()\fP
+.IP "\(bu" 2
+\fBFapi_ExportKey()\fP
+.IP "\(bu" 2
+\fBFapi_Import()\fP
+.IP "\(bu" 2
+\fBFapi_PcrRead()\fP
+.IP "\(bu" 2
+\fBFapi_VerifyQuote()\fP
+.IP "\(bu" 2
+\fBFapi_List()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SS "test_fapi_unseal (\fBFAPI_CONTEXT\fP * context)"
+Test the FAPI functions for sealing\&.
+.PP
+Tested FAPI commands:
+.IP "\(bu" 2
+\fBFapi_Provision()\fP
+.IP "\(bu" 2
+\fBFapi_CreateSeal()\fP
+.IP "\(bu" 2
+\fBFapi_Unseal()\fP
+.IP "\(bu" 2
+\fBFapi_Delete()\fP
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIEXIT_FAILURE\fP 
+.br
+\fIEXIT_SUCCESS\fP 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

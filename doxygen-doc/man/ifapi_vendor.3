@@ -1,0 +1,51 @@
+.TH "ifapi_vendor" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ifapi_vendor
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC \fBifapi_get_intl_ek_certificate\fP (\fBFAPI_CONTEXT\fP *context, TPM2B_PUBLIC *ek_public, unsigned char **cert_buffer, size_t *cert_size)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Provides functions implementing vendor specific extensions\&. 
+.SH "Function Documentation"
+.PP 
+.SS "TSS2_RC ifapi_get_intl_ek_certificate (\fBFAPI_CONTEXT\fP * context, TPM2B_PUBLIC * ek_public, unsigned char ** cert_buffer, size_t * cert_size)"
+Get INTEL certificate for EK
+.PP
+Using the base64 encoded public endorsement key the JSON encoded certificate will be downloaded\&. The JSON certificate will be parsed and the base64 encoded certificate will be converted into binary format\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The FAPI context with the configuration data\&. 
+.br
+\fIek_public\fP The out public data of the EK\&. 
+.br
+\fIcert_buffer\fP the der encoded certificate\&. 
+.br
+\fIcert_size\fP The size of the certificate buffer\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_NO_CERT\fP If an error did occur during certificate downloading\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occured\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

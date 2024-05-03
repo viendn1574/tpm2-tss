@@ -1,0 +1,39 @@
+.TH "IFAPI_Fapi_AuthorizePolicy" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_Fapi_AuthorizePolicy
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <fapi_int\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "const char * \fBpolicyPath\fP"
+.br
+.ti -1c
+.RI "const char * \fBsigningKeyPath\fP"
+.br
+.ti -1c
+.RI "TPM2B_DIGEST \fBpolicyRef\fP"
+.br
+.ti -1c
+.RI "\fBTPMS_POLICYAUTHORIZATION\fP \fBauthorization\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The data structure holding internal state of Fapi_AuthorizePolicy\&. 
+.SH "Field Documentation"
+.PP 
+.SS "const char* policyPath"
+Policy with Policy to be authorized 
+.SS "const char* signingKeyPath"
+Key for policy signing 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

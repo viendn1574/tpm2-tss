@@ -1,0 +1,6 @@
+[==========] Running 1 test(s).
+[ RUN      ] test_resubmit
+[       OK ] test_resubmit
+[==========] 1 test(s) run.
+[  PASSED  ] 1 test(s).
+PASS test/unit/sys-execute (exit status: 0)

@@ -1,0 +1,10 @@
+[==========] Running 3 test(s).
+[ RUN      ] CopyCommandHeader_nextData_unit
+[       OK ] CopyCommandHeader_nextData_unit
+[ RUN      ] CopyCommandHeader_tag_unit
+[       OK ] CopyCommandHeader_tag_unit
+[ RUN      ] CopyCommandHeader_commandcode_unit
+[       OK ] CopyCommandHeader_commandcode_unit
+[==========] 3 test(s) run.
+[  PASSED  ] 3 test(s).
+PASS test/unit/CopyCommandHeader (exit status: 0)

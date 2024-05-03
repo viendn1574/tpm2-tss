@@ -1,0 +1,158 @@
+.TH "Fapi_SetAppData" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Fapi_SetAppData \- FAPI functions to invoke SetAppData either as one-call or in an asynchronous manner\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC \fBFapi_SetAppData\fP (\fBFAPI_CONTEXT\fP *context, char const *path, uint8_t const *appData, size_t appDataSize)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBFapi_SetAppData_Async\fP (\fBFAPI_CONTEXT\fP *context, char const *path, uint8_t const *appData, size_t appDataSize)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBFapi_SetAppData_Finish\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+FAPI functions to invoke SetAppData either as one-call or in an asynchronous manner\&. 
+
+
+.SH "Function Documentation"
+.PP 
+.SS "Fapi_SetAppData (\fBFAPI_CONTEXT\fP * context, char const * path, uint8_t const * appData, size_t appDataSize)"
+One-Call function for Fapi_SetAppData
+.PP
+Associates an arbitrary data blob with a given object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP 
+.br
+\fIpath\fP The path to the object the blob is associated with 
+.br
+\fIappData\fP The blob to associate with the object\&. May be NULL 
+.br
+\fIappDataSize\fP The size of appData in bytes\&. Must be 0 if appData is NULL
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if context or path is NULL or if appData is NULL and appDataSize is not 0\&. 
+.br
+\fITSS2_FAPI_RC_BAD_CONTEXT\fP if context corruption is detected\&. 
+.br
+\fITSS2_FAPI_RC_BAD_PATH\fP if path does not map to a FAPI entity\&. 
+.br
+\fITSS2_FAPI_RC_BAD_SEQUENCE\fP if the context has an asynchronous operation already pending\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if the data cannot be saved\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_PATH_NOT_FOUND\fP if a FAPI object path was not found during authorization\&. 
+.br
+\fITSS2_FAPI_RC_KEY_NOT_FOUND\fP if a key was not found\&. 
+.br
+\fITSS2_FAPI_RC_TRY_AGAIN\fP if an I/O operation is not finished yet and this function needs to be called again\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_NOT_PROVISIONED\fP FAPI was not provisioned\&. 
+.RE
+.PP
+
+.SS "Fapi_SetAppData_Async (\fBFAPI_CONTEXT\fP * context, char const * path, uint8_t const * appData, size_t appDataSize)"
+One-Call function for Fapi_SetAppData
+.PP
+Associates an arbitrary data blob with a given object\&.
+.PP
+Call Fapi_SetAppData_Finish to finish the execution of this command\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP 
+.br
+\fIpath\fP The path to the object the blob is associated with 
+.br
+\fIappData\fP The blob to associate with the object\&. May be NULL 
+.br
+\fIappDataSize\fP The size of appData in bytes\&. Must be 0 if appData is NULL
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if context or path is NULL or if appData is NULL and appDataSize is not 0\&. 
+.br
+\fITSS2_FAPI_RC_BAD_CONTEXT\fP if context corruption is detected\&. 
+.br
+\fITSS2_FAPI_RC_BAD_PATH\fP if path does not map to a FAPI entity\&. 
+.br
+\fITSS2_FAPI_RC_BAD_SEQUENCE\fP if the context has an asynchronous operation already pending\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if the data cannot be saved\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_PATH_NOT_FOUND\fP if a FAPI object path was not found during authorization\&. 
+.br
+\fITSS2_FAPI_RC_KEY_NOT_FOUND\fP if a key was not found\&. 
+.br
+\fITSS2_FAPI_RC_NOT_PROVISIONED\fP FAPI was not provisioned\&. 
+.RE
+.PP
+
+.SS "Fapi_SetAppData_Finish (\fBFAPI_CONTEXT\fP * context)"
+Asynchronous finish function for Fapi_SetAppData
+.PP
+This function should be called after a previous Fapi_SetAppData_Async\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if context is NULL\&. 
+.br
+\fITSS2_FAPI_RC_BAD_CONTEXT\fP if context corruption is detected\&. 
+.br
+\fITSS2_FAPI_RC_BAD_SEQUENCE\fP if the context has an asynchronous operation already pending\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if the data cannot be saved\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_FAPI_RC_TRY_AGAIN\fP if the asynchronous operation is not yet complete\&. Call this function again later\&. 
+.br
+\fITSS2_FAPI_RC_BAD_PATH\fP if a path is used in inappropriate context or contains illegal characters\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_PATH_NOT_FOUND\fP if a FAPI object path was not found during authorization\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

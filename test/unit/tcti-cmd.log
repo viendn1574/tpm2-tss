@@ -1,0 +1,57 @@
+[==========] Running 16 test(s).
+[ RUN      ] tcti_cmd_init_all_null_test
+[       OK ] tcti_cmd_init_all_null_test
+[ RUN      ] tcti_cmd_init_size_test
+[       OK ] tcti_cmd_init_size_test
+[ RUN      ] tcti_cmd_test_pipe_1_fail
+ERROR:tcti:src/tss2-tcti/tcti-cmd.c:283:popen_w_pipes() Could not open stderr pipe (): Bad address 
+ERROR:tcti:src/tss2-tcti/tcti-cmd.c:613:Tss2_Tcti_Cmd_Init() Open subprocess command "tcti_cmd_test_pipe_1_fail", failed with: Bad address 
+[       OK ] tcti_cmd_test_pipe_1_fail
+[ RUN      ] tcti_cmd_test_pipe_2_fail
+ERROR:tcti:src/tss2-tcti/tcti-cmd.c:290:popen_w_pipes() Could not open stderr pipe (): Bad address 
+ERROR:tcti:src/tss2-tcti/tcti-cmd.c:613:Tss2_Tcti_Cmd_Init() Open subprocess command "tcti_cmd_test_pipe_2_fail", failed with: Bad address 
+[       OK ] tcti_cmd_test_pipe_2_fail
+[ RUN      ] tcti_cmd_test_fork_fail
+ERROR:tcti:src/tss2-tcti/tcti-cmd.c:306:popen_w_pipes() Could not fork (): Cannot allocate memory 
+ERROR:tcti:src/tss2-tcti/tcti-cmd.c:613:Tss2_Tcti_Cmd_Init() Open subprocess command "tcti_cmd_test_fork_fail", failed with: Cannot allocate memory 
+[       OK ] tcti_cmd_test_fork_fail
+[ RUN      ] tcti_cmd_test_fdopen_1_fail
+ERROR:tcti:src/tss2-tcti/tcti-cmd.c:328:popen_w_pipes() Could not fdopen sink: Invalid argument 
+ERROR:tcti:src/tss2-tcti/tcti-cmd.c:613:Tss2_Tcti_Cmd_Init() Open subprocess command "tcti_cmd_test_fdopen_1_fail", failed with: Invalid argument 
+[       OK ] tcti_cmd_test_fdopen_1_fail
+[ RUN      ] tcti_cmd_test_fdopen_2_fail
+ERROR:tcti:src/tss2-tcti/tcti-cmd.c:335:popen_w_pipes() Could not fdopen source: Invalid argument 
+ERROR:tcti:src/tss2-tcti/tcti-cmd.c:613:Tss2_Tcti_Cmd_Init() Open subprocess command "tcti_cmd_test_fdopen_2_fail", failed with: Invalid argument 
+[       OK ] tcti_cmd_test_fdopen_2_fail
+[ RUN      ] tcti_cmd_test_sigprocmask_1_fail
+ERROR:tcti:src/tss2-tcti/tcti-cmd.c:115:disable_sigchld() sigprocmask failed: Invalid argument 
+ERROR:tcti:src/tss2-tcti/tcti-cmd.c:613:Tss2_Tcti_Cmd_Init() Open subprocess command "tcti_cmd_test_sigprocmask_1_fail", failed with: Invalid argument 
+[       OK ] tcti_cmd_test_sigprocmask_1_fail
+[ RUN      ] tcti_cmd_test_good
+[       OK ] tcti_cmd_test_good
+[ RUN      ] tcti_cmd_test_malformed_size_smaller
+ERROR:test:test/helper/tpm_cmd_tcti_dummy.c:173:main() Could not get TPM Header from stdin: Success 
+ERROR:test:test/helper/tpm_cmd_tcti_dummy.c:175:main() PID (79002): Child child_exiting 
+ERROR:test:test/helper/tpm_cmd_tcti_dummy.c:148:main() Unknown buffer response string: smaller 
+ERROR:test:test/helper/tpm_cmd_tcti_dummy.c:149:main() PID (79017): Child child_exiting 
+ERROR:tcti:src/tss2-tcti/tcti-cmd.c:511:tcti_cmd_receive() Read was not size of header, got 0 expected 10 
+[       OK ] tcti_cmd_test_malformed_size_smaller
+[ RUN      ] tcti_cmd_test_malformed_size_bigger
+ERROR:test:test/helper/tpm_cmd_tcti_dummy.c:148:main() Unknown buffer response string: bigger 
+ERROR:test:test/helper/tpm_cmd_tcti_dummy.c:149:main() PID (79032): Child child_exiting 
+ERROR:tcti:src/tss2-tcti/tcti-cmd.c:511:tcti_cmd_receive() Read was not size of header, got 0 expected 10 
+[       OK ] tcti_cmd_test_malformed_size_bigger
+[ RUN      ] tcti_cmd_test_transmit_fail
+ERROR:tcti:src/tss2-tcti/tcti-cmd.c:413:tcti_cmd_transmit() Transmitting to subprocess failed: Bad file descriptor 
+[       OK ] tcti_cmd_test_transmit_fail
+[ RUN      ] tcti_cmd_test_set_locality
+[       OK ] tcti_cmd_test_set_locality
+[ RUN      ] tcti_cmd_test_cancel
+[       OK ] tcti_cmd_test_cancel
+[ RUN      ] tcti_cmd_test_get_poll_handles_ok
+[       OK ] tcti_cmd_test_get_poll_handles_ok
+[ RUN      ] tcti_cmd_test_get_info
+[       OK ] tcti_cmd_test_get_info
+[==========] 16 test(s) run.
+[  PASSED  ] 16 test(s).
+PASS test/unit/tcti-cmd (exit status: 0)

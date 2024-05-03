@@ -1,0 +1,53 @@
+.TH "IFAPI_Path_SetDescription" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_Path_SetDescription
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <fapi_int\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "char * \fBdescription\fP"
+.br
+.ti -1c
+.RI "\fBUINT8_ARY\fP \fBappData\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP \fBobject\fP"
+.br
+.ti -1c
+.RI "char * \fBobject_path\fP"
+.br
+.ti -1c
+.RI "json_object * \fBjso\fP"
+.br
+.ti -1c
+.RI "char * \fBjso_string\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The data structure holding internal state of Fapi_SetDescription\&. 
+.SH "Field Documentation"
+.PP 
+.SS "\fBUINT8_ARY\fP appData"
+Application data to be stored in object store\&. 
+.SS "char* description"
+The description of the object 
+.SS "json_object* jso"
+JSON object for storing the AppData 
+.SS "char* jso_string"
+JSON deserialized buffer 
+.SS "\fBIFAPI_OBJECT\fP object"
+The IPAPI object to store the info 
+.SS "char* object_path"
+The realative path to the object 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

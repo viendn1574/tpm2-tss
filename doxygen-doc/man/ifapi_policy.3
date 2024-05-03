@@ -1,0 +1,555 @@
+.TH "ifapi_policy" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ifapi_policy
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC \fBifapi_calculate_policy\fP (\fBTPML_POLICYELEMENTS\fP *policy, TPML_DIGEST_VALUES *policyDigests, TPMI_ALG_HASH hash_alg, size_t hash_size, size_t digest_idx)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_calculate_policy_authorize\fP (\fBTPMS_POLICYAUTHORIZE\fP *policy, TPML_DIGEST_VALUES *current_digest, TPMI_ALG_HASH current_hash_alg)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_calculate_policy_authorize_nv\fP (\fBTPMS_POLICYAUTHORIZENV\fP *policy, TPML_DIGEST_VALUES *current_digest, TPMI_ALG_HASH current_hash_alg)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_calculate_policy_command_code\fP (\fBTPMS_POLICYCOMMANDCODE\fP *policy, TPML_DIGEST_VALUES *current_digest, TPMI_ALG_HASH current_hash_alg)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_calculate_policy_counter_timer\fP (\fBTPMS_POLICYCOUNTERTIMER\fP *policy, TPML_DIGEST_VALUES *current_digest, TPMI_ALG_HASH current_hash_alg)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_calculate_policy_cp_hash\fP (\fBTPMS_POLICYCPHASH\fP *policy, TPML_DIGEST_VALUES *current_digest, TPMI_ALG_HASH current_hash_alg)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_calculate_policy_digest_hash\fP (TPM2B_DIGEST *digest, TPML_DIGEST_VALUES *current_digest, TPMI_ALG_HASH current_hash_alg, TPM2_CC command_code)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_calculate_policy_duplicate\fP (\fBTPMS_POLICYDUPLICATIONSELECT\fP *policy, TPML_DIGEST_VALUES *current_digest, TPMI_ALG_HASH current_hash_alg)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_calculate_policy_locality\fP (\fBTPMS_POLICYLOCALITY\fP *policy, TPML_DIGEST_VALUES *current_digest, TPMI_ALG_HASH current_hash_alg)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_calculate_policy_name_hash\fP (\fBTPMS_POLICYNAMEHASH\fP *policy, TPML_DIGEST_VALUES *current_digest, TPMI_ALG_HASH current_hash_alg)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_calculate_policy_nv\fP (\fBTPMS_POLICYNV\fP *policy, TPML_DIGEST_VALUES *current_digest, TPMI_ALG_HASH current_hash_alg)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_calculate_policy_nv_written\fP (\fBTPMS_POLICYNVWRITTEN\fP *policy, TPML_DIGEST_VALUES *current_digest, TPMI_ALG_HASH current_hash_alg)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_calculate_policy_or\fP (\fBTPMS_POLICYOR\fP *policyOr, TPML_DIGEST_VALUES *current_digest, TPMI_ALG_HASH hash_alg, size_t hash_size, size_t digest_idx)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_calculate_policy_secret\fP (\fBTPMS_POLICYSECRET\fP *policy, TPML_DIGEST_VALUES *current_digest, TPMI_ALG_HASH current_hash_alg)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_calculate_policy_signed\fP (\fBTPMS_POLICYSIGNED\fP *policy, TPML_DIGEST_VALUES *current_digest, TPMI_ALG_HASH current_hash_alg)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_calculate_simple_policy\fP (TPM2_CC command_code1, TPM2_CC command_code2, TPML_DIGEST_VALUES *current_digest, TPMI_ALG_HASH current_hash_alg)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_compute_policy_pcr\fP (\fBTPMS_POLICYPCR\fP *policy, TPML_DIGEST_VALUES *current_digest, TPMI_ALG_HASH current_hash_alg)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Provides functions for policy calculation (without TPM)\&. 
+.SH "Function Documentation"
+.PP 
+.SS "TSS2_RC ifapi_calculate_policy (\fBTPML_POLICYELEMENTS\fP * policy, TPML_DIGEST_VALUES * policyDigests, TPMI_ALG_HASH hash_alg, size_t hash_size, size_t digest_idx)"
+Compute policy digest for a list of policies\&.
+.PP
+Every policy in the list will update the previous policy\&. Thus the final policy digest will describe the sequential execution of the policy list\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpolicy\fP The policy with the policy list\&. 
+.br
+\fIpolicyDigests\fP The digest list which has to be updated\&. 
+.br
+\fIhash_alg\fP The hash algorithm used for the policy computation\&. 
+.br
+\fIhash_size\fP The size of the policy digest\&. 
+.br
+\fIdigest_idx\fP The index of the current policy in the passed digest list\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_calculate_policy_authorize (\fBTPMS_POLICYAUTHORIZE\fP * policy, TPML_DIGEST_VALUES * current_digest, TPMI_ALG_HASH current_hash_alg)"
+Calculate a policy digest for a placeholder policy\&.
+.PP
+The placeholder policy can be extended during execution by a signed policy, which can be verified by using the parameters of this placeholder policy\&. Based on the command code, the key name of the signing key and a policy reference the new policy digest is computed by the function calculate_policy_key_param()\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpolicy\fP The policy with the name of the public key and the policy reference\&. 
+.br
+\fIcurrent_digest\fP The digest list which has to be updated\&. 
+.br
+\fIcurrent_hash_alg\fP The hash algorithm used for the policy computation\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_calculate_policy_authorize_nv (\fBTPMS_POLICYAUTHORIZENV\fP * policy, TPML_DIGEST_VALUES * current_digest, TPMI_ALG_HASH current_hash_alg)"
+Calculate a policy digest for a policy stored in an approved NV index\&.
+.PP
+Based on the command code, and the computed NV name the new policy digest is computed by the function calculate_policy_key_param()\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpolicy\fP The policy with the public information of the NV index\&. 
+.br
+\fIcurrent_digest\fP The digest list which has to be updated\&. 
+.br
+\fIcurrent_hash_alg\fP The hash algorithm used for the policy computation\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_calculate_policy_command_code (\fBTPMS_POLICYCOMMANDCODE\fP * policy, TPML_DIGEST_VALUES * current_digest, TPMI_ALG_HASH current_hash_alg)"
+Update policy command code with a command code defined in the policy\&.
+.PP
+For the update two command codes will be used\&. The command code of policy command code and the passed command code\&. The policy will be updated with the function \fBifapi_calculate_simple_policy()\fP
+.PP
+\fBParameters\fP
+.RS 4
+\fIpolicy\fP The policy command code with the second command code\&. 
+.br
+\fIcurrent_digest\fP The digest list which has to be updated\&. 
+.br
+\fIcurrent_hash_alg\fP The hash algorithm used for the policy computation\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_calculate_policy_counter_timer (\fBTPMS_POLICYCOUNTERTIMER\fP * policy, TPML_DIGEST_VALUES * current_digest, TPMI_ALG_HASH current_hash_alg)"
+Calculate a policy for for comparing current TPM timers with the policy\&.
+.PP
+The timer value and the operation for comparison defined in the policy will bu used to update the policy digest\&. The offset which is supported by the TPM policy for FAPI will be 0\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpolicy\fP The policy with the timer value and the operation for comparison\&. 
+.br
+\fIcurrent_digest\fP The digest list which has to be updated\&. 
+.br
+\fIcurrent_hash_alg\fP The hash algorithm used for the policy computation\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_calculate_policy_cp_hash (\fBTPMS_POLICYCPHASH\fP * policy, TPML_DIGEST_VALUES * current_digest, TPMI_ALG_HASH current_hash_alg)"
+Compute policy bound to a specific command and command parameters\&.
+.PP
+The cp hash value and the command code will be updated by the function \fBifapi_calculate_policy_digest_hash()\fP\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpolicy\fP The policy with the cp hash value\&. 
+.br
+\fIcurrent_digest\fP The digest list which has to be updated\&. 
+.br
+\fIcurrent_hash_alg\fP The hash algorithm used for the policy computation\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_calculate_policy_digest_hash (TPM2B_DIGEST * digest, TPML_DIGEST_VALUES * current_digest, TPMI_ALG_HASH current_hash_alg, TPM2_CC command_code)"
+Compute policy if only a digest and a command code are needed for extension\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIdigest\fP the digest which will be used for policy extension\&. 
+.br
+\fIcurrent_digest\fP The digest list which has to be updated\&. 
+.br
+\fIcurrent_hash_alg\fP The hash algorithm used for the policy computation\&. 
+.br
+\fIcommand_code\fP The compute of the command which did compute the digest\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_calculate_policy_duplicate (\fBTPMS_POLICYDUPLICATIONSELECT\fP * policy, TPML_DIGEST_VALUES * current_digest, TPMI_ALG_HASH current_hash_alg)"
+Calculate a policy digest to allow duplication force a selected new parent\&.
+.PP
+Based on the command code, the name of the new parent, and the include object switch the new policy digest is computed\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpolicy\fP The policy with the new parent information\&. 
+.br
+\fIcurrent_digest\fP The digest list which has to be updated\&. 
+.br
+\fIcurrent_hash_alg\fP The hash algorithm used for the policy computation\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_calculate_policy_locality (\fBTPMS_POLICYLOCALITY\fP * policy, TPML_DIGEST_VALUES * current_digest, TPMI_ALG_HASH current_hash_alg)"
+Compute policy which limits authorization to a specific locality\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpolicy\fP The policy with the locality\&. 
+.br
+\fIcurrent_digest\fP The digest list which has to be updated\&. 
+.br
+\fIcurrent_hash_alg\fP The hash algorithm used for the policy computation\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_calculate_policy_name_hash (\fBTPMS_POLICYNAMEHASH\fP * policy, TPML_DIGEST_VALUES * current_digest, TPMI_ALG_HASH current_hash_alg)"
+Compute policy bound to a specific set of TPM entities\&.
+.PP
+The policy digest will be updated with the function \fBifapi_calculate_policy_digest_hash()\fP which will add the hash of the entity name list\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpolicy\fP The policy with the list of entity names\&. 
+.br
+\fIcurrent_digest\fP The digest list which has to be updated\&. 
+.br
+\fIcurrent_hash_alg\fP The hash algorithm used for the policy computation\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_calculate_policy_nv (\fBTPMS_POLICYNV\fP * policy, TPML_DIGEST_VALUES * current_digest, TPMI_ALG_HASH current_hash_alg)"
+Compute policy bound to the content of an NV index\&.
+.PP
+The value used for comparison, the compare operation and an offset for the NV index are part of the policy\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpolicy\fP The policy with the expected values used for comparison\&. 
+.br
+\fIcurrent_digest\fP The digest list which has to be updated\&. 
+.br
+\fIcurrent_hash_alg\fP The hash algorithm used for the policy computation\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_calculate_policy_nv_written (\fBTPMS_POLICYNVWRITTEN\fP * policy, TPML_DIGEST_VALUES * current_digest, TPMI_ALG_HASH current_hash_alg)"
+Compute policy bound to bound to the TPMA_NV_WRITTEN attributes\&.
+.PP
+The expected value of the NV written attribute is part of the policy\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpolicy\fP The policy with the expected attribute value\&. 
+.br
+\fIcurrent_digest\fP The digest list which has to be updated\&. 
+.br
+\fIcurrent_hash_alg\fP The hash algorithm used for the policy computation\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_calculate_policy_or (\fBTPMS_POLICYOR\fP * policyOr, TPML_DIGEST_VALUES * current_digest, TPMI_ALG_HASH hash_alg, size_t hash_size, size_t digest_idx)"
+Compute a list of policies to enable authorization options\&.
+.PP
+First the policy digest will be computed for every branch\&. After that the policy digest will be reset to zero and extended by the list of computed policy digests of the branches\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpolicyOr\fP The policy with the possible policy branches\&. 
+.br
+\fIcurrent_digest\fP The digest list which has to be updated\&. 
+.br
+\fIhash_alg\fP The hash algorithm used for the policy computation\&. 
+.br
+\fIhash_size\fP The size of the policy digest\&. 
+.br
+\fIdigest_idx\fP The index of the current policy in the passed digest list\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_calculate_policy_secret (\fBTPMS_POLICYSECRET\fP * policy, TPML_DIGEST_VALUES * current_digest, TPMI_ALG_HASH current_hash_alg)"
+Calculate a policy for adding secret-based authorization\&.
+.PP
+During execution proving the knowledge of the secrect auth value of a certain object is required\&. The name of this object and a policy reference is used for policy calculation\&. Based on the command code, the object name and a policy reference the new policy digest is computed by the function calculate_policy_key_param()\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpolicy\fP The policy with the object name of the object to be authorized and the policy reference\&. 
+.br
+\fIcurrent_digest\fP The digest list which has to be updated\&. 
+.br
+\fIcurrent_hash_alg\fP The hash algorithm used for the policy computation\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_calculate_policy_signed (\fBTPMS_POLICYSIGNED\fP * policy, TPML_DIGEST_VALUES * current_digest, TPMI_ALG_HASH current_hash_alg)"
+Calculate a policy digest for a signed policy\&.
+.PP
+Based on the command code, the public key, and the policy reference stored in the policy the new policy digest is computed by the function calculate_policy_key_param()\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpolicy\fP The policy with the public key and the policy reference\&. 
+.br
+\fIcurrent_digest\fP The digest list which has to be updated\&. 
+.br
+\fIcurrent_hash_alg\fP The hash algorithm used for the policy computation\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_calculate_simple_policy (TPM2_CC command_code1, TPM2_CC command_code2, TPML_DIGEST_VALUES * current_digest, TPMI_ALG_HASH current_hash_alg)"
+Update policy if only the command codes are used\&.
+.PP
+Some simple policies use onle one or two command codes for policy calculation\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcommand_code1\fP The first command code for policy extension\&. Can be NULL\&. 
+.br
+\fIcommand_code2\fP The second command code for policy extension\&. Can be NULL\&. 
+.br
+\fIcurrent_digest\fP The digest list which has to be updated\&. 
+.br
+\fIcurrent_hash_alg\fP The hash algorithm used for the policy computation\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_compute_policy_pcr (\fBTPMS_POLICYPCR\fP * policy, TPML_DIGEST_VALUES * current_digest, TPMI_ALG_HASH current_hash_alg)"
+Calculate a policy digest for a certain PCR selection\&.
+.PP
+From a PCR list the list of PCR values and the corresponding PCR digest is computed\&. The passed policy digest will be extended with this data and also with the policy command code\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpolicy\fP The policy with the list of selected PCRs\&. 
+.br
+\fIcurrent_digest\fP The digest list which has to be updated\&. 
+.br
+\fIcurrent_hash_alg\fP The hash algorithm used for the policy computation\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

@@ -1,0 +1,44 @@
+.TH "IFAPI_FILE_SEARCH_CTX" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_FILE_SEARCH_CTX
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <fapi_int\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "enum IFAPI_STATE_FILE_SEARCH \fBstate\fP"
+.br
+.ti -1c
+.RI "char ** \fBpathlist\fP"
+.br
+.ti -1c
+.RI "size_t \fBpath_idx\fP"
+.br
+.ti -1c
+.RI "size_t \fBnumPaths\fP"
+.br
+.ti -1c
+.RI "char * \fBcurrent_path\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The data structure holding internal policy state\&. 
+.SH "Field Documentation"
+.PP 
+.SS "size_t numPaths"
+Number of all objects in data store 
+.SS "size_t path_idx"
+Index of array of objects to be searched 
+.SS "char** pathlist"
+The array of all objects in the search path 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

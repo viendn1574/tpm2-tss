@@ -1,0 +1,36 @@
+[==========] Running 1 test(s).
+[ RUN      ] doLog_test
+WARNING:test:test/unit/log.c:32:execute_doLog() test 
+WARNING:test:test/unit/log.c:32:execute_doLog() test 
+info:test:test/unit/log.c:31:execute_doLog() test 
+WARNING:test:test/unit/log.c:32:execute_doLog() test 
+info:test:test/unit/log.c:33:execute_doLog() test 
+debug:test:test/unit/log.c:29:execute_doLog() test 
+info:test:test/unit/log.c:31:execute_doLog() test 
+WARNING:test:test/unit/log.c:32:execute_doLog() test 
+info:test:test/unit/log.c:33:execute_doLog() test 
+debug:test:test/unit/log.c:29:execute_doLog() test 
+trace:test:test/unit/log.c:30:execute_doLog() test 
+info:test:test/unit/log.c:31:execute_doLog() test 
+WARNING:test:test/unit/log.c:32:execute_doLog() test 
+info:test:test/unit/log.c:33:execute_doLog() test 
+WARNING:test:test/unit/log.c:32:execute_doLog() test 
+WARNING:test:test/unit/log.c:32:execute_doLog() test 
+WARNING:test:test/unit/log.c:32:execute_doLog() test 
+debug:test:test/unit/log.c:29:execute_doLog() test 
+info:test:test/unit/log.c:31:execute_doLog() test 
+WARNING:test:test/unit/log.c:32:execute_doLog() test 
+info:test:test/unit/log.c:33:execute_doLog() test 
+WARNING:test:test/unit/log.c:32:execute_doLog() test 
+WARNING:test:test/unit/log.c:32:execute_doLog() test 
+WARNING:test:test/unit/log.c:32:execute_doLog() test 
+debug:test:test/unit/log.c:29:execute_doLog() test 
+trace:test:test/unit/log.c:30:execute_doLog() test 
+info:test:test/unit/log.c:31:execute_doLog() test 
+WARNING:test:test/unit/log.c:32:execute_doLog() test 
+info:test:test/unit/log.c:33:execute_doLog() test 
+WARNING:test:test/unit/log.c:32:execute_doLog() test 
+[       OK ] doLog_test
+[==========] 1 test(s) run.
+[  PASSED  ] 1 test(s).
+PASS test/unit/log (exit status: 0)

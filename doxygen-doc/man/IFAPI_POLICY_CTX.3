@@ -1,0 +1,70 @@
+.TH "IFAPI_POLICY_CTX" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_POLICY_CTX
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <fapi_int\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "enum IFAPI_STATE_POLICY \fBstate\fP"
+.br
+.ti -1c
+.RI "struct \fBTPMS_POLICY\fP \fBpolicy\fP"
+.br
+.ti -1c
+.RI "size_t \fBdigest_idx\fP"
+.br
+.ti -1c
+.RI "size_t \fBhash_size\fP"
+.br
+.ti -1c
+.RI "char ** \fBpathlist\fP"
+.br
+.ti -1c
+.RI "TPMI_ALG_HASH \fBhash_alg\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_POLICY_EXEC_CTX\fP * \fBpolicy_stack\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_POLICYUTIL_STACK\fP * \fButil_current_policy\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_POLICYUTIL_STACK\fP * \fBpolicyutil_stack\fP"
+.br
+.ti -1c
+.RI "\fBESYS_TR\fP \fBsession\fP"
+.br
+.ti -1c
+.RI "enum FAPI_CREATE_SESSION_STATE \fBcreate_session_state\fP"
+.br
+.ti -1c
+.RI "char * \fBpath\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_POLICY_EVAL_INST_CTX\fP \fBeval_ctx\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The data structure holding internal policy state\&. 
+.SH "Field Documentation"
+.PP 
+.SS "char** pathlist"
+The array of all objects in the search path 
+.SS "\fBIFAPI_POLICY_EXEC_CTX\fP* policy_stack"
+The stack used for storing current policy information\&. e\&.g\&. for retry the current index of policy elements hash to be stored\&. 
+.SS "\fBIFAPI_POLICYUTIL_STACK\fP* policyutil_stack"
+The stack used for storing current policy information\&. e\&.g\&. for retry the current index of policy elements hash to be stored\&. 
+.SS "\fBESYS_TR\fP session"
+Auxiliary variable to store created policy session\&. The value will also be stored in the policy stack 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

@@ -1,0 +1,168 @@
+.TH "Esys_NV_SetBits" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Esys_NV_SetBits \- ESAPI function to invoke the TPM2_NV_SetBits command either as a one-call or in an asynchronous manner\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC \fBEsys_NV_SetBits_Async\fP (\fBESYS_CONTEXT\fP *esysContext, \fBESYS_TR\fP authHandle, \fBESYS_TR\fP nvIndex, \fBESYS_TR\fP shandle1, \fBESYS_TR\fP shandle2, \fBESYS_TR\fP shandle3, UINT64 bits)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBEsys_NV_SetBits\fP (\fBESYS_CONTEXT\fP *esysContext, \fBESYS_TR\fP authHandle, \fBESYS_TR\fP nvIndex, \fBESYS_TR\fP shandle1, \fBESYS_TR\fP shandle2, \fBESYS_TR\fP shandle3, UINT64 bits)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBEsys_NV_SetBits_Finish\fP (\fBESYS_CONTEXT\fP *esysContext)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+ESAPI function to invoke the TPM2_NV_SetBits command either as a one-call or in an asynchronous manner\&. 
+
+
+.SH "Function Documentation"
+.PP 
+.SS "TSS2_RC Esys_NV_SetBits (\fBESYS_CONTEXT\fP * esysContext, \fBESYS_TR\fP authHandle, \fBESYS_TR\fP nvIndex, \fBESYS_TR\fP shandle1, \fBESYS_TR\fP shandle2, \fBESYS_TR\fP shandle3, UINT64 bits)"
+One-Call function for TPM2_NV_SetBits
+.PP
+This function invokes the TPM2_NV_SetBits command in a one-call variant\&. This means the function will block until the TPM response is available\&. All input parameters are const\&. The memory for non-simple output parameters is allocated by the function implementation\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIesysContext\fP The \fBESYS_CONTEXT\fP\&. 
+.br
+\fIauthHandle\fP Handle indicating the source of the authorization value\&. 
+.br
+\fInvIndex\fP NV Index of the area in which the bit is to be set\&. 
+.br
+\fIshandle1\fP Session handle for authorization of authHandle 
+.br
+\fIshandle2\fP Second session handle\&. 
+.br
+\fIshandle3\fP Third session handle\&. 
+.br
+\fIbits\fP The data to OR with the current contents\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_ESYS_RC_BAD_REFERENCE\fP if the esysContext or required input pointers or required output handle references are NULL\&. 
+.br
+\fITSS2_ESYS_RC_BAD_CONTEXT\fP if esysContext corruption is detected\&. 
+.br
+\fITSS2_ESYS_RC_MEMORY\fP if the ESAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_ESYS_RC_BAD_SEQUENCE\fP if the context has an asynchronous operation already pending\&. 
+.br
+\fITSS2_ESYS_RC_INSUFFICIENT_RESPONSE\fP if the TPM's response does not at least contain the tag, response length, and response code\&. 
+.br
+\fITSS2_ESYS_RC_MALFORMED_RESPONSE\fP if the TPM's response is corrupted\&. 
+.br
+\fITSS2_ESYS_RC_RSP_AUTH_FAILED\fP if the response HMAC from the TPM did not verify\&. 
+.br
+\fITSS2_ESYS_RC_MULTIPLE_DECRYPT_SESSIONS\fP if more than one session has the 'decrypt' attribute bit set\&. 
+.br
+\fITSS2_ESYS_RC_MULTIPLE_ENCRYPT_SESSIONS\fP if more than one session has the 'encrypt' attribute bit set\&. 
+.br
+\fITSS2_ESYS_RC_BAD_TR\fP if any of the ESYS_TR objects are unknown to the \fBESYS_CONTEXT\fP or are of the wrong type or if required ESYS_TR objects are ESYS_TR_NONE\&. 
+.br
+\fITSS2_ESYS_RC_NO_DECRYPT_PARAM\fP if one of the sessions has the 'decrypt' attribute set and the command does not support encryption of the first command parameter\&. 
+.br
+\fITSS2_ESYS_RC_NO_ENCRYPT_PARAM\fP if one of the sessions has the 'encrypt' attribute set and the command does not support encryption of the first response parameter\&. 
+.br
+\fITSS2_RCs\fP produced by lower layers of the software stack may be returned to the caller unaltered unless handled internally\&. 
+.RE
+.PP
+
+.SS "TSS2_RC Esys_NV_SetBits_Async (\fBESYS_CONTEXT\fP * esysContext, \fBESYS_TR\fP authHandle, \fBESYS_TR\fP nvIndex, \fBESYS_TR\fP shandle1, \fBESYS_TR\fP shandle2, \fBESYS_TR\fP shandle3, UINT64 bits)"
+Asynchronous function for TPM2_NV_SetBits
+.PP
+This function invokes the TPM2_NV_SetBits command in a asynchronous variant\&. This means the function will return as soon as the command has been sent downwards the stack to the TPM\&. All input parameters are const\&. In order to retrieve the TPM's response call Esys_NV_SetBits_Finish\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIesysContext\fP The \fBESYS_CONTEXT\fP\&. 
+.br
+\fIauthHandle\fP Handle indicating the source of the authorization value\&. 
+.br
+\fInvIndex\fP NV Index of the area in which the bit is to be set\&. 
+.br
+\fIshandle1\fP Session handle for authorization of authHandle 
+.br
+\fIshandle2\fP Second session handle\&. 
+.br
+\fIshandle3\fP Third session handle\&. 
+.br
+\fIbits\fP The data to OR with the current contents\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIESYS_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_ESYS_RC_BAD_REFERENCE\fP if the esysContext or required input pointers or required output handle references are NULL\&. 
+.br
+\fITSS2_ESYS_RC_BAD_CONTEXT\fP if esysContext corruption is detected\&. 
+.br
+\fITSS2_ESYS_RC_MEMORY\fP if the ESAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_RCs\fP produced by lower layers of the software stack may be returned to the caller unaltered unless handled internally\&. 
+.br
+\fITSS2_ESYS_RC_MULTIPLE_DECRYPT_SESSIONS\fP if more than one session has the 'decrypt' attribute bit set\&. 
+.br
+\fITSS2_ESYS_RC_MULTIPLE_ENCRYPT_SESSIONS\fP if more than one session has the 'encrypt' attribute bit set\&. 
+.br
+\fITSS2_ESYS_RC_BAD_TR\fP if any of the ESYS_TR objects are unknown to the \fBESYS_CONTEXT\fP or are of the wrong type or if required ESYS_TR objects are ESYS_TR_NONE\&. 
+.br
+\fITSS2_ESYS_RC_NO_DECRYPT_PARAM\fP if one of the sessions has the 'decrypt' attribute set and the command does not support encryption of the first command parameter\&. 
+.br
+\fITSS2_ESYS_RC_NO_ENCRYPT_PARAM\fP if one of the sessions has the 'encrypt' attribute set and the command does not support encryption of the first response parameter\&. 
+.RE
+.PP
+
+.SS "TSS2_RC Esys_NV_SetBits_Finish (\fBESYS_CONTEXT\fP * esysContext)"
+Asynchronous finish function for TPM2_NV_SetBits
+.PP
+This function returns the results of a TPM2_NV_SetBits command invoked via Esys_NV_SetBits_Finish\&. All non-simple output parameters are allocated by the function's implementation\&. NULL can be passed for every output parameter if the value is not required\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIesysContext\fP The \fBESYS_CONTEXT\fP\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success 
+.br
+\fIESYS_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_ESYS_RC_BAD_REFERENCE\fP if the esysContext or required input pointers or required output handle references are NULL\&. 
+.br
+\fITSS2_ESYS_RC_BAD_CONTEXT\fP if esysContext corruption is detected\&. 
+.br
+\fITSS2_ESYS_RC_MEMORY\fP if the ESAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_ESYS_RC_BAD_SEQUENCE\fP if the context has an asynchronous operation already pending\&. 
+.br
+\fITSS2_ESYS_RC_TRY_AGAIN\fP if the timeout counter expires before the TPM response is received\&. 
+.br
+\fITSS2_ESYS_RC_INSUFFICIENT_RESPONSE\fP if the TPM's response does not at least contain the tag, response length, and response code\&. 
+.br
+\fITSS2_ESYS_RC_RSP_AUTH_FAILED\fP if the response HMAC from the TPM did not verify\&. 
+.br
+\fITSS2_ESYS_RC_MALFORMED_RESPONSE\fP if the TPM's response is corrupted\&. 
+.br
+\fITSS2_RCs\fP produced by lower layers of the software stack may be returned to the caller unaltered unless handled internally\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

@@ -1,0 +1,47 @@
+.TH "IFAPI_CALLBACKS" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_CALLBACKS
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <fapi_int\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "Fapi_CB_Auth \fBauth\fP"
+.br
+.ti -1c
+.RI "void * \fBauthData\fP"
+.br
+.ti -1c
+.RI "Fapi_CB_Branch \fBbranch\fP"
+.br
+.ti -1c
+.RI "void * \fBbranchData\fP"
+.br
+.ti -1c
+.RI "Fapi_CB_Sign \fBsign\fP"
+.br
+.ti -1c
+.RI "void * \fBsignData\fP"
+.br
+.ti -1c
+.RI "Fapi_CB_PolicyAction \fBaction\fP"
+.br
+.ti -1c
+.RI "void * \fBactionData\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Structure holding FAPI callbacks and userData
+.PP
+This structure holds the callback pointers and corresponding userData pointers for each of the three callback types of FAPI\&. They are set using Fapi_SetAuthCB, Fapi_SetBranchCB and Fapi_SetSignCB\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

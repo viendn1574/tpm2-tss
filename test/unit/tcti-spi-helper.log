@@ -1,0 +1,16 @@
+[==========] Running 4 test(s).
+[ RUN      ] tcti_spi_no_wait_state_success_test
+[       OK ] tcti_spi_no_wait_state_success_test
+[ RUN      ] tcti_spi_with_wait_state_success_test
+[       OK ] tcti_spi_with_wait_state_success_test
+[ RUN      ] tcti_spi_with_bad_callbacks_test
+ERROR:tcti:src/tss2-tcti/tcti-spi-helper.c:439:check_platform_conf() Expected sleep_ms, spi_transfer, start_timeout and timeout_expired to be set. 
+ERROR:tcti:src/tss2-tcti/tcti-spi-helper.c:697:Tss2_Tcti_Spi_Helper_Init() platform_conf invalid ErrorCode (0x000a000b) 
+[       OK ] tcti_spi_with_bad_callbacks_test
+[ RUN      ] tcti_spi_with_wait_state_bad_callbacks_test
+ERROR:tcti:src/tss2-tcti/tcti-spi-helper.c:444:check_platform_conf() Expected spi_acquire and spi_release to both be NULL or set. 
+ERROR:tcti:src/tss2-tcti/tcti-spi-helper.c:697:Tss2_Tcti_Spi_Helper_Init() platform_conf invalid ErrorCode (0x000a000b) 
+[       OK ] tcti_spi_with_wait_state_bad_callbacks_test
+[==========] 4 test(s) run.
+[  PASSED  ] 4 test(s).
+PASS test/unit/tcti-spi-helper (exit status: 0)

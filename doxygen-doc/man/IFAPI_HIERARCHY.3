@@ -1,0 +1,49 @@
+.TH "IFAPI_HIERARCHY" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_HIERARCHY
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ifapi_keystore\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "TPMI_YES_NO \fBwith_auth\fP"
+.br
+.ti -1c
+.RI "char * \fBdescription\fP"
+.br
+.ti -1c
+.RI "TPM2B_DIGEST \fBauthPolicy\fP"
+.br
+.ti -1c
+.RI "\fBESYS_TR\fP \fBesysHandle\fP"
+.br
+.ti -1c
+.RI "bool \fBauthorized\fP"
+.br
+.ti -1c
+.RI "TPM2B_NAME \fBname\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Type for representing hierarchy 
+.SH "Field Documentation"
+.PP 
+.SS "bool authorized"
+Switch whether hiearchy is authorized\&. 
+.SS "char* description"
+Human readable description of hierarchy 
+.SS "TPM2B_NAME name"
+Name of the hierarchy 
+.SS "TPMI_YES_NO with_auth"
+Authorization provided 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

@@ -1,0 +1,36 @@
+.TH "IFAPI_POLICY_EVAL_INST_CTX" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_POLICY_EVAL_INST_CTX
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ifapi_policy_instantiate\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "\fBTPMS_POLICY\fP * \fBpolicy\fP"
+.br
+.ti -1c
+.RI "\fBNODE_OBJECT_T\fP * \fBpolicy_elements\fP"
+.br
+.ti -1c
+.RI "TSS2_POLICY_CALC_CALLBACKS \fBcallbacks\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Type for representing the context for policy instantiation\&. 
+.SH "Field Documentation"
+.PP 
+.SS "TSS2_POLICY_CALC_CALLBACKS callbacks"
+The policy elements to be instantiated 
+.SS "\fBTPMS_POLICY\fP* policy"
+The policy to be instantiated 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

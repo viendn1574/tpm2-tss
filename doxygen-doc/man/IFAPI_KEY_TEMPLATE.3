@@ -1,0 +1,43 @@
+.TH "IFAPI_KEY_TEMPLATE" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_KEY_TEMPLATE
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <fapi_int\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "TPMI_YES_NO \fBsystem\fP"
+.br
+.ti -1c
+.RI "TPMI_YES_NO \fBpersistent\fP"
+.br
+.ti -1c
+.RI "UINT32 \fBpersistent_handle\fP"
+.br
+.ti -1c
+.RI "TPM2B_PUBLIC \fBpublic\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Type for representing FAPI template for keys 
+.SH "Field Documentation"
+.PP 
+.SS "TPMI_YES_NO persistent"
+Store key persistent in NV ram\&. 
+.SS "UINT32 persistent_handle"
+< Persistent handle which should be used 
+.SS "TPM2B_PUBLIC public"
+Template for public data 
+.SS "TPMI_YES_NO system"
+Store the object in the system wide directory 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

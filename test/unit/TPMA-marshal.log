@@ -1,0 +1,30 @@
+[==========] Running 10 test(s).
+[ RUN      ] tpma_marshal_success
+[       OK ] tpma_marshal_success
+[ RUN      ] tpma_marshal_success_offset
+[       OK ] tpma_marshal_success_offset
+[ RUN      ] tpma_marshal_buffer_null_with_offset
+[       OK ] tpma_marshal_buffer_null_with_offset
+[ RUN      ] tpma_marshal_buffer_null_offset_null
+ERROR:marshal:src/tss2-mu/tpma-types.c:151:Tss2_MU_TPMA_ALGORITHM_Marshal() buffer and offset parameter are NULL 
+ERROR:marshal:src/tss2-mu/tpma-types.c:163:Tss2_MU_TPMA_SESSION_Marshal() buffer and offset parameter are NULL 
+[       OK ] tpma_marshal_buffer_null_offset_null
+[ RUN      ] tpma_marshal_buffer_size_lt_data_nad_lt_offset
+[       OK ] tpma_marshal_buffer_size_lt_data_nad_lt_offset
+[ RUN      ] tpma_unmarshal_success
+[       OK ] tpma_unmarshal_success
+[ RUN      ] tpma_unmarshal_dest_null_buff_null
+ERROR:marshal:src/tss2-mu/tpma-types.c:152:Tss2_MU_TPMA_ALGORITHM_Unmarshal() buffer or dest and offset parameter are NULL 
+ERROR:marshal:src/tss2-mu/tpma-types.c:164:Tss2_MU_TPMA_SESSION_Unmarshal() buffer or dest and offset parameter are NULL 
+[       OK ] tpma_unmarshal_dest_null_buff_null
+[ RUN      ] tpma_unmarshal_buffer_null_offset_null
+ERROR:marshal:src/tss2-mu/tpma-types.c:152:Tss2_MU_TPMA_ALGORITHM_Unmarshal() buffer or dest and offset parameter are NULL 
+ERROR:marshal:src/tss2-mu/tpma-types.c:164:Tss2_MU_TPMA_SESSION_Unmarshal() buffer or dest and offset parameter are NULL 
+[       OK ] tpma_unmarshal_buffer_null_offset_null
+[ RUN      ] tpma_unmarshal_dest_null_offset_valid
+[       OK ] tpma_unmarshal_dest_null_offset_valid
+[ RUN      ] tpma_unmarshal_buffer_size_lt_data_nad_lt_offset
+[       OK ] tpma_unmarshal_buffer_size_lt_data_nad_lt_offset
+[==========] 10 test(s) run.
+[  PASSED  ] 10 test(s).
+PASS test/unit/TPMA-marshal (exit status: 0)

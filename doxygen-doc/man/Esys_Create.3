@@ -1,0 +1,188 @@
+.TH "Esys_Create" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Esys_Create \- ESAPI function to invoke the TPM2_Create command either as a one-call or in an asynchronous manner\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC \fBEsys_Create_Async\fP (\fBESYS_CONTEXT\fP *esysContext, \fBESYS_TR\fP parentHandle, \fBESYS_TR\fP shandle1, \fBESYS_TR\fP shandle2, \fBESYS_TR\fP shandle3, const TPM2B_SENSITIVE_CREATE *inSensitive, const TPM2B_PUBLIC *inPublic, const TPM2B_DATA *outsideInfo, const TPML_PCR_SELECTION *creationPCR)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBEsys_Create\fP (\fBESYS_CONTEXT\fP *esysContext, \fBESYS_TR\fP parentHandle, \fBESYS_TR\fP shandle1, \fBESYS_TR\fP shandle2, \fBESYS_TR\fP shandle3, const TPM2B_SENSITIVE_CREATE *inSensitive, const TPM2B_PUBLIC *inPublic, const TPM2B_DATA *outsideInfo, const TPML_PCR_SELECTION *creationPCR, TPM2B_PRIVATE **outPrivate, TPM2B_PUBLIC **outPublic, TPM2B_CREATION_DATA **creationData, TPM2B_DIGEST **creationHash, TPMT_TK_CREATION **creationTicket)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBEsys_Create_Finish\fP (\fBESYS_CONTEXT\fP *esysContext, TPM2B_PRIVATE **outPrivate, TPM2B_PUBLIC **outPublic, TPM2B_CREATION_DATA **creationData, TPM2B_DIGEST **creationHash, TPMT_TK_CREATION **creationTicket)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+ESAPI function to invoke the TPM2_Create command either as a one-call or in an asynchronous manner\&. 
+
+
+.SH "Function Documentation"
+.PP 
+.SS "TSS2_RC Esys_Create (\fBESYS_CONTEXT\fP * esysContext, \fBESYS_TR\fP parentHandle, \fBESYS_TR\fP shandle1, \fBESYS_TR\fP shandle2, \fBESYS_TR\fP shandle3, const TPM2B_SENSITIVE_CREATE * inSensitive, const TPM2B_PUBLIC * inPublic, const TPM2B_DATA * outsideInfo, const TPML_PCR_SELECTION * creationPCR, TPM2B_PRIVATE ** outPrivate, TPM2B_PUBLIC ** outPublic, TPM2B_CREATION_DATA ** creationData, TPM2B_DIGEST ** creationHash, TPMT_TK_CREATION ** creationTicket)"
+One-Call function for TPM2_Create
+.PP
+This function invokes the TPM2_Create command in a one-call variant\&. This means the function will block until the TPM response is available\&. All input parameters are const\&. The memory for non-simple output parameters is allocated by the function implementation\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIesysContext\fP The \fBESYS_CONTEXT\fP\&. 
+.br
+\fIparentHandle\fP Handle of parent for new object\&. 
+.br
+\fIshandle1\fP Session handle for authorization of parentHandle 
+.br
+\fIshandle2\fP Second session handle\&. 
+.br
+\fIshandle3\fP Third session handle\&. 
+.br
+\fIinSensitive\fP The sensitive data\&. 
+.br
+\fIinPublic\fP The public template\&. 
+.br
+\fIoutsideInfo\fP Data that will be included in the creation data for this object to provide permanent, verifiable linkage between this object and some object owner data\&. 
+.br
+\fIcreationPCR\fP PCR that will be used in creation data\&. 
+.br
+\fIoutPrivate\fP The private portion of the object\&. (callee-allocated) 
+.br
+\fIoutPublic\fP The public portion of the created object\&. (callee-allocated) 
+.br
+\fIcreationData\fP Contains a TPMS_CREATION_DATA\&. (callee-allocated) 
+.br
+\fIcreationHash\fP Digest of creationData using nameAlg of outPublic\&. (callee-allocated) 
+.br
+\fIcreationTicket\fP Ticket used by TPM2_CertifyCreation() to validate that the creation data was produced by the TPM\&. (callee-allocated) 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_ESYS_RC_BAD_REFERENCE\fP if the esysContext or required input pointers or required output handle references are NULL\&. 
+.br
+\fITSS2_ESYS_RC_BAD_CONTEXT\fP if esysContext corruption is detected\&. 
+.br
+\fITSS2_ESYS_RC_MEMORY\fP if the ESAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_ESYS_RC_BAD_SEQUENCE\fP if the context has an asynchronous operation already pending\&. 
+.br
+\fITSS2_ESYS_RC_INSUFFICIENT_RESPONSE\fP if the TPM's response does not at least contain the tag, response length, and response code\&. 
+.br
+\fITSS2_ESYS_RC_MALFORMED_RESPONSE\fP if the TPM's response is corrupted\&. 
+.br
+\fITSS2_ESYS_RC_RSP_AUTH_FAILED\fP if the response HMAC from the TPM did not verify\&. 
+.br
+\fITSS2_ESYS_RC_MULTIPLE_DECRYPT_SESSIONS\fP if more than one session has the 'decrypt' attribute bit set\&. 
+.br
+\fITSS2_ESYS_RC_MULTIPLE_ENCRYPT_SESSIONS\fP if more than one session has the 'encrypt' attribute bit set\&. 
+.br
+\fITSS2_ESYS_RC_BAD_TR\fP if any of the ESYS_TR objects are unknown to the \fBESYS_CONTEXT\fP or are of the wrong type or if required ESYS_TR objects are ESYS_TR_NONE\&. 
+.br
+\fITSS2_RCs\fP produced by lower layers of the software stack may be returned to the caller unaltered unless handled internally\&. 
+.RE
+.PP
+
+.SS "TSS2_RC Esys_Create_Async (\fBESYS_CONTEXT\fP * esysContext, \fBESYS_TR\fP parentHandle, \fBESYS_TR\fP shandle1, \fBESYS_TR\fP shandle2, \fBESYS_TR\fP shandle3, const TPM2B_SENSITIVE_CREATE * inSensitive, const TPM2B_PUBLIC * inPublic, const TPM2B_DATA * outsideInfo, const TPML_PCR_SELECTION * creationPCR)"
+Asynchronous function for TPM2_Create
+.PP
+This function invokes the TPM2_Create command in a asynchronous variant\&. This means the function will return as soon as the command has been sent downwards the stack to the TPM\&. All input parameters are const\&. In order to retrieve the TPM's response call Esys_Create_Finish\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIesysContext\fP The \fBESYS_CONTEXT\fP\&. 
+.br
+\fIparentHandle\fP Handle of parent for new object\&. 
+.br
+\fIshandle1\fP Session handle for authorization of parentHandle 
+.br
+\fIshandle2\fP Second session handle\&. 
+.br
+\fIshandle3\fP Third session handle\&. 
+.br
+\fIinSensitive\fP The sensitive data\&. 
+.br
+\fIinPublic\fP The public template\&. 
+.br
+\fIoutsideInfo\fP Data that will be included in the creation data for this object to provide permanent, verifiable linkage between this object and some object owner data\&. 
+.br
+\fIcreationPCR\fP PCR that will be used in creation data\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIESYS_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_ESYS_RC_BAD_REFERENCE\fP if the esysContext or required input pointers or required output handle references are NULL\&. 
+.br
+\fITSS2_ESYS_RC_BAD_CONTEXT\fP if esysContext corruption is detected\&. 
+.br
+\fITSS2_ESYS_RC_MEMORY\fP if the ESAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_RCs\fP produced by lower layers of the software stack may be returned to the caller unaltered unless handled internally\&. 
+.br
+\fITSS2_ESYS_RC_MULTIPLE_DECRYPT_SESSIONS\fP if more than one session has the 'decrypt' attribute bit set\&. 
+.br
+\fITSS2_ESYS_RC_MULTIPLE_ENCRYPT_SESSIONS\fP if more than one session has the 'encrypt' attribute bit set\&. 
+.br
+\fITSS2_ESYS_RC_BAD_TR\fP if any of the ESYS_TR objects are unknown to the \fBESYS_CONTEXT\fP or are of the wrong type or if required ESYS_TR objects are ESYS_TR_NONE\&. 
+.RE
+.PP
+
+.SS "TSS2_RC Esys_Create_Finish (\fBESYS_CONTEXT\fP * esysContext, TPM2B_PRIVATE ** outPrivate, TPM2B_PUBLIC ** outPublic, TPM2B_CREATION_DATA ** creationData, TPM2B_DIGEST ** creationHash, TPMT_TK_CREATION ** creationTicket)"
+Asynchronous finish function for TPM2_Create
+.PP
+This function returns the results of a TPM2_Create command invoked via Esys_Create_Finish\&. All non-simple output parameters are allocated by the function's implementation\&. NULL can be passed for every output parameter if the value is not required\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIesysContext\fP The \fBESYS_CONTEXT\fP\&. 
+.br
+\fIoutPrivate\fP The private portion of the object\&. (callee-allocated) 
+.br
+\fIoutPublic\fP The public portion of the created object\&. (callee-allocated) 
+.br
+\fIcreationData\fP Contains a TPMS_CREATION_DATA\&. (callee-allocated) 
+.br
+\fIcreationHash\fP Digest of creationData using nameAlg of outPublic\&. (callee-allocated) 
+.br
+\fIcreationTicket\fP Ticket used by TPM2_CertifyCreation() to validate that the creation data was produced by the TPM\&. (callee-allocated) 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success 
+.br
+\fIESYS_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_ESYS_RC_BAD_REFERENCE\fP if the esysContext or required input pointers or required output handle references are NULL\&. 
+.br
+\fITSS2_ESYS_RC_BAD_CONTEXT\fP if esysContext corruption is detected\&. 
+.br
+\fITSS2_ESYS_RC_MEMORY\fP if the ESAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_ESYS_RC_BAD_SEQUENCE\fP if the context has an asynchronous operation already pending\&. 
+.br
+\fITSS2_ESYS_RC_TRY_AGAIN\fP if the timeout counter expires before the TPM response is received\&. 
+.br
+\fITSS2_ESYS_RC_INSUFFICIENT_RESPONSE\fP if the TPM's response does not at least contain the tag, response length, and response code\&. 
+.br
+\fITSS2_ESYS_RC_RSP_AUTH_FAILED\fP if the response HMAC from the TPM did not verify\&. 
+.br
+\fITSS2_ESYS_RC_MALFORMED_RESPONSE\fP if the TPM's response is corrupted\&. 
+.br
+\fITSS2_RCs\fP produced by lower layers of the software stack may be returned to the caller unaltered unless handled internally\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

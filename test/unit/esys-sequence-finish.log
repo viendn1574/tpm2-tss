@@ -1,0 +1,584 @@
+[==========] Running 116 test(s).
+[ RUN      ] check_Startup
+ERROR:esys:src/tss2-esys/api/Esys_Startup.c:176:Esys_Startup_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Startup.c:176:Esys_Startup_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Startup.c:176:Esys_Startup_Finish() Esys called in bad sequence. 
+[       OK ] check_Startup
+[ RUN      ] check_Shutdown
+ERROR:esys:src/tss2-esys/api/Esys_Shutdown.c:233:Esys_Shutdown_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Shutdown.c:233:Esys_Shutdown_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Shutdown.c:233:Esys_Shutdown_Finish() Esys called in bad sequence. 
+[       OK ] check_Shutdown
+[ RUN      ] check_SelfTest
+ERROR:esys:src/tss2-esys/api/Esys_SelfTest.c:233:Esys_SelfTest_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_SelfTest.c:233:Esys_SelfTest_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_SelfTest.c:233:Esys_SelfTest_Finish() Esys called in bad sequence. 
+[       OK ] check_SelfTest
+[ RUN      ] check_IncrementalSelfTest
+ERROR:esys:src/tss2-esys/api/Esys_IncrementalSelfTest.c:239:Esys_IncrementalSelfTest_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_IncrementalSelfTest.c:239:Esys_IncrementalSelfTest_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_IncrementalSelfTest.c:239:Esys_IncrementalSelfTest_Finish() Esys called in bad sequence. 
+[       OK ] check_IncrementalSelfTest
+[ RUN      ] check_GetTestResult
+ERROR:esys:src/tss2-esys/api/Esys_GetTestResult.c:232:Esys_GetTestResult_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_GetTestResult.c:232:Esys_GetTestResult_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_GetTestResult.c:232:Esys_GetTestResult_Finish() Esys called in bad sequence. 
+[       OK ] check_GetTestResult
+[ RUN      ] check_StartAuthSession
+ERROR:esys:src/tss2-esys/api/Esys_StartAuthSession.c:336:Esys_StartAuthSession_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_StartAuthSession.c:336:Esys_StartAuthSession_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_StartAuthSession.c:336:Esys_StartAuthSession_Finish() Esys called in bad sequence. 
+[       OK ] check_StartAuthSession
+[ RUN      ] check_PolicyRestart
+ERROR:esys:src/tss2-esys/api/Esys_PolicyRestart.c:246:Esys_PolicyRestart_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyRestart.c:246:Esys_PolicyRestart_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyRestart.c:246:Esys_PolicyRestart_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicyRestart
+[ RUN      ] check_Create
+ERROR:esys:src/tss2-esys/api/Esys_Create.c:323:Esys_Create_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Create.c:323:Esys_Create_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Create.c:323:Esys_Create_Finish() Esys called in bad sequence. 
+[       OK ] check_Create
+[ RUN      ] check_Load
+ERROR:esys:src/tss2-esys/api/Esys_Load.c:268:Esys_Load_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Load.c:268:Esys_Load_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Load.c:268:Esys_Load_Finish() Esys called in bad sequence. 
+[       OK ] check_Load
+[ RUN      ] check_LoadExternal
+ERROR:esys:src/tss2-esys/api/Esys_LoadExternal.c:258:Esys_LoadExternal_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_LoadExternal.c:258:Esys_LoadExternal_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_LoadExternal.c:258:Esys_LoadExternal_Finish() Esys called in bad sequence. 
+[       OK ] check_LoadExternal
+[ RUN      ] check_ReadPublic
+ERROR:esys:src/tss2-esys/api/Esys_ReadPublic.c:260:Esys_ReadPublic_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ReadPublic.c:260:Esys_ReadPublic_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ReadPublic.c:260:Esys_ReadPublic_Finish() Esys called in bad sequence. 
+[       OK ] check_ReadPublic
+[ RUN      ] check_ActivateCredential
+ERROR:esys:src/tss2-esys/api/Esys_ActivateCredential.c:277:Esys_ActivateCredential_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ActivateCredential.c:277:Esys_ActivateCredential_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ActivateCredential.c:277:Esys_ActivateCredential_Finish() Esys called in bad sequence. 
+[       OK ] check_ActivateCredential
+[ RUN      ] check_MakeCredential
+ERROR:esys:src/tss2-esys/api/Esys_MakeCredential.c:260:Esys_MakeCredential_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_MakeCredential.c:260:Esys_MakeCredential_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_MakeCredential.c:260:Esys_MakeCredential_Finish() Esys called in bad sequence. 
+[       OK ] check_MakeCredential
+[ RUN      ] check_Unseal
+ERROR:esys:src/tss2-esys/api/Esys_Unseal.c:251:Esys_Unseal_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Unseal.c:251:Esys_Unseal_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Unseal.c:251:Esys_Unseal_Finish() Esys called in bad sequence. 
+[       OK ] check_Unseal
+[ RUN      ] check_ObjectChangeAuth
+ERROR:esys:src/tss2-esys/api/Esys_ObjectChangeAuth.c:262:Esys_ObjectChangeAuth_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ObjectChangeAuth.c:262:Esys_ObjectChangeAuth_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ObjectChangeAuth.c:262:Esys_ObjectChangeAuth_Finish() Esys called in bad sequence. 
+[       OK ] check_ObjectChangeAuth
+[ RUN      ] check_CreateLoaded
+ERROR:esys:src/tss2-esys/api/Esys_CreateLoaded.c:310:Esys_CreateLoaded_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_CreateLoaded.c:310:Esys_CreateLoaded_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_CreateLoaded.c:310:Esys_CreateLoaded_Finish() Esys called in bad sequence. 
+[       OK ] check_CreateLoaded
+[ RUN      ] check_Duplicate
+ERROR:esys:src/tss2-esys/api/Esys_Duplicate.c:294:Esys_Duplicate_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Duplicate.c:294:Esys_Duplicate_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Duplicate.c:294:Esys_Duplicate_Finish() Esys called in bad sequence. 
+[       OK ] check_Duplicate
+[ RUN      ] check_Rewrap
+ERROR:esys:src/tss2-esys/api/Esys_Rewrap.c:281:Esys_Rewrap_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Rewrap.c:281:Esys_Rewrap_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Rewrap.c:281:Esys_Rewrap_Finish() Esys called in bad sequence. 
+[       OK ] check_Rewrap
+[ RUN      ] check_Import
+ERROR:esys:src/tss2-esys/api/Esys_Import.c:279:Esys_Import_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Import.c:279:Esys_Import_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Import.c:279:Esys_Import_Finish() Esys called in bad sequence. 
+[       OK ] check_Import
+[ RUN      ] check_RSA_Encrypt
+ERROR:esys:src/tss2-esys/api/Esys_RSA_Encrypt.c:258:Esys_RSA_Encrypt_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_RSA_Encrypt.c:258:Esys_RSA_Encrypt_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_RSA_Encrypt.c:258:Esys_RSA_Encrypt_Finish() Esys called in bad sequence. 
+[       OK ] check_RSA_Encrypt
+[ RUN      ] check_RSA_Decrypt
+ERROR:esys:src/tss2-esys/api/Esys_RSA_Decrypt.c:261:Esys_RSA_Decrypt_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_RSA_Decrypt.c:261:Esys_RSA_Decrypt_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_RSA_Decrypt.c:261:Esys_RSA_Decrypt_Finish() Esys called in bad sequence. 
+[       OK ] check_RSA_Decrypt
+[ RUN      ] check_ECDH_KeyGen
+ERROR:esys:src/tss2-esys/api/Esys_ECDH_KeyGen.c:252:Esys_ECDH_KeyGen_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ECDH_KeyGen.c:252:Esys_ECDH_KeyGen_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ECDH_KeyGen.c:252:Esys_ECDH_KeyGen_Finish() Esys called in bad sequence. 
+[       OK ] check_ECDH_KeyGen
+[ RUN      ] check_ECDH_ZGen
+ERROR:esys:src/tss2-esys/api/Esys_ECDH_ZGen.c:251:Esys_ECDH_ZGen_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ECDH_ZGen.c:251:Esys_ECDH_ZGen_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ECDH_ZGen.c:251:Esys_ECDH_ZGen_Finish() Esys called in bad sequence. 
+[       OK ] check_ECDH_ZGen
+[ RUN      ] check_ECC_Parameters
+ERROR:esys:src/tss2-esys/api/Esys_ECC_Parameters.c:239:Esys_ECC_Parameters_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ECC_Parameters.c:239:Esys_ECC_Parameters_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ECC_Parameters.c:239:Esys_ECC_Parameters_Finish() Esys called in bad sequence. 
+[       OK ] check_ECC_Parameters
+[ RUN      ] check_ZGen_2Phase
+ERROR:esys:src/tss2-esys/api/Esys_ZGen_2Phase.c:274:Esys_ZGen_2Phase_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ZGen_2Phase.c:274:Esys_ZGen_2Phase_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ZGen_2Phase.c:274:Esys_ZGen_2Phase_Finish() Esys called in bad sequence. 
+[       OK ] check_ZGen_2Phase
+[ RUN      ] check_EncryptDecrypt
+ERROR:esys:src/tss2-esys/api/Esys_EncryptDecrypt.c:278:Esys_EncryptDecrypt_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_EncryptDecrypt.c:278:Esys_EncryptDecrypt_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_EncryptDecrypt.c:278:Esys_EncryptDecrypt_Finish() Esys called in bad sequence. 
+[       OK ] check_EncryptDecrypt
+[ RUN      ] check_EncryptDecrypt2
+ERROR:esys:src/tss2-esys/api/Esys_EncryptDecrypt2.c:272:Esys_EncryptDecrypt2_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_EncryptDecrypt2.c:272:Esys_EncryptDecrypt2_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_EncryptDecrypt2.c:272:Esys_EncryptDecrypt2_Finish() Esys called in bad sequence. 
+[       OK ] check_EncryptDecrypt2
+[ RUN      ] check_Hash
+ERROR:esys:src/tss2-esys/api/Esys_Hash.c:256:Esys_Hash_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Hash.c:256:Esys_Hash_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Hash.c:256:Esys_Hash_Finish() Esys called in bad sequence. 
+[       OK ] check_Hash
+[ RUN      ] check_HMAC
+ERROR:esys:src/tss2-esys/api/Esys_HMAC.c:256:Esys_HMAC_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_HMAC.c:256:Esys_HMAC_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_HMAC.c:256:Esys_HMAC_Finish() Esys called in bad sequence. 
+[       OK ] check_HMAC
+[ RUN      ] check_GetRandom
+ERROR:esys:src/tss2-esys/api/Esys_GetRandom.c:233:Esys_GetRandom_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_GetRandom.c:233:Esys_GetRandom_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_GetRandom.c:233:Esys_GetRandom_Finish() Esys called in bad sequence. 
+[       OK ] check_GetRandom
+[ RUN      ] check_StirRandom
+ERROR:esys:src/tss2-esys/api/Esys_StirRandom.c:227:Esys_StirRandom_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_StirRandom.c:227:Esys_StirRandom_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_StirRandom.c:227:Esys_StirRandom_Finish() Esys called in bad sequence. 
+[       OK ] check_StirRandom
+[ RUN      ] check_HMAC_Start
+ERROR:esys:src/tss2-esys/api/Esys_HMAC_Start.c:269:Esys_HMAC_Start_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_HMAC_Start.c:269:Esys_HMAC_Start_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_HMAC_Start.c:269:Esys_HMAC_Start_Finish() Esys called in bad sequence. 
+[       OK ] check_HMAC_Start
+[ RUN      ] check_HashSequenceStart
+ERROR:esys:src/tss2-esys/api/Esys_HashSequenceStart.c:233:Esys_HashSequenceStart_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_HashSequenceStart.c:233:Esys_HashSequenceStart_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_HashSequenceStart.c:233:Esys_HashSequenceStart_Finish() Esys called in bad sequence. 
+[       OK ] check_HashSequenceStart
+[ RUN      ] check_SequenceUpdate
+ERROR:esys:src/tss2-esys/api/Esys_SequenceUpdate.c:251:Esys_SequenceUpdate_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_SequenceUpdate.c:251:Esys_SequenceUpdate_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_SequenceUpdate.c:251:Esys_SequenceUpdate_Finish() Esys called in bad sequence. 
+[       OK ] check_SequenceUpdate
+[ RUN      ] check_SequenceComplete
+ERROR:esys:src/tss2-esys/api/Esys_SequenceComplete.c:283:Esys_SequenceComplete_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_SequenceComplete.c:283:Esys_SequenceComplete_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_SequenceComplete.c:283:Esys_SequenceComplete_Finish() Esys called in bad sequence. 
+[       OK ] check_SequenceComplete
+[ RUN      ] check_EventSequenceComplete
+ERROR:esys:src/tss2-esys/api/Esys_EventSequenceComplete.c:273:Esys_EventSequenceComplete_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_EventSequenceComplete.c:273:Esys_EventSequenceComplete_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_EventSequenceComplete.c:273:Esys_EventSequenceComplete_Finish() Esys called in bad sequence. 
+[       OK ] check_EventSequenceComplete
+[ RUN      ] check_Certify
+ERROR:esys:src/tss2-esys/api/Esys_Certify.c:281:Esys_Certify_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Certify.c:281:Esys_Certify_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Certify.c:281:Esys_Certify_Finish() Esys called in bad sequence. 
+[       OK ] check_Certify
+[ RUN      ] check_CertifyCreation
+ERROR:esys:src/tss2-esys/api/Esys_CertifyCreation.c:291:Esys_CertifyCreation_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_CertifyCreation.c:291:Esys_CertifyCreation_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_CertifyCreation.c:291:Esys_CertifyCreation_Finish() Esys called in bad sequence. 
+[       OK ] check_CertifyCreation
+[ RUN      ] check_Quote
+ERROR:esys:src/tss2-esys/api/Esys_Quote.c:267:Esys_Quote_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Quote.c:267:Esys_Quote_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Quote.c:267:Esys_Quote_Finish() Esys called in bad sequence. 
+[       OK ] check_Quote
+[ RUN      ] check_GetSessionAuditDigest
+ERROR:esys:src/tss2-esys/api/Esys_GetSessionAuditDigest.c:293:Esys_GetSessionAuditDigest_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_GetSessionAuditDigest.c:293:Esys_GetSessionAuditDigest_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_GetSessionAuditDigest.c:293:Esys_GetSessionAuditDigest_Finish() Esys called in bad sequence. 
+[       OK ] check_GetSessionAuditDigest
+[ RUN      ] check_GetCommandAuditDigest
+ERROR:esys:src/tss2-esys/api/Esys_GetCommandAuditDigest.c:279:Esys_GetCommandAuditDigest_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_GetCommandAuditDigest.c:279:Esys_GetCommandAuditDigest_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_GetCommandAuditDigest.c:279:Esys_GetCommandAuditDigest_Finish() Esys called in bad sequence. 
+[       OK ] check_GetCommandAuditDigest
+[ RUN      ] check_GetTime
+ERROR:esys:src/tss2-esys/api/Esys_GetTime.c:277:Esys_GetTime_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_GetTime.c:277:Esys_GetTime_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_GetTime.c:277:Esys_GetTime_Finish() Esys called in bad sequence. 
+[       OK ] check_GetTime
+[ RUN      ] check_Commit
+ERROR:esys:src/tss2-esys/api/Esys_Commit.c:278:Esys_Commit_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Commit.c:278:Esys_Commit_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Commit.c:278:Esys_Commit_Finish() Esys called in bad sequence. 
+[       OK ] check_Commit
+[ RUN      ] check_EC_Ephemeral
+ERROR:esys:src/tss2-esys/api/Esys_EC_Ephemeral.c:237:Esys_EC_Ephemeral_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_EC_Ephemeral.c:237:Esys_EC_Ephemeral_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_EC_Ephemeral.c:237:Esys_EC_Ephemeral_Finish() Esys called in bad sequence. 
+[       OK ] check_EC_Ephemeral
+[ RUN      ] check_VerifySignature
+ERROR:esys:src/tss2-esys/api/Esys_VerifySignature.c:258:Esys_VerifySignature_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_VerifySignature.c:258:Esys_VerifySignature_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_VerifySignature.c:258:Esys_VerifySignature_Finish() Esys called in bad sequence. 
+[       OK ] check_VerifySignature
+[ RUN      ] check_Sign
+ERROR:esys:src/tss2-esys/api/Esys_Sign.c:267:Esys_Sign_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Sign.c:267:Esys_Sign_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Sign.c:267:Esys_Sign_Finish() Esys called in bad sequence. 
+[       OK ] check_Sign
+[ RUN      ] check_SetCommandCodeAuditStatus
+ERROR:esys:src/tss2-esys/api/Esys_SetCommandCodeAuditStatus.c:272:Esys_SetCommandCodeAuditStatus_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_SetCommandCodeAuditStatus.c:272:Esys_SetCommandCodeAuditStatus_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_SetCommandCodeAuditStatus.c:272:Esys_SetCommandCodeAuditStatus_Finish() Esys called in bad sequence. 
+[       OK ] check_SetCommandCodeAuditStatus
+[ RUN      ] check_PCR_Extend
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Extend.c:255:Esys_PCR_Extend_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Extend.c:255:Esys_PCR_Extend_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Extend.c:255:Esys_PCR_Extend_Finish() Esys called in bad sequence. 
+[       OK ] check_PCR_Extend
+[ RUN      ] check_PCR_Event
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Event.c:255:Esys_PCR_Event_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Event.c:255:Esys_PCR_Event_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Event.c:255:Esys_PCR_Event_Finish() Esys called in bad sequence. 
+[       OK ] check_PCR_Event
+[ RUN      ] check_PCR_Read
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Read.c:254:Esys_PCR_Read_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Read.c:254:Esys_PCR_Read_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Read.c:254:Esys_PCR_Read_Finish() Esys called in bad sequence. 
+[       OK ] check_PCR_Read
+[ RUN      ] check_PCR_Allocate
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Allocate.c:277:Esys_PCR_Allocate_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Allocate.c:277:Esys_PCR_Allocate_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Allocate.c:277:Esys_PCR_Allocate_Finish() Esys called in bad sequence. 
+[       OK ] check_PCR_Allocate
+[ RUN      ] check_PCR_SetAuthPolicy
+ERROR:esys:src/tss2-esys/api/Esys_PCR_SetAuthPolicy.c:260:Esys_PCR_SetAuthPolicy_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_SetAuthPolicy.c:260:Esys_PCR_SetAuthPolicy_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_SetAuthPolicy.c:260:Esys_PCR_SetAuthPolicy_Finish() Esys called in bad sequence. 
+[       OK ] check_PCR_SetAuthPolicy
+[ RUN      ] check_PCR_SetAuthValue
+ERROR:esys:src/tss2-esys/api/Esys_PCR_SetAuthValue.c:271:Esys_PCR_SetAuthValue_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_SetAuthValue.c:271:Esys_PCR_SetAuthValue_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_SetAuthValue.c:271:Esys_PCR_SetAuthValue_Finish() Esys called in bad sequence. 
+[       OK ] check_PCR_SetAuthValue
+[ RUN      ] check_PCR_Reset
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Reset.c:251:Esys_PCR_Reset_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Reset.c:251:Esys_PCR_Reset_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Reset.c:251:Esys_PCR_Reset_Finish() Esys called in bad sequence. 
+[       OK ] check_PCR_Reset
+[ RUN      ] check_PolicySigned
+ERROR:esys:src/tss2-esys/api/Esys_PolicySigned.c:293:Esys_PolicySigned_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicySigned.c:293:Esys_PolicySigned_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicySigned.c:293:Esys_PolicySigned_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicySigned
+[ RUN      ] check_PolicySecret
+ERROR:esys:src/tss2-esys/api/Esys_PolicySecret.c:293:Esys_PolicySecret_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicySecret.c:293:Esys_PolicySecret_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicySecret.c:293:Esys_PolicySecret_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicySecret
+[ RUN      ] check_PolicyTicket
+ERROR:esys:src/tss2-esys/api/Esys_PolicyTicket.c:271:Esys_PolicyTicket_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyTicket.c:271:Esys_PolicyTicket_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyTicket.c:271:Esys_PolicyTicket_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicyTicket
+[ RUN      ] check_PolicyOR
+ERROR:esys:src/tss2-esys/api/Esys_PolicyOR.c:250:Esys_PolicyOR_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyOR.c:250:Esys_PolicyOR_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyOR.c:250:Esys_PolicyOR_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicyOR
+[ RUN      ] check_PolicyPCR
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPCR.c:252:Esys_PolicyPCR_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPCR.c:252:Esys_PolicyPCR_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPCR.c:252:Esys_PolicyPCR_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicyPCR
+[ RUN      ] check_PolicyLocality
+ERROR:esys:src/tss2-esys/api/Esys_PolicyLocality.c:252:Esys_PolicyLocality_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyLocality.c:252:Esys_PolicyLocality_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyLocality.c:252:Esys_PolicyLocality_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicyLocality
+[ RUN      ] check_PolicyNV
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNV.c:282:Esys_PolicyNV_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNV.c:282:Esys_PolicyNV_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNV.c:282:Esys_PolicyNV_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicyNV
+[ RUN      ] check_PolicyCounterTimer
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCounterTimer.c:258:Esys_PolicyCounterTimer_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCounterTimer.c:258:Esys_PolicyCounterTimer_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCounterTimer.c:258:Esys_PolicyCounterTimer_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicyCounterTimer
+[ RUN      ] check_PolicyCommandCode
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCommandCode.c:252:Esys_PolicyCommandCode_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCommandCode.c:252:Esys_PolicyCommandCode_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCommandCode.c:252:Esys_PolicyCommandCode_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicyCommandCode
+[ RUN      ] check_PolicyPhysicalPresence
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPhysicalPresence.c:247:Esys_PolicyPhysicalPresence_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPhysicalPresence.c:247:Esys_PolicyPhysicalPresence_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPhysicalPresence.c:247:Esys_PolicyPhysicalPresence_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicyPhysicalPresence
+[ RUN      ] check_PolicyCpHash
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCpHash.c:251:Esys_PolicyCpHash_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCpHash.c:251:Esys_PolicyCpHash_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyCpHash.c:251:Esys_PolicyCpHash_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicyCpHash
+[ RUN      ] check_PolicyNameHash
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNameHash.c:252:Esys_PolicyNameHash_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNameHash.c:252:Esys_PolicyNameHash_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNameHash.c:252:Esys_PolicyNameHash_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicyNameHash
+[ RUN      ] check_PolicyDuplicationSelect
+ERROR:esys:src/tss2-esys/api/Esys_PolicyDuplicationSelect.c:265:Esys_PolicyDuplicationSelect_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyDuplicationSelect.c:265:Esys_PolicyDuplicationSelect_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyDuplicationSelect.c:265:Esys_PolicyDuplicationSelect_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicyDuplicationSelect
+[ RUN      ] check_PolicyAuthorize
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthorize.c:270:Esys_PolicyAuthorize_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthorize.c:270:Esys_PolicyAuthorize_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthorize.c:270:Esys_PolicyAuthorize_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicyAuthorize
+[ RUN      ] check_PolicyAuthValue
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthValue.c:256:Esys_PolicyAuthValue_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthValue.c:256:Esys_PolicyAuthValue_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthValue.c:256:Esys_PolicyAuthValue_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicyAuthValue
+[ RUN      ] check_PolicyPassword
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPassword.c:256:Esys_PolicyPassword_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPassword.c:256:Esys_PolicyPassword_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPassword.c:256:Esys_PolicyPassword_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicyPassword
+[ RUN      ] check_PolicyGetDigest
+ERROR:esys:src/tss2-esys/api/Esys_PolicyGetDigest.c:249:Esys_PolicyGetDigest_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyGetDigest.c:249:Esys_PolicyGetDigest_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyGetDigest.c:249:Esys_PolicyGetDigest_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicyGetDigest
+[ RUN      ] check_PolicyNvWritten
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNvWritten.c:252:Esys_PolicyNvWritten_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNvWritten.c:252:Esys_PolicyNvWritten_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyNvWritten.c:252:Esys_PolicyNvWritten_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicyNvWritten
+[ RUN      ] check_PolicyTemplate
+ERROR:esys:src/tss2-esys/api/Esys_PolicyTemplate.c:252:Esys_PolicyTemplate_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyTemplate.c:252:Esys_PolicyTemplate_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyTemplate.c:252:Esys_PolicyTemplate_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicyTemplate
+[ RUN      ] check_PolicyAuthorizeNV
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthorizeNV.c:275:Esys_PolicyAuthorizeNV_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthorizeNV.c:275:Esys_PolicyAuthorizeNV_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyAuthorizeNV.c:275:Esys_PolicyAuthorizeNV_Finish() Esys called in bad sequence. 
+[       OK ] check_PolicyAuthorizeNV
+[ RUN      ] check_CreatePrimary
+ERROR:esys:src/tss2-esys/api/Esys_CreatePrimary.c:324:Esys_CreatePrimary_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_CreatePrimary.c:324:Esys_CreatePrimary_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_CreatePrimary.c:324:Esys_CreatePrimary_Finish() Esys called in bad sequence. 
+[       OK ] check_CreatePrimary
+[ RUN      ] check_HierarchyControl
+ERROR:esys:src/tss2-esys/api/Esys_HierarchyControl.c:275:Esys_HierarchyControl_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_HierarchyControl.c:275:Esys_HierarchyControl_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_HierarchyControl.c:275:Esys_HierarchyControl_Finish() Esys called in bad sequence. 
+[       OK ] check_HierarchyControl
+[ RUN      ] check_SetPrimaryPolicy
+ERROR:esys:src/tss2-esys/api/Esys_SetPrimaryPolicy.c:259:Esys_SetPrimaryPolicy_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_SetPrimaryPolicy.c:259:Esys_SetPrimaryPolicy_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_SetPrimaryPolicy.c:259:Esys_SetPrimaryPolicy_Finish() Esys called in bad sequence. 
+[       OK ] check_SetPrimaryPolicy
+[ RUN      ] check_ChangePPS
+ERROR:esys:src/tss2-esys/api/Esys_ChangePPS.c:251:Esys_ChangePPS_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ChangePPS.c:251:Esys_ChangePPS_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ChangePPS.c:251:Esys_ChangePPS_Finish() Esys called in bad sequence. 
+[       OK ] check_ChangePPS
+[ RUN      ] check_ChangeEPS
+ERROR:esys:src/tss2-esys/api/Esys_ChangeEPS.c:251:Esys_ChangeEPS_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ChangeEPS.c:251:Esys_ChangeEPS_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ChangeEPS.c:251:Esys_ChangeEPS_Finish() Esys called in bad sequence. 
+[       OK ] check_ChangeEPS
+[ RUN      ] check_Clear
+ERROR:esys:src/tss2-esys/api/Esys_Clear.c:255:Esys_Clear_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Clear.c:255:Esys_Clear_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Clear.c:255:Esys_Clear_Finish() Esys called in bad sequence. 
+[       OK ] check_Clear
+[ RUN      ] check_ClearControl
+ERROR:esys:src/tss2-esys/api/Esys_ClearControl.c:257:Esys_ClearControl_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ClearControl.c:257:Esys_ClearControl_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ClearControl.c:257:Esys_ClearControl_Finish() Esys called in bad sequence. 
+[       OK ] check_ClearControl
+[ RUN      ] check_HierarchyChangeAuth
+ERROR:esys:src/tss2-esys/api/Esys_HierarchyChangeAuth.c:271:Esys_HierarchyChangeAuth_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_HierarchyChangeAuth.c:271:Esys_HierarchyChangeAuth_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_HierarchyChangeAuth.c:271:Esys_HierarchyChangeAuth_Finish() Esys called in bad sequence. 
+[       OK ] check_HierarchyChangeAuth
+[ RUN      ] check_DictionaryAttackLockReset
+ERROR:esys:src/tss2-esys/api/Esys_DictionaryAttackLockReset.c:252:Esys_DictionaryAttackLockReset_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_DictionaryAttackLockReset.c:252:Esys_DictionaryAttackLockReset_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_DictionaryAttackLockReset.c:252:Esys_DictionaryAttackLockReset_Finish() Esys called in bad sequence. 
+[       OK ] check_DictionaryAttackLockReset
+[ RUN      ] check_DictionaryAttackParameters
+ERROR:esys:src/tss2-esys/api/Esys_DictionaryAttackParameters.c:274:Esys_DictionaryAttackParameters_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_DictionaryAttackParameters.c:274:Esys_DictionaryAttackParameters_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_DictionaryAttackParameters.c:274:Esys_DictionaryAttackParameters_Finish() Esys called in bad sequence. 
+[       OK ] check_DictionaryAttackParameters
+[ RUN      ] check_PP_Commands
+ERROR:esys:src/tss2-esys/api/Esys_PP_Commands.c:265:Esys_PP_Commands_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PP_Commands.c:265:Esys_PP_Commands_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_PP_Commands.c:265:Esys_PP_Commands_Finish() Esys called in bad sequence. 
+[       OK ] check_PP_Commands
+[ RUN      ] check_SetAlgorithmSet
+ERROR:esys:src/tss2-esys/api/Esys_SetAlgorithmSet.c:258:Esys_SetAlgorithmSet_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_SetAlgorithmSet.c:258:Esys_SetAlgorithmSet_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_SetAlgorithmSet.c:258:Esys_SetAlgorithmSet_Finish() Esys called in bad sequence. 
+[       OK ] check_SetAlgorithmSet
+[ RUN      ] check_FieldUpgradeStart
+ERROR:esys:src/tss2-esys/api/Esys_FieldUpgradeStart.c:272:Esys_FieldUpgradeStart_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_FieldUpgradeStart.c:272:Esys_FieldUpgradeStart_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_FieldUpgradeStart.c:272:Esys_FieldUpgradeStart_Finish() Esys called in bad sequence. 
+[       OK ] check_FieldUpgradeStart
+[ RUN      ] check_FieldUpgradeData
+ERROR:esys:src/tss2-esys/api/Esys_FieldUpgradeData.c:239:Esys_FieldUpgradeData_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_FieldUpgradeData.c:239:Esys_FieldUpgradeData_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_FieldUpgradeData.c:239:Esys_FieldUpgradeData_Finish() Esys called in bad sequence. 
+[       OK ] check_FieldUpgradeData
+[ RUN      ] check_FirmwareRead
+ERROR:esys:src/tss2-esys/api/Esys_FirmwareRead.c:235:Esys_FirmwareRead_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_FirmwareRead.c:235:Esys_FirmwareRead_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_FirmwareRead.c:235:Esys_FirmwareRead_Finish() Esys called in bad sequence. 
+[       OK ] check_FirmwareRead
+[ RUN      ] check_ContextSave
+ERROR:esys:src/tss2-esys/api/Esys_ContextSave.c:205:Esys_ContextSave_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ContextSave.c:205:Esys_ContextSave_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ContextSave.c:205:Esys_ContextSave_Finish() Esys called in bad sequence. 
+[       OK ] check_ContextSave
+[ RUN      ] check_ContextLoad
+ERROR:esys:src/tss2-esys/api/Esys_ContextLoad.c:223:Esys_ContextLoad_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ContextLoad.c:223:Esys_ContextLoad_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ContextLoad.c:223:Esys_ContextLoad_Finish() Esys called in bad sequence. 
+[       OK ] check_ContextLoad
+[ RUN      ] check_FlushContext
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:198:Esys_FlushContext_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:198:Esys_FlushContext_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:198:Esys_FlushContext_Finish() Esys called in bad sequence. 
+[       OK ] check_FlushContext
+[ RUN      ] check_EvictControl
+ERROR:esys:src/tss2-esys/api/Esys_EvictControl.c:286:Esys_EvictControl_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_EvictControl.c:286:Esys_EvictControl_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_EvictControl.c:286:Esys_EvictControl_Finish() Esys called in bad sequence. 
+[       OK ] check_EvictControl
+[ RUN      ] check_ReadClock
+ERROR:esys:src/tss2-esys/api/Esys_ReadClock.c:234:Esys_ReadClock_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ReadClock.c:234:Esys_ReadClock_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ReadClock.c:234:Esys_ReadClock_Finish() Esys called in bad sequence. 
+[       OK ] check_ReadClock
+[ RUN      ] check_ClockSet
+ERROR:esys:src/tss2-esys/api/Esys_ClockSet.c:255:Esys_ClockSet_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ClockSet.c:255:Esys_ClockSet_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ClockSet.c:255:Esys_ClockSet_Finish() Esys called in bad sequence. 
+[       OK ] check_ClockSet
+[ RUN      ] check_ClockRateAdjust
+ERROR:esys:src/tss2-esys/api/Esys_ClockRateAdjust.c:255:Esys_ClockRateAdjust_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ClockRateAdjust.c:255:Esys_ClockRateAdjust_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_ClockRateAdjust.c:255:Esys_ClockRateAdjust_Finish() Esys called in bad sequence. 
+[       OK ] check_ClockRateAdjust
+[ RUN      ] check_GetCapability
+ERROR:esys:src/tss2-esys/api/Esys_GetCapability.c:257:Esys_GetCapability_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_GetCapability.c:257:Esys_GetCapability_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_GetCapability.c:257:Esys_GetCapability_Finish() Esys called in bad sequence. 
+[       OK ] check_GetCapability
+[ RUN      ] check_TestParms
+ERROR:esys:src/tss2-esys/api/Esys_TestParms.c:235:Esys_TestParms_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_TestParms.c:235:Esys_TestParms_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_TestParms.c:235:Esys_TestParms_Finish() Esys called in bad sequence. 
+[       OK ] check_TestParms
+[ RUN      ] check_NV_DefineSpace
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:298:Esys_NV_DefineSpace_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:298:Esys_NV_DefineSpace_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:298:Esys_NV_DefineSpace_Finish() Esys called in bad sequence. 
+[       OK ] check_NV_DefineSpace
+[ RUN      ] check_NV_UndefineSpace
+ERROR:esys:src/tss2-esys/api/Esys_NV_UndefineSpace.c:269:Esys_NV_UndefineSpace_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_UndefineSpace.c:269:Esys_NV_UndefineSpace_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_UndefineSpace.c:269:Esys_NV_UndefineSpace_Finish() Esys called in bad sequence. 
+[       OK ] check_NV_UndefineSpace
+[ RUN      ] check_NV_UndefineSpaceSpecial
+ERROR:esys:src/tss2-esys/api/Esys_NV_UndefineSpaceSpecial.c:279:Esys_NV_UndefineSpaceSpecial_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_UndefineSpaceSpecial.c:279:Esys_NV_UndefineSpaceSpecial_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_UndefineSpaceSpecial.c:279:Esys_NV_UndefineSpaceSpecial_Finish() Esys called in bad sequence. 
+[       OK ] check_NV_UndefineSpaceSpecial
+[ RUN      ] check_NV_ReadPublic
+ERROR:esys:src/tss2-esys/api/Esys_NV_ReadPublic.c:263:Esys_NV_ReadPublic_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_ReadPublic.c:263:Esys_NV_ReadPublic_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_ReadPublic.c:263:Esys_NV_ReadPublic_Finish() Esys called in bad sequence. 
+[       OK ] check_NV_ReadPublic
+[ RUN      ] check_NV_Write
+ERROR:esys:src/tss2-esys/api/Esys_NV_Write.c:274:Esys_NV_Write_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Write.c:274:Esys_NV_Write_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Write.c:274:Esys_NV_Write_Finish() Esys called in bad sequence. 
+[       OK ] check_NV_Write
+[ RUN      ] check_NV_Increment
+ERROR:esys:src/tss2-esys/api/Esys_NV_Increment.c:271:Esys_NV_Increment_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Increment.c:271:Esys_NV_Increment_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Increment.c:271:Esys_NV_Increment_Finish() Esys called in bad sequence. 
+[       OK ] check_NV_Increment
+[ RUN      ] check_NV_Extend
+ERROR:esys:src/tss2-esys/api/Esys_NV_Extend.c:270:Esys_NV_Extend_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Extend.c:270:Esys_NV_Extend_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Extend.c:270:Esys_NV_Extend_Finish() Esys called in bad sequence. 
+[       OK ] check_NV_Extend
+[ RUN      ] check_NV_SetBits
+ERROR:esys:src/tss2-esys/api/Esys_NV_SetBits.c:276:Esys_NV_SetBits_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_SetBits.c:276:Esys_NV_SetBits_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_SetBits.c:276:Esys_NV_SetBits_Finish() Esys called in bad sequence. 
+[       OK ] check_NV_SetBits
+[ RUN      ] check_NV_WriteLock
+ERROR:esys:src/tss2-esys/api/Esys_NV_WriteLock.c:271:Esys_NV_WriteLock_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_WriteLock.c:271:Esys_NV_WriteLock_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_WriteLock.c:271:Esys_NV_WriteLock_Finish() Esys called in bad sequence. 
+[       OK ] check_NV_WriteLock
+[ RUN      ] check_NV_GlobalWriteLock
+ERROR:esys:src/tss2-esys/api/Esys_NV_GlobalWriteLock.c:252:Esys_NV_GlobalWriteLock_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_GlobalWriteLock.c:252:Esys_NV_GlobalWriteLock_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_GlobalWriteLock.c:252:Esys_NV_GlobalWriteLock_Finish() Esys called in bad sequence. 
+[       OK ] check_NV_GlobalWriteLock
+[ RUN      ] check_NV_Read
+ERROR:esys:src/tss2-esys/api/Esys_NV_Read.c:271:Esys_NV_Read_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Read.c:271:Esys_NV_Read_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Read.c:271:Esys_NV_Read_Finish() Esys called in bad sequence. 
+[       OK ] check_NV_Read
+[ RUN      ] check_NV_ReadLock
+ERROR:esys:src/tss2-esys/api/Esys_NV_ReadLock.c:271:Esys_NV_ReadLock_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_ReadLock.c:271:Esys_NV_ReadLock_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_ReadLock.c:271:Esys_NV_ReadLock_Finish() Esys called in bad sequence. 
+[       OK ] check_NV_ReadLock
+[ RUN      ] check_NV_ChangeAuth
+ERROR:esys:src/tss2-esys/api/Esys_NV_ChangeAuth.c:267:Esys_NV_ChangeAuth_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_ChangeAuth.c:267:Esys_NV_ChangeAuth_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_ChangeAuth.c:267:Esys_NV_ChangeAuth_Finish() Esys called in bad sequence. 
+[       OK ] check_NV_ChangeAuth
+[ RUN      ] check_NV_Certify
+ERROR:esys:src/tss2-esys/api/Esys_NV_Certify.c:303:Esys_NV_Certify_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Certify.c:303:Esys_NV_Certify_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_NV_Certify.c:303:Esys_NV_Certify_Finish() Esys called in bad sequence. 
+[       OK ] check_NV_Certify
+[ RUN      ] check_Vendor_TCG_Test
+ERROR:esys:src/tss2-esys/api/Esys_Vendor_TCG_Test.c:227:Esys_Vendor_TCG_Test_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Vendor_TCG_Test.c:227:Esys_Vendor_TCG_Test_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Vendor_TCG_Test.c:227:Esys_Vendor_TCG_Test_Finish() Esys called in bad sequence. 
+[       OK ] check_Vendor_TCG_Test
+[ RUN      ] check_AC_GetCapability
+ERROR:esys:src/tss2-esys/api/Esys_AC_GetCapability.c:248:Esys_AC_GetCapability_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_AC_GetCapability.c:248:Esys_AC_GetCapability_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_AC_GetCapability.c:248:Esys_AC_GetCapability_Finish() Esys called in bad sequence. 
+[       OK ] check_AC_GetCapability
+[ RUN      ] check_AC_Send
+ERROR:esys:src/tss2-esys/api/Esys_AC_Send.c:257:Esys_AC_Send_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_AC_Send.c:257:Esys_AC_Send_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_AC_Send.c:257:Esys_AC_Send_Finish() Esys called in bad sequence. 
+[       OK ] check_AC_Send
+[ RUN      ] check_Policy_AC_SendSelect
+ERROR:esys:src/tss2-esys/api/Esys_Policy_AC_SendSelect.c:256:Esys_Policy_AC_SendSelect_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Policy_AC_SendSelect.c:256:Esys_Policy_AC_SendSelect_Finish() Esys called in bad sequence. 
+ERROR:esys:src/tss2-esys/api/Esys_Policy_AC_SendSelect.c:256:Esys_Policy_AC_SendSelect_Finish() Esys called in bad sequence. 
+[       OK ] check_Policy_AC_SendSelect
+[==========] 116 test(s) run.
+[  PASSED  ] 116 test(s).
+PASS test/unit/esys-sequence-finish (exit status: 0)

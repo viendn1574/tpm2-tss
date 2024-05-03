@@ -1,0 +1,212 @@
+.TH "Fapi_Quote" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Fapi_Quote \- FAPI functions to invoke Quote either as one-call or in an asynchronous manner\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC \fBFapi_Quote\fP (\fBFAPI_CONTEXT\fP *context, uint32_t *pcrList, size_t pcrListSize, char const *keyPath, char const *quoteType, uint8_t const *qualifyingData, size_t qualifyingDataSize, char **quoteInfo, uint8_t **signature, size_t *signatureSize, char **pcrLog, char **certificate)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBFapi_Quote_Async\fP (\fBFAPI_CONTEXT\fP *context, uint32_t *pcrList, size_t pcrListSize, char const *keyPath, char const *quoteType, uint8_t const *qualifyingData, size_t qualifyingDataSize)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBFapi_Quote_Finish\fP (\fBFAPI_CONTEXT\fP *context, char **quoteInfo, uint8_t **signature, size_t *signatureSize, char **pcrLog, char **certificate)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+FAPI functions to invoke Quote either as one-call or in an asynchronous manner\&. 
+
+
+.SH "Function Documentation"
+.PP 
+.SS "Fapi_Quote (\fBFAPI_CONTEXT\fP * context, uint32_t * pcrList, size_t pcrListSize, char const * keyPath, char const * quoteType, uint8_t const * qualifyingData, size_t qualifyingDataSize, char ** quoteInfo, uint8_t ** signature, size_t * signatureSize, char ** pcrLog, char ** certificate)"
+One-Call function for Fapi_Quote
+.PP
+Given a set of PCRs and a restricted signing key, it will sign those PCRs and return the quote\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP 
+.br
+\fIpcrList\fP The list of PCRs that are to be quoted 
+.br
+\fIpcrListSize\fP The size of pcrList in bytes 
+.br
+\fIkeyPath\fP The path to the signing key 
+.br
+\fIquoteType\fP The type of quote\&. May be NULL 
+.br
+\fIqualifyingData\fP A nonce provided by the caller\&. May be NULL 
+.br
+\fIqualifyingDataSize\fP The size of qualifyingData in bytes\&. Must be 0 if qualifyingData is NULL 
+.br
+\fIquoteInfo\fP A JSON-encoded structure holding the inputs to the quote operation 
+.br
+\fIsignature\fP The signature of the PCRs 
+.br
+\fIsignatureSize\fP The size of the signature in bytes\&. May be NULL 
+.br
+\fIpcrLog\fP The log of the PCR\&. May be NULL 
+.br
+\fIcertificate\fP The certificate associated with the signing key\&. May be NULL
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if context, pcrList, keyPath, quoteInfo or signature is NULL\&. 
+.br
+\fITSS2_FAPI_RC_BAD_CONTEXT\fP if context corruption is detected\&. 
+.br
+\fITSS2_FAPI_RC_KEY_NOT_FOUND\fP if path does not map to a FAPI entity\&. 
+.br
+\fITSS2_FAPI_RC_BAD_KEY\fP if the entity at path is not a key, or is a key that is unsuitable for the requested operation\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if qualifyingData is invalid or if qualifyingDataSize is zero\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if the data cannot be saved\&. 
+.br
+\fITSS2_FAPI_RC_BAD_SEQUENCE\fP if the context has an asynchronous operation already pending\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_FAPI_RC_NO_TPM\fP if FAPI was initialized in no-TPM-mode via its config file\&. 
+.br
+\fITSS2_FAPI_RC_TRY_AGAIN\fP if an I/O operation is not finished yet and this function needs to be called again\&. 
+.br
+\fITSS2_FAPI_RC_PATH_NOT_FOUND\fP if a FAPI object path was not found during authorization\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_AUTHORIZATION_UNKNOWN\fP if a required authorization callback is not set\&. 
+.br
+\fITSS2_FAPI_RC_AUTHORIZATION_FAILED\fP if the authorization attempt fails\&. 
+.br
+\fITSS2_FAPI_RC_POLICY_UNKNOWN\fP if policy search for a certain policy digest was not successful\&. 
+.br
+\fITSS2_ESYS_RC_*\fP possible error codes of ESAPI\&. 
+.br
+\fITSS2_FAPI_RC_NOT_PROVISIONED\fP FAPI was not provisioned\&. 
+.br
+\fITSS2_FAPI_RC_BAD_PATH\fP if the path is used in inappropriate context or contains illegal characters\&. 
+.RE
+.PP
+
+.SS "Fapi_Quote_Async (\fBFAPI_CONTEXT\fP * context, uint32_t * pcrList, size_t pcrListSize, char const * keyPath, char const * quoteType, uint8_t const * qualifyingData, size_t qualifyingDataSize)"
+Asynchronous function for Fapi_Quote
+.PP
+Given a set of PCRs and a restricted signing key, it will sign those PCRs and return the quote\&.
+.PP
+Call Fapi_Quote_Finish to finish the execution of this command\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP 
+.br
+\fIpcrList\fP The list of PCRs that are to be quoted 
+.br
+\fIpcrListSize\fP The size of pcrList in bytes 
+.br
+\fIkeyPath\fP The path to the signing key 
+.br
+\fIquoteType\fP The type of quote\&. May be NULL 
+.br
+\fIqualifyingData\fP A nonce provided by the caller\&. May be NULL 
+.br
+\fIqualifyingDataSize\fP The size of qualifyingData in bytes\&. Must be 0 if qualifyingData is NULL
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if context, pcrList or keyPath is NULL\&. 
+.br
+\fITSS2_FAPI_RC_BAD_CONTEXT\fP if context corruption is detected\&. 
+.br
+\fITSS2_FAPI_RC_KEY_NOT_FOUND\fP if path does not map to a FAPI entity\&. 
+.br
+\fITSS2_FAPI_RC_BAD_KEY\fP if the entity at path is not a key, or is a key that is unsuitable for the requested operation\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if pcrListSize is 0, qualifyingData is invalid or if qualifyingDataSize is zero\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if the data cannot be saved\&. 
+.br
+\fITSS2_FAPI_RC_BAD_SEQUENCE\fP if the context has an asynchronous operation already pending\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_FAPI_RC_NO_TPM\fP if FAPI was initialized in no-TPM-mode via its config file\&. 
+.RE
+.PP
+
+.SS "Fapi_Quote_Finish (\fBFAPI_CONTEXT\fP * context, char ** quoteInfo, uint8_t ** signature, size_t * signatureSize, char ** pcrLog, char ** certificate)"
+Asynchronous finish function for Fapi_Quote
+.PP
+This function should be called after a previous Fapi_Quote_Async\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP 
+.br
+\fIquoteInfo\fP A JSON-encoded structure holding the inputs to the quote operation 
+.br
+\fIsignature\fP The signature of the PCRs 
+.br
+\fIsignatureSize\fP The size of the signature in bytes\&. May be NULL 
+.br
+\fIpcrLog\fP The log of the PCR\&. May be NULL 
+.br
+\fIcertificate\fP The certificate associated with the signing key\&. May be NULL
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if context, quoteInfor or signature is NULL\&. 
+.br
+\fITSS2_FAPI_RC_BAD_CONTEXT\fP if context corruption is detected\&. 
+.br
+\fITSS2_FAPI_RC_BAD_SEQUENCE\fP if the context has an asynchronous operation already pending\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if the data cannot be saved\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_FAPI_RC_TRY_AGAIN\fP if the asynchronous operation is not yet complete\&. Call this function again later\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_PATH_NOT_FOUND\fP if a FAPI object path was not found during authorization\&. 
+.br
+\fITSS2_FAPI_RC_KEY_NOT_FOUND\fP if a key was not found\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_AUTHORIZATION_UNKNOWN\fP if a required authorization callback is not set\&. 
+.br
+\fITSS2_FAPI_RC_AUTHORIZATION_FAILED\fP if the authorization attempt fails\&. 
+.br
+\fITSS2_FAPI_RC_POLICY_UNKNOWN\fP if policy search for a certain policy digest was not successful\&. 
+.br
+\fITSS2_ESYS_RC_*\fP possible error codes of ESAPI\&. 
+.br
+\fITSS2_FAPI_RC_NOT_PROVISIONED\fP FAPI was not provisioned\&. 
+.br
+\fITSS2_FAPI_RC_BAD_PATH\fP if the path is used in inappropriate context or contains illegal characters\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

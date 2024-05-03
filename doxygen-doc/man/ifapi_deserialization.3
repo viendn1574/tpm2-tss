@@ -1,0 +1,3884 @@
+.TH "ifapi_deserialization" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ifapi_deserialization
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_FAPI_QUOTE_INFO_deserialize\fP (json_object *jso, \fBFAPI_QUOTE_INFO\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_DUPLICATE_deserialize\fP (json_object *jso, \fBIFAPI_DUPLICATE\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_EVENT_TYPE_deserialize\fP (json_object *jso, IFAPI_EVENT_TYPE *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_EVENT_TYPE_deserialize_txt\fP (json_object *jso, IFAPI_EVENT_TYPE *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_EXT_PUB_KEY_deserialize\fP (json_object *jso, \fBIFAPI_EXT_PUB_KEY\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_HIERARCHY_deserialize\fP (json_object *jso, \fBIFAPI_HIERARCHY\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_IMA_EVENT_deserialize\fP (json_object *jso, \fBIFAPI_IMA_EVENT\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_KEY_deserialize\fP (json_object *jso, \fBIFAPI_KEY\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_NV_deserialize\fP (json_object *jso, \fBIFAPI_NV\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_OBJECT_TYPE_CONSTANT_deserialize\fP (json_object *jso, IFAPI_OBJECT_TYPE_CONSTANT *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_OBJECT_deserialize\fP (json_object *jso, \fBIFAPI_OBJECT\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_IFAPI_TSS_EVENT_deserialize\fP (json_object *jso, \fBIFAPI_TSS_EVENT\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_char_deserialize\fP (json_object *jso, char **out)"
+.br
+.ti -1c
+.RI "bool \fBifapi_get_sub_object\fP (json_object *jso, char *name, json_object **sub_jso)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_hex_to_byte_ary\fP (const char hex[], UINT32 vlen, BYTE val[])"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_BYTE_array_deserialize\fP (size_t max, json_object *jso, BYTE *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_BYTE_deserialize\fP (json_object *jso, BYTE *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_CREATION_DATA_deserialize\fP (json_object *jso, TPM2B_CREATION_DATA *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_DATA_deserialize\fP (json_object *jso, TPM2B_DATA *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_DIGEST_deserialize\fP (json_object *jso, TPM2B_DIGEST *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_ECC_PARAMETER_deserialize\fP (json_object *jso, TPM2B_ECC_PARAMETER *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_ENCRYPTED_SECRET_deserialize\fP (json_object *jso, TPM2B_ENCRYPTED_SECRET *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_EVENT_deserialize\fP (json_object *jso, TPM2B_EVENT *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_MAX_NV_BUFFER_deserialize\fP (json_object *jso, TPM2B_MAX_NV_BUFFER *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_NAME_deserialize\fP (json_object *jso, TPM2B_NAME *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_NONCE_deserialize\fP (json_object *jso, TPM2B_NONCE *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_NV_PUBLIC_deserialize\fP (json_object *jso, TPM2B_NV_PUBLIC *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_OPERAND_deserialize\fP (json_object *jso, TPM2B_OPERAND *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_PRIVATE_deserialize\fP (json_object *jso, TPM2B_PRIVATE *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_PUBLIC_KEY_RSA_deserialize\fP (json_object *jso, TPM2B_PUBLIC_KEY_RSA *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2B_PUBLIC_deserialize\fP (json_object *jso, TPM2B_PUBLIC *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_ALG_ID_deserialize\fP (json_object *jso, TPM2_ALG_ID *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_CC_deserialize\fP (json_object *jso, TPM2_CC *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_ECC_CURVE_deserialize\fP (json_object *jso, TPM2_ECC_CURVE *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_EO_deserialize\fP (json_object *jso, TPM2_EO *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_GENERATED_deserialize\fP (json_object *jso, TPM2_GENERATED *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_HANDLE_deserialize\fP (json_object *jso, TPM2_HANDLE *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_NT_deserialize\fP (json_object *jso, TPM2_NT *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_PT_PCR_deserialize\fP (json_object *jso, TPM2_PT_PCR *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPM2_ST_deserialize\fP (json_object *jso, TPM2_ST *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMA_LOCALITY_deserialize\fP (json_object *jso, TPMA_LOCALITY *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMA_NV_deserialize\fP (json_object *jso, TPMA_NV *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMA_OBJECT_deserialize\fP (json_object *jso, TPMA_OBJECT *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_AES_KEY_BITS_deserialize\fP (json_object *jso, TPMI_AES_KEY_BITS *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_ECC_SCHEME_deserialize\fP (json_object *jso, TPMI_ALG_ECC_SCHEME *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_HASH_deserialize\fP (json_object *jso, TPMI_ALG_HASH *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_KDF_deserialize\fP (json_object *jso, TPMI_ALG_KDF *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_KEYEDHASH_SCHEME_deserialize\fP (json_object *jso, TPMI_ALG_KEYEDHASH_SCHEME *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_PUBLIC_deserialize\fP (json_object *jso, TPMI_ALG_PUBLIC *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_RSA_DECRYPT_deserialize\fP (json_object *jso, TPMI_ALG_RSA_DECRYPT *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_RSA_SCHEME_deserialize\fP (json_object *jso, TPMI_ALG_RSA_SCHEME *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_SIG_SCHEME_deserialize\fP (json_object *jso, TPMI_ALG_SIG_SCHEME *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_SYM_MODE_deserialize\fP (json_object *jso, TPMI_ALG_SYM_MODE *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_CIPHER_MODE_deserialize\fP (json_object *jso, TPMI_ALG_CIPHER_MODE *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_SYM_OBJECT_deserialize\fP (json_object *jso, TPMI_ALG_SYM_OBJECT *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ALG_SYM_deserialize\fP (json_object *jso, TPMI_ALG_SYM *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ECC_CURVE_deserialize\fP (json_object *jso, TPMI_ECC_CURVE *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_RH_HIERARCHY_deserialize\fP (json_object *jso, TPMI_RH_HIERARCHY *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_RH_NV_INDEX_deserialize\fP (json_object *jso, TPMI_RH_NV_INDEX *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_RSA_KEY_BITS_deserialize\fP (json_object *jso, TPMI_RSA_KEY_BITS *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_ST_ATTEST_deserialize\fP (json_object *jso, TPMI_ST_ATTEST *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_YES_NO_deserialize\fP (json_object *jso, TPMI_YES_NO *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPML_DIGEST_VALUES_deserialize\fP (json_object *jso, TPML_DIGEST_VALUES *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPML_PCR_SELECTION_deserialize\fP (json_object *jso, TPML_PCR_SELECTION *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_ATTEST_deserialize\fP (json_object *jso, TPMS_ATTEST *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_CERTIFY_INFO_deserialize\fP (json_object *jso, TPMS_CERTIFY_INFO *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_CLOCK_INFO_deserialize\fP (json_object *jso, TPMS_CLOCK_INFO *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_COMMAND_AUDIT_INFO_deserialize\fP (json_object *jso, TPMS_COMMAND_AUDIT_INFO *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_CREATION_DATA_deserialize\fP (json_object *jso, TPMS_CREATION_DATA *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_CREATION_INFO_deserialize\fP (json_object *jso, TPMS_CREATION_INFO *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_ECC_PARMS_deserialize\fP (json_object *jso, TPMS_ECC_PARMS *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_ECC_POINT_deserialize\fP (json_object *jso, TPMS_ECC_POINT *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_EMPTY_deserialize\fP (json_object *jso, TPMS_EMPTY *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_ENC_SCHEME_OAEP_deserialize\fP (json_object *jso, TPMS_ENC_SCHEME_OAEP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_ENC_SCHEME_RSAES_deserialize\fP (json_object *jso, TPMS_ENC_SCHEME_RSAES *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_KEYEDHASH_PARMS_deserialize\fP (json_object *jso, TPMS_KEYEDHASH_PARMS *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_KEY_SCHEME_ECDH_deserialize\fP (json_object *jso, TPMS_KEY_SCHEME_ECDH *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_NV_CERTIFY_INFO_deserialize\fP (json_object *jso, TPMS_NV_CERTIFY_INFO *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_NV_PUBLIC_deserialize\fP (json_object *jso, TPMS_NV_PUBLIC *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_PCR_SELECTION_deserialize\fP (json_object *jso, TPMS_PCR_SELECTION *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_PCR_SELECT_deserialize\fP (json_object *jso, TPMS_PCR_SELECT *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_QUOTE_INFO_deserialize\fP (json_object *jso, TPMS_QUOTE_INFO *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_RSA_PARMS_deserialize\fP (json_object *jso, TPMS_RSA_PARMS *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SCHEME_ECDAA_deserialize\fP (json_object *jso, TPMS_SCHEME_ECDAA *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SCHEME_HASH_deserialize\fP (json_object *jso, TPMS_SCHEME_HASH *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SCHEME_HMAC_deserialize\fP (json_object *jso, TPMS_SCHEME_HMAC *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SCHEME_KDF1_SP800_108_deserialize\fP (json_object *jso, TPMS_SCHEME_KDF1_SP800_108 *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SCHEME_KDF1_SP800_56A_deserialize\fP (json_object *jso, TPMS_SCHEME_KDF1_SP800_56A *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SCHEME_MGF1_deserialize\fP (json_object *jso, TPMS_SCHEME_MGF1 *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SCHEME_XOR_deserialize\fP (json_object *jso, TPMS_SCHEME_XOR *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SESSION_AUDIT_INFO_deserialize\fP (json_object *jso, TPMS_SESSION_AUDIT_INFO *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIGNATURE_ECC_deserialize\fP (json_object *jso, TPMS_SIGNATURE_ECC *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIGNATURE_ECDAA_deserialize\fP (json_object *jso, TPMS_SIGNATURE_ECDAA *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIGNATURE_ECDSA_deserialize\fP (json_object *jso, TPMS_SIGNATURE_ECDSA *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIGNATURE_ECSCHNORR_deserialize\fP (json_object *jso, TPMS_SIGNATURE_ECSCHNORR *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIGNATURE_RSAPSS_deserialize\fP (json_object *jso, TPMS_SIGNATURE_RSAPSS *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIGNATURE_RSASSA_deserialize\fP (json_object *jso, TPMS_SIGNATURE_RSASSA *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIGNATURE_RSA_deserialize\fP (json_object *jso, TPMS_SIGNATURE_RSA *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIGNATURE_SM2_deserialize\fP (json_object *jso, TPMS_SIGNATURE_SM2 *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIG_SCHEME_ECDAA_deserialize\fP (json_object *jso, TPMS_SIG_SCHEME_ECDAA *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIG_SCHEME_ECDSA_deserialize\fP (json_object *jso, TPMS_SIG_SCHEME_ECDSA *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIG_SCHEME_ECSCHNORR_deserialize\fP (json_object *jso, TPMS_SIG_SCHEME_ECSCHNORR *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIG_SCHEME_RSAPSS_deserialize\fP (json_object *jso, TPMS_SIG_SCHEME_RSAPSS *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIG_SCHEME_RSASSA_deserialize\fP (json_object *jso, TPMS_SIG_SCHEME_RSASSA *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SIG_SCHEME_SM2_deserialize\fP (json_object *jso, TPMS_SIG_SCHEME_SM2 *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_SYMCIPHER_PARMS_deserialize\fP (json_object *jso, TPMS_SYMCIPHER_PARMS *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_TIME_ATTEST_INFO_deserialize\fP (json_object *jso, TPMS_TIME_ATTEST_INFO *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_TIME_INFO_deserialize\fP (json_object *jso, TPMS_TIME_INFO *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_ECC_SCHEME_deserialize\fP (json_object *jso, TPMT_ECC_SCHEME *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_HA_deserialize\fP (json_object *jso, TPMT_HA *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_KDF_SCHEME_deserialize\fP (json_object *jso, TPMT_KDF_SCHEME *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_KEYEDHASH_SCHEME_deserialize\fP (json_object *jso, TPMT_KEYEDHASH_SCHEME *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_PUBLIC_deserialize\fP (json_object *jso, TPMT_PUBLIC *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_RSA_DECRYPT_deserialize\fP (json_object *jso, TPMT_RSA_DECRYPT *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_RSA_SCHEME_deserialize\fP (json_object *jso, TPMT_RSA_SCHEME *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_SIGNATURE_deserialize\fP (json_object *jso, TPMT_SIGNATURE *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_SIG_SCHEME_deserialize\fP (json_object *jso, TPMT_SIG_SCHEME *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_SYM_DEF_OBJECT_deserialize\fP (json_object *jso, TPMT_SYM_DEF_OBJECT *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_SYM_DEF_deserialize\fP (json_object *jso, TPMT_SYM_DEF *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_TK_CREATION_deserialize\fP (json_object *jso, TPMT_TK_CREATION *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_ASYM_SCHEME_deserialize\fP (UINT32 selector, json_object *jso, TPMU_ASYM_SCHEME *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_ATTEST_deserialize\fP (UINT32 selector, json_object *jso, TPMU_ATTEST *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_HA_deserialize\fP (UINT32 selector, json_object *jso, TPMU_HA *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_KDF_SCHEME_deserialize\fP (UINT32 selector, json_object *jso, TPMU_KDF_SCHEME *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_PUBLIC_ID_deserialize\fP (UINT32 selector, json_object *jso, TPMU_PUBLIC_ID *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_PUBLIC_PARMS_deserialize\fP (UINT32 selector, json_object *jso, TPMU_PUBLIC_PARMS *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_SCHEME_KEYEDHASH_deserialize\fP (UINT32 selector, json_object *jso, TPMU_SCHEME_KEYEDHASH *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_SIGNATURE_deserialize\fP (UINT32 selector, json_object *jso, TPMU_SIGNATURE *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_SIG_SCHEME_deserialize\fP (UINT32 selector, json_object *jso, TPMU_SIG_SCHEME *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_SYM_KEY_BITS_deserialize\fP (UINT32 selector, json_object *jso, TPMU_SYM_KEY_BITS *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_SYM_MODE_deserialize\fP (UINT32 selector, json_object *jso, TPMU_SYM_MODE *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_UINT16_deserialize\fP (json_object *jso, UINT16 *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_UINT32_deserialize\fP (json_object *jso, UINT32 *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_UINT64_deserialize\fP (json_object *jso, UINT64 *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_UINT8_ARY_deserialize\fP (json_object *jso, \fBUINT8_ARY\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_UINT8_deserialize\fP (json_object *jso, UINT8 *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_byte_deserialize\fP (json_object *jso, UINT32 max, BYTE *out, UINT16 *out_size)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_pcr_selection_deserialize\fP (json_object *jso, UINT8 *sizeofSelect, BYTE pcrSelect[])"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_POLICYTYPE_deserialize\fP (json_object *jso, TPMI_POLICYTYPE *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMI_POLICYTYPE_deserialize_txt\fP (json_object *jso, TPMI_POLICYTYPE *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPML_PCRVALUES_deserialize\fP (json_object *jso, TPML_PCRVALUES **out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPML_POLICYAUTHORIZATIONS_deserialize\fP (json_object *jso, \fBTPML_POLICYAUTHORIZATIONS\fP **out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPML_POLICYBRANCHES_deserialize\fP (json_object *jso, \fBTPML_POLICYBRANCHES\fP **out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPML_POLICYELEMENTS_deserialize\fP (json_object *jso, \fBTPML_POLICYELEMENTS\fP **out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_PCRVALUE_deserialize\fP (json_object *jso, TPMS_PCRVALUE *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYACTION_deserialize\fP (json_object *jso, \fBTPMS_POLICYACTION\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYAUTHORIZATION_deserialize\fP (json_object *jso, \fBTPMS_POLICYAUTHORIZATION\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYAUTHORIZENV_deserialize\fP (json_object *jso, \fBTPMS_POLICYAUTHORIZENV\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYAUTHORIZE_deserialize\fP (json_object *jso, \fBTPMS_POLICYAUTHORIZE\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYAUTHVALUE_deserialize\fP (json_object *jso, \fBTPMS_POLICYAUTHVALUE\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYBRANCH_deserialize\fP (json_object *jso, \fBTPMS_POLICYBRANCH\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYCOMMANDCODE_deserialize\fP (json_object *jso, \fBTPMS_POLICYCOMMANDCODE\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYCOUNTERTIMER_deserialize\fP (json_object *jso, \fBTPMS_POLICYCOUNTERTIMER\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYCPHASH_deserialize\fP (json_object *jso, \fBTPMS_POLICYCPHASH\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYDUPLICATIONSELECT_deserialize\fP (json_object *jso, \fBTPMS_POLICYDUPLICATIONSELECT\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYLOCALITY_deserialize\fP (json_object *jso, \fBTPMS_POLICYLOCALITY\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYNAMEHASH_deserialize\fP (json_object *jso, \fBTPMS_POLICYNAMEHASH\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYNVWRITTEN_deserialize\fP (json_object *jso, \fBTPMS_POLICYNVWRITTEN\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYNV_deserialize\fP (json_object *jso, \fBTPMS_POLICYNV\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYOR_deserialize\fP (json_object *jso, \fBTPMS_POLICYOR\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYPASSWORD_deserialize\fP (json_object *jso, \fBTPMS_POLICYPASSWORD\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYPCR_deserialize\fP (json_object *jso, \fBTPMS_POLICYPCR\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYPHYSICALPRESENCE_deserialize\fP (json_object *jso, \fBTPMS_POLICYPHYSICALPRESENCE\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYSECRET_deserialize\fP (json_object *jso, \fBTPMS_POLICYSECRET\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYSIGNED_deserialize\fP (json_object *jso, \fBTPMS_POLICYSIGNED\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICYTEMPLATE_deserialize\fP (json_object *jso, \fBTPMS_POLICYTEMPLATE\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMS_POLICY_deserialize\fP (json_object *jso, \fBTPMS_POLICY\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMT_POLICYELEMENT_deserialize\fP (json_object *jso, \fBTPMT_POLICYELEMENT\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_TPMU_POLICYELEMENT_deserialize\fP (UINT32 selector, json_object *jso, \fBTPMU_POLICYELEMENT\fP *out)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_json_import_IFAPI_KEY_deserialize\fP (json_object *jso, \fBIFAPI_KEY\fP *out)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Provides functions for the deserialization from JSON to FAPI objects\&. 
+.SH "Function Documentation"
+.PP 
+.SS "bool ifapi_get_sub_object (json_object * jso, char * name, json_object ** sub_jso)"
+Get sub object from a json object\&.
+.PP
+A sub object with a certain name stored in the passed object is returned\&. If the sub object is not found e second trial with the lower case version of the name will be performed\&.
+.PP
+param[in] jso the object with the sub object\&. param[in] name the name of the stored sub object\&. param[out] sub_jso the pointer to the sub object\&. 
+.PP
+\fBReturn values\fP
+.RS 4
+\fItrue\fP if object was found\&. 
+.br
+\fIfalse\fP if the object was not found\&. 
+.RE
+.PP
+
+.SS "static TSS2_RC ifapi_hex_to_byte_ary (const char hex[], UINT32 vlen, BYTE val[])"
+Convert a byte array in character representation to binary\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIhex\fP the character representation of the byte array 
+.br
+\fIvlen\fP the maximal length of the binary byte array\&. 
+.br
+\fIval\fP the byte array\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the character representation is too long\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_BYTE_array_deserialize (size_t max, json_object * jso, BYTE * out)"
+Deserialize an array of BYTE structures\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fImax\fP the maximal number of bytess to be deserialized\&. 
+.br
+\fIjso\fP the JSON object with the byte array\&. 
+.br
+\fIout\fP the byte array for deserialization\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_BYTE_deserialize (json_object * jso, BYTE * out)"
+Deserialize a BYTE json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_byte_deserialize (json_object * jso, UINT32 max, BYTE * out, UINT16 * out_size)"
+Deserialize a json array of bytes\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the parent object of the json byte array\&. 
+.br
+\fImax\fP maximal size of the deserialized object\&. 
+.br
+\fIout*\fP Pointer to the deserialized byte array\&. 
+.br
+\fIout_size\fP the length of the deserialized byte array\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_char_deserialize (json_object * jso, char ** out)"
+Deserialize a character string\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP json string object\&. 
+.br
+\fIout\fP the pointer to the created string\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_FAPI_QUOTE_INFO_deserialize (json_object * jso, \fBFAPI_QUOTE_INFO\fP * out)"
+Deserialize a \fBFAPI_QUOTE_INFO\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_DUPLICATE_deserialize (json_object * jso, \fBIFAPI_DUPLICATE\fP * out)"
+Deserialize a \fBIFAPI_DUPLICATE\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_EVENT_TYPE_deserialize (json_object * jso, IFAPI_EVENT_TYPE * out)"
+Deserialize a IFAPI_EVENT_TYPE json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_EVENT_TYPE_deserialize_txt (json_object * jso, IFAPI_EVENT_TYPE * out)"
+Deserialize a json object of type IFAPI_EVENT_TYPE\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_EXT_PUB_KEY_deserialize (json_object * jso, \fBIFAPI_EXT_PUB_KEY\fP * out)"
+Deserialize a \fBIFAPI_EXT_PUB_KEY\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_HIERARCHY_deserialize (json_object * jso, \fBIFAPI_HIERARCHY\fP * out)"
+Deserialize a \fBIFAPI_NV\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_IMA_EVENT_deserialize (json_object * jso, \fBIFAPI_IMA_EVENT\fP * out)"
+Deserialize a \fBIFAPI_IMA_EVENT\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_KEY_deserialize (json_object * jso, \fBIFAPI_KEY\fP * out)"
+Deserialize a \fBIFAPI_KEY\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_NV_deserialize (json_object * jso, \fBIFAPI_NV\fP * out)"
+Deserialize a \fBIFAPI_NV\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_OBJECT_deserialize (json_object * jso, \fBIFAPI_OBJECT\fP * out)"
+Deserialize a IFAPI_OBJECT json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_OBJECT_TYPE_CONSTANT_deserialize (json_object * jso, IFAPI_OBJECT_TYPE_CONSTANT * out)"
+Deserialize a IFAPI_OBJECT_TYPE_CONSTANT json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_IFAPI_TSS_EVENT_deserialize (json_object * jso, \fBIFAPI_TSS_EVENT\fP * out)"
+Deserialize a \fBIFAPI_TSS_EVENT\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "ifapi_json_import_IFAPI_KEY_deserialize (json_object * jso, \fBIFAPI_KEY\fP * out)"
+Deserialize a import data to create a \fBIFAPI_KEY\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_pcr_selection_deserialize (json_object * jso, UINT8 * sizeofSelect, BYTE pcrSelect[])"
+Deserialize json object which represents a pcr selection\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP json array of pcr registers\&. 
+.br
+\fIsizeofSelect\fP size of bit mask for used pcr registers\&. 
+.br
+\fIpcrSelect\fP byte array with bit mask\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_ALG_ID_deserialize (json_object * jso, TPM2_ALG_ID * out)"
+Deserialize a TPM2_ALG_ID json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_CC_deserialize (json_object * jso, TPM2_CC * out)"
+Deserialize a TPM2_CC json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_ECC_CURVE_deserialize (json_object * jso, TPM2_ECC_CURVE * out)"
+Deserialize a TPM2_ECC_CURVE json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_EO_deserialize (json_object * jso, TPM2_EO * out)"
+Deserialize a TPM2_EO json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_GENERATED_deserialize (json_object * jso, TPM2_GENERATED * out)"
+Deserialize a TPM2_GENERATED json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_HANDLE_deserialize (json_object * jso, TPM2_HANDLE * out)"
+Deserialize a TPM2_HANDLE json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_NT_deserialize (json_object * jso, TPM2_NT * out)"
+Deserialize a TPM2_NT json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_PT_PCR_deserialize (json_object * jso, TPM2_PT_PCR * out)"
+Deserialize a TPM2_PT_PCR json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2_ST_deserialize (json_object * jso, TPM2_ST * out)"
+Deserialize a TPM2_ST json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_CREATION_DATA_deserialize (json_object * jso, TPM2B_CREATION_DATA * out)"
+Deserialize a TPM2B_CREATION_DATA json object\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_DATA_deserialize (json_object * jso, TPM2B_DATA * out)"
+Deserialize a TPM2B_DATA json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_DIGEST_deserialize (json_object * jso, TPM2B_DIGEST * out)"
+Deserialize a TPM2B_DIGEST json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_ECC_PARAMETER_deserialize (json_object * jso, TPM2B_ECC_PARAMETER * out)"
+Deserialize a TPM2B_ECC_PARAMETER json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_ENCRYPTED_SECRET_deserialize (json_object * jso, TPM2B_ENCRYPTED_SECRET * out)"
+Deserialize a TPM2B_ENCRYPTED_SECRET json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_EVENT_deserialize (json_object * jso, TPM2B_EVENT * out)"
+Deserialize a TPM2B_EVENT json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_MAX_NV_BUFFER_deserialize (json_object * jso, TPM2B_MAX_NV_BUFFER * out)"
+Deserialize a TPM2B_MAX_NV_BUFFER json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_NAME_deserialize (json_object * jso, TPM2B_NAME * out)"
+Deserialize a TPM2B_NAME json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_NONCE_deserialize (json_object * jso, TPM2B_NONCE * out)"
+Deserialize a TPM2B_NONCE json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_NV_PUBLIC_deserialize (json_object * jso, TPM2B_NV_PUBLIC * out)"
+Deserialize a TPM2B_NV_PUBLIC json object\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_OPERAND_deserialize (json_object * jso, TPM2B_OPERAND * out)"
+Deserialize a TPM2B_OPERAND json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_PRIVATE_deserialize (json_object * jso, TPM2B_PRIVATE * out)"
+Deserialize a TPM2B_PRIVATE json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_PUBLIC_deserialize (json_object * jso, TPM2B_PUBLIC * out)"
+Deserialize a TPM2B_PUBLIC json object\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPM2B_PUBLIC_KEY_RSA_deserialize (json_object * jso, TPM2B_PUBLIC_KEY_RSA * out)"
+Deserialize a TPM2B_PUBLIC_KEY_RSA json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMA_LOCALITY_deserialize (json_object * jso, TPMA_LOCALITY * out)"
+Deserialize a TPMA_LOCALITY json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMA_NV_deserialize (json_object * jso, TPMA_NV * out)"
+Deserialize a TPMA_NV json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMA_OBJECT_deserialize (json_object * jso, TPMA_OBJECT * out)"
+Deserialize a TPMA_OBJECT json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_AES_KEY_BITS_deserialize (json_object * jso, TPMI_AES_KEY_BITS * out)"
+Deserialize a TPMI_AES_KEY_BITS json object\&.
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_CIPHER_MODE_deserialize (json_object * jso, TPMI_ALG_CIPHER_MODE * out)"
+Deserialize a TPMI_ALG_CIPHER_MODE json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_ECC_SCHEME_deserialize (json_object * jso, TPMI_ALG_ECC_SCHEME * out)"
+Deserialize a TPMI_ALG_ECC_SCHEME json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_HASH_deserialize (json_object * jso, TPMI_ALG_HASH * out)"
+Deserialize a TPMI_ALG_HASH json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_KDF_deserialize (json_object * jso, TPMI_ALG_KDF * out)"
+Deserialize a TPMI_ALG_KDF json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_KEYEDHASH_SCHEME_deserialize (json_object * jso, TPMI_ALG_KEYEDHASH_SCHEME * out)"
+Deserialize a TPMI_ALG_KEYEDHASH_SCHEME json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_PUBLIC_deserialize (json_object * jso, TPMI_ALG_PUBLIC * out)"
+Deserialize a TPMI_ALG_PUBLIC json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_RSA_DECRYPT_deserialize (json_object * jso, TPMI_ALG_RSA_DECRYPT * out)"
+Deserialize a TPMI_ALG_RSA_DECRYPT json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_RSA_SCHEME_deserialize (json_object * jso, TPMI_ALG_RSA_SCHEME * out)"
+Deserialize a TPMI_ALG_RSA_SCHEME json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_SIG_SCHEME_deserialize (json_object * jso, TPMI_ALG_SIG_SCHEME * out)"
+Deserialize a TPMI_ALG_SIG_SCHEME json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_SYM_deserialize (json_object * jso, TPMI_ALG_SYM * out)"
+Deserialize a TPMI_ALG_SYM json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_SYM_MODE_deserialize (json_object * jso, TPMI_ALG_SYM_MODE * out)"
+Deserialize a TPMI_ALG_SYM_MODE json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ALG_SYM_OBJECT_deserialize (json_object * jso, TPMI_ALG_SYM_OBJECT * out)"
+Deserialize a TPMI_ALG_SYM_OBJECT json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ECC_CURVE_deserialize (json_object * jso, TPMI_ECC_CURVE * out)"
+Deserialize a TPMI_ECC_CURVE json object\&.
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_POLICYTYPE_deserialize (json_object * jso, TPMI_POLICYTYPE * out)"
+Deserialize a TPMI_POLICYTYPE json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_POLICYTYPE_deserialize_txt (json_object * jso, TPMI_POLICYTYPE * out)"
+Deserialize a json object of type TPMI_POLICYTYPE\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_RH_HIERARCHY_deserialize (json_object * jso, TPMI_RH_HIERARCHY * out)"
+Deserialize a TPMI_RH_HIERARCHY json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_RH_NV_INDEX_deserialize (json_object * jso, TPMI_RH_NV_INDEX * out)"
+Deserialize a TPMI_RH_NV_INDEX json object\&.
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_RSA_KEY_BITS_deserialize (json_object * jso, TPMI_RSA_KEY_BITS * out)"
+Deserialize a TPMI_RSA_KEY_BITS json object\&.
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_ST_ATTEST_deserialize (json_object * jso, TPMI_ST_ATTEST * out)"
+Deserialize a TPMI_ST_ATTEST json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMI_YES_NO_deserialize (json_object * jso, TPMI_YES_NO * out)"
+Deserialize a TPMI_YES_NO json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPML_DIGEST_VALUES_deserialize (json_object * jso, TPML_DIGEST_VALUES * out)"
+Deserialize a TPML_DIGEST_VALUES json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPML_PCR_SELECTION_deserialize (json_object * jso, TPML_PCR_SELECTION * out)"
+Deserialize a TPML_PCR_SELECTION json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPML_PCRVALUES_deserialize (json_object * jso, TPML_PCRVALUES ** out)"
+Deserialize a TPML_PCRVALUES json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPML_POLICYAUTHORIZATIONS_deserialize (json_object * jso, \fBTPML_POLICYAUTHORIZATIONS\fP ** out)"
+Deserialize a \fBTPML_POLICYAUTHORIZATIONS\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPML_POLICYBRANCHES_deserialize (json_object * jso, \fBTPML_POLICYBRANCHES\fP ** out)"
+Deserialize a \fBTPML_POLICYBRANCHES\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPML_POLICYELEMENTS_deserialize (json_object * jso, \fBTPML_POLICYELEMENTS\fP ** out)"
+Deserialize a \fBTPML_POLICYELEMENTS\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_ATTEST_deserialize (json_object * jso, TPMS_ATTEST * out)"
+Deserialize a TPMS_ATTEST json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_CERTIFY_INFO_deserialize (json_object * jso, TPMS_CERTIFY_INFO * out)"
+Deserialize a TPMS_CERTIFY_INFO json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_CLOCK_INFO_deserialize (json_object * jso, TPMS_CLOCK_INFO * out)"
+Deserialize a TPMS_CLOCK_INFO json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_COMMAND_AUDIT_INFO_deserialize (json_object * jso, TPMS_COMMAND_AUDIT_INFO * out)"
+Deserialize a TPMS_COMMAND_AUDIT_INFO json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_CREATION_DATA_deserialize (json_object * jso, TPMS_CREATION_DATA * out)"
+Deserialize a TPMS_CREATION_DATA json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_CREATION_INFO_deserialize (json_object * jso, TPMS_CREATION_INFO * out)"
+Deserialize a TPMS_CREATION_INFO json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_ECC_PARMS_deserialize (json_object * jso, TPMS_ECC_PARMS * out)"
+Deserialize a TPMS_ECC_PARMS json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_ECC_POINT_deserialize (json_object * jso, TPMS_ECC_POINT * out)"
+Deserialize a TPMS_ECC_POINT json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_EMPTY_deserialize (json_object * jso, TPMS_EMPTY * out)"
+Deserialize a TPMS_EMPTY \&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIout\fP not used\&. 
+.br
+\fIjso\fP not used\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_ENC_SCHEME_OAEP_deserialize (json_object * jso, TPMS_ENC_SCHEME_OAEP * out)"
+Deserialize a TPMS_ENC_SCHEME_OAEP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_ENC_SCHEME_RSAES_deserialize (json_object * jso, TPMS_ENC_SCHEME_RSAES * out)"
+Deserialize a TPMS_ENC_SCHEME_RSAES json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_KEY_SCHEME_ECDH_deserialize (json_object * jso, TPMS_KEY_SCHEME_ECDH * out)"
+Deserialize a TPMS_KEY_SCHEME_ECDH json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_KEYEDHASH_PARMS_deserialize (json_object * jso, TPMS_KEYEDHASH_PARMS * out)"
+Deserialize a TPMS_KEYEDHASH_PARMS json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_NV_CERTIFY_INFO_deserialize (json_object * jso, TPMS_NV_CERTIFY_INFO * out)"
+Deserialize a TPMS_NV_CERTIFY_INFO json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_NV_PUBLIC_deserialize (json_object * jso, TPMS_NV_PUBLIC * out)"
+Deserialize a TPMS_NV_PUBLIC json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_PCR_SELECT_deserialize (json_object * jso, TPMS_PCR_SELECT * out)"
+Deserialize a TPMS_PCR_SELECT variable\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP json object to be deserialized\&. 
+.br
+\fIout\fP the deserialized object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_PCR_SELECTION_deserialize (json_object * jso, TPMS_PCR_SELECTION * out)"
+Deserialize a TPMS_PCR_SELECTION variable\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP json object to be deserialized\&. 
+.br
+\fIout\fP the deserialized object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_PCRVALUE_deserialize (json_object * jso, TPMS_PCRVALUE * out)"
+Deserialize a TPMS_PCRVALUE json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICY_deserialize (json_object * jso, \fBTPMS_POLICY\fP * out)"
+Deserialize a \fBTPMS_POLICY\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYACTION_deserialize (json_object * jso, \fBTPMS_POLICYACTION\fP * out)"
+Deserialize a \fBTPMS_POLICYACTION\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYAUTHORIZATION_deserialize (json_object * jso, \fBTPMS_POLICYAUTHORIZATION\fP * out)"
+Deserialize a \fBTPMS_POLICYAUTHORIZATION\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYAUTHORIZE_deserialize (json_object * jso, \fBTPMS_POLICYAUTHORIZE\fP * out)"
+Deserialize a \fBTPMS_POLICYAUTHORIZE\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+< counter for conditional fields
+.SS "TSS2_RC ifapi_json_TPMS_POLICYAUTHORIZENV_deserialize (json_object * jso, \fBTPMS_POLICYAUTHORIZENV\fP * out)"
+Deserialize a \fBTPMS_POLICYAUTHORIZENV\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+< counter for conditional fields
+.SS "TSS2_RC ifapi_json_TPMS_POLICYAUTHVALUE_deserialize (json_object * jso, \fBTPMS_POLICYAUTHVALUE\fP * out)"
+Deserialize a \fBTPMS_POLICYAUTHVALUE\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYBRANCH_deserialize (json_object * jso, \fBTPMS_POLICYBRANCH\fP * out)"
+Deserialize a \fBTPMS_POLICYBRANCH\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYCOMMANDCODE_deserialize (json_object * jso, \fBTPMS_POLICYCOMMANDCODE\fP * out)"
+Deserialize a \fBTPMS_POLICYCOMMANDCODE\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYCOUNTERTIMER_deserialize (json_object * jso, \fBTPMS_POLICYCOUNTERTIMER\fP * out)"
+Deserialize a \fBTPMS_POLICYCOUNTERTIMER\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYCPHASH_deserialize (json_object * jso, \fBTPMS_POLICYCPHASH\fP * out)"
+Deserialize a \fBTPMS_POLICYCPHASH\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYDUPLICATIONSELECT_deserialize (json_object * jso, \fBTPMS_POLICYDUPLICATIONSELECT\fP * out)"
+Deserialize a \fBTPMS_POLICYDUPLICATIONSELECT\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+< counter for conditional fields
+.SS "TSS2_RC ifapi_json_TPMS_POLICYLOCALITY_deserialize (json_object * jso, \fBTPMS_POLICYLOCALITY\fP * out)"
+Deserialize a \fBTPMS_POLICYLOCALITY\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYNAMEHASH_deserialize (json_object * jso, \fBTPMS_POLICYNAMEHASH\fP * out)"
+Deserialize a \fBTPMS_POLICYNAMEHASH\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+< counter for conditional fields
+.SS "TSS2_RC ifapi_json_TPMS_POLICYNV_deserialize (json_object * jso, \fBTPMS_POLICYNV\fP * out)"
+Deserialize a \fBTPMS_POLICYNV\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+< counter for conditional fields
+.SS "TSS2_RC ifapi_json_TPMS_POLICYNVWRITTEN_deserialize (json_object * jso, \fBTPMS_POLICYNVWRITTEN\fP * out)"
+Deserialize a \fBTPMS_POLICYNVWRITTEN\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYOR_deserialize (json_object * jso, \fBTPMS_POLICYOR\fP * out)"
+Deserialize a \fBTPMS_POLICYOR\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYPASSWORD_deserialize (json_object * jso, \fBTPMS_POLICYPASSWORD\fP * out)"
+Deserialize a \fBTPMS_POLICYPASSWORD\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYPCR_deserialize (json_object * jso, \fBTPMS_POLICYPCR\fP * out)"
+Deserialize a \fBTPMS_POLICYPCR\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+< counter for conditional fields
+.SS "TSS2_RC ifapi_json_TPMS_POLICYPHYSICALPRESENCE_deserialize (json_object * jso, \fBTPMS_POLICYPHYSICALPRESENCE\fP * out)"
+Deserialize a \fBTPMS_POLICYPHYSICALPRESENCE\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_POLICYSECRET_deserialize (json_object * jso, \fBTPMS_POLICYSECRET\fP * out)"
+Deserialize a \fBTPMS_POLICYSECRET\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+< counter for conditional fields
+.SS "TSS2_RC ifapi_json_TPMS_POLICYSIGNED_deserialize (json_object * jso, \fBTPMS_POLICYSIGNED\fP * out)"
+Deserialize a \fBTPMS_POLICYSIGNED\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+< counter for conditional fields
+.SS "TSS2_RC ifapi_json_TPMS_POLICYTEMPLATE_deserialize (json_object * jso, \fBTPMS_POLICYTEMPLATE\fP * out)"
+Deserialize a \fBTPMS_POLICYTEMPLATE\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+< counter for conditional fields
+.SS "TSS2_RC ifapi_json_TPMS_QUOTE_INFO_deserialize (json_object * jso, TPMS_QUOTE_INFO * out)"
+Deserialize a TPMS_QUOTE_INFO json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_RSA_PARMS_deserialize (json_object * jso, TPMS_RSA_PARMS * out)"
+Deserialize a TPMS_RSA_PARMS json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SCHEME_ECDAA_deserialize (json_object * jso, TPMS_SCHEME_ECDAA * out)"
+Deserialize a TPMS_SCHEME_ECDAA json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SCHEME_HASH_deserialize (json_object * jso, TPMS_SCHEME_HASH * out)"
+Deserialize a TPMS_SCHEME_HASH json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SCHEME_HMAC_deserialize (json_object * jso, TPMS_SCHEME_HMAC * out)"
+Deserialize a TPMS_SCHEME_HMAC json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SCHEME_KDF1_SP800_108_deserialize (json_object * jso, TPMS_SCHEME_KDF1_SP800_108 * out)"
+Deserialize a TPMS_SCHEME_KDF1_SP800_108 json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SCHEME_KDF1_SP800_56A_deserialize (json_object * jso, TPMS_SCHEME_KDF1_SP800_56A * out)"
+Deserialize a TPMS_SCHEME_KDF1_SP800_56A json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SCHEME_MGF1_deserialize (json_object * jso, TPMS_SCHEME_MGF1 * out)"
+Deserialize a TPMS_SCHEME_MGF1 json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SCHEME_XOR_deserialize (json_object * jso, TPMS_SCHEME_XOR * out)"
+Deserialize a TPMS_SCHEME_XOR json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SESSION_AUDIT_INFO_deserialize (json_object * jso, TPMS_SESSION_AUDIT_INFO * out)"
+Deserialize a TPMS_SESSION_AUDIT_INFO json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIG_SCHEME_ECDAA_deserialize (json_object * jso, TPMS_SIG_SCHEME_ECDAA * out)"
+Deserialize a TPMS_SIG_SCHEME_ECDAA json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIG_SCHEME_ECDSA_deserialize (json_object * jso, TPMS_SIG_SCHEME_ECDSA * out)"
+Deserialize a TPMS_SIG_SCHEME_ECDSA json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIG_SCHEME_ECSCHNORR_deserialize (json_object * jso, TPMS_SIG_SCHEME_ECSCHNORR * out)"
+Deserialize a TPMS_SIG_SCHEME_ECSCHNORR json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIG_SCHEME_RSAPSS_deserialize (json_object * jso, TPMS_SIG_SCHEME_RSAPSS * out)"
+Deserialize a TPMS_SIG_SCHEME_RSAPSS json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIG_SCHEME_RSASSA_deserialize (json_object * jso, TPMS_SIG_SCHEME_RSASSA * out)"
+Deserialize a TPMS_SIG_SCHEME_RSASSA json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIG_SCHEME_SM2_deserialize (json_object * jso, TPMS_SIG_SCHEME_SM2 * out)"
+Deserialize a TPMS_SIG_SCHEME_SM2 json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIGNATURE_ECC_deserialize (json_object * jso, TPMS_SIGNATURE_ECC * out)"
+Deserialize a TPMS_SIGNATURE_ECC json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIGNATURE_ECDAA_deserialize (json_object * jso, TPMS_SIGNATURE_ECDAA * out)"
+Deserialize a TPMS_SIGNATURE_ECDAA json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIGNATURE_ECDSA_deserialize (json_object * jso, TPMS_SIGNATURE_ECDSA * out)"
+Deserialize a TPMS_SIGNATURE_ECDSA json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIGNATURE_ECSCHNORR_deserialize (json_object * jso, TPMS_SIGNATURE_ECSCHNORR * out)"
+Deserialize a TPMS_SIGNATURE_ECSCHNORR json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIGNATURE_RSA_deserialize (json_object * jso, TPMS_SIGNATURE_RSA * out)"
+Deserialize a TPMS_SIGNATURE_RSA json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIGNATURE_RSAPSS_deserialize (json_object * jso, TPMS_SIGNATURE_RSAPSS * out)"
+Deserialize a TPMS_SIGNATURE_RSAPSS json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIGNATURE_RSASSA_deserialize (json_object * jso, TPMS_SIGNATURE_RSASSA * out)"
+Deserialize a TPMS_SIGNATURE_RSASSA json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SIGNATURE_SM2_deserialize (json_object * jso, TPMS_SIGNATURE_SM2 * out)"
+Deserialize a TPMS_SIGNATURE_SM2 json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_SYMCIPHER_PARMS_deserialize (json_object * jso, TPMS_SYMCIPHER_PARMS * out)"
+Deserialize a TPMS_SYMCIPHER_PARMS json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_TIME_ATTEST_INFO_deserialize (json_object * jso, TPMS_TIME_ATTEST_INFO * out)"
+Deserialize a TPMS_TIME_ATTEST_INFO json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMS_TIME_INFO_deserialize (json_object * jso, TPMS_TIME_INFO * out)"
+Deserialize a TPMS_TIME_INFO json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_ECC_SCHEME_deserialize (json_object * jso, TPMT_ECC_SCHEME * out)"
+Deserialize a TPMT_ECC_SCHEME json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_HA_deserialize (json_object * jso, TPMT_HA * out)"
+Deserialize a TPMT_HA json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_KDF_SCHEME_deserialize (json_object * jso, TPMT_KDF_SCHEME * out)"
+Deserialize a TPMT_KDF_SCHEME json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_KEYEDHASH_SCHEME_deserialize (json_object * jso, TPMT_KEYEDHASH_SCHEME * out)"
+Deserialize a TPMT_KEYEDHASH_SCHEME json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_POLICYELEMENT_deserialize (json_object * jso, \fBTPMT_POLICYELEMENT\fP * out)"
+Deserialize a \fBTPMT_POLICYELEMENT\fP json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_PUBLIC_deserialize (json_object * jso, TPMT_PUBLIC * out)"
+Deserialize a TPMT_PUBLIC json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_RSA_DECRYPT_deserialize (json_object * jso, TPMT_RSA_DECRYPT * out)"
+Deserialize a TPMT_RSA_DECRYPT json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_RSA_SCHEME_deserialize (json_object * jso, TPMT_RSA_SCHEME * out)"
+Deserialize a TPMT_RSA_SCHEME json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_SIG_SCHEME_deserialize (json_object * jso, TPMT_SIG_SCHEME * out)"
+Deserialize a TPMT_SIG_SCHEME json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_SIGNATURE_deserialize (json_object * jso, TPMT_SIGNATURE * out)"
+Deserialize a TPMT_SIGNATURE json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_SYM_DEF_deserialize (json_object * jso, TPMT_SYM_DEF * out)"
+Deserialize a TPMT_SYM_DEF json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_SYM_DEF_OBJECT_deserialize (json_object * jso, TPMT_SYM_DEF_OBJECT * out)"
+Deserialize a TPMT_SYM_DEF_OBJECT json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMT_TK_CREATION_deserialize (json_object * jso, TPMT_TK_CREATION * out)"
+Deserialize a TPMT_TK_CREATION json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_ASYM_SCHEME_deserialize (UINT32 selector, json_object * jso, TPMU_ASYM_SCHEME * out)"
+Deserialize a TPMU_ASYM_SCHEME json object\&.
+.PP
+This functions expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIselector\fP The type the scheme\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_ATTEST_deserialize (UINT32 selector, json_object * jso, TPMU_ATTEST * out)"
+Deserialize a TPMU_ATTEST json object\&.
+.PP
+This functions expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIselector\fP The type the attest\&. 
+.br
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_HA_deserialize (UINT32 selector, json_object * jso, TPMU_HA * out)"
+Deserialize a TPMU_HA json object\&.
+.PP
+This functions expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIselector\fP The type of the HA object\&. 
+.br
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_KDF_SCHEME_deserialize (UINT32 selector, json_object * jso, TPMU_KDF_SCHEME * out)"
+Deserialize a TPMU_KDF_SCHEME json object\&.
+.PP
+This functions expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIselector\fP The type the KDF scheme\&. 
+.br
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_POLICYELEMENT_deserialize (UINT32 selector, json_object * jso, \fBTPMU_POLICYELEMENT\fP * out)"
+Deserialize a \fBTPMU_POLICYELEMENT\fP json object\&.
+.PP
+This functions expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIselector\fP The type the policy element\&. 
+.br
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_PUBLIC_ID_deserialize (UINT32 selector, json_object * jso, TPMU_PUBLIC_ID * out)"
+Deserialize a TPMU_PUBLIC_ID json object\&.
+.PP
+This functions expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIselector\fP The type the public ID\&. 
+.br
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_PUBLIC_PARMS_deserialize (UINT32 selector, json_object * jso, TPMU_PUBLIC_PARMS * out)"
+Deserialize a TPMU_PUBLIC_PARMS json object\&.
+.PP
+This functions expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIselector\fP The type the public params\&. 
+.br
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_SCHEME_KEYEDHASH_deserialize (UINT32 selector, json_object * jso, TPMU_SCHEME_KEYEDHASH * out)"
+Deserialize a TPMU_SCHEME_KEYEDHASH json object\&.
+.PP
+This functions expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIselector\fP The type the keyedhash scheme\&. 
+.br
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_SIG_SCHEME_deserialize (UINT32 selector, json_object * jso, TPMU_SIG_SCHEME * out)"
+Deserialize a TPMU_SIG_SCHEME json object\&.
+.PP
+This functions expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIselector\fP The type the signature scheme\&. 
+.br
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_SIGNATURE_deserialize (UINT32 selector, json_object * jso, TPMU_SIGNATURE * out)"
+Deserialize a TPMU_SIGNATURE json object\&.
+.PP
+This functions expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIselector\fP The type the signature\&. 
+.br
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_SYM_KEY_BITS_deserialize (UINT32 selector, json_object * jso, TPMU_SYM_KEY_BITS * out)"
+Deserialize a TPMU_SYM_KEY_BITS json object\&.
+.PP
+This functions expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIselector\fP The type the symmetric algorithm\&. 
+.br
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_TPMU_SYM_MODE_deserialize (UINT32 selector, json_object * jso, TPMU_SYM_MODE * out)"
+Deserialize a TPMU_SYM_MODE json object\&.
+.PP
+This functions expects the Bitfield to be encoded as unsigned int in host-endianess\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIselector\fP The type the symmetric algorithm\&. 
+.br
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_UINT16_deserialize (json_object * jso, UINT16 * out)"
+Deserialize a UINT16 json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_UINT32_deserialize (json_object * jso, UINT32 * out)"
+Deserialize a UINT32 json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_UINT64_deserialize (json_object * jso, UINT64 * out)"
+Deserialize a UINT64 json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_UINT8_ARY_deserialize (json_object * jso, \fBUINT8_ARY\fP * out)"
+Deserialize an array of UINT8\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP object to be deserialized\&. 
+.br
+\fIout\fP the deserialized object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_json_UINT8_deserialize (json_object * jso, UINT8 * out)"
+Deserialize a UINT8 json object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso\fP the json object to be deserialized\&. 
+.br
+\fIout\fP the deserialzed binary object\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the json object can't be deserialized\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

@@ -1,0 +1,55 @@
+.TH "TPMS_POLICYAUTHORIZATION" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+TPMS_POLICYAUTHORIZATION
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ifapi_policy_types\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "char * \fBtype\fP"
+.br
+.ti -1c
+.RI "TPMT_PUBLIC \fBkey\fP"
+.br
+.ti -1c
+.RI "TPM2B_NONCE \fBpolicyRef\fP"
+.br
+.ti -1c
+.RI "TPMT_SIGNATURE \fBsignature\fP"
+.br
+.ti -1c
+.RI "TPMI_ALG_HASH \fBhashAlg\fP"
+.br
+.ti -1c
+.RI "\fBUINT8_ARY\fP \fBpemSignature\fP"
+.br
+.ti -1c
+.RI "char * \fBkeyPEM\fP"
+.br
+.ti -1c
+.RI "TPMT_RSA_SCHEME \fBrsaScheme\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Policy type \fBTPMS_POLICYAUTHORIZATION\fP 
+.SH "Field Documentation"
+.PP 
+.SS "TPMT_PUBLIC key"
+Selector of the algorithm used for the signature and the pub 
+.SS "TPM2B_NONCE policyRef"
+None 
+.SS "TPMT_SIGNATURE signature"
+None 
+.SS "char* type"
+tpm 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

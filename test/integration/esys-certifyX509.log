@@ -1,0 +1,12 @@
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_CertifyX509.c:345:Esys_CertifyX509_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_CertifyX509.c:112:Esys_CertifyX509() Esys Finish ErrorCode (0x000b0143) 
+ERROR:test:test/integration/esys-certifyX509.int.c:183:test_esys_certifyx509() Error: CertifyX509 ErrorCode (0x000b0143) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-certifyX509.int_simulator.pid
+FAIL test/integration/esys-certifyX509.int (exit status: 1)

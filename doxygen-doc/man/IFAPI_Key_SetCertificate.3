@@ -1,0 +1,48 @@
+.TH "IFAPI_Key_SetCertificate" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_Key_SetCertificate
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <fapi_int\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "const char * \fBpem_cert\fP"
+.br
+.ti -1c
+.RI "char * \fBpem_cert_dup\fP"
+.br
+.ti -1c
+.RI "const char * \fBkey_path\fP"
+.br
+.ti -1c
+.RI "\fBNODE_STR_T\fP * \fBpath_list\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP \fBkey_object\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The data structure holding internal state of Fapi_Key_Setcertificate\&. 
+.SH "Field Documentation"
+.PP 
+.SS "\fBIFAPI_OBJECT\fP key_object"
+The IPAPI object for the certified key 
+.SS "const char* key_path"
+The absolute key path 
+.SS "\fBNODE_STR_T\fP* path_list"
+The computed explicit path 
+.SS "const char* pem_cert"
+The certifificate in pem or format 
+.SS "char* pem_cert_dup"
+The allocate certifificate 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

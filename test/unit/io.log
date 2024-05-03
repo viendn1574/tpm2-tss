@@ -1,0 +1,25 @@
+[==========] Running 13 test(s).
+[ RUN      ] write_all_simple_success_test
+[       OK ] write_all_simple_success_test
+[ RUN      ] read_all_eof_test
+WARNING:tcti:src/util/io.c:72:read_all() Attempted read 10 bytes from fd 10, but EOF returned 
+[       OK ] read_all_eof_test
+[ RUN      ] read_all_twice_eof
+WARNING:tcti:src/util/io.c:72:read_all() Attempted read 5 bytes from fd 10, but EOF returned 
+[       OK ] read_all_twice_eof
+[ RUN      ] socket_connect_test
+[       OK ] socket_connect_test
+[ RUN      ] socket_connect_null_test
+[       OK ] socket_connect_null_test
+[ RUN      ] socket_connect_socket_fail_test
+WARNING:tcti:src/util/io.c:262:socket_connect() Failed to connect to host 127.0.0.1, port 555: errno 22: Invalid argument 
+[       OK ] socket_connect_socket_fail_test
+[ RUN      ] socket_connect_connect_fail_test
+WARNING:tcti:src/util/io.c:262:socket_connect() Failed to connect to host 127.0.0.1, port 444: errno 88: Socket operation on non-socket 
+WARNING:tcti:src/util/io.c:262:socket_connect() Failed to connect to host ::1, port 555: errno 22: Invalid argument 
+WARNING:tcti:src/util/io.c:176:socket_close() Failed to close SOCKET 1. errno 9: Bad file descriptor 
+WARNING:tcti:src/util/io.c:262:socket_connect() Failed to connect to host ::1, port 444: errno 9: Bad file descriptor 
+WARNING:tcti:src/util/io.c:298:socket_connect_unix() Failed to create AF_UNIX socket 
+WARNING:tcti:src/util/io.c:304:socket_connect_unix() Failed to connect to /some/path 
+[  PASSED  ] 13 test(s).
+PASS test/unit/io (exit status: 0)

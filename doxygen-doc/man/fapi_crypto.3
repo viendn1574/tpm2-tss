@@ -1,0 +1,541 @@
+.TH "fapi_crypto" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+fapi_crypto
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC \fBifapi_cert_to_pem\fP (const uint8_t *certBuffer, size_t certBufferSize, char **pemCert, TPM2_ALG_ID *certAlgorithmId, TPM2B_PUBLIC *tpmPublic)"
+.br
+.ti -1c
+.RI "void \fBifapi_crypto_hash_abort\fP (\fBIFAPI_CRYPTO_CONTEXT_BLOB\fP **context)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_crypto_hash_finish\fP (\fBIFAPI_CRYPTO_CONTEXT_BLOB\fP **context, uint8_t *digest, size_t *digestSize)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_crypto_hash_start\fP (\fBIFAPI_CRYPTO_CONTEXT_BLOB\fP **context, TPM2_ALG_ID hashAlgorithm)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_crypto_hash_update\fP (\fBIFAPI_CRYPTO_CONTEXT_BLOB\fP *context, const uint8_t *buffer, size_t size)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_der_sig_to_tpm\fP (const TPMT_PUBLIC *tpmPublic, const unsigned char *signature, size_t signatureSize, TPMI_ALG_HASH hashAlgorithm, TPMT_SIGNATURE *tpmSignature)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_get_hash_alg_for_size\fP (uint16_t size, TPMI_ALG_HASH *hashAlgorithm)"
+.br
+.ti -1c
+.RI "TPM2_RC \fBifapi_get_profile_sig_scheme\fP (const \fBIFAPI_PROFILE\fP *profile, const TPMT_PUBLIC *tpmPublic, TPMT_SIG_SCHEME *signatureScheme)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_get_public_from_pem_cert\fP (const char *pem_cert, TPM2B_PUBLIC *tpm_public)"
+.br
+.ti -1c
+.RI "TPM2_ALG_ID \fBifapi_get_signature_algorithm_from_pem\fP (const char *pemKey)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_get_tpm2b_public_from_pem\fP (const char *pemKey, TPM2B_PUBLIC *tpmPublic)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_get_tpm_key_fingerprint\fP (const TPM2B_PUBLIC *tpmPublicKey, TPMI_ALG_HASH hashAlg, TPM2B_DIGEST *fingerprint)"
+.br
+.ti -1c
+.RI "size_t \fBifapi_hash_get_digest_size\fP (TPM2_ALG_ID hashAlgorithm)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_initialize_sign_public\fP (TPM2_ALG_ID signatureAlgorithm, TPM2B_PUBLIC *public)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_pub_pem_key_from_tpm\fP (const TPM2B_PUBLIC *tpmPublicKey, char **pemKey, int *pemKeySize)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_tpm_ecc_sig_to_der\fP (const TPMT_SIGNATURE *tpmSignature, uint8_t **signature, size_t *signatureSize)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_curl_verify_ek_cert\fP (char *root_cert_pem, char *intermed_cert_pem, char *ek_cert_pem)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_verify_signature\fP (const \fBIFAPI_OBJECT\fP *keyObject, const uint8_t *signature, size_t signatureSize, const uint8_t *digest, size_t digestSize)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_verify_signature_quote\fP (const \fBIFAPI_OBJECT\fP *keyObject, const uint8_t *signature, size_t signatureSize, const uint8_t *digest, size_t digestSize, const TPMT_SIG_SCHEME *signatureScheme)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The types and functions used internally by FAPI for cryptographic operations\&. Multiple implementations of these functions for different cryptographic backends may exist\&. 
+.SH "Function Documentation"
+.PP 
+.SS "TSS2_RC ifapi_cert_to_pem (const uint8_t * certBuffer, size_t certBufferSize, char ** pemCert, TPM2_ALG_ID * certAlgorithmId, TPM2B_PUBLIC * tpmPublic)"
+Converts a TPM certificate buffer to the PEM format\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcertBuffer\fP A byte buffer holding the certificate 
+.br
+\fIcertBufferSize\fP The size of certBuffer in bytes 
+.br
+\fIpemCert\fP A byte buffer where the PEM-formatted certificate is stored 
+.br
+\fIcertAlgorithmId\fP The key type of the certified key 
+.br
+\fItpmPublic\fP The public key of the certificate in TPM format\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if certBuffer or pemCert is NULL 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if memory could not be allocated 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the certificate is invalid 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an error occurs in the crypto library 
+.RE
+.PP
+
+.SS "void ifapi_crypto_hash_abort (\fBIFAPI_CRYPTO_CONTEXT_BLOB\fP ** context)"
+Aborts a hash operation and finalizes the hash context\&. It will be set to NULL\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The context of the digest object\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_crypto_hash_finish (\fBIFAPI_CRYPTO_CONTEXT_BLOB\fP ** context, uint8_t * digest, size_t * digestSize)"
+Gets the digest value from a hash context and closes it\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The hash context that is released 
+.br
+\fIdigest\fP The buffer for the digest value 
+.br
+\fIdigestSize\fP The size of digest in bytes\&. Can be NULL
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if context or digest is NULL 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an error occurs in the crypto library 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_crypto_hash_start (\fBIFAPI_CRYPTO_CONTEXT_BLOB\fP ** context, TPM2_ALG_ID hashAlgorithm)"
+Starts the computation of a hash digest\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The created hash context (callee-allocated)\&. 
+.br
+\fIhashAlgorithm\fP The TSS hash identifier for the hash algorithm to use\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if hashAlgorithm is invalid 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if context is NULL 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if memory cannot be allocated 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an error occurs in the crypto library 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_crypto_hash_update (\fBIFAPI_CRYPTO_CONTEXT_BLOB\fP * context, const uint8_t * buffer, size_t size)"
+Updates the digest value of a hash object with data from a byte buffer\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The hash context that will be updated 
+.br
+\fIbuffer\fP The data for the update 
+.br
+\fIsize\fP The size of data in bytes
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP for invalid parameters\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an error occurs in the crypto library 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_curl_verify_ek_cert (char * root_cert_pem, char * intermed_cert_pem, char * ek_cert_pem)"
+Verify EK certificate read from TPM\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIroot_cert_pem\fP The vendor root certificate\&. 
+.br
+\fIintermed_cert_pem\fP The vendor intermediate certificate\&. 
+.br
+\fIek_cert_pem\fP The ek certificate from TPM\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the verification was no successful\&. 
+.br
+\fITSS2_FAPI_RC_NO_CERT\fP if an error did occur during certificate downloading\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_der_sig_to_tpm (const TPMT_PUBLIC * tpmPublic, const unsigned char * signature, size_t signatureSize, TPMI_ALG_HASH hashAlgorithm, TPMT_SIGNATURE * tpmSignature)"
+Convert signature from DER to TPM format\&.
+.PP
+The signature in DER format is converted to TPM format to enable verification by the TPM\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fItpmPublic\fP The public information of the signature key 
+.br
+\fIsignature\fP A byte buffer holding the DER encoded signature 
+.br
+\fIsignatureSize\fP The size of signature in bytes 
+.br
+\fIhashAlgorithm\fP The TSS identifier for the hash algorithm used to compute the digest 
+.br
+\fItpmSignature\fP The signature in TPM format
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an error occurs in the crypto library 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if tpmPublic, signature or tpmSignature is NULL 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if memory could not be allocated 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_get_hash_alg_for_size (uint16_t size, TPMI_ALG_HASH * hashAlgorithm)"
+Returns a suitable hash algorithm for a given digest size\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIsize\fP The size of the digest 
+.br
+\fIhashAlgorithm\fP A suitable hash algorithm for the digest size
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if hashAlgorithm is NULL 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the digest size is invalid 
+.RE
+.PP
+
+.SS "TPM2_RC ifapi_get_profile_sig_scheme (const \fBIFAPI_PROFILE\fP * profile, const TPMT_PUBLIC * tpmPublic, TPMT_SIG_SCHEME * signatureScheme)"
+Returns the signature scheme that is currently used in the FAPI context\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIprofile\fP The FAPI profile from which the signing scheme is retrieved 
+.br
+\fItpmPublic\fP The public key for which the signing key is fetched from the FAPI 
+.br
+\fIsignatureScheme\fP The currently used signature scheme
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the signature scheme was successfully fetched 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if one of the parameters is NULL 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the key type is not TPM2_ALG_RSA or TPM2_ALG_ECC 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_get_public_from_pem_cert (const char * pem_cert, TPM2B_PUBLIC * tpm_public)"
+Get public information for key of a pem certificate\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpem_cert\fP The pem certificate\&. 
+.br
+\fItpm_public\fP The public information of the key in TPM format\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the conversion fails\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if openssl errors occur\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TPM2_ALG_ID ifapi_get_signature_algorithm_from_pem (const char * pemKey)"
+Returns the TPM algorithm identifier that matches to the signature algorithm of a given PEM key\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpemKey\fP The public key from which the signature algorithm is retrieved
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITPM2_ALG_RSA\fP if pemKey holds an RSA key 
+.br
+\fITPM2_ALG_ECC\fP if pemKey holds an ECC key 
+.br
+\fITPM2_ALG_ERROR\fP if the signature algorithm could not be determined 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_get_tpm2b_public_from_pem (const char * pemKey, TPM2B_PUBLIC * tpmPublic)"
+Gets an object with the TPM-relevant public information of a PEM encoded public key\&. The information is gathered from the key itself and the currently used FAPI profile\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpemKey\fP A byte buffer holding the PEM encoded public key for which the public information is retrieved 
+.br
+\fItpmPublic\fP The public information of pemKey
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if profile, pemKey or tpmPublic is NULL 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if memory could not be allocated 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an error occurs in the crypto library 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_get_tpm_key_fingerprint (const TPM2B_PUBLIC * tpmPublicKey, TPMI_ALG_HASH hashAlg, TPM2B_DIGEST * fingerprint)"
+Compute the fingerprint of a TPM public key\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fItpmPublicKey\fP The public key created by the TPM 
+.br
+\fIhashAlg\fP The hash algorithm used for fingerprint computation\&. 
+.br
+\fIfingerprint\fP The fingerprint digest\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an error occurs in the crypto library 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if memory could not be allocated 
+.br
+\fITSS2_FAPI_BAD_REFERENCE\fP if tpmPublicKey or pemKeySize are NULL 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.RE
+.PP
+
+.SS "size_t ifapi_hash_get_digest_size (TPM2_ALG_ID hashAlgorithm)"
+Returns the digest size of a given hash algorithm\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIhashAlgorithm\fP The TSS identifier of the hash algorithm
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The size of the digest produced by the hash algorithm if hashAlgorithm is valid 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fI0\fP if hashAlgorithm is invalid 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_initialize_sign_public (TPM2_ALG_ID signatureAlgorithm, TPM2B_PUBLIC * public)"
+Initializes a FAPI key template for a given signature algorithm\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIsignatureAlgorithm\fP The signature algorithm to use\&. Must be TPM2_ALG_RSA or TPM2_ALG_ECC 
+.br
+\fIpublic\fP The template to initialize
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if template is NULL 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if signatureAlgorithm is not TPM2_ALG_RSA or TPM2_ALG_ECC 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_pub_pem_key_from_tpm (const TPM2B_PUBLIC * tpmPublicKey, char ** pemKey, int * pemKeySize)"
+Convert a TPM public key into a PEM formatted byte buffer\&. This can be used by TLS libraries\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fItpmPublicKey\fP The public key created by the TPM 
+.br
+\fIpemKey\fP A byte buffer that will hold the PEM representation of the public key (callee allocated) 
+.br
+\fIpemKeySize\fP The size of pemKey in bytes
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an error occurs in the crypto library 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if memory could not be allocated 
+.br
+\fITSS2_FAPI_BAD_REFERENCE\fP if tpmPublicKey or pemKeySize are NULL 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_tpm_ecc_sig_to_der (const TPMT_SIGNATURE * tpmSignature, uint8_t ** signature, size_t * signatureSize)"
+Convert a TPM ECDSA signature into a DER formatted byte buffer\&. This can be used by TLS libraries\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fItpmSignature\fP The signature created by the TPM 
+.br
+\fIsignature\fP A byte buffer that will hold the DER representation of the signature (callee allocated) 
+.br
+\fIsignatureSize\fP The size of signature in bytes\&. May be NULL
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if tpmSignature is NULL 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if memory could not be allocated 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an error occurs in the crypto library 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_verify_signature (const \fBIFAPI_OBJECT\fP * keyObject, const uint8_t * signature, size_t signatureSize, const uint8_t * digest, size_t digestSize)"
+Verifies a signature using a given FAPI public key\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIkeyObject\fP The FAPI public key used for verification 
+.br
+\fIsignature\fP The signature to verify 
+.br
+\fIsignatureSize\fP The size of signature in bytes 
+.br
+\fIdigest\fP The digest of the signature 
+.br
+\fIdigestSize\fP The size of digest in bytes
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP In case of success 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if keyObject, signature or digest is NULL 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the type of the key is wrong 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if memory could not be allocated 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an error occurs in the crypto library 
+.br
+\fITSS2_FAPI_RC_SIGNATURE_VERIFICATION_FAILED\fP if the verification of the signature fails 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_verify_signature_quote (const \fBIFAPI_OBJECT\fP * keyObject, const uint8_t * signature, size_t signatureSize, const uint8_t * digest, size_t digestSize, const TPMT_SIG_SCHEME * signatureScheme)"
+Verifies the signature created by a Quote command\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIkeyObject\fP A FAPI key with which the signature is verified 
+.br
+\fIsignature\fP A byte buffer holding the signature 
+.br
+\fIsignatureSize\fP The size of signature in bytes 
+.br
+\fIdigest\fP The digest of the signature 
+.br
+\fIdigestSize\fP The size of digest in bytes 
+.br
+\fIsignatureScheme\fP The signature scheme
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if keyObject, signature, digest or signatureScheme is NULL 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if memory could not be allocated 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the PEM encoded key could not be decoded 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an error occurs in the crypto library 
+.br
+\fITSS2_FAPI_RC_SIGNATURE_VERIFICATION_FAILED\fP if the verification of the signature fails 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

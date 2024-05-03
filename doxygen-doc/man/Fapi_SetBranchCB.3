@@ -1,0 +1,61 @@
+.TH "Fapi_SetBranchCB" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Fapi_SetBranchCB \- FAPI functions to invoke SetBranchCB\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef TSS2_RC(* \fBFapi_CB_Branch\fP) (char const *objectPath, char const *description, char const **branchNames, size_t numBranches, size_t *selectedBranch, void *userData)"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC \fBFapi_SetBranchCB\fP (\fBFAPI_CONTEXT\fP *context, Fapi_CB_Branch callback, void *userData)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+FAPI functions to invoke SetBranchCB\&. 
+
+
+.SH "Function Documentation"
+.PP 
+.SS "Fapi_SetBranchCB (\fBFAPI_CONTEXT\fP * context, Fapi_CB_Branch callback, void * userData)"
+This function registers a callback that will be invoked whenever the FAPI has to decide which branch of a Policy-OR policy to use to authorize a particular FAPI operation\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP 
+.br
+\fIcallback\fP The callback function for branch selection 
+.br
+\fIuserData\fP A pointer that is provided to all callback invocations
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if the context is NULL\&. 
+.br
+\fITSS2_FAPI_RC_BAD_CONTEXT\fP if context corruption is detected\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_FAPI_RC_BAD_SEQUENCE\fP if the synchronous or Async functions are called while the context has another asynchronous operation outstanding, or the Finish function is called while the context does not have an appropriate asynchronous operation outstanding\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if the data cannot be saved\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

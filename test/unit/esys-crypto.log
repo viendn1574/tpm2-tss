@@ -1,0 +1,45 @@
+[==========] Running 8 test(s).
+[ RUN      ] check_hash_functions
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:190:iesys_cryptossl_hash_start() Context is NULL  
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:198:iesys_cryptossl_hash_start() ErrorCode (0x00070002) Unsupported hash algorithm (0) 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:287:iesys_cryptossl_hash_finish() Null-Pointer passed ErrorCode (0x00070005) 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:295:iesys_cryptossl_hash_finish() Buffer too small ErrorCode (0x00070010) 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:246:iesys_cryptossl_hash_update() Null-Pointer passed 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:246:iesys_cryptossl_hash_update() Null-Pointer passed 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:251:iesys_cryptossl_hash_update() bad context 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:291:iesys_cryptossl_hash_finish() bad context ErrorCode (0x00070005) 
+[       OK ] check_hash_functions
+[ RUN      ] check_hmac_functions
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:374:iesys_cryptossl_hmac_start() Null-Pointer passed in for context ErrorCode (0x00070005) 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:381:iesys_cryptossl_hmac_start() ErrorCode (0x00070002) Unsupported hash algorithm (0) 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:487:iesys_cryptossl_hmac_finish() Null-Pointer passed ErrorCode (0x00070005) 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:487:iesys_cryptossl_hmac_finish() Null-Pointer passed ErrorCode (0x00070005) 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:496:iesys_cryptossl_hmac_finish() Buffer too small ErrorCode (0x00070010) 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:446:iesys_cryptossl_hmac_update() Null-Pointer passed ErrorCode (0x00070005) 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:446:iesys_cryptossl_hmac_update() Null-Pointer passed ErrorCode (0x00070005) 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:450:iesys_cryptossl_hmac_update() bad context ErrorCode (0x00070005) 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:492:iesys_cryptossl_hmac_finish() bad context ErrorCode (0x00070005) 
+[       OK ] check_hmac_functions
+[ RUN      ] check_random
+[       OK ] check_random
+[ RUN      ] check_pk_encrypt
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:645:iesys_cryptossl_pk_encrypt() Unsupported hash algorithm (0) 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:661:iesys_cryptossl_pk_encrypt() ErrorCode (0x0007000b) Illegal RSA scheme 
+[       OK ] check_pk_encrypt
+[ RUN      ] check_aes_encrypt
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:1083:iesys_cryptossl_sym_aes_encrypt() Bad reference ErrorCode (0x00070005) 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:1101:iesys_cryptossl_sym_aes_encrypt() ErrorCode (0x0007000b) AES encrypt called with wrong algorithm. 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:1095:iesys_cryptossl_sym_aes_encrypt() ErrorCode (0x0007000b) AES algorithm not implemented or illegal mode (CFB expected). 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:1095:iesys_cryptossl_sym_aes_encrypt() ErrorCode (0x0007000b) AES algorithm not implemented or illegal mode (CFB expected). 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:1166:iesys_cryptossl_sym_aes_decrypt() Bad reference ErrorCode (0x00070005) 
+ERROR:esys_crypto:src/tss2-esys/esys_crypto_ossl.c:1170:iesys_cryptossl_sym_aes_decrypt() ErrorCode (0x0007000b) AES encrypt called with wrong algorithm. 
+[       OK ] check_aes_encrypt
+[ RUN      ] check_free
+[       OK ] check_free
+[ RUN      ] check_get_sys_context
+[       OK ] check_get_sys_context
+[ RUN      ] test_backend_set
+[       OK ] test_backend_set
+[==========] 8 test(s) run.
+[  PASSED  ] 8 test(s).
+PASS test/unit/esys-crypto (exit status: 0)

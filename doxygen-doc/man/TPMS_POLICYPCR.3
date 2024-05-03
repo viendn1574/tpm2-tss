@@ -1,0 +1,40 @@
+.TH "TPMS_POLICYPCR" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+TPMS_POLICYPCR
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ifapi_policy_types\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "struct TPML_PCRVALUES * \fBpcrs\fP"
+.br
+.ti -1c
+.RI "TPMS_PCR_SELECT \fBcurrentPCRs\fP"
+.br
+.ti -1c
+.RI "TPML_PCR_SELECTION \fBcurrentPCRandBanks\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Policy type \fBTPMS_POLICYPCR\fP 
+.SH "Field Documentation"
+.PP 
+.SS "TPML_PCR_SELECTION currentPCRandBanks"
+Complete selection with banks 
+.br
+ 
+.SS "TPMS_PCR_SELECT currentPCRs"
+The hashAlg are inferred from 
+.SS "struct TPML_PCRVALUES* pcrs"
+None 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

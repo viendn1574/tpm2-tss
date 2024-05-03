@@ -1,0 +1,24 @@
+[==========] Running 8 test(s).
+[ RUN      ] test_tctildr_get_default_null_param
+ERROR:tcti:src/tss2-tcti/tctildr-nodl.c:135:tctildr_get_default() tcticontext must not be NULL 
+[       OK ] test_tctildr_get_default_null_param
+[ RUN      ] test_tctildr_get_default_all_fail
+ERROR:tcti:src/tss2-tcti/tctildr-nodl.c:151:tctildr_get_default() No standard TCTI could be loaded 
+[       OK ] test_tctildr_get_default_all_fail
+[ RUN      ] test_get_tcti_null_tcti
+ERROR:tcti:src/tss2-tcti/tctildr-nodl.c:163:tctildr_get_tcti() tcticontext must not be NULL 
+[       OK ] test_get_tcti_null_tcti
+[ RUN      ] test_get_tcti_default_success
+[       OK ] test_get_tcti_default_success
+[ RUN      ] test_get_tcti_match_second
+[       OK ] test_get_tcti_match_second
+[ RUN      ] test_get_tcti_match_none
+ERROR:tcti:src/tss2-tcti/tctildr-nodl.c:182:tctildr_get_tcti() Unable to initialize TCTI with name: "foo" 
+[       OK ] test_get_tcti_match_none
+[ RUN      ] test_finalize_data
+[       OK ] test_finalize_data
+[ RUN      ] test_get_info
+[       OK ] test_get_info
+[==========] 8 test(s) run.
+[  PASSED  ] 8 test(s).
+PASS test/unit/tctildr-nodl (exit status: 0)

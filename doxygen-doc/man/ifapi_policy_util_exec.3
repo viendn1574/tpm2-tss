@@ -1,0 +1,110 @@
+.TH "ifapi_policy_util_exec" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ifapi_policy_util_exec
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC \fBifapi_policyutil_execute\fP (\fBFAPI_CONTEXT\fP *context, \fBESYS_TR\fP *session)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_policyutil_execute_prepare\fP (\fBFAPI_CONTEXT\fP *context, TPMI_ALG_HASH hash_alg, \fBTPMS_POLICY\fP *policy)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Provides functions for the execution of policies for object authorization\&. 
+.SH "Function Documentation"
+.PP 
+.SS "TSS2_RC ifapi_policyutil_execute (\fBFAPI_CONTEXT\fP * context, \fBESYS_TR\fP * session)"
+State machine to Execute the TPM policy commands needed for the current policy\&.
+.PP
+In the first step a session will be created if no session is passed\&. In the second step the policy engine will execute the policy\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The fapi context with the pointer to the policy stack\&. 
+.br
+\fIsession\fP The policy session to be extended or if the value is equal zero or ESYS_TR_NONE a new created session will been be stored in this parameter\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP If wrong values are detected during execution\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP If an error occurs during access to the policy store\&. 
+.br
+\fITSS2_FAPI_RC_POLICY_UNKNOWN\fP If policy search for a certain policy digest was not successful\&. 
+.br
+\fITSS2_FAPI_RC_BAD_TEMPLATE\fP In a invalid policy is loaded during execution\&. 
+.br
+\fITPM2_RC_BAD_AUTH\fP If the authentication for an object needed for policy execution fails\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_TRY_AGAIN\fP if an I/O operation is not finished yet and this function needs to be called again\&. 
+.br
+\fITSS2_FAPI_RC_BAD_SEQUENCE\fP if the context has an asynchronous operation already pending\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_PATH_NOT_FOUND\fP if a FAPI object path was not found during authorization\&. 
+.br
+\fITSS2_FAPI_RC_KEY_NOT_FOUND\fP if a key was not found\&. 
+.br
+\fITSS2_FAPI_RC_AUTHORIZATION_UNKNOWN\fP if a required authorization callback is not set\&. 
+.br
+\fITSS2_FAPI_RC_AUTHORIZATION_FAILED\fP if the authorization attempt fails\&. 
+.br
+\fITSS2_ESYS_RC_*\fP possible error codes of ESAPI\&. 
+.br
+\fITSS2_FAPI_RC_BAD_PATH\fP if the path is used in inappropriate context or contains illegal characters\&. 
+.br
+\fITSS2_FAPI_RC_NOT_PROVISIONED\fP FAPI was not provisioned\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_policyutil_execute_prepare (\fBFAPI_CONTEXT\fP * context, TPMI_ALG_HASH hash_alg, \fBTPMS_POLICY\fP * policy)"
+Prepare the execution of a new policy on policy stack\&.
+.PP
+The context for the policy utility, the policy execution and the needed callbacks is initialized\&. The policy execution will be prepared\&. In this step the list of policies to be executed will be computed\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The fapi context with the pointer to the policy stack\&. 
+.br
+\fIhash_alg\fP The hash algorithm used for the policy computation\&. 
+.br
+\fIpolicy\fP The policy to be executed\&. Some policy elements will be used to store computed parameters needed for policy execution\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_AUTHORIZATION_UNKNOWN\fP If the callback for branch selection is not defined\&. This callback will be needed of or policies have to be executed\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP If the computed branch index delivered by the callback does not identify a branch\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP If no context is passed\&.
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.br
+\fITSS2_FAPI_RC_AUTHORIZATION_FAILED\fP if the authorization attempt fails\&. 
+.br
+\fITSS2_ESYS_RC_*\fP possible error codes of ESAPI\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

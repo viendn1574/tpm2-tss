@@ -1,0 +1,136 @@
+.TH "Fapi_GetInfo" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Fapi_GetInfo \- FAPI functions to invoke GetInfo either as one-call or in an asynchronous manner\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC \fBFapi_GetInfo\fP (\fBFAPI_CONTEXT\fP *context, char **info)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBFapi_GetInfo_Async\fP (\fBFAPI_CONTEXT\fP *context)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBFapi_GetInfo_Finish\fP (\fBFAPI_CONTEXT\fP *context, char **info)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+FAPI functions to invoke GetInfo either as one-call or in an asynchronous manner\&. 
+
+
+.SH "Function Documentation"
+.PP 
+.SS "Fapi_GetInfo (\fBFAPI_CONTEXT\fP * context, char ** info)"
+One-Call function for Fapi_GetInfo
+.PP
+Returns a UTF-8 encoded string that identifies the versions of FAPI, TPM, configurations and other relevant information\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP 
+.br
+\fIinfo\fP The byte buffer for the information string
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if context or info is NULL\&. 
+.br
+\fITSS2_FAPI_RC_BAD_CONTEXT\fP if context corruption is detected\&. 
+.br
+\fITSS2_FAPI_RC_BAD_SEQUENCE\fP if the context has an asynchronous operation already pending\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if the data cannot be saved\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_FAPI_RC_NO_TPM\fP if FAPI was initialized in no-TPM-mode via its config file\&. 
+.br
+\fITSS2_FAPI_RC_TRY_AGAIN\fP if an I/O operation is not finished yet and this function needs to be called again\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_ESYS_RC_*\fP possible error codes of ESAPI\&. 
+.RE
+.PP
+
+.SS "Fapi_GetInfo_Async (\fBFAPI_CONTEXT\fP * context)"
+Asynchronous function for Fapi_GetInfo
+.PP
+Returns a UTF-8 encoded string that identifies the versions of FAPI, TPM, configurations and other relevant information\&.
+.PP
+Call Fapi_GetInfo_Finish to finish the execution of this command\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if context is NULL\&. 
+.br
+\fITSS2_FAPI_RC_BAD_CONTEXT\fP if context corruption is detected\&. 
+.br
+\fITSS2_FAPI_RC_BAD_SEQUENCE\fP if the context has an asynchronous operation already pending\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if the data cannot be saved\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_FAPI_RC_NO_TPM\fP if FAPI was initialized in no-TPM-mode via its config file\&. 
+.RE
+.PP
+
+.SS "Fapi_GetInfo_Finish (\fBFAPI_CONTEXT\fP * context, char ** info)"
+Asynchronous finish function for Fapi_GetInfo
+.PP
+This function should be called after a previous Fapi_GetInfo_Async\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP The \fBFAPI_CONTEXT\fP 
+.br
+\fIinfo\fP The byte buffer for the information string
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if context or info is NULL\&. 
+.br
+\fITSS2_FAPI_RC_BAD_CONTEXT\fP if context corruption is detected\&. 
+.br
+\fITSS2_FAPI_RC_BAD_SEQUENCE\fP if the context has an asynchronous operation already pending\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if the data cannot be saved\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_FAPI_RC_TRY_AGAIN\fP if the asynchronous operation is not yet complete\&. Call this function again later\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_ESYS_RC_*\fP possible error codes of ESAPI\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

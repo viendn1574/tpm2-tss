@@ -1,0 +1,64 @@
+.TH "tpm2_eventlog_context" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+tpm2_eventlog_context
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "void * \fBdata\fP"
+.br
+.ti -1c
+.RI "SPECID_CALLBACK \fBspecid_cb\fP"
+.br
+.ti -1c
+.RI "LOG_EVENT_CALLBACK \fBlog_eventhdr_cb\fP"
+.br
+.ti -1c
+.RI "EVENT2_CALLBACK \fBevent2hdr_cb\fP"
+.br
+.ti -1c
+.RI "DIGEST2_CALLBACK \fBdigest2_cb\fP"
+.br
+.ti -1c
+.RI "EVENT2DATA_CALLBACK \fBevent2_cb\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBsha1_used\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBsha256_used\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBsha384_used\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBsha512_used\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBsm3_256_used\fP"
+.br
+.ti -1c
+.RI "uint8_t \fBsha1_pcrs\fP [TPM2_MAX_PCRS][TPM2_SHA1_DIGEST_SIZE]"
+.br
+.ti -1c
+.RI "uint8_t \fBsha256_pcrs\fP [TPM2_MAX_PCRS][TPM2_SHA256_DIGEST_SIZE]"
+.br
+.ti -1c
+.RI "uint8_t \fBsha384_pcrs\fP [TPM2_MAX_PCRS][TPM2_SHA384_DIGEST_SIZE]"
+.br
+.ti -1c
+.RI "uint8_t \fBsha512_pcrs\fP [TPM2_MAX_PCRS][TPM2_SHA512_DIGEST_SIZE]"
+.br
+.ti -1c
+.RI "uint8_t \fBsm3_256_pcrs\fP [TPM2_MAX_PCRS][TPM2_SM3_256_DIGEST_SIZE]"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

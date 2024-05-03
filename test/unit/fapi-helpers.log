@@ -1,0 +1,45 @@
+[==========] Running 5 test(s).
+[ RUN      ] check_get_nv_start_index
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1886:ifapi_get_nv_start_index() ErrorCode (0x0006001d) Invalid NV path: /nv/wrong_path 
+[       OK ] check_get_nv_start_index
+[ RUN      ] check_check_nv_index
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1911:ifapi_check_nv_index() ErrorCode (0x0006000b) NV TPM handle not in the range 0x01000000:0x013fffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1911:ifapi_check_nv_index() ErrorCode (0x0006000b) NV TPM handle not in the range 0x01000000:0x013fffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1916:ifapi_check_nv_index() ErrorCode (0x0006000b) NV Platform handle not in the range 0x01400000:0x017fffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1916:ifapi_check_nv_index() ErrorCode (0x0006000b) NV Platform handle not in the range 0x01400000:0x017fffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1921:ifapi_check_nv_index() ErrorCode (0x0006000b) NV Owner handle not in the range 0x01800000:0x01bfffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1921:ifapi_check_nv_index() ErrorCode (0x0006000b) NV Owner handle not in the range 0x01800000:0x01bfffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1926:ifapi_check_nv_index() ErrorCode (0x0006000b) NV Endorsement Certificate handle not in the range 0x01c00000:0x01c07fff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1926:ifapi_check_nv_index() ErrorCode (0x0006000b) NV Endorsement Certificate handle not in the range 0x01c00000:0x01c07fff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1932:ifapi_check_nv_index() ErrorCode (0x0006000b) NV  Platform Certificate handle not in the range 0x01c08000:0x01c0ffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1932:ifapi_check_nv_index() ErrorCode (0x0006000b) NV  Platform Certificate handle not in the range 0x01c08000:0x01c0ffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1938:ifapi_check_nv_index() ErrorCode (0x0006000b) NV Component OEM handle not in the range 0x01c10000:0x01c1ffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1938:ifapi_check_nv_index() ErrorCode (0x0006000b) NV Component OEM handle not in the range 0x01c10000:0x01c1ffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1944:ifapi_check_nv_index() ErrorCode (0x0006000b) NV TPM OEM handle not in the range 0x01c20000:0x01c2ffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1944:ifapi_check_nv_index() ErrorCode (0x0006000b) NV TPM OEM handle not in the range 0x01c20000:0x01c2ffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1950:ifapi_check_nv_index() ErrorCode (0x0006000b) NV Platform OEM handle not in the range 0x01c30000:0x01c3ffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1950:ifapi_check_nv_index() ErrorCode (0x0006000b) NV Platform OEM handle not in the range 0x01c30000:0x01c3ffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1956:ifapi_check_nv_index() ErrorCode (0x0006000b) NV PC-Client handle not in the range 0x01c40000:0x01c4ffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1956:ifapi_check_nv_index() ErrorCode (0x0006000b) NV PC-Client handle not in the range 0x01c40000:0x01c4ffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1962:ifapi_check_nv_index() ErrorCode (0x0006000b) NV PC-Client handle not in the range 0x01c50000:0x01c5ffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1962:ifapi_check_nv_index() ErrorCode (0x0006000b) NV PC-Client handle not in the range 0x01c50000:0x01c5ffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1968:ifapi_check_nv_index() ErrorCode (0x0006000b) NV PC-Client handle not in the range 0x01c60000:0x016cffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1968:ifapi_check_nv_index() ErrorCode (0x0006000b) NV PC-Client handle not in the range 0x01c60000:0x016cffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1974:ifapi_check_nv_index() ErrorCode (0x0006000b) NV PC-Client handle not in the range 0x01c70000:0x017cffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1974:ifapi_check_nv_index() ErrorCode (0x0006000b) NV PC-Client handle not in the range 0x01c70000:0x017cffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1980:ifapi_check_nv_index() ErrorCode (0x0006000b) NV PC-Client handle not in the range 0x01c80000:0x018cffff 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1980:ifapi_check_nv_index() ErrorCode (0x0006000b) NV PC-Client handle not in the range 0x01c80000:0x018cffff 
+[       OK ] check_check_nv_index
+[ RUN      ] check_cmp_TPMU_PUBLIC_ID
+[       OK ] check_cmp_TPMU_PUBLIC_ID
+[ RUN      ] check_get_name
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1488:ifapi_get_name() Marshaling TPMT_PUBLIC 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1495:ifapi_get_name() crypto hash update 
+ERROR:fapi:src/tss2-fapi/ifapi_helpers.c:1503:ifapi_get_name() crypto hash finish 
+[       OK ] check_get_name
+[ RUN      ] check_get_profile_sig_scheme
+ERROR:fapi:src/tss2-fapi/fapi_crypto.c:111:ifapi_get_profile_sig_scheme() Invalid key type. ErrorCode (0x0006000b) 
+[       OK ] check_get_profile_sig_scheme
+[==========] 5 test(s) run.
+[  PASSED  ] 5 test(s).
+PASS test/unit/fapi-helpers (exit status: 0)

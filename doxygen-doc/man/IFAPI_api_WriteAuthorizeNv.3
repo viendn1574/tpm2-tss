@@ -1,0 +1,43 @@
+.TH "IFAPI_api_WriteAuthorizeNv" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_api_WriteAuthorizeNv
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <fapi_int\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "const char * \fBpolicyPath\fP"
+.br
+.ti -1c
+.RI "TPMI_ALG_HASH * \fBhash_alg\fP"
+.br
+.ti -1c
+.RI "size_t \fBhash_size\fP"
+.br
+.ti -1c
+.RI "size_t \fBdigest_idx\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The data structure holding internal state of Fapi_WriteAuthorizeNv\&. 
+.SH "Field Documentation"
+.PP 
+.SS "size_t digest_idx"
+The index of the digest in the policy 
+.SS "TPMI_ALG_HASH* hash_alg"
+The hash alg used for digest computation 
+.SS "size_t hash_size"
+The digest size 
+.SS "const char* policyPath"
+Policy with Policy to be authorized 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

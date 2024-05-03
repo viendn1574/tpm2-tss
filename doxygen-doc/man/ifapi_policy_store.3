@@ -1,0 +1,196 @@
+.TH "ifapi_policy_store" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ifapi_policy_store
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC \fBifapi_policy_delete\fP (\fBIFAPI_POLICY_STORE\fP *pstore, char *path)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_policy_store_initialize\fP (\fBIFAPI_POLICY_STORE\fP *pstore, const char *config_policydir)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_policy_store_load_async\fP (\fBIFAPI_POLICY_STORE\fP *pstore, \fBIFAPI_IO\fP *io, const char *path)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_policy_store_load_finish\fP (\fBIFAPI_POLICY_STORE\fP *pstore, \fBIFAPI_IO\fP *io, \fBTPMS_POLICY\fP *policy)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_policy_store_store_async\fP (\fBIFAPI_POLICY_STORE\fP *pstore, \fBIFAPI_IO\fP *io, const char *path, const \fBTPMS_POLICY\fP *policy)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_policy_store_store_finish\fP (\fBIFAPI_POLICY_STORE\fP *pstore, \fBIFAPI_IO\fP *io)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Provides internal fapi functions for reading and writing to the policy store\&. 
+.SH "Function Documentation"
+.PP 
+.SS "TSS2_RC ifapi_policy_delete (\fBIFAPI_POLICY_STORE\fP * pstore, char * path)"
+Remove file storing a policy object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpstore\fP The policy directory\&. 
+.br
+\fIpath\fP The relative name of the object be removed\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP On success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP If memory could not be allocated\&. 
+.br
+\fITSS2_FAPI_RC_PATH_NOT_FOUND\fP If no file is found in policy store\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP If the file can't be removed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_policy_store_initialize (\fBIFAPI_POLICY_STORE\fP * pstore, const char * config_policydir)"
+Store policy store parameters in the policy store context\&.
+.PP
+Also the user directory will be created if it does not exist\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpstore\fP The keystore to be initialized\&. 
+.br
+\fIconfig_policydir\fP The configured policy directory\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP If the keystore can be initialized\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP If the policy store can't be initialized\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if memory could not be allocated\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_policy_store_load_async (\fBIFAPI_POLICY_STORE\fP * pstore, \fBIFAPI_IO\fP * io, const char * path)"
+Start loading FAPI policy from policy store\&.
+.PP
+Keys objects, NV objects, and hierarchies can be loaded\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpstore\fP The policy directory\&. 
+.br
+\fIio\fP The input/output context being used for file I/O\&. 
+.br
+\fIpath\fP The relative path of the object\&. For keys the path will expanded if possible\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP If the object can be read\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if an I/O error was encountered\&. 
+.br
+\fITSS2_FAPI_RC_PATH_NOT_FOUND\fP if the file does not exist\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if memory could not be allocated to hold the read data\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_policy_store_load_finish (\fBIFAPI_POLICY_STORE\fP * pstore, \fBIFAPI_IO\fP * io, \fBTPMS_POLICY\fP * policy)"
+Finish loading FAPI policy from policy store\&.
+.PP
+This function needs to be called repeatedly until it does not return TSS2_FAPI_RC_TRY_AGAIN\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpstore\fP The policy context with the policy directory\&. 
+.br
+\fIio\fP The input/output context being used for file I/O\&. 
+.br
+\fIpolicy\fP The caller allocated policy which will loaded from policy store\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP After successfully loading the object\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if an I/O error was encountered; such as the file was not found\&. 
+.br
+\fITSS2_FAPI_RC_TRY_AGAIN\fP if the asynchronous operation is not yet complete\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_policy_store_store_async (\fBIFAPI_POLICY_STORE\fP * pstore, \fBIFAPI_IO\fP * io, const char * path, const \fBTPMS_POLICY\fP * policy)"
+Start writing FAPI object to the key store\&.
+.PP
+The relative path will be expanded, if the default policy directory (/policy) is not part of the path\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpstore\fP The policy context with the policy directory\&. 
+.br
+\fIio\fP The input/output context being used for file I/O\&. 
+.br
+\fIpath\fP The relative path of the policy\&. 
+.br
+\fIpolicy\fP The policy to be written to the policy store\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP If the policy is written successfully\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP If an I/O error was encountered; 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP If memory could not be allocated to hold the output data\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_policy_store_store_finish (\fBIFAPI_POLICY_STORE\fP * pstore, \fBIFAPI_IO\fP * io)"
+Finish writing a FAPI policy object to the policy store\&.
+.PP
+This function needs to be called repeatedly until it does not return TSS2_FAPI_RC_TRY_AGAIN\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpstore\fP The policy context with the policy directory\&. 
+.br
+\fIio\fP The input/output context being used for file I/O\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if an I/O error was encountered; such as the file was not found\&. 
+.br
+\fITSS2_FAPI_RC_TRY_AGAIN\fP if the asynchronous operation is not yet complete\&. Call this function again later\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

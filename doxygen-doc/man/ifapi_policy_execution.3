@@ -1,0 +1,99 @@
+.TH "ifapi_policy_execution" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ifapi_policy_execution
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC \fBget_policy_digest_idx\fP (TPML_DIGEST_VALUES *digest_values, TPMI_ALG_HASH hashAlg, size_t *idx)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_extend_authorization\fP (\fBTPMS_POLICY\fP *policy, \fBTPMS_POLICYAUTHORIZATION\fP *authorization)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_policyeval_execute_prepare\fP (\fBIFAPI_POLICY_EXEC_CTX\fP *pol_ctx, TPMI_ALG_HASH hash_alg, \fBTPMS_POLICY\fP *policy)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Provides internal functions for policy execution\&. 
+.SH "Function Documentation"
+.PP 
+.SS "TSS2_RC get_policy_digest_idx (TPML_DIGEST_VALUES * digest_values, TPMI_ALG_HASH hashAlg, size_t * idx)"
+Compute the index for the current digest list and clear the digest\&.
+.PP
+The list entry with the appropriate hash algorithm will be searched\&. The found digest will be set to zero\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIdigest_values\fP The list of policy digests and corresponding hash algorithms\&. 
+.br
+\fIhashAlg\fP The hash algorithm to be searched\&. 
+.br
+\fIidx\fP The index of the found digest\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP If no appropriate digest was found in the digest list\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_extend_authorization (\fBTPMS_POLICY\fP * policy, \fBTPMS_POLICYAUTHORIZATION\fP * authorization)"
+Add a new authorization to a policy\&.
+.PP
+The the signed hash computed from the policy digest and the policyRef together with the public key of the key used for signing will be stored in the policy\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpolicy\fP The policy to be authorized\&. 
+.br
+\fIauthorization\fP The structure with the signature, the policyRef and the public key\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP If the memory for the authorization list cannot be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_policyeval_execute_prepare (\fBIFAPI_POLICY_EXEC_CTX\fP * pol_ctx, TPMI_ALG_HASH hash_alg, \fBTPMS_POLICY\fP * policy)"
+Initialize policy element list to be executed and store policy in context\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpol_ctx\fP Context for execution of a list of policy elements\&. 
+.br
+\fIhash_alg\fP The hash algorithm used for the policy computation\&. 
+.br
+\fIpolicy\fP The policy to be executed\&. Some policy elements will be used to store computed parameters needed for policy execution\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_AUTHORIZATION_UNKNOWN\fP If the callback for branch selection is not defined\&. This callback will be needed if or policies have to be executed\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP If the computed branch index delivered by the callback does not identify a branch\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_AUTHORIZATION_FAILED\fP if the authorization attempt fails\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

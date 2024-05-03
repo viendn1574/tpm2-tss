@@ -1,0 +1,62 @@
+[==========] Running 10 test(s).
+[ RUN      ] tcti_pcap_init_context_and_size_null_test
+[       OK ] tcti_pcap_init_context_and_size_null_test
+[ RUN      ] tcti_pcap_init_size_test
+[       OK ] tcti_pcap_init_size_test
+[ RUN      ] tcti_pcap_init_tctildr_fail_test
+ERROR:tcti:src/tss2-tcti/tcti-pcap.c:262:Tss2_Tcti_Pcap_Init() Error loading TCTI: (null) 
+[       OK ] tcti_pcap_init_tctildr_fail_test
+[ RUN      ] tcti_pcap_init_open_fail_test
+ERROR:tcti:src/tss2-tcti/tcti-pcap-builder.c:221:pcap_init() Failed to open file pcap_file: Success 
+WARNING:tcti:src/tss2-tcti/tcti-pcap-builder.c:316:pcap_deinit() Failed to close file: Bad file descriptor 
+ERROR:tcti:src/tss2-tcti/tcti-pcap.c:281:Tss2_Tcti_Pcap_Init() Failed to initialize PCAP TCTI 
+[       OK ] tcti_pcap_init_open_fail_test
+[ RUN      ] tcti_pcap_init_write_fail_test
+exp: 0a0d0d0a1c0000004d3c2b1a01000000ffffffffffffffff1c0000000100000014000000e40000000000000014000000
+got: 0a0d0d0a1c0000004d3c2b1a01000000ffffffffffffffff1c0000000100000014000000e40000000000000014000000
+ERROR:tcti:src/util/io.c:114:write_all() failed to write to fd 19088743: Bad file descriptor 
+ERROR:tcti:src/tss2-tcti/tcti-pcap-builder.c:247:pcap_init() Failed to write to file pcap_file: Bad file descriptor 
+ERROR:tcti:src/tss2-tcti/tcti-pcap.c:281:Tss2_Tcti_Pcap_Init() Failed to initialize PCAP TCTI 
+[       OK ] tcti_pcap_init_write_fail_test
+[ RUN      ] tcti_pcap_receive_test
+exp: 0a0d0d0a1c0000004d3c2b1a01000000ffffffffffffffff1c0000000100000014000000e40000000000000014000000
+got: 0a0d0d0a1c0000004d3c2b1a01000000ffffffffffffffff1c0000000100000014000000e40000000000000014000000
+exp: 060000004c0000000000000003020100070605042b0000002b0000004500002b00004000ff06000005060708010203040911c350aabbccdd001122335010ffff00000000000102004c000000
+got: 060000004c0000000000000003020100070605042b0000002b0000004500002b00004000ff06000005060708010203040911c350aabbccdd001122335010ffff00000000000102004c000000
+exp: 060000004c0000000000000003020100070605042b0000002b0000004500002b00004000ff06000005060708010203040911c350aabbcce0001122335010ffff00000000000102004c000000
+got: 060000004c0000000000000003020100070605042b0000002b0000004500002b00004000ff06000005060708010203040911c350aabbcce0001122335010ffff00000000000102004c000000
+ERROR:tcti:src/util/io.c:114:write_all() failed to write to fd 19088743: Bad file descriptor 
+ERROR:tcti:src/tss2-tcti/tcti-pcap-builder.c:296:pcap_print() Failed to write to file: Bad file descriptor 
+WARNING:tcti:src/tss2-tcti/tcti-pcap.c:133:tcti_pcap_receive() Failed to save transmission to PCAP file. 
+[       OK ] tcti_pcap_receive_test
+[ RUN      ] tcti_pcap_transmit_test
+exp: 0a0d0d0a1c0000004d3c2b1a01000000ffffffffffffffff1c0000000100000014000000e40000000000000014000000
+got: 0a0d0d0a1c0000004d3c2b1a01000000ffffffffffffffff1c0000000100000014000000e40000000000000014000000
+exp: 060000004c0000000000000003020100070605042b0000002b0000004500002b00004000ff0600000102030405060708c350091100112233aabbccdd5010ffff00000000000102004c000000
+got: 060000004c0000000000000003020100070605042b0000002b0000004500002b00004000ff0600000102030405060708c350091100112233aabbccdd5010ffff00000000000102004c000000
+ERROR:tcti:src/tss2-tcti/tcti-pcap.c:86:tcti_pcap_transmit() Failed calling TCTI transmit of child TCTI module 
+exp: 060000004c0000000000000003020100070605042b0000002b0000004500002b00004000ff0600000102030405060708c350091100112236aabbccdd5010ffff00000000000102004c000000
+got: 060000004c0000000000000003020100070605042b0000002b0000004500002b00004000ff0600000102030405060708c350091100112236aabbccdd5010ffff00000000000102004c000000
+exp: 060000004c0000000000000003020100070605042b0000002b0000004500002b00004000ff0600000102030405060708c350091100112239aabbccdd5010ffff00000000000102004c000000
+got: 060000004c0000000000000003020100070605042b0000002b0000004500002b00004000ff0600000102030405060708c350091100112239aabbccdd5010ffff00000000000102004c000000
+ERROR:tcti:src/util/io.c:114:write_all() failed to write to fd 19088743: Bad file descriptor 
+ERROR:tcti:src/tss2-tcti/tcti-pcap-builder.c:296:pcap_print() Failed to write to file: Bad file descriptor 
+WARNING:tcti:src/tss2-tcti/tcti-pcap.c:81:tcti_pcap_transmit() Failed to save transmission to PCAP file. 
+[       OK ] tcti_pcap_transmit_test
+[ RUN      ] tcti_pcap_cancel_test
+exp: 0a0d0d0a1c0000004d3c2b1a01000000ffffffffffffffff1c0000000100000014000000e40000000000000014000000
+got: 0a0d0d0a1c0000004d3c2b1a01000000ffffffffffffffff1c0000000100000014000000e40000000000000014000000
+WARNING:tcti:src/tss2-tcti/tcti-pcap.c:156:tcti_pcap_cancel() Logging Tcti_Cancel to a PCAP file is not implemented 
+[       OK ] tcti_pcap_cancel_test
+[ RUN      ] tcti_pcap_set_locality_test
+exp: 0a0d0d0a1c0000004d3c2b1a01000000ffffffffffffffff1c0000000100000014000000e40000000000000014000000
+got: 0a0d0d0a1c0000004d3c2b1a01000000ffffffffffffffff1c0000000100000014000000e40000000000000014000000
+WARNING:tcti:src/tss2-tcti/tcti-pcap.c:185:tcti_pcap_set_locality() Logging Tcti_SetLocality to a PCAP file is not implemented 
+[       OK ] tcti_pcap_set_locality_test
+[ RUN      ] tcti_pcap_get_poll_handles_test
+exp: 0a0d0d0a1c0000004d3c2b1a01000000ffffffffffffffff1c0000000100000014000000e40000000000000014000000
+got: 0a0d0d0a1c0000004d3c2b1a01000000ffffffffffffffff1c0000000100000014000000e40000000000000014000000
+[       OK ] tcti_pcap_get_poll_handles_test
+[==========] 10 test(s) run.
+[  PASSED  ] 10 test(s).
+PASS test/unit/tcti-pcap (exit status: 0)

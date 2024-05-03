@@ -1,0 +1,209 @@
+.TH "ifapi_policy_callbacks" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ifapi_policy_callbacks
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC \fBifapi_get_duplicate_name\fP (TPM2B_NAME *name, void *userdata)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_get_key_public\fP (const char *path, TPMT_PUBLIC *public, void *ctx)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_get_object_name\fP (const char *path, TPM2B_NAME *name, void *ctx)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_policy_action\fP (const char *action, void *userdata)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_policyeval_cbauth\fP (TPM2B_NAME *name, \fBESYS_TR\fP *object_handle, \fBESYS_TR\fP *auth_handle, \fBESYS_TR\fP *authSession, void *userdata)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Provides internal callbacks functions for policy execution\&. 
+.SH "Function Documentation"
+.PP 
+.SS "TSS2_RC ifapi_get_duplicate_name (TPM2B_NAME * name, void * userdata)"
+Callback for getting the name of a key to be duplicated\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP the name of the object to be duplicated\&. 
+.br
+\fIuserdata\fP The user context to retrieve the key\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if the context is not passed or the object to be duplicated is not set\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_get_key_public (const char * path, TPMT_PUBLIC * public, void * ctx)"
+Get public data of a key from keystore\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP The relative path of the key\&. 
+.br
+\fIpublic\fP The caller allocated public structure\&. 
+.br
+\fIctx\fP The context to access io and keystore module and to store the io state\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if the data cannot be loaded\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_FAPI_RC_BAD_TEMPLATE\fP If the loaded template is not appropriate for this operation\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_TRY_AGAIN\fP if an I/O operation is not finished yet and this function needs to be called again\&. 
+.br
+\fITSS2_FAPI_RC_BAD_SEQUENCE\fP if the context has an asynchronous operation already pending\&. 
+.br
+\fITSS2_FAPI_RC_PATH_NOT_FOUND\fP if a FAPI object path was not found during authorization\&. 
+.br
+\fITSS2_FAPI_RC_KEY_NOT_FOUND\fP if a key was not found\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_NOT_PROVISIONED\fP FAPI was not provisioned\&. 
+.br
+\fITSS2_FAPI_RC_BAD_PATH\fP if the path is used in inappropriate context or contains illegal characters\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_get_object_name (const char * path, TPM2B_NAME * name, void * ctx)"
+Get TPM name of an object from key keystore\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP The relative path of the object\&. 
+.br
+\fIname\fP The caller allocate public structure\&. 
+.br
+\fIctx\fP The context to access io and keystore module and to store the io state\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if the data cannot be loaded\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the FAPI cannot allocate enough memory for internal operations or return parameters\&. 
+.br
+\fITSS2_FAPI_RC_BAD_TEMPLATE\fP If the loaded template is not appropriate for this operation\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_TRY_AGAIN\fP if an I/O operation is not finished yet and this function needs to be called again\&. 
+.br
+\fITSS2_FAPI_RC_BAD_SEQUENCE\fP if the context has an asynchronous operation already pending\&. 
+.br
+\fITSS2_FAPI_RC_PATH_NOT_FOUND\fP if a FAPI object path was not found during authorization\&. 
+.br
+\fITSS2_FAPI_RC_KEY_NOT_FOUND\fP if a key was not found\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_NOT_PROVISIONED\fP FAPI was not provisioned\&. 
+.br
+\fITSS2_FAPI_RC_BAD_PATH\fP if the path is used in inappropriate context or contains illegal characters\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_policy_action (const char * action, void * userdata)"
+Callback for policy action\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIaction\fP The name of the policy action\&. 
+.br
+\fIuserdata\fP The Fapi context which will be used for keystore access, and storing the policy execution state\&. the io state\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_AUTHORIZATION_UNKNOWN\fP If the callback for branch selection is not defined\&. This callback will be needed of or policies have to be executed\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP If no user data is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_policyeval_cbauth (TPM2B_NAME * name, \fBESYS_TR\fP * object_handle, \fBESYS_TR\fP * auth_handle, \fBESYS_TR\fP * authSession, void * userdata)"
+Callback for authorization of objects used by policy\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP The name of the object to be authorized\&. 
+.br
+\fIobject_handle\fP The ESYS handle of the used object\&. 
+.br
+\fIauth_handle\fP will be used for object authorization\&. For keys it will we equal to the object handle\&. 
+.br
+\fIauthSession\fP The session used for object authorization\&. 
+.br
+\fIuserdata\fP The Fapi context which will be used for keystore access, and storing the policy execution state\&. the io state\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if context or policy is NULL\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if memory allocation failed\&. 
+.br
+\fITSS2_FAPI_RC_TRY_AGAIN\fP if the asynchronous operation is not yet complete\&. Call this function again later\&. 
+.br
+\fITSS2_FAPI_RC_BAD_SEQUENCE\fP if the context has an asynchronous operation already pending\&. 
+.br
+\fITSS2_FAPI_RC_PATH_NOT_FOUND\fP If a policy was not found\&. 
+.br
+\fITSS2_FAPI_RC_KEY_NOT_FOUND\fP If a key was not found\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP If an IO error occurred during reading a policy or a key\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP If an error in an used library occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_AUTHORIZATION_UNKNOWN\fP if a required authorization callback is not set\&. 
+.br
+\fITSS2_FAPI_RC_AUTHORIZATION_FAILED\fP if the authorization attempt fails\&. 
+.br
+\fITSS2_FAPI_RC_POLICY_UNKNOWN\fP if policy search for a certain policy digest was not successful\&. 
+.br
+\fITSS2_ESYS_RC_*\fP possible error codes of ESAPI\&. 
+.br
+\fITSS2_FAPI_RC_BAD_PATH\fP if the path is used in inappropriate context or contains illegal characters\&. 
+.br
+\fITSS2_FAPI_RC_NOT_PROVISIONED\fP FAPI was not provisioned\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

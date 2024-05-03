@@ -1,0 +1,38 @@
+.TH "IFAPI_EXT_PUB_KEY" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_EXT_PUB_KEY
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ifapi_keystore\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "char * \fBpem_ext_public\fP"
+.br
+.ti -1c
+.RI "char * \fBcertificate\fP"
+.br
+.ti -1c
+.RI "TPM2B_PUBLIC \fBpublic\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Type for representing a external public key 
+.SH "Field Documentation"
+.PP 
+.SS "char* certificate"
+Keys certificate (if any) 
+.SS "char* pem_ext_public"
+Public key in PEM format 
+.SS "TPM2B_PUBLIC public"
+The pulic information in TPM format 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

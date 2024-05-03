@@ -1,0 +1,168 @@
+.TH "IFAPI_NV_Cmds" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_NV_Cmds
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <fapi_int\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "char * \fBnvPath\fP"
+.br
+.ti -1c
+.RI "char * \fBpolicyPath\fP"
+.br
+.ti -1c
+.RI "TPM2B_NV_PUBLIC \fBpublic\fP"
+.br
+.ti -1c
+.RI "\fBESYS_TR\fP \fBesys_auth_handle\fP"
+.br
+.ti -1c
+.RI "\fBESYS_TR\fP \fBesys_handle\fP"
+.br
+.ti -1c
+.RI "TPM2_HANDLE \fBtpm_handle\fP"
+.br
+.ti -1c
+.RI "size_t \fBnumBytes\fP"
+.br
+.ti -1c
+.RI "UINT16 \fBbytesRequested\fP"
+.br
+.ti -1c
+.RI "UINT16 \fBoffset\fP"
+.br
+.ti -1c
+.RI "size_t \fBdata_idx\fP"
+.br
+.ti -1c
+.RI "const uint8_t * \fBdata\fP"
+.br
+.ti -1c
+.RI "uint8_t * \fBrdata\fP"
+.br
+.ti -1c
+.RI "size_t \fBsize\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP \fBauth_object\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_OBJECT\fP \fBnv_object\fP"
+.br
+.ti -1c
+.RI "TPM2B_AUTH \fBauth\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_NV\fP \fBnv_obj\fP"
+.br
+.ti -1c
+.RI "\fBESYS_TR\fP \fBauth_index\fP"
+.br
+.ti -1c
+.RI "uint64_t \fBbitmap\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_NV_TEMPLATE\fP \fBpublic_templ\fP"
+.br
+.ti -1c
+.RI "enum _FAPI_STATE_NV_READ \fBnv_read_state\fP"
+.br
+.ti -1c
+.RI "enum _FAPI_STATE_NV_WRITE \fBnv_write_state\fP"
+.br
+.ti -1c
+.RI "uint8_t * \fBwrite_data\fP"
+.br
+.ti -1c
+.RI "char * \fBlogData\fP"
+.br
+.ti -1c
+.RI "json_object * \fBjso_event_log\fP"
+.br
+.ti -1c
+.RI "TPMI_RH_NV_INDEX \fBmaxNvIndex\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_EVENT\fP \fBpcr_event\fP"
+.br
+.ti -1c
+.RI "TPML_DIGEST_VALUES \fBdigests\fP"
+.br
+.ti -1c
+.RI "bool \fBskip_policy_computation\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The data structure holding internal state of Fapi NV commands\&. 
+.SH "Field Documentation"
+.PP 
+.SS "TPM2B_AUTH auth"
+The Password 
+.SS "\fBESYS_TR\fP auth_index"
+The ESAPI handle of the authorization object 
+.SS "\fBIFAPI_OBJECT\fP auth_object"
+Object used for authentication 
+.SS "uint64_t bitmap"
+The bitmask for the SetBits command 
+.SS "UINT16 bytesRequested"
+Bytes currently requested from TPM 
+.SS "const uint8_t* data"
+Buffer for data to be written 
+.SS "size_t data_idx"
+Offset in the read buffer 
+.SS "TPML_DIGEST_VALUES digests"
+Digest for the event data of an extend 
+.SS "\fBESYS_TR\fP esys_auth_handle"
+The ESAPI handle for the NV auth object 
+.SS "\fBESYS_TR\fP esys_handle"
+The ESAPI handle for the NV object 
+.SS "json_object* jso_event_log"
+logData in JSON format 
+.SS "char* logData"
+The event log for NV objects of type pcr 
+.SS "TPMI_RH_NV_INDEX maxNvIndex"
+Max index for search for free index 
+.br
+ 
+.SS "size_t numBytes"
+The number of bytes of a ESYS request 
+.SS "\fBIFAPI_NV\fP nv_obj"
+The NV Object 
+.SS "\fBIFAPI_OBJECT\fP nv_object"
+Deserialized NV object 
+.SS "enum _FAPI_STATE_NV_READ nv_read_state"
+The current state of NV read 
+.SS "enum _FAPI_STATE_NV_WRITE nv_write_state"
+The current state of NV write 
+.SS "char* nvPath"
+The name of the file for object serialization 
+.SS "UINT16 offset"
+Offset in TPM memory TPM 
+.SS "\fBIFAPI_EVENT\fP pcr_event"
+Event to be added to log 
+.SS "char* policyPath"
+The name of the policy file 
+.SS "TPM2B_NV_PUBLIC public"
+The public info of the NV object\&. 
+.SS "\fBIFAPI_NV_TEMPLATE\fP public_templ"
+The template for nv creation, adjusted appropriate by the passed flags 
+.SS "uint8_t* rdata"
+Buffer for data to be read 
+.SS "size_t size"
+size of rdata 
+.SS "bool skip_policy_computation"
+switch whether policy needs to be computed 
+.SS "TPM2_HANDLE tpm_handle"
+The TPM nv index 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

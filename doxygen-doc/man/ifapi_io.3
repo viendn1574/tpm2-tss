@@ -1,0 +1,283 @@
+.TH "ifapi_io" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ifapi_io
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "TSS2_RC \fBifapi_io_check_file_writeable\fP (const char *file)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_io_dirfiles\fP (const char *dirname, char ***files, size_t *numfiles)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_io_dirfiles_all\fP (const char *searchPath, char ***pathlist, size_t *numPaths)"
+.br
+.ti -1c
+.RI "bool \fBifapi_io_path_exists\fP (const char *path)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_io_poll\fP (\fBIFAPI_IO\fP *io)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_io_poll_handles\fP (\fBIFAPI_IO\fP *io, FAPI_POLL_HANDLE **handles, size_t *num_handles)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_io_read_async\fP (struct \fBIFAPI_IO\fP *io, const char *filename)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_io_read_finish\fP (struct \fBIFAPI_IO\fP *io, uint8_t **buffer, size_t *length)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_io_remove_file\fP (const char *file)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_io_write_async\fP (struct \fBIFAPI_IO\fP *io, const char *filename, const uint8_t *buffer, size_t length)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_io_write_finish\fP (struct \fBIFAPI_IO\fP *io)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Provides internal basic IO functions for policy and key store module\&. 
+.SH "Function Documentation"
+.PP 
+.SS "TSS2_RC ifapi_io_check_file_writeable (const char * file)"
+Check whether a file is writeable\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIfile\fP The name of the fileto be checked\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the directories existed or were successfully created 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if an I/O error occurred 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_io_dirfiles (const char * dirname, char *** files, size_t * numfiles)"
+Enumerate the list of files in a directory\&.
+.PP
+Enumerage the regular files (no directories, symlinks etc) from a given directory\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIdirname\fP The directory to list files from\&. 
+.br
+\fIfiles\fP The list of file names\&. 
+.br
+\fInumfiles\fP The size of files\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the directories were successfully removed 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if an I/O error occurred 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if memory could not be allocated to hold the read data\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_io_dirfiles_all (const char * searchPath, char *** pathlist, size_t * numPaths)"
+Recursive enumerate the list of files in a directory\&.
+.PP
+Enumerage the regular files (no directories, symlinks etc) from a given directory\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIsearchPath\fP The directory to list files from\&. 
+.br
+\fIpathlist\fP The list of file names\&. 
+.br
+\fInumPaths\fP The size of files\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the directories were successfully removed 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if an I/O error occurred 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if memory could not be allocated to hold the read data\&. 
+.RE
+.PP
+
+.SS "bool ifapi_io_path_exists (const char * path)"
+Determine whether a path exists\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP The absolute path of the file\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fItrue\fP The file exists\&. 
+.br
+\fIfalse\fP The file does not exist\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_io_poll (\fBIFAPI_IO\fP * io)"
+Wait for file I/O to be ready\&.
+.PP
+If FAPI state automata are in a file I/O state it will be waited for an event on a file descriptor\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIio\fP The input/output context being used for file I/O\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP After the end of the wait\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if the poll function returns an error\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_io_poll_handles (\fBIFAPI_IO\fP * io, FAPI_POLL_HANDLE ** handles, size_t * num_handles)"
+Get a list of poll handles\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIio\fP The input/output context being used for file I/O\&. 
+.br
+\fIhandles\fP The array with the poll handles\&. 
+.br
+\fInum_handles\fP The number of poll handles\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_NO_HANDLE\fP In no poll events are stored in IO context\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP If the output data cannot be allocated\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_io_read_async (struct \fBIFAPI_IO\fP * io, const char * filename)"
+Start reading a file's complete content into memory in an asynchronous way\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIio\fP The input/output context being used for file I/O\&. 
+.br
+\fIfilename\fP The name of the file to be read into memory\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if an I/O error was encountered; such as the file was not found\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if memory could not be allocated to hold the read data\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_io_read_finish (struct \fBIFAPI_IO\fP * io, uint8_t ** buffer, size_t * length)"
+Finish reading a file's complete content into memory in an asynchronous way\&.
+.PP
+This function needs to be called repeatedly until it does not return TSS2_FAPI_RC_TRY_AGAIN\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIio\fP The input/output context being used for file I/O\&. 
+.br
+\fIbuffer\fP The data that was read from file\&. (callee-allocated; use free()) 
+.br
+\fIlength\fP The length of the data that was read from file\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if an I/O error was encountered; such as the file was not found\&. 
+.br
+\fITSS2_FAPI_RC_TRY_AGAIN\fP if the asynchronous operation is not yet complete\&. Call this function again later\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_io_remove_file (const char * file)"
+Remove a file\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIfile\fP The absolute path of the file to be removed\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP If the file was successfully removed 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP If the file could not be removed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_io_write_async (struct \fBIFAPI_IO\fP * io, const char * filename, const uint8_t * buffer, size_t length)"
+Start writing a buffer into a file in an asynchronous way\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIio\fP The input/output context being used for file I/O\&. 
+.br
+\fIfilename\fP The name of the file to be read into memory\&. 
+.br
+\fIbuffer\fP The buffer to be written\&. 
+.br
+\fIlength\fP The number of bytes to be written\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if an I/O error was encountered; such as the file was not found\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if memory could not be allocated to hold the read data\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_io_write_finish (struct \fBIFAPI_IO\fP * io)"
+Finish writing a buffer into a file in an asynchronous way\&.
+.PP
+This function needs to be called repeatedly until it does not return TSS2_FAPI_RC_TRY_AGAIN\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIio\fP The input/output context being used for file I/O\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if an I/O error was encountered; such as the file was not found\&. 
+.br
+\fITSS2_FAPI_RC_TRY_AGAIN\fP if the asynchronous operation is not yet complete\&. Call this function again later\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

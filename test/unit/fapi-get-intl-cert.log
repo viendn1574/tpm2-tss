@@ -1,0 +1,30 @@
+[==========] Running 3 test(s).
+[ RUN      ] check_get_intl_cert_ok
+[       OK ] check_get_intl_cert_ok
+[ RUN      ] check_get_intl_cert_invalid_json
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:361:ifapi_get_intl_ek_certificate() ErrorCode (0x00060001) Invalid EK cert data 
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:396:ifapi_get_intl_ek_certificate() Get INTEL EK certificate. 
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:357:ifapi_get_intl_ek_certificate() ErrorCode (0x00060001) Could not find cert object 
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:396:ifapi_get_intl_ek_certificate() Get INTEL EK certificate. 
+[       OK ] check_get_intl_cert_invalid_json
+[ RUN      ] check_get_intl_cert_sha_error
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:99:hash_ek_public() EVP_DigestUpdate failed 
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:151:base64_encode() hash_ek_public returned null 
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:333:ifapi_get_intl_ek_certificate() base64_encode returned null 
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:396:ifapi_get_intl_ek_certificate() Get INTEL EK certificate. 
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:76:hash_ek_public() EVP_DigestUpdate failed 
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:151:base64_encode() hash_ek_public returned null 
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:333:ifapi_get_intl_ek_certificate() base64_encode returned null 
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:396:ifapi_get_intl_ek_certificate() Get INTEL EK certificate. 
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:108:hash_ek_public() EVP_DigestUpdate failed 
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:151:base64_encode() hash_ek_public returned null 
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:333:ifapi_get_intl_ek_certificate() base64_encode returned null 
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:396:ifapi_get_intl_ek_certificate() Get INTEL EK certificate. 
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:89:hash_ek_public() EVP_DigestUpdate failed 
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:151:base64_encode() hash_ek_public returned null 
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:333:ifapi_get_intl_ek_certificate() base64_encode returned null 
+ERROR:fapi:src/tss2-fapi/ifapi_get_intl_cert.c:396:ifapi_get_intl_ek_certificate() Get INTEL EK certificate. 
+[       OK ] check_get_intl_cert_sha_error
+[==========] 3 test(s) run.
+[  PASSED  ] 3 test(s).
+PASS test/unit/fapi-get-intl-cert (exit status: 0)

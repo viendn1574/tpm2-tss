@@ -1,0 +1,48 @@
+.TH "IFAPI_POLICYUTIL_STACK" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IFAPI_POLICYUTIL_STACK
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ifapi_policyutil_execute\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "\fBESYS_TR\fP \fBpolicy_session\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_POLICY_EXEC_CTX\fP * \fBpol_exec_ctx\fP"
+.br
+.ti -1c
+.RI "enum IFAPI_STATE_POLICY_UTIL_EXEC \fBstate\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_POLICYUTIL_STACK\fP * \fBnext\fP"
+.br
+.ti -1c
+.RI "\fBIFAPI_POLICYUTIL_STACK\fP * \fBprev\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The context of the policy execution 
+.SH "Field Documentation"
+.PP 
+.SS "\fBIFAPI_POLICYUTIL_STACK\fP* next"
+Pointer to next policy 
+.SS "\fBIFAPI_POLICY_EXEC_CTX\fP* pol_exec_ctx"
+The execution context for the current policy 
+.SS "\fBESYS_TR\fP policy_session"
+The policy session created for the current evaluation 
+.br
+ 
+.SS "\fBIFAPI_POLICYUTIL_STACK\fP* prev"
+Pointer to previous policy 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

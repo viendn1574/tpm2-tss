@@ -1,0 +1,2662 @@
+===================================================
+   tpm2-tss 4.0.1-44-g8699ab39: ./test-suite.log
+===================================================
+
+# TOTAL: 212
+# PASS:  122
+# SKIP:  9
+# XFAIL: 0
+# FAIL:  81
+# XPASS: 0
+# ERROR: 0
+
+.. contents:: :depth: 2
+
+FAIL: test/integration/esys-act-set-timeout
+===========================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_ACT_SetTimeout.c:291:Esys_ACT_SetTimeout_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_ACT_SetTimeout.c:101:Esys_ACT_SetTimeout() Esys Finish ErrorCode (0x000b0143) 
+ERROR:test:test/integration/esys-act-set-timeout.int.c:65:test_esys_act_set_timeout() Error: Clear ErrorCode (0x000b0143) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-act-set-timeout.int_simulator.pid
+FAIL test/integration/esys-act-set-timeout.int (exit status: 1)
+
+FAIL: test/integration/esys-certifyX509
+=======================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_CertifyX509.c:345:Esys_CertifyX509_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_CertifyX509.c:112:Esys_CertifyX509() Esys Finish ErrorCode (0x000b0143) 
+ERROR:test:test/integration/esys-certifyX509.int.c:183:test_esys_certifyx509() Error: CertifyX509 ErrorCode (0x000b0143) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-certifyX509.int_simulator.pid
+FAIL test/integration/esys-certifyX509.int (exit status: 1)
+
+SKIP: test/integration/esys-clear-control
+=========================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_ClearControl.c:293:Esys_ClearControl_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_ClearControl.c:101:Esys_ClearControl() Esys Finish ErrorCode (0x000009a2) 
+WARNING:test:test/integration/esys-clear-control.int.c:56:test_esys_clear_control() Platform authorization not possible. 
+Script returned 77
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-clear-control.int_simulator.pid
+SKIP test/integration/esys-clear-control.int (exit status: 77)
+
+FAIL: test/integration/esys-clockset
+====================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_ClockRateAdjust.c:291:Esys_ClockRateAdjust_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_ClockRateAdjust.c:100:Esys_ClockRateAdjust() Esys Finish ErrorCode (0x000001c4) 
+ERROR:test:test/integration/esys-clockset.int.c:118:test_esys_clockset() Error: ClockRateAdjust ErrorCode (0x000001c4) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-clockset.int_simulator.pid
+FAIL test/integration/esys-clockset.int (exit status: 1)
+
+FAIL: test/integration/esys-clockset-audit
+==========================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_ClockRateAdjust.c:291:Esys_ClockRateAdjust_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_ClockRateAdjust.c:100:Esys_ClockRateAdjust() Esys Finish ErrorCode (0x000001c4) 
+ERROR:test:test/integration/esys-clockset.int.c:118:test_esys_clockset() Error: ClockRateAdjust ErrorCode (0x000001c4) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-clockset-audit.int_simulator.pid
+FAIL test/integration/esys-clockset-audit.int (exit status: 1)
+
+SKIP: test/integration/esys-get-capability-act
+==============================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_GetCapability.c:301:Esys_GetCapability_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_GetCapability.c:106:Esys_GetCapability() Esys Finish ErrorCode (0x000001c4) 
+Script returned 77
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-get-capability-act.int_simulator.pid
+SKIP test/integration/esys-get-capability-act.int (exit status: 77)
+
+FAIL: test/integration/esys-nv-ram-counter
+==========================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:345:Esys_NV_DefineSpace_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:121:Esys_NV_DefineSpace() Esys Finish ErrorCode (0x0000014c) 
+ERROR:test:test/integration/esys-nv-ram-counter.int.c:116:test_esys_nv_ram_counter() Error esys define nv space ErrorCode (0x0000014c) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-nv-ram-counter.int_simulator.pid
+FAIL test/integration/esys-nv-ram-counter.int (exit status: 1)
+
+FAIL: test/integration/esys-nv-ram-counter-session
+==================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:345:Esys_NV_DefineSpace_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:121:Esys_NV_DefineSpace() Esys Finish ErrorCode (0x0000014c) 
+ERROR:test:test/integration/esys-nv-ram-counter.int.c:116:test_esys_nv_ram_counter() Error esys define nv space ErrorCode (0x0000014c) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-nv-ram-counter-session.int_simulator.pid
+FAIL test/integration/esys-nv-ram-counter-session.int (exit status: 1)
+
+FAIL: test/integration/esys-nv-ram-counter-session-long-auth
+============================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:345:Esys_NV_DefineSpace_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:121:Esys_NV_DefineSpace() Esys Finish ErrorCode (0x0000014c) 
+ERROR:test:test/integration/esys-nv-ram-counter.int.c:116:test_esys_nv_ram_counter() Error esys define nv space ErrorCode (0x0000014c) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-nv-ram-counter-session-long-auth.int_simulator.pid
+FAIL test/integration/esys-nv-ram-counter-session-long-auth.int (exit status: 1)
+
+FAIL: test/integration/esys-nv-ram-extend-index
+===============================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:345:Esys_NV_DefineSpace_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:121:Esys_NV_DefineSpace() Esys Finish ErrorCode (0x0000014c) 
+ERROR:test:test/integration/esys-nv-ram-extend-index.int.c:114:test_esys_nv_ram_extend_index() Error esys define nv space ErrorCode (0x0000014c) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-nv-ram-extend-index.int_simulator.pid
+FAIL test/integration/esys-nv-ram-extend-index.int (exit status: 1)
+
+FAIL: test/integration/esys-nv-ram-extend-index-session
+=======================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:345:Esys_NV_DefineSpace_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:121:Esys_NV_DefineSpace() Esys Finish ErrorCode (0x0000014c) 
+ERROR:test:test/integration/esys-nv-ram-extend-index.int.c:114:test_esys_nv_ram_extend_index() Error esys define nv space ErrorCode (0x0000014c) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-nv-ram-extend-index-session.int_simulator.pid
+FAIL test/integration/esys-nv-ram-extend-index-session.int (exit status: 1)
+
+FAIL: test/integration/esys-nv-ram-ordinary-index-rlock
+=======================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:345:Esys_NV_DefineSpace_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:121:Esys_NV_DefineSpace() Esys Finish ErrorCode (0x0000014c) 
+ERROR:test:test/integration/esys-nv-ram-ordinary-index.int.c:119:test_esys_nv_ram_ordinary_index() Error esys define nv space ErrorCode (0x0000014c) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-nv-ram-ordinary-index-rlock.int_simulator.pid
+FAIL test/integration/esys-nv-ram-ordinary-index-rlock.int (exit status: 1)
+
+FAIL: test/integration/esys-nv-ram-ordinary-index-rlock-session
+===============================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:345:Esys_NV_DefineSpace_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:121:Esys_NV_DefineSpace() Esys Finish ErrorCode (0x0000014c) 
+ERROR:test:test/integration/esys-nv-ram-ordinary-index.int.c:119:test_esys_nv_ram_ordinary_index() Error esys define nv space ErrorCode (0x0000014c) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-nv-ram-ordinary-index-rlock-session.int_simulator.pid
+FAIL test/integration/esys-nv-ram-ordinary-index-rlock-session.int (exit status: 1)
+
+FAIL: test/integration/esys-nv-ram-ordinary-index-wlock
+=======================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:345:Esys_NV_DefineSpace_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:121:Esys_NV_DefineSpace() Esys Finish ErrorCode (0x0000014c) 
+ERROR:test:test/integration/esys-nv-ram-ordinary-index.int.c:119:test_esys_nv_ram_ordinary_index() Error esys define nv space ErrorCode (0x0000014c) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-nv-ram-ordinary-index-wlock.int_simulator.pid
+FAIL test/integration/esys-nv-ram-ordinary-index-wlock.int (exit status: 1)
+
+FAIL: test/integration/esys-nv-ram-ordinary-index-wlock-session
+===============================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:345:Esys_NV_DefineSpace_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:121:Esys_NV_DefineSpace() Esys Finish ErrorCode (0x0000014c) 
+ERROR:test:test/integration/esys-nv-ram-ordinary-index.int.c:119:test_esys_nv_ram_ordinary_index() Error esys define nv space ErrorCode (0x0000014c) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-nv-ram-ordinary-index-wlock-session.int_simulator.pid
+FAIL test/integration/esys-nv-ram-ordinary-index-wlock-session.int (exit status: 1)
+
+FAIL: test/integration/esys-nv-ram-set-bits
+===========================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:345:Esys_NV_DefineSpace_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:121:Esys_NV_DefineSpace() Esys Finish ErrorCode (0x0000014c) 
+ERROR:test:test/integration/esys-nv-ram-set-bits.int.c:110:test_esys_nv_ram_set_bits() Error esys define nv space ErrorCode (0x0000014c) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-nv-ram-set-bits.int_simulator.pid
+FAIL test/integration/esys-nv-ram-set-bits.int (exit status: 1)
+
+FAIL: test/integration/esys-nv-ram-set-bits-session
+===================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:345:Esys_NV_DefineSpace_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:121:Esys_NV_DefineSpace() Esys Finish ErrorCode (0x0000014c) 
+ERROR:test:test/integration/esys-nv-ram-set-bits.int.c:110:test_esys_nv_ram_set_bits() Error esys define nv space ErrorCode (0x0000014c) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-nv-ram-set-bits-session.int_simulator.pid
+FAIL test/integration/esys-nv-ram-set-bits-session.int (exit status: 1)
+
+FAIL: test/integration/esys-policy-nv-changeauth
+================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:345:Esys_NV_DefineSpace_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:121:Esys_NV_DefineSpace() Esys Finish ErrorCode (0x0000014c) 
+ERROR:test:test/integration/esys-policy-nv-changeauth.int.c:137:test_esys_policy_nv_changeauth() Error esys define nv space ErrorCode (0x0000014c) 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1107:esys_GetResourceObject() Error: Esys handle does not exist (70018). 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x00070018) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x00070018) 
+ERROR:test:test/integration/esys-policy-nv-changeauth.int.c:265:test_esys_policy_nv_changeauth() Cleanup policySession failed. 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-policy-nv-changeauth.int_simulator.pid
+FAIL test/integration/esys-policy-nv-changeauth.int (exit status: 1)
+
+SKIP: test/integration/esys-policy-nv-undefine-special
+======================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:345:Esys_NV_DefineSpace_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:121:Esys_NV_DefineSpace() Esys Finish ErrorCode (0x000009a2) 
+WARNING:test:test/integration/esys-policy-nv-undefine-special.int.c:140:test_esys_policy_nv_undefine_special() Platform authorization not possible. 
+Script returned 77
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-policy-nv-undefine-special.int_simulator.pid
+SKIP test/integration/esys-policy-nv-undefine-special.int (exit status: 77)
+
+FAIL: test/integration/esys-policy-regression
+=============================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:345:Esys_NV_DefineSpace_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:121:Esys_NV_DefineSpace() Esys Finish ErrorCode (0x0000014c) 
+ERROR:test:test/integration/esys-policy-regression.int.c:193:test_esys_policy_regression() Error esys define nv space ErrorCode (0x0000014c) 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1107:esys_GetResourceObject() Error: Esys handle does not exist (70018). 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x00070018) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x00070018) 
+ERROR:test:test/integration/esys-policy-regression.int.c:482:test_esys_policy_regression() Cleanup sessionTrialPCR failed. 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-policy-regression.int_simulator.pid
+FAIL test/integration/esys-policy-regression.int (exit status: 1)
+
+FAIL: test/integration/esys-tr-fromTpmPublic-nv
+===============================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:345:Esys_NV_DefineSpace_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:121:Esys_NV_DefineSpace() Esys Finish ErrorCode (0x0000014c) 
+ERROR:test:test/integration/esys-tr-fromTpmPublic-nv.int.c:71:test_esys_tr_fromTpmPublic_nv() NV define space ErrorCode (0x0000014c) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-tr-fromTpmPublic-nv.int_simulator.pid
+FAIL test/integration/esys-tr-fromTpmPublic-nv.int (exit status: 1)
+
+FAIL: test/integration/esys-tr-getTpmHandle-nv
+==============================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:345:Esys_NV_DefineSpace_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:121:Esys_NV_DefineSpace() Esys Finish ErrorCode (0x0000014c) 
+ERROR:test:test/integration/esys-tr-getTpmHandle-nv.int.c:63:test_esys_tr_toTpmPublic_nv() NV define space ErrorCode (0x0000014c) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-tr-getTpmHandle-nv.int_simulator.pid
+FAIL test/integration/esys-tr-getTpmHandle-nv.int (exit status: 1)
+
+SKIP: test/integration/esys-audit
+=================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_GetCommandAuditDigest.c:329:Esys_GetCommandAuditDigest_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_GetCommandAuditDigest.c:108:Esys_GetCommandAuditDigest() Esys Finish ErrorCode (0x000b0143) 
+WARNING:test:test/integration/esys-audit.int.c:196:test_esys_audit() Command TPM2_GetCommandAuditDigest not supported by TPM. 
+Script returned 77
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-audit.int_simulator.pid
+SKIP test/integration/esys-audit.int (exit status: 77)
+
+SKIP: test/integration/esys-duplicate
+=====================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_Rewrap.c:331:Esys_Rewrap_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_Rewrap.c:109:Esys_Rewrap() Esys Finish ErrorCode (0x000b0143) 
+WARNING:test:test/integration/esys-duplicate.int.c:410:test_esys_duplicate() Command TPM2_Rewrap not supported by TPM. 
+Script returned 77
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-duplicate.int_simulator.pid
+SKIP test/integration/esys-duplicate.int (exit status: 77)
+
+SKIP: test/integration/esys-hierarchy-control
+=============================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_HierarchyControl.c:311:Esys_HierarchyControl_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_HierarchyControl.c:104:Esys_HierarchyControl() Esys Finish ErrorCode (0x000009a2) 
+WARNING:test:test/integration/esys-hierarchy-control.int.c:65:test_esys_hierarchy_control() Platform authorization not possible. 
+Script returned 77
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-hierarchy-control.int_simulator.pid
+SKIP test/integration/esys-hierarchy-control.int (exit status: 77)
+
+FAIL: test/integration/esys-nv-certify
+======================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:345:Esys_NV_DefineSpace_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:121:Esys_NV_DefineSpace() Esys Finish ErrorCode (0x0000014c) 
+ERROR:test:test/integration/esys-nv-certify.int.c:174:test_esys_nv_certify() Error esys define nv space ErrorCode (0x0000014c) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-nv-certify.int_simulator.pid
+FAIL test/integration/esys-nv-certify.int (exit status: 1)
+
+SKIP: test/integration/esys-pcr-basic
+=====================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_PCR_Allocate.c:313:Esys_PCR_Allocate_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_PCR_Allocate.c:110:Esys_PCR_Allocate() Esys Finish ErrorCode (0x000009a2) 
+WARNING:test:test/integration/esys-pcr-basic.int.c:143:test_esys_pcr_basic() Platform authorization not possible. 
+ERROR:test:test/integration/esys-pcr-basic.int.c:147:test_esys_pcr_basic() Error: PCR_Allocate ErrorCode (0x000009a2) 
+Script returned 77
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-pcr-basic.int_simulator.pid
+SKIP test/integration/esys-pcr-basic.int (exit status: 77)
+
+FAIL: test/integration/esys-policy-authorize-nv-opt
+===================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:345:Esys_NV_DefineSpace_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:121:Esys_NV_DefineSpace() Esys Finish ErrorCode (0x0000014c) 
+ERROR:test:test/integration/esys-policy-authorize-nv-opt.int.c:136:test_esys_policy_authorize_nv_opt() Error esys define nv space ErrorCode (0x0000014c) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-policy-authorize-nv-opt.int_simulator.pid
+FAIL test/integration/esys-policy-authorize-nv-opt.int (exit status: 1)
+
+SKIP: test/integration/esys-policy-physical-presence-opt
+========================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_PolicyPhysicalPresence.c:283:Esys_PolicyPhysicalPresence_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_PolicyPhysicalPresence.c:98:Esys_PolicyPhysicalPresence() Esys Finish ErrorCode (0x000b0143) 
+WARNING:test:test/integration/esys-policy-physical-presence-opt.int.c:117:test_esys_policy_physical_presence_opt() Command TPM2_PolicyPhysicalPresence  not supported by TPM. 
+Script returned 77
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-policy-physical-presence-opt.int_simulator.pid
+SKIP test/integration/esys-policy-physical-presence-opt.int (exit status: 77)
+
+SKIP: test/integration/esys-pp-commands
+=======================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_PP_Commands.c:301:Esys_PP_Commands_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_PP_Commands.c:104:Esys_PP_Commands() Esys Finish ErrorCode (0x000b0143) 
+WARNING:test:test/integration/esys-pp-commands.int.c:56:test_esys_pp_commands() Command TPM2_PP_Commands not supported by TPM. 
+ERROR:test:test/integration/esys-pp-commands.int.c:70:test_esys_pp_commands() Error: PP_Commands ErrorCode (0x000b0143) 
+Script returned 77
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-pp-commands.int_simulator.pid
+SKIP test/integration/esys-pp-commands.int (exit status: 77)
+
+FAIL: test/integration/esys-auto-session-flags
+==============================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:host=,port=
+Execute the test script
+WARNING:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:345:Esys_NV_DefineSpace_Finish() Received TPM Error 
+ERROR:esys:src/tss2-esys/api/Esys_NV_DefineSpace.c:121:Esys_NV_DefineSpace() Esys Finish ErrorCode (0x0000014c) 
+ERROR:test:test/integration/esys-auto-session-flags.int.c:111:test_esys_auto_flags() Error esys define nv space ErrorCode (0x0000014c) 
+Script returned 1
+failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-auto-session-flags.int_simulator.pid
+FAIL test/integration/esys-auto-session-flags.int (exit status: 1)
+
+FAIL: test/integration/dlopen-fapi-get-random
+=============================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.oK40X8/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.oK40X8/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.oK40X8",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.oK40X8/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.oK40X8/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-get-random.int.c:47:test_fapi_get_random() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/dlopen-fapi-get-random.fint (exit status: 1)
+
+FAIL: test/integration/fapi-check-wrong-paths
+=============================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.HTdz21/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.HTdz21/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.HTdz21",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.HTdz21/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.HTdz21/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-check-wrong-paths.int.c:47:test_fapi_wrong_path() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-check-wrong-paths.fint (exit status: 1)
+
+FAIL: test/integration/fapi-data-crypt
+======================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.EwttKV/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.EwttKV/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.EwttKV",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.EwttKV/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.EwttKV/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-data-crypt.int.c:212:test_fapi_data_crypt() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-data-crypt.fint (exit status: 1)
+
+FAIL: test/integration/fapi-data-crypt-persistent
+=================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.SkekbX/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.SkekbX/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.SkekbX",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.SkekbX/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.SkekbX/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-data-crypt.int.c:212:test_fapi_data_crypt() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-data-crypt-persistent.fint (exit status: 1)
+
+FAIL: test/integration/fapi-data-crypt-rsa
+==========================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_RSA",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.oU488B/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.oU488B/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.oU488B",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.oU488B/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.oU488B/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-data-crypt.int.c:212:test_fapi_data_crypt() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-data-crypt-rsa.fint (exit status: 1)
+
+FAIL: test/integration/fapi-data-crypt-rsa-persistent
+=====================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_RSA",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.ErXwpt/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.ErXwpt/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.ErXwpt",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.ErXwpt/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.ErXwpt/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-data-crypt.int.c:212:test_fapi_data_crypt() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-data-crypt-rsa-persistent.fint (exit status: 1)
+
+FAIL: test/integration/fapi-duplicate
+=====================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.u5W6PB/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.u5W6PB/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.u5W6PB",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.u5W6PB/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.u5W6PB/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-duplicate.int.c:54:test_fapi_duplicate() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-duplicate.fint (exit status: 1)
+
+FAIL: test/integration/fapi-export-policy
+=========================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.m3wpbn/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.m3wpbn/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.m3wpbn",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.m3wpbn/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.m3wpbn/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-export-policy.int.c:149:test_fapi_export_policy() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-export-policy.fint (exit status: 1)
+
+FAIL: test/integration/fapi-get-esys-blobs
+==========================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.bPut66/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.bPut66/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.bPut66",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.bPut66/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.bPut66/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-get-esys-blobs.int.c:95:test_fapi_get_esys_blobs() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-get-esys-blobs.fint (exit status: 1)
+
+FAIL: test/integration/fapi-get-random
+======================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.JIQxPY/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.JIQxPY/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.JIQxPY",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.JIQxPY/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.JIQxPY/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-get-random.int.c:47:test_fapi_get_random() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-get-random.fint (exit status: 1)
+
+FAIL: test/integration/fapi-platform-certificates
+=================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.hNfZUm/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.hNfZUm/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.hNfZUm",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.hNfZUm/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.hNfZUm/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-platform-certificates.int.c:50:test_fapi_platform_certificates() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-platform-certificates.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-sign
+===========================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.EEFeqm/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.EEFeqm/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.EEFeqm",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.EEFeqm/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.EEFeqm/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-sign.int.c:123:test_fapi_key_create_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-he-sign
+==============================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.dGXQmV/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.dGXQmV/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.dGXQmV",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.dGXQmV/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.dGXQmV/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-he-sign.int.c:111:test_fapi_key_create_he_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-he-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-primary-sign
+===================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.979cnB/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.979cnB/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.979cnB",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.979cnB/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.979cnB/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-primary-sign.int.c:120:test_fapi_key_create_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-primary-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create2-sign
+============================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.7AVxGP/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.7AVxGP/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.7AVxGP",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.7AVxGP/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.7AVxGP/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create2-sign.int.c:203:test_fapi_key_create_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create2-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-null-key-sign
+====================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.y9yIlm/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.y9yIlm/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.y9yIlm",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.y9yIlm/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.y9yIlm/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-null-key-sign.int.c:87:test_fapi_key_create_null_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-null-key-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-sign-persistent-key
+==========================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.ykfdqF/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.ykfdqF/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.ykfdqF",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.ykfdqF/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.ykfdqF/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-sign.int.c:123:test_fapi_key_create_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-sign-persistent-key.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-sign-password-provision
+==============================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.joB1Mk/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.joB1Mk/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.joB1Mk",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.joB1Mk/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.joB1Mk/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-sign-password-provision.int.c:114:test_fapi_key_create_sign_password_provision() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-sign-password-provision.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-sign-rsa
+===============================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_RSA",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.pfcp2V/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.pfcp2V/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.pfcp2V",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.pfcp2V/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.pfcp2V/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-sign.int.c:123:test_fapi_key_create_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-sign-rsa.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-authorize-sign
+============================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_RSA",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.n801eQ/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.n801eQ/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.n801eQ",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.n801eQ/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.n801eQ/system_dir/policy does not exist, creating 
+WARNING:fapi:src/tss2-fapi/api/Fapi_List.c:216:Fapi_List_Finish() Path not found: / 
+ERROR:fapi:src/tss2-fapi/api/Fapi_List.c:81:Fapi_List() ErrorCode (0x00060034) Entities_List 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policy-authorize-sign.int.c:138:test_fapi_key_create_policy_authorize_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-authorize-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-authorize-rsa-pem-sign
+====================================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_RSA",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.gzlMJv/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.gzlMJv/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.gzlMJv",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.gzlMJv/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.gzlMJv/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policy-authorize-pem-sign.int.c:82:test_fapi_key_create_policy_authorize_pem_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-authorize-rsa-pem-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-authorize-ecc-pem-sign
+====================================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.5E2YlA/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.5E2YlA/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.5E2YlA",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.5E2YlA/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.5E2YlA/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policy-authorize-pem-sign.int.c:82:test_fapi_key_create_policy_authorize_pem_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-authorize-ecc-pem-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-authorize-nv-sign
+===============================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.Gt5uXD/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.Gt5uXD/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.Gt5uXD",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.Gt5uXD/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.Gt5uXD/system_dir/policy does not exist, creating 
+info:test:test/integration/fapi-key-create-policy-authorize-nv-sign.int.c:154:test_fapi_key_create_policy_authorize_nv() Policy File: /policy/pol_authorize_nv 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policy-authorize-nv-sign.int.c:157:test_fapi_key_create_policy_authorize_nv() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-authorize-nv-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-authorize-nv-tpms-sign
+====================================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.ClCxEL/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.ClCxEL/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.ClCxEL",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.ClCxEL/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.ClCxEL/system_dir/policy does not exist, creating 
+info:test:test/integration/fapi-key-create-policy-authorize-nv-sign.int.c:154:test_fapi_key_create_policy_authorize_nv() Policy File: /policy/pol_authorize_nv_tpms 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policy-authorize-nv-sign.int.c:157:test_fapi_key_create_policy_authorize_nv() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-authorize-nv-tpms-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-authorize-nv-complex-tpm2b-sign
+=============================================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.CXWUjx/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.CXWUjx/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.CXWUjx",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.CXWUjx/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.CXWUjx/system_dir/policy does not exist, creating 
+info:test:test/integration/fapi-key-create-policy-authorize-nv-sign.int.c:154:test_fapi_key_create_policy_authorize_nv() Policy File: /policy/pol_authorize_nv_complex_tpm2b 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policy-authorize-nv-sign.int.c:157:test_fapi_key_create_policy_authorize_nv() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-authorize-nv-complex-tpm2b-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-secret-key-sign
+=============================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.BG8jpp/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.BG8jpp/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.BG8jpp",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.BG8jpp/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.BG8jpp/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policy-secret-key-sign.int.c:115:test_fapi_key_create_policy_secret_key_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-secret-key-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-pcr-sign
+======================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.Ildde0/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.Ildde0/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.Ildde0",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.Ildde0/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.Ildde0/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policy-pcr-sign.int.c:223:test_fapi_key_create_policy_pcr_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-pcr-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-signed
+====================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.tr9uYz/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.tr9uYz/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.tr9uYz",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.tr9uYz/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.tr9uYz/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policy-signed.int.c:228:test_fapi_key_create_policy_signed() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-signed.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-signed-ecc
+========================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.LL8ZtI/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.LL8ZtI/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.LL8ZtI",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.LL8ZtI/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.LL8ZtI/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policy-signed.int.c:228:test_fapi_key_create_policy_signed() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-signed-ecc.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-signed-keyedhash
+==============================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.WooCHd/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.WooCHd/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.WooCHd",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.WooCHd/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.WooCHd/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policy-signed-keyedhash.int.c:210:test_fapi_key_create_policy_signed() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-signed-keyedhash.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-nv-sign
+=====================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.AbzK2I/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.AbzK2I/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.AbzK2I",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.AbzK2I/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.AbzK2I/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policy-nv-sign.int.c:70:test_fapi_key_create_policy_nv_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-nv-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-nv-counter-sign
+=============================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.FPpXvg/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.FPpXvg/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.FPpXvg",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.FPpXvg/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.FPpXvg/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policy-nv-counter-sign.int.c:62:test_fapi_key_create_policy_nv_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-nv-counter-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-or-sign
+=====================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.JVtk9A/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.JVtk9A/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.JVtk9A",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.JVtk9A/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.JVtk9A/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policy-or-sign.int.c:100:test_fapi_key_create_policy_or_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-or-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-password-sign
+===========================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.mG37fA/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.mG37fA/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.mG37fA",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.mG37fA/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.mG37fA/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policies-sign.int.c:111:test_fapi_key_create_policies_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-password-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-countertimer-sign
+===============================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.hjz4LV/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.hjz4LV/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.hjz4LV",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.hjz4LV/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.hjz4LV/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policies-sign.int.c:111:test_fapi_key_create_policies_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-countertimer-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-physical-presence-sign
+====================================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.BaHPm1/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.BaHPm1/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.BaHPm1",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.BaHPm1/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.BaHPm1/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policies-sign.int.c:111:test_fapi_key_create_policies_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-physical-presence-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-locality-sign
+===========================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.fkp89y/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.fkp89y/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.fkp89y",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.fkp89y/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.fkp89y/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policies-sign.int.c:111:test_fapi_key_create_policies_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-locality-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-command-code-sign
+===============================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.4j8nY9/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.4j8nY9/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.4j8nY9",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.4j8nY9/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.4j8nY9/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policies-sign.int.c:111:test_fapi_key_create_policies_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-command-code-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-policy-auth-value-sign
+=============================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.wkov0P/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.wkov0P/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.wkov0P",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.wkov0P/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.wkov0P/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-policies-sign.int.c:111:test_fapi_key_create_policies_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-policy-auth-value-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-ckda-sign
+================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_RSA",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.IhKYFu/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.IhKYFu/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.IhKYFu",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.IhKYFu/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.IhKYFu/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-ckda-sign.int.c:75:test_fapi_key_create_ckda_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-ckda-sign.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-change-auth
+===========================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.pecmeS/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.pecmeS/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.pecmeS",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.pecmeS/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.pecmeS/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-change-auth.int.c:91:test_fapi_key_change_auth() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-change-auth.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-sign-password
+====================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.1Mco9y/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.1Mco9y/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.1Mco9y",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.1Mco9y/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.1Mco9y/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-sign.int.c:123:test_fapi_key_create_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-sign-password.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-ckda-sign-password
+=========================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_RSA",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.wiYzRi/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.wiYzRi/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.wiYzRi",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.wiYzRi/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.wiYzRi/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-ckda-sign.int.c:75:test_fapi_key_create_ckda_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-ckda-sign-password.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-sign-password-da
+=======================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.FnYWQr/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.FnYWQr/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.FnYWQr",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.FnYWQr/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.FnYWQr/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-sign.int.c:123:test_fapi_key_create_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-sign-password-da.fint (exit status: 1)
+
+FAIL: test/integration/fapi-key-create-ckda-sign-password-da
+============================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_RSA",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.UUb27z/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.UUb27z/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.UUb27z",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.UUb27z/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.UUb27z/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-key-create-ckda-sign.int.c:75:test_fapi_key_create_ckda_sign() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-key-create-ckda-sign-password-da.fint (exit status: 1)
+
+FAIL: test/integration/fapi-nv-authorizenv-cphash
+=================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.buABsy/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.buABsy/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.buABsy",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.buABsy/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.buABsy/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-nv-authorizenv-cphash.int.c:97:test_fapi_nv_authorizenv_cphash() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-nv-authorizenv-cphash.fint (exit status: 1)
+
+FAIL: test/integration/fapi-nv-ordinary
+=======================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.WXkn7q/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.WXkn7q/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.WXkn7q",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.WXkn7q/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.WXkn7q/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-nv-ordinary.int.c:150:test_fapi_nv_ordinary() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-nv-ordinary.fint (exit status: 1)
+
+FAIL: test/integration/fapi-nv-written-policy
+=============================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.5f8sqw/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.5f8sqw/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.5f8sqw",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.5f8sqw/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.5f8sqw/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-nv-written-policy.int.c:59:test_fapi_nv_written_policy() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-nv-written-policy.fint (exit status: 1)
+
+FAIL: test/integration/fapi-nv-extend
+=====================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.u16JDO/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.u16JDO/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.u16JDO",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.u16JDO/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.u16JDO/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-nv-extend.int.c:71:test_fapi_nv_extend() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-nv-extend.fint (exit status: 1)
+
+FAIL: test/integration/fapi-nv-increment
+========================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.b9SjCq/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.b9SjCq/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.b9SjCq",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.b9SjCq/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.b9SjCq/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-nv-increment.int.c:75:test_fapi_nv_increment() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-nv-increment.fint (exit status: 1)
+
+FAIL: test/integration/fapi-nv-set-bits
+=======================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.GTfOYU/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.GTfOYU/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.GTfOYU",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.GTfOYU/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.GTfOYU/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-nv-set-bits.int.c:63:test_fapi_nv_set_bits() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-nv-set-bits.fint (exit status: 1)
+
+FAIL: test/integration/fapi-pcr-test
+====================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.7Ar4yp/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.7Ar4yp/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.7Ar4yp",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.7Ar4yp/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.7Ar4yp/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-pcr-test.int.c:207:test_fapi_pcr_test() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-pcr-test.fint (exit status: 1)
+
+FAIL: test/integration/fapi-quote
+=================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.87HBUb/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.87HBUb/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.87HBUb",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.87HBUb/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.87HBUb/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-quote.int.c:71:test_fapi_quote() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-quote.fint (exit status: 1)
+
+FAIL: test/integration/fapi-quote-with-primary
+==============================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.pBWHbV/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.pBWHbV/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.pBWHbV",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.pBWHbV/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.pBWHbV/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-quote-with-primary.int.c:71:test_fapi_quote() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-quote-with-primary.fint (exit status: 1)
+
+FAIL: test/integration/fapi-quote-rsa
+=====================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_RSA",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.dADsUO/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.dADsUO/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.dADsUO",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.dADsUO/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.dADsUO/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-quote.int.c:71:test_fapi_quote() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-quote-rsa.fint (exit status: 1)
+
+FAIL: test/integration/fapi-policy-or-nv-read-write
+===================================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.Nst0zR/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.Nst0zR/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.Nst0zR",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.Nst0zR/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.Nst0zR/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-policy-or-nv-read-write.int.c:133:test_fapi_policy_or_nv_read_write() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-policy-or-nv-read-write.fint (exit status: 1)
+
+FAIL: test/integration/fapi-second-provisioning
+===============================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.3zvpwf/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.3zvpwf/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.3zvpwf",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.3zvpwf/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.3zvpwf/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-second-provisioning.int.c:68:test_fapi_test_second_provisioning() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-second-provisioning.fint (exit status: 1)
+
+FAIL: test/integration/fapi-unseal
+==================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.k25xqf/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.k25xqf/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.k25xqf",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.k25xqf/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.k25xqf/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-unseal.int.c:51:test_fapi_unseal() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-unseal.fint (exit status: 1)
+
+FAIL: test/integration/fapi-unseal-persistent
+=============================================
+
+TPM20TEST_TCTI_NAME=device
+TPM20TEST_DEVICE_FILE=/dev/tpmrm0
+TPM20TEST_SOCKET_ADDRESS=
+TPM20TEST_SOCKET_PORT=
+TPM20TEST_TCTI=device:/dev/tpmrm0
+Execute the test script
+info:test:test/integration/main-fapi.c:413:init_fapi() Using config:
+{
+     "profile_name": "P_ECC",
+     "profile_dir": "./test/data/fapi/",
+     "user_dir": "/tmp/fapi_tmpdir.X5mGXX/user/dir",
+     "system_dir": "/tmp/fapi_tmpdir.X5mGXX/system_dir",
+     "system_pcrs" : [],
+     "log_dir" : "/tmp/fapi_tmpdir.X5mGXX",
+     "tcti": "device:/dev/tpmrm0",
+} 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.X5mGXX/user/dir does not exist, creating 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:339:ifapi_io_check_create_dir() Directory /tmp/fapi_tmpdir.X5mGXX/system_dir/policy does not exist, creating 
+ERROR:fapi:src/tss2-fapi/ifapi_curl.c:186:ifapi_curl_verify_ek_cert() ErrorCode (0x00060025) No certificate downloaded 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:943:Fapi_Provision_Finish() ErrorCode (0x00060025) Verify EK certificate 
+ERROR:esys:src/tss2-esys/esys_iutil.c:395:iesys_handle_to_tpm_handle() Error: Esys invalid ESAPI handle (ff). 
+ERROR:esys:src/tss2-esys/esys_iutil.c:1116:esys_GetResourceObject() Unknown ESYS handle. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:138:Esys_FlushContext_Async() flushHandle unknown. ErrorCode (0x0007000b) 
+ERROR:esys:src/tss2-esys/api/Esys_FlushContext.c:66:Esys_FlushContext() Error in async function ErrorCode (0x0007000b) 
+ERROR:fapi:src/tss2-fapi/fapi_util.c:1199:ifapi_session_clean() Cleanup session failed. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Provision.c:174:Fapi_Provision() ErrorCode (0x00060025) Provision 
+ERROR:test:test/integration/fapi-unseal.int.c:51:test_fapi_unseal() Error Fapi_Provision ErrorCode (0x00060025) 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:405:Fapi_Delete_Async() ErrorCode (0x00060034) FAPI not provisioned. 
+ERROR:fapi:src/tss2-fapi/api/Fapi_Delete.c:313:Fapi_Delete() ErrorCode (0x00060034) Entity_Delete 
+info:test:test/integration/main-fapi.c:504:main() Test returned 1 
+Script returned 1
+FAIL test/integration/fapi-unseal-persistent.fint (exit status: 1)
+

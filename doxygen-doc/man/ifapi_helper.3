@@ -1,0 +1,1049 @@
+.TH "ifapi_helper" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ifapi_helper
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBadd_string_to_list\fP (\fBNODE_STR_T\fP *str_list, char *string)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBappend_object_to_list\fP (void *object, \fBNODE_OBJECT_T\fP **object_list)"
+.br
+.ti -1c
+.RI "void \fBfree_string_list\fP (\fBNODE_STR_T\fP *node)"
+.br
+.ti -1c
+.RI "char * \fBget_description\fP (\fBIFAPI_OBJECT\fP *object)"
+.br
+.ti -1c
+.RI "bool \fBifapi_TPM2B_DIGEST_cmp\fP (TPM2B_DIGEST *in1, TPM2B_DIGEST *in2)"
+.br
+.ti -1c
+.RI "bool \fBifapi_TPM2B_ECC_PARAMETER_cmp\fP (TPM2B_ECC_PARAMETER *in1, TPM2B_ECC_PARAMETER *in2)"
+.br
+.ti -1c
+.RI "bool \fBifapi_TPM2B_PUBLIC_KEY_RSA_cmp\fP (TPM2B_PUBLIC_KEY_RSA *in1, TPM2B_PUBLIC_KEY_RSA *in2)"
+.br
+.ti -1c
+.RI "bool \fBifapi_TPMS_ECC_POINT_cmp\fP (TPMS_ECC_POINT *in1, TPMS_ECC_POINT *in2)"
+.br
+.ti -1c
+.RI "bool \fBifapi_TPMT_PUBLIC_cmp\fP (TPMT_PUBLIC *in1, TPMT_PUBLIC *in2)"
+.br
+.ti -1c
+.RI "bool \fBifapi_TPMU_PUBLIC_ID_cmp\fP (TPMU_PUBLIC_ID *in1, UINT32 selector1, TPMU_PUBLIC_ID *in2, UINT32 selector2)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_asprintf\fP (char **str, const char *fmt,\&.\&.\&.)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_calculate_pcr_digest\fP (json_object *jso_event_list, const \fBFAPI_QUOTE_INFO\fP *quote_info, TPM2B_DIGEST *pcr_digest)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_check_profile_pcr_selection\fP (const TPML_PCR_SELECTION *pcr_profile, const TPML_PCR_SELECTION *pcr_capablity)"
+.br
+.ti -1c
+.RI "void \fBifapi_cleanup_policy\fP (\fBTPMS_POLICY\fP *policy)"
+.br
+.ti -1c
+.RI "bool \fBifapi_cmp_public_key\fP (TPM2B_PUBLIC *key1, TPM2B_PUBLIC *key2)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_compute_policy_digest\fP (TPML_PCRVALUES *pcrs, TPML_PCR_SELECTION *pcr_selection, TPMI_ALG_HASH hash_alg, TPM2B_DIGEST *pcr_digest)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_compute_quote_info\fP (\fBIFAPI_OBJECT\fP *sig_key_object, TPM2B_ATTEST *tpm_quoted, char **quoteInfo)"
+.br
+.ti -1c
+.RI "\fBTPMS_POLICY\fP * \fBifapi_copy_policy\fP (const \fBTPMS_POLICY\fP *from_policy)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_create_dirs\fP (const char *supdir, const char *path)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_extend_vpcr\fP (TPM2B_DIGEST *vpcr, TPMI_ALG_HASH bank, const \fBIFAPI_EVENT\fP *event)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_filter_pcr_selection_by_index\fP (TPML_PCR_SELECTION *pcr_selection, const TPM2_HANDLE *pcr_index, size_t pcr_count)"
+.br
+.ti -1c
+.RI "void \fBifapi_free_node_list\fP (\fBNODE_OBJECT_T\fP *node)"
+.br
+.ti -1c
+.RI "void \fBifapi_free_object_list\fP (\fBNODE_OBJECT_T\fP *node)"
+.br
+.ti -1c
+.RI "int \fBifapi_get_curl_buffer\fP (unsigned char *url, unsigned char **buffer, size_t *buffer_size)"
+.br
+.ti -1c
+.RI "\fBESYS_TR\fP \fBifapi_get_hierary_handle\fP (const char *path)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_get_name\fP (TPMT_PUBLIC *publicInfo, TPM2B_NAME *name)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_get_nv_start_index\fP (const char *path, TPM2_HANDLE *start_nv_index)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_get_quote_info\fP (char const *quoteInfo, TPM2B_ATTEST *tpm_quoted, \fBFAPI_QUOTE_INFO\fP *fapi_quote_info)"
+.br
+.ti -1c
+.RI "bool \fBifapi_hierarchy_path_p\fP (const char *path)"
+.br
+.ti -1c
+.RI "void \fBifapi_init_hierarchy_object\fP (\fBIFAPI_OBJECT\fP *hierarchy, \fBESYS_TR\fP esys_handle)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_object_cmp_name\fP (\fBIFAPI_OBJECT\fP *object, void *name, bool *equal)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_object_cmp_nv_public\fP (\fBIFAPI_OBJECT\fP *object, void *nv_public, bool *equal)"
+.br
+.ti -1c
+.RI "size_t \fBifapi_path_length\fP (\fBNODE_STR_T\fP *node)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_path_string\fP (char **dest, const char *supdir, \fBNODE_STR_T\fP *node, char *name)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_path_string_n\fP (char **dest, const char *supdir, \fBNODE_STR_T\fP *node, char *name, size_t n)"
+.br
+.ti -1c
+.RI "bool \fBifapi_path_type_p\fP (const char *path, const char *type)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_set_key_flags\fP (const char *type, bool policy, \fBIFAPI_KEY_TEMPLATE\fP *template)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_set_nv_flags\fP (const char *type, \fBIFAPI_NV_TEMPLATE\fP *template, const char *policy)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_tpm_to_fapi_signature\fP (\fBIFAPI_OBJECT\fP *sig_key_object, TPMT_SIGNATURE *tpm_signature, uint8_t **signature, size_t *signatureSize)"
+.br
+.ti -1c
+.RI "\fBNODE_STR_T\fP * \fBinit_string_list\fP (const char *string)"
+.br
+.ti -1c
+.RI "bool \fBobject_with_auth\fP (\fBIFAPI_OBJECT\fP *object)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBpush_object_to_list\fP (void *object, \fBNODE_OBJECT_T\fP **object_list)"
+.br
+.ti -1c
+.RI "\fBNODE_STR_T\fP * \fBsplit_string\fP (const char *string, char *delimiter)"
+.br
+.ti -1c
+.RI "int \fBvasprintf\fP (char **str, const char *fmt, va_list args)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_check_nv_index\fP (const char *path, TPM2_HANDLE nv_index)"
+.br
+.ti -1c
+.RI "bool \fBifapi_null_primary_p\fP (const char *path)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Provides helper functions\&. 
+.SH "Function Documentation"
+.PP 
+.SS "bool add_string_to_list (\fBNODE_STR_T\fP * str_list, char * string)"
+Add string to the last element of a linked list of strings\&.
+.PP
+A duplicate of the passed string will be added\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIstr_list\fP The linked list\&. 
+.br
+\fIstring\fP The string to be added\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fItrue\fP if the string was added to the list\&. 
+.br
+\fIfalse\fP if the list could not be extended\&. 
+.RE
+.PP
+
+.SS "TSS2_RC append_object_to_list (void * object, \fBNODE_OBJECT_T\fP ** object_list)"
+Add a object as last element to a linked list\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIobject\fP The object to be added\&. 
+.br
+\fIobject_list\fP The linked list to be extended\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the object was added\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP If memory for the list extension cannot be allocated\&. 
+.RE
+.PP
+
+.SS "void free_string_list (\fBNODE_STR_T\fP * node)"
+Free linked list of strings\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fInode\fP the first node of the linked list\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_asprintf (char ** str, const char * fmt,  \&.\&.\&.)"
+Print to allocated string\&.
+.PP
+A list of parameters will be printed to an allocated string according to the format description in the first parameter\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIstr\fP The allocated output string\&. 
+.br
+\fIfmt\fP The format string (printf formats can be used\&.) 
+.br
+\fI\&.\&.\&.\fP The list of objects to be printed\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP If the printing was successful\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_calculate_pcr_digest (json_object * jso_event_list, const \fBFAPI_QUOTE_INFO\fP * quote_info, TPM2B_DIGEST * pcr_digest)"
+Check whether a event list corresponds to a certain quote information\&.
+.PP
+The event list is used to compute the PCR values corresponding to this event list\&. The PCR digest for these PCRs is computed and compared with the attest passed with quote_info\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIjso_event_list\fP The event list in JSON representation\&. 
+.br
+\fIquote_info\fP The information structure with the attest\&. 
+.br
+\fIpcr_digest\fP The computed pcr_digest for the PCRs uses by FAPI\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP If the PCR digest from the event list matches the PCR digest passed with the quote_info\&. 
+.br
+\fITSS2_FAPI_RC_SIGNATURE_VERIFICATION_FAILED\fP If the digest computed from event list does not match the attest 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP If inappropriate values are detected in the input data\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "ifapi_check_nv_index (const char * path, TPM2_HANDLE nv_index)"
+Check whether NV index is appropriate for NV path\&.
+.PP
+The value will be checked based on e TCG handle registry\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP The path used for the NV object\&. 
+.br
+\fInv_index\fP The NV index to be used\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP If the index for the path can be determined\&. 
+.br
+\fITSS2_FAPI_RC_BAD_PATH\fP If the path is not valid\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP If the nv index is not appropriate for the path\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_check_profile_pcr_selection (const TPML_PCR_SELECTION * pcr_profile, const TPML_PCR_SELECTION * pcr_capablity)"
+Check whether profile PCR capabilities are a subset of TPM PCR capabilities\&.
+.PP
+It has to be checked that every hash alg from the profile is available and whether the selected PCRs are available\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpcr_profile\fP The pcr profile to use as basis for the selection\&. 
+.br
+\fIpcr_capablity\fP The PCR capabilities available for TPM\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESSS\fP if the conversion was successful\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if profile is not subset of capabilities\&. 
+.RE
+.PP
+
+.SS "void ifapi_cleanup_policy (\fBTPMS_POLICY\fP * policy)"
+Free memory allocated during deserialization of policy\&.
+.PP
+The object will not be freed (might be declared on the stack)\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpolicy\fP The policy to be cleaned up\&. 
+.RE
+.PP
+
+.SS "bool ifapi_cmp_public_key (TPM2B_PUBLIC * key1, TPM2B_PUBLIC * key2)"
+Compare two public keys\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey1\fP The first key\&. 
+.br
+\fIkey2\fP The second key\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fItrue\fP if equal false if not\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_compute_policy_digest (TPML_PCRVALUES * pcrs, TPML_PCR_SELECTION * pcr_selection, TPMI_ALG_HASH hash_alg, TPM2B_DIGEST * pcr_digest)"
+Compute PCR selection and a PCR digest for a PCR value list\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpcrs\fP The list of PCR values\&. 
+.br
+\fIpcr_selection\fP The selection computed based on the list of PCR values\&. 
+.br
+\fIhash_alg\fP The hash algorithm which is used for the policy computation\&. 
+.br
+\fIpcr_digest\fP The computed PCR digest corresponding to the passed PCR value list\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the PCR selection and the PCR digest could be computed\&.\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP If inappropriate values are detected in the input data\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_compute_quote_info (\fBIFAPI_OBJECT\fP * sig_key_object, TPM2B_ATTEST * tpm_quoted, char ** quoteInfo)"
+Compute the JSON representation of quote information\&.
+.PP
+The attest generated by a TPM quote will be converted into a JSON representation together with the signature scheme of the key used for the quote\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIsig_key_object\fP The key object which was used for the quote\&. 
+.br
+\fItpm_quoted\fP The attest produced by the quote\&. 
+.br
+\fIquoteInfo\fP The character string with the JSON representation of the attest together with the signing schemed\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP If the conversion was successful\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP If an invalid value is detected during serialisation\&. 
+.br
+\fIPossible\fP error codes of the unmarshaling function\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "\fBTPMS_POLICY\fP * ifapi_copy_policy (const \fBTPMS_POLICY\fP * from_policy)"
+Copy policy\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIfrom_policy\fP the policy to be copied\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIThe\fP new policy or NULL if not enough memory was available\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_create_dirs (const char * supdir, const char * path)"
+Create sub-directories in a certain directory\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIsupdir\fP The directory in which the new directories shall be created\&. 
+.br
+\fIpath\fP The path containing one or more sub-directories\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP If the directories were created\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP If the linked list with the sub-directories cannot be allocated\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP If a directory cannot be created\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_extend_vpcr (TPM2B_DIGEST * vpcr, TPMI_ALG_HASH bank, const \fBIFAPI_EVENT\fP * event)"
+Compute new PCR value from a part of an event list\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIvpcr\fP The old and the new PCR value\&. 
+.br
+\fIbank\fP The bank corresponding to value of the event list which will be used for computation\&. 
+.br
+\fIevent\fP The event list with the values which were extended for a certain bank\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the bank was not found in the event list\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an error occurs in the crypto library 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_filter_pcr_selection_by_index (TPML_PCR_SELECTION * pcr_selection, const TPM2_HANDLE * pcr_index, size_t pcr_count)"
+Reduce a PCR selection to a single pcr\&.
+.PP
+This includes two steps: clearing all bits but the selected and clearing empty hashalg lines\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpcr_selection\fP The pcr selection to be filtered\&. 
+.br
+\fIpcr_index\fP The only PCR to remain selected\&. 
+.br
+\fIpcr_count\fP The size of the pcr list\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the filtering was successful\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if no pcr remain selected or the pcr selection is malformed\&. 
+.RE
+.PP
+
+.SS "void ifapi_free_node_list (\fBNODE_OBJECT_T\fP * node)"
+Free linked list of IFAPI objects (link nodes only)\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fInode\fP the first node of the linked list\&. 
+.RE
+.PP
+
+.SS "void ifapi_free_object_list (\fBNODE_OBJECT_T\fP * node)"
+Free linked list of IFAPI objects\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fInode\fP the first node of the linked list\&. 
+.RE
+.PP
+
+.SS "int ifapi_get_curl_buffer (unsigned char * url, unsigned char ** buffer, size_t * buffer_size)"
+Get byte buffer from file system or web via curl\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIurl\fP The url of the resource\&. 
+.br
+\fIbuffer\fP The buffer retrieved via the url\&. 
+.br
+\fIbuffer_size\fP The size of the retrieved object\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fI0\fP if buffer could be retrieved\&. 
+.br
+\fI-1\fP if an error did occur 
+.RE
+.PP
+
+.SS "\fBESYS_TR\fP ifapi_get_hierary_handle (const char * path)"
+Get ESYS handle for a hierarchy path\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP The path to be checked\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIThe\fP ESAPI handle for the hierarchy defined in path\&. 
+.br
+\fI0\fP if not handle can be assigned\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_get_name (TPMT_PUBLIC * publicInfo, TPM2B_NAME * name)"
+Compute the name of a TPM transient or persistent object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpublicInfo\fP The public information of the TPM object\&. 
+.br
+\fIname\fP The computed name\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITPM2_RC_SUCCESS\fP or one of the possible errors TSS2_FAPI_RC_BAD_VALUE, TSS2_FAPI_RC_MEMORY, TSS2_FAPI_RC_GENERAL_FAILURE\&. or return codes of SAPI errors\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_get_nv_start_index (const char * path, TPM2_HANDLE * start_nv_index)"
+Determine start index for NV object depending on type\&.
+.PP
+The value will be determined based on e TCG handle registry\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP The path used for the NV object\&. 
+.br
+\fIstart_nv_index\fP The first possible NV index for this type\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP If the index for the path can be determined\&. 
+.br
+\fITSS2_FAPI_RC_BAD_PATH\fP If no handle can be assigned\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_get_quote_info (char const * quoteInfo, TPM2B_ATTEST * tpm_quoted, \fBFAPI_QUOTE_INFO\fP * fapi_quote_info)"
+Deserialize the JSON representation of FAPI quote information\&.
+.PP
+The JSON representation of FAPI quote information will be deserialized to a \fBFAPI_QUOTE_INFO\fP structure and also the TPM2B version of the attest will be created\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIquoteInfo\fP The JSON representation if the quote information\&. 
+.br
+\fItpm_quoted\fP The marhaled version of the attest structure\&. 
+.br
+\fIfapi_quote_info\fP The quote information structure used by FAPI\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP If the deserialization was successful\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP If an invalid value is detected during deserialisation\&. 
+.br
+\fIPossible\fP error codes of the marshaling function\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "bool ifapi_hierarchy_path_p (const char * path)"
+Determine whether path describes a hierarchy object\&.
+.PP
+It will be checked whether the path describes a hierarch\&. A key path with a hierarchy will not deliver true\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP The path to be checked\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fItrue\fP if the path describes a hierarchy\&. 
+.br
+\fIfalse\fP if not\&. 
+.RE
+.PP
+
+.SS "void ifapi_init_hierarchy_object (\fBIFAPI_OBJECT\fP * hierarchy, \fBESYS_TR\fP esys_handle)"
+Initialize the internal representation of a FAPI hierarchy object\&.
+.PP
+The object will be cleared and the type of the general fapi object will be set to hierarchy\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIhierarchy\fP The caller allocated hierarchy object\&. The name of the object will be computed\&. 
+.br
+\fIesys_handle\fP The ESAPI handle of the hierarchy which will be added to to the object\&. 
+.RE
+.PP
+
+.SS "ifapi_null_primary_p (const char * path)"
+Determine whether path is a primary in the null hierarchy\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP The path to be checked\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fItrue\fP if the path describes a null hierarchy primary\&. 
+.br
+\fIfalse\fP if not\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_object_cmp_name (\fBIFAPI_OBJECT\fP * object, void * name, bool * equal)"
+Check whether a nv or key object has a certain name\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIobject\fP The object (has to be checked whether it's a key)\&. 
+.br
+\fIname\fP The name to be compared\&. 
+.br
+\fIequal\fP If the two names are equal\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESSS\fP if name of object can be deserialized\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP if an internal error occurred\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_object_cmp_nv_public (\fBIFAPI_OBJECT\fP * object, void * nv_public, bool * equal)"
+Check whether a nv object has a certain public info\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIobject\fP The object (has to be checked whether it's a key)\&. 
+.br
+\fInv_public\fP The NV public data with the NV index\&. 
+.br
+\fIequal\fP If the two names are equal\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESSS\fP if name of object can be deserialized\&. 
+.RE
+.PP
+
+.SS "size_t ifapi_path_length (\fBNODE_STR_T\fP * node)"
+Compute the number on nodes in a linked list\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fInode\fP the first node of the linked list\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIthe\fP number on nodes\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_path_string (char ** dest, const char * supdir, \fBNODE_STR_T\fP * node, char * name)"
+Compute a pathname based on a linked list of strings\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIdest\fP The pointer to the generated pathname (callee allocated)\&. 
+.br
+\fIsupdir\fP A sup directory will be the prefix of the pathname\&. 
+.br
+\fInode\fP The linked list\&. 
+.br
+\fIname\fP A name which is appended to the result if not NULL\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the memory for the pathname can't be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_path_string_n (char ** dest, const char * supdir, \fBNODE_STR_T\fP * node, char * name, size_t n)"
+Compute a pathname based on the first n elements of a linked list of strings\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIdest\fP the pointer to the pathname (callee allocated)\&. 
+.br
+\fIsupdir\fP a sup directory will be the prefix of the pathname\&. (can be NULL)\&. 
+.br
+\fInode\fP the linked list\&. 
+.br
+\fIname\fP the filename (can be NULL)\&. 
+.br
+\fIn\fP the number of the first elements which will bes used for concatenation\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the function call was a success\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if the memory for the pathname can't be allocated\&. 
+.RE
+.PP
+
+.SS "bool ifapi_path_type_p (const char * path, const char * type)"
+Determine whether path is of certain type\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP The path to be checked\&. 
+.br
+\fItype\fP sub-string at the beginning of the path to be checked\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fItrue\fP if the path name starts with type\&. 
+.br
+\fIfalse\fP if not\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_set_key_flags (const char * type, bool policy, \fBIFAPI_KEY_TEMPLATE\fP * template)"
+Create template for key creation based on type flags\&.
+.PP
+Based on passed flags the TPM2B_PUBLIC data which is used for key creation will be adapted\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fItype\fP The flags describing the key type\&. 
+.br
+\fIpolicy\fP The flag whether a policy is used\&. 
+.br
+\fItemplate\fP The template including the TPM2B_PUBLIC which will be used for key creation\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the template can be generated\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP If an invalid combination of flags was used\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_set_nv_flags (const char * type, \fBIFAPI_NV_TEMPLATE\fP * template, const char * policy)"
+Create template for nv object creation based on type flags\&.
+.PP
+Based on passed flags the TPM2B_NV_PUBLIC data which is used for key creation will be adapted\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItype\fP The flags describing the nv object type\&. 
+.br
+\fIpolicy\fP The flag whether a policy is used\&. 
+.br
+\fItemplate\fP The template including the TPM2B_NV_PUBLIC which will be used for nv object creation\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the template can be generated\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP If an invalid combination of flags was used\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SS "bool ifapi_TPM2B_DIGEST_cmp (TPM2B_DIGEST * in1, TPM2B_DIGEST * in2)"
+Compare two variables of type TPM2B_DIGEST\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin1\fP variable to be compared with in2\&. 
+.br
+\fIin2\fP variable to be compared with in1\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fItrue\fP if the variables are equal\&. 
+.br
+\fIfalse\fP if not\&. 
+.RE
+.PP
+
+.SS "bool ifapi_TPM2B_ECC_PARAMETER_cmp (TPM2B_ECC_PARAMETER * in1, TPM2B_ECC_PARAMETER * in2)"
+Compare two variables of type TPM2B_ECC_PARAMETER\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin1\fP variable to be compared with in2\&. 
+.br
+\fIin2\fP variable to be compared with in1\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fItrue\fP if the variables are equal\&. 
+.br
+\fIfalse\fP if not\&. 
+.RE
+.PP
+
+.SS "bool ifapi_TPM2B_PUBLIC_KEY_RSA_cmp (TPM2B_PUBLIC_KEY_RSA * in1, TPM2B_PUBLIC_KEY_RSA * in2)"
+Compare two variables of type TPM2B_PUBLIC_KEY_RSA\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin1\fP variable to be compared with in2 
+.br
+\fIin2\fP variable to be compared with in1
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fItrue\fP if the variables are equal\&. 
+.br
+\fIfalse\fP if not\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_tpm_to_fapi_signature (\fBIFAPI_OBJECT\fP * sig_key_object, TPMT_SIGNATURE * tpm_signature, uint8_t ** signature, size_t * signatureSize)"
+Compute signature as byte array and signature size in DER format\&.
+.PP
+For ECC signatures the conversion to DER is necessary, for RSA the buffer of the TPM2B has already DER format\&. parameters\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsig_key_object\fP The signing key\&. 
+.br
+\fItpm_signature\fP the signature in TPM format\&. 
+.br
+\fIsignature\fP The byte array of the signature (callee allocated)\&. 
+.br
+\fIsignatureSize\fP The size of the byte array\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESSS\fP if the conversion was successful\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if not enough memory can be allocated\&. 
+.br
+\fITSS2_FAPI_RC_GENERAL_FAILURE\fP If an internal error occurs, which is not covered by other return codes (e\&.g\&. a unexpected openssl error)\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if an invalid value was passed into the function\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP a invalid null pointer is passed\&. 
+.RE
+.PP
+
+.SS "bool ifapi_TPMS_ECC_POINT_cmp (TPMS_ECC_POINT * in1, TPMS_ECC_POINT * in2)"
+Compare two variables of type TPMS_ECC_POINT\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin1\fP variable to be compared with in2\&. 
+.br
+\fIin2\fP variable to be compared with in1\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fItrue\fP if the variables are equal\&. 
+.br
+\fIfalse\fP if not\&. 
+.RE
+.PP
+
+.SS "bool ifapi_TPMT_PUBLIC_cmp (TPMT_PUBLIC * in1, TPMT_PUBLIC * in2)"
+Compare the PUBLIC_ID stored in two TPMT_PUBLIC structures\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin1\fP the public data with the unique data to be compared with: 
+.br
+\fIin2\fP 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fItrue\fP if the variables are equal\&. 
+.br
+\fIfalse\fP if not\&. 
+.RE
+.PP
+
+.SS "bool ifapi_TPMU_PUBLIC_ID_cmp (TPMU_PUBLIC_ID * in1, UINT32 selector1, TPMU_PUBLIC_ID * in2, UINT32 selector2)"
+Compare two variables of type TPMU_PUBLIC_ID\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIin1\fP variable to be compared with in2\&. 
+.br
+\fIselector1\fP key type of first key\&. 
+.br
+\fIin2\fP variable to be compared with in1\&. 
+.br
+\fIselector2\fP key type of second key\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if variables are equal\&. 
+.PP
+false if not\&. 
+.RE
+.PP
+
+.SS "\fBNODE_STR_T\fP * init_string_list (const char * string)"
+Initialize a linked list of strings\&.
+.PP
+free string in the list object will be set to true\&. If the list will be extended by sub-string which are part of this strin free_string has to be set to false\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIstring\fP The string for the first element\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIthe\fP initial node of the linked list\&. 
+.br
+\fINULL\fP if the list cannot be created\&. 
+.RE
+.PP
+
+.SS "bool object_with_auth (\fBIFAPI_OBJECT\fP * object)"
+Determine whether authentication with an auth value is needed ro an object\&.\&.
+.PP
+In the key store the information whether an auth value was provided for an object is saved\&. Thus the it is possible to decide whether the auth value callback is required for authentication\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIobject\fP The object which has to be checked\&.\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fItrue\fP If an auth value was provided\&. 
+.br
+\fIfalse\fP If not\&. 
+.RE
+.PP
+
+.SS "TSS2_RC push_object_to_list (void * object, \fBNODE_OBJECT_T\fP ** object_list)"
+Add a object as first element to a linked list\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIobject\fP The object to be added\&. 
+.br
+\fIobject_list\fP The linked list to be extended\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP if the object was added\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP If memory for the list extension cannot be allocated\&. 
+.RE
+.PP
+
+.SS "\fBNODE_STR_T\fP * split_string (const char * string, char * delimiter)"
+Divides str into substrings based on a delimiter\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIstring\fP the string to split\&. 
+.br
+\fIdelimiter\fP the delimiter\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIThe\fP linked list of substrings\&. 
+.br
+\fINULL\fP if the list cannot be created\&. 
+.RE
+.PP
+
+.SS "int vasprintf (char ** str, const char * fmt, va_list args)"
+Print to allocated string\&.
+.PP
+A list of parameters will be printed to an allocated string according to the format description in the first parameter\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIstr\fP The allocated output string\&. 
+.br
+\fIfmt\fP The format string (printf formats can be used\&.) 
+.br
+\fIargs\fP The list of objects to be printed\&.
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fIint\fP The size of the string ff the printing was successful\&. 
+.br
+\fI-1\fP if not enough memory can be allocated\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.

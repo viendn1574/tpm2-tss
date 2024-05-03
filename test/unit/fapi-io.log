@@ -1,0 +1,26 @@
+[==========] Running 4 test(s).
+[ RUN      ] check_io_read_async
+ERROR:fapi:src/tss2-fapi/ifapi_io.c:51:ifapi_io_read_async() rbuffer still in use; maybe use of old API. 
+ERROR:fapi:src/tss2-fapi/ifapi_io.c:57:ifapi_io_read_async() Open file "tss_unit_dummyf": Success 
+ERROR:fapi:src/tss2-fapi/ifapi_io.c:57:ifapi_io_read_async() Open file "tss_unit_dummyf": Success 
+ERROR:fapi:src/tss2-fapi/ifapi_io.c:79:ifapi_io_read_async() File "tss_unit_dummyf" could not be locked: Resource temporarily unavailable 
+ERROR:fapi:src/tss2-fapi/ifapi_io.c:107:ifapi_io_read_async() Memory could not be allocated. 2 bytes requested 
+ERROR:fapi:src/tss2-fapi/ifapi_io.c:119:ifapi_io_read_async() fcntl failed with 0 
+[       OK ] check_io_read_async
+[ RUN      ] check_io_read_finish
+ERROR:fapi:src/tss2-fapi/ifapi_io.c:161:ifapi_io_read_finish() Error reading from file: 0. 
+WARNING:fapi:src/tss2-fapi/ifapi_io.c:176:ifapi_io_read_finish() The old file read API is still being used 
+[       OK ] check_io_read_finish
+[ RUN      ] check_io_write_async
+ERROR:fapi:src/tss2-fapi/ifapi_io.c:209:ifapi_io_write_async() rbuffer still in use; maybe use of old API. 
+ERROR:fapi:src/tss2-fapi/ifapi_io.c:217:ifapi_io_write_async() Memory could not be allocated. 0 bytes requested 
+ERROR:fapi:src/tss2-fapi/ifapi_io.c:224:ifapi_io_write_async() ErrorCode (0x0006000a) Open file "tss_unit_dummyf" for writing: Success 
+ERROR:fapi:src/tss2-fapi/ifapi_io.c:234:ifapi_io_write_async() ErrorCode (0x0006000a) File "tss_unit_dummyf" could not be locked: Resource temporarily unavailable 
+ERROR:fapi:src/tss2-fapi/ifapi_io.c:249:ifapi_io_write_async() ErrorCode (0x0006000a) fcntl failed with 0 
+[       OK ] check_io_write_async
+[ RUN      ] check_io_write_finish
+ERROR:fapi:src/tss2-fapi/ifapi_io.c:286:ifapi_io_write_finish() Error writing to file: 0. 
+[       OK ] check_io_write_finish
+[==========] 4 test(s) run.
+[  PASSED  ] 4 test(s).
+PASS test/unit/fapi-io (exit status: 0)

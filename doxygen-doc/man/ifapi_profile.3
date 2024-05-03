@@ -1,0 +1,125 @@
+.TH "ifapi_profile" 3 "Mon May 15 2023" "Version 4.0.1-44-g8699ab39" "tpm2-tss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ifapi_profile
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBifapi_profiles_finalize\fP (\fBIFAPI_PROFILES\fP *profiles)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_profiles_get\fP (const \fBIFAPI_PROFILES\fP *profiles, const char *name, const \fBIFAPI_PROFILE\fP **profile)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_profiles_initialize_async\fP (\fBIFAPI_PROFILES\fP *profiles, \fBIFAPI_IO\fP *io, const char *profilesdir, const char *defaultprofile)"
+.br
+.ti -1c
+.RI "TSS2_RC \fBifapi_profiles_initialize_finish\fP (\fBIFAPI_PROFILES\fP *profiles, \fBIFAPI_IO\fP *io)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Provides functions for the handling of profiles stored in the object store\&. 
+.SH "Function Documentation"
+.PP 
+.SS "void ifapi_profiles_finalize (\fBIFAPI_PROFILES\fP * profiles)"
+Sanitizes and frees internal data structures of loaded profiles' information\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIprofiles\fP The context for the profiles information\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_profiles_get (const \fBIFAPI_PROFILES\fP * profiles, const char * name, const \fBIFAPI_PROFILE\fP ** profile)"
+Return the profile data for a given profile name\&.
+.PP
+Returns a (const, not to be free'd) pointer to the profile data for a requested profile\&. If a NULL profile is requesten, then the default profile is returned\&. If a keypath is passed in, then the prefix is analysed\&. If that keypath starts with a profile then this profile is returned\&. Otherwise the default profile is returned\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIprofiles\fP The profiles context 
+.br
+\fIname\fP The name of the profile or the keypath 
+.br
+\fIprofile\fP The pointer to the profile data\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if NULL pointers were passed in\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if a profile is not found\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_profiles_initialize_async (\fBIFAPI_PROFILES\fP * profiles, \fBIFAPI_IO\fP * io, const char * profilesdir, const char * defaultprofile)"
+Initialize the profiles information in the context in an asynchronous way
+.PP
+Load the profile information from disk, fill the dictionary of loaded profiles and fill the default profile information into the context\&.
+.PP
+Call ifapi_profiles_initialize_finish to complete the operation\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIprofiles\fP The context for the profiles information\&. 
+.br
+\fIio\fP The input/output context being used for file I/O\&. 
+.br
+\fIprofilesdir\fP The directory to load profile information from\&. 
+.br
+\fIdefaultprofile\fP The name of the default profile to use\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if NULL pointers were passed in\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if the profilesdir does not exist or is empty\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if creation of log_dir failed or log_dir is not writable\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if memory allocation failed\&. 
+.RE
+.PP
+
+.SS "TSS2_RC ifapi_profiles_initialize_finish (\fBIFAPI_PROFILES\fP * profiles, \fBIFAPI_IO\fP * io)"
+Initialize the profiles information in the context in an asynchronous way
+.PP
+Call after ifapi_profiles_initialize_async to complete the operation\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIprofiles\fP The context for the profiles information\&. 
+.br
+\fIio\fP The input/output context being used for file I/O\&. 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fITSS2_RC_SUCCESS\fP on success\&. 
+.br
+\fITSS2_FAPI_RC_BAD_REFERENCE\fP if NULL pointers were passed in\&. 
+.br
+\fITSS2_FAPI_RC_BAD_VALUE\fP if a profile could not be loaded\&. 
+.br
+\fITSS2_FAPI_RC_IO_ERROR\fP if creation of log_dir failed or log_dir is not writable\&. 
+.br
+\fITSS2_FAPI_RC_MEMORY\fP if memory allocation failed\&. 
+.br
+\fITSS2_FAPI_RC_TRY_AGAIN\fP if the I/O operation is not finished yet and this function needs to be called again\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for tpm2-tss from the source code\&.
