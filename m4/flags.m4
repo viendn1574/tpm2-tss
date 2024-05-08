@@ -12,7 +12,7 @@ AC_DEFUN([ADD_COMPILER_FLAG],[
             AC_MSG_WARN([Optional CFLAG "$1" not supported by your compiler, continuing.])],[
             AC_MSG_ERROR([Required CFLAG "$1" not supported by your compiler, aborting.])]
         )],[
-        -Wall -Werror]
+        -Wall]
     )]
 )
 dnl ADD_PREPROC_FLAG:
@@ -31,7 +31,7 @@ AC_DEFUN([ADD_PREPROC_FLAG],[
             AC_MSG_WARN([Optional preprocessor flag "$1" not supported by your compiler, continuing.])],[
             AC_MSG_ERROR([Required preprocessor flag "$1" not supported by your compiler, aborting.])]
         )],[
-        -Wall -Werror]
+        -Wall]
     )]
 )
 dnl ADD_LINK_FLAG:
