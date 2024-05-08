@@ -28,11 +28,25 @@
 #include "ifapi_json_serialize.h"
 #include "ifapi_json_deserialize.h"
 #include "fapi_policy.h"
+#include "ifapi_helpers.h"
 
 #include "util/aux_util.h"
 
 #define LOGMODULE tests
 #include "util/log.h"
+
+#define EXIT_SKIP 77
+
+static bool big_endian(void) {
+
+    uint32_t test_word;
+    uint8_t *test_byte;
+
+    test_word = 0xFF000000;
+    test_byte = (uint8_t *) (&test_word);
+
+    return test_byte[0] == 0xFF;
+}
 
 static uint8_t *file_to_buffer(const char *filename, size_t *size)
 {
@@ -118,6 +132,64 @@ check_eventlog(const char *file, uint32_t *pcr_list, size_t pcr_list_size, int n
 }
 
 static void
+check_eventlog_pcr0(const char *file, uint32_t *pcr_list, size_t pcr_list_size, int n_events)
+{
+    TSS2_RC r;
+    uint8_t *eventlog;
+    size_t size;
+    json_object *json_event_list = NULL;
+    IFAPI_PCR_REG pcrs[TPM2_MAX_PCRS];
+
+    TPML_PCR_SELECTION pcr_selection =
+        {
+         .count = 1,
+        .pcrSelections =
+         {
+          {
+           .hash = TPM2_ALG_SHA1,
+           .sizeofSelect = 3,
+           .pcrSelect = { 1, 0, 0 } },
+         }};
+
+    TPM2B_DIGEST expected_pcr0 =
+        {
+         .size = 20,
+         .buffer = { 0x15, 0xf4, 0xe6, 0xca, 0x45, 0x7d, 0x1a, 0xf6, 0xbc, 0x49,
+                     0x51, 0x1a, 0x93, 0xba, 0x35, 0x00, 0xad, 0x69, 0xac, 0xc5 },
+        };
+
+    /* Read file to get file size for comparison. */
+    eventlog = file_to_buffer(file, &size);
+    assert_non_null(eventlog);
+
+    r = ifapi_get_tcg_firmware_event_list(file, pcr_list, pcr_list_size, &json_event_list);
+    assert_int_equal (r, TSS2_RC_SUCCESS);
+
+    r = ifapi_calculate_pcrs(json_event_list, &pcr_selection, TPM2_ALG_SHA1, NULL, &pcrs[0]);
+    assert_int_equal (r, TSS2_RC_SUCCESS);
+
+    /* Compare with the pcr0 value got from system with HCRTM events */
+    assert_true(!memcmp(&expected_pcr0.buffer[0], &pcrs[0].value.buffer[0], 20));
+
+    json_object_put(json_event_list);
+    SAFE_FREE(eventlog);
+}
+
+static void
+check_bios_hcrtm(void **state)
+{
+
+#ifdef __FreeBSD__
+    /* Free BSD does not support SM3 hashalg */
+    skip();
+#endif
+    check_eventlog_pcr0("test/data/fapi/eventlog/binary_measurements_hcrtm.bin", &pcr_list[0], 9, 111);
+    check_eventlog("test/data/fapi/eventlog/binary_measurements_hcrtm.bin", &pcr_list[0], 1, 5);
+    check_eventlog("test/data/fapi/eventlog/binary_measurements_hcrtm.bin", &pcr_list[0], 9, 111);
+    check_eventlog("test/data/fapi/eventlog/binary_measurements_hcrtm.bin", NULL, 0, 0);
+}
+
+static void
 check_bios_nuc(void **state)
 {
     check_eventlog("test/data/fapi/eventlog/binary_measurements_nuc.bin", &pcr_list[0], 1, 2);
@@ -129,7 +201,7 @@ static void
 check_bios_pc_client(void **state)
 {
     check_eventlog("test/data/fapi/eventlog/binary_measurements_pc_client.bin", &pcr_list[0], 1, 5);
-    check_eventlog("test/data/fapi/eventlog/binary_measurements_pc_client.bin", &pcr_list[0], 3, 17);
+    check_eventlog("test/data/fapi/eventlog/binary_measurements_pc_client.bin", &pcr_list[0], 9, 31);
     check_eventlog("test/data/fapi/eventlog/binary_measurements_pc_client.bin", NULL, 0, 0);
 }
 
@@ -167,7 +239,12 @@ check_specid_vendordata(void **state)
 int
 main(int argc, char *argv[])
 {
+    if (big_endian()) {
+        return EXIT_SKIP;
+    }
+
     const struct CMUnitTest tests[] = {
+        cmocka_unit_test(check_bios_hcrtm),
         cmocka_unit_test(check_bios_nuc),
         cmocka_unit_test(check_bios_pc_client),
         cmocka_unit_test(check_event_uefiservices),

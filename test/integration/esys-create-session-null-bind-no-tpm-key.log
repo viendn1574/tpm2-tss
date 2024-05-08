@@ -1,9 +1,0 @@
-TPM20TEST_TCTI_NAME=device
-TPM20TEST_DEVICE_FILE=/dev/tpmrm0
-TPM20TEST_SOCKET_ADDRESS=
-TPM20TEST_SOCKET_PORT=
-TPM20TEST_TCTI=device:host=,port=
-Execute the test script
-Script returned 0
-failed to stop daemon, no pid file: /home/vien/tpm2-tss/test/integration/esys-create-session-null-bind-no-tpm-key.int_simulator.pid
-PASS test/integration/esys-create-session-null-bind-no-tpm-key.int (exit status: 0)

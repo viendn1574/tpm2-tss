@@ -55,9 +55,10 @@ typedef UINT32 TSS2_KEY_TYPE;
 #define MAX_PLATFORM_CERT_HANDLE 0x01C0FFFF
 
 typedef UINT8 IFAPI_SESSION_TYPE;
-#define IFAPI_SESSION_GENEK 0x01
-#define IFAPI_SESSION1      0x02
-#define IFAPI_SESSION2      0x04
+#define IFAPI_SESSION_GEN_SRK 0x01
+#define IFAPI_SESSION1        0x02
+#define IFAPI_SESSION2        0x04
+#define IFAPI_SESSION_USE_SRK 0x08
 
 #define IFAPI_POLICY_PATH "policy"
 #define IFAPI_NV_PATH "nv"
@@ -68,7 +69,9 @@ typedef UINT8 IFAPI_SESSION_TYPE;
 #define IFAPI_PUB_KEY_DIR "ext"
 #define IFAPI_POLICY_DIR "policy"
 #define IFAPI_PEM_PUBLIC_STRING "-----BEGIN PUBLIC KEY-----"
-#define IFAPI_PEM_PRIVATE_KEY "-----PRIVATE KEY-----"
+#define IFAPI_PEM_PRIVATE_KEY "-----BEGIN PRIVATE KEY-----"
+#define IFAPI_PEM_RSA_PRIVATE_KEY "-----BEGIN RSA PRIVATE KEY-----"
+#define IFAPI_PEM_ECC_PRIVATE_KEY "-----BEGIN EC PRIVATE KEY-----"
 #define IFAPI_JSON_TAG_POLICY "policy"
 #define IFAPI_JSON_TAG_OBJECT_TYPE "objectType"
 #define IFAPI_JSON_TAG_DUPLICATE "public_parent"
@@ -125,6 +128,11 @@ typedef struct {
         LOG_ERROR(TPM2_ERROR_FORMAT " " msg, TPM2_ERROR_TEXT(r), ## __VA_ARGS__); \
         goto label;  \
     }
+
+#define ENC_SESSION_IF_POLICY(auth_session)             \
+    (auth_session == ESYS_TR_PASSWORD || auth_session == ESYS_TR_NONE || \
+     auth_session == context->session2 || \
+     !context->session2) ? ESYS_TR_NONE : context->session2
 
 /** The states for the FAPI's object authorization state*/
 enum IFAPI_GET_CERT_STATE {
@@ -185,13 +193,6 @@ typedef struct {
     TPMS_NV_PUBLIC                               public;    /**< Template for public data */
 } IFAPI_NV_TEMPLATE;
 
-/** Type for representing a external public key
- */
-typedef struct {
-    TPMT_SIG_SCHEME                          sig_scheme;    /**< Signature scheme used for quote. */
-    TPMS_ATTEST                                  attest;    /**< Attestation data from Quote */
-} FAPI_QUOTE_INFO;
-
 
 /** The states for the FAPI's NV read state */
 enum _FAPI_STATE_NV_READ {
@@ -239,6 +240,7 @@ typedef struct {
     TPM2B_AUTH auth;            /**< The Password */
     IFAPI_NV nv_obj;            /**< The NV Object */
     ESYS_TR auth_index;         /**< The ESAPI handle of the authorization object */
+    ESYS_TR auth_session;       /**< The autorization session for a nv object */
     uint64_t bitmap;            /**< The bitmask for the SetBits command */
     IFAPI_NV_TEMPLATE public_templ; /**< The template for nv creation, adjusted
                                          appropriate by the passed flags */
@@ -291,7 +293,8 @@ typedef struct {
     uint32_t const *hashAlgs;
     uint32_t *hashAlgs2;
     size_t numHashAlgs;
-    char    const *quoteInfo;
+    char const *quoteInfo;
+    char *certificate;
     TPM2B_ATTEST *tpm_quoted;
     TPMT_SIGNATURE *tpm_signature;
     uint8_t *signature;
@@ -711,6 +714,9 @@ typedef struct {
     TPM2B_PRIVATE *private;
     char *jso_string;
     const IFAPI_PROFILE *profile;
+    IFAPI_KEY_TEMPLATE public_templ;  /**< The template for the keys public data */
+    const char *ossl_priv;            /**< Private OSSL PEM key to be import. */
+    TPM2B_SENSITIVE sensitive;        /**< The sensitive part of an OSSL key. */
 } IFAPI_ImportKey;
 
 
@@ -1025,6 +1031,7 @@ enum _FAPI_STATE {
     DATA_ENCRYPT_WAIT_FOR_PROFILE,
     DATA_ENCRYPT_WAIT_FOR_SESSION,
     DATA_ENCRYPT_WAIT_FOR_KEY,
+    DATA_ENCRYPT_WAIT_FOR_EXT_KEY,
     DATA_ENCRYPT_WAIT_FOR_FLUSH,
     DATA_ENCRYPT_WAIT_FOR_RSA_ENCRYPTION,
     DATA_ENCRYPT_CLEAN,
@@ -1206,5 +1213,6 @@ struct FAPI_CONTEXT {
 #define VENDOR_IFX  0x49465800
 #define VENDOR_INTC 0x494E5443
 #define VEDNOR_IBM  0x49424D20
+#define VENDOR_AMD  0x414D4400
 
 #endif /* FAPI_INT_H */

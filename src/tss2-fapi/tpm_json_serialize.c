@@ -68,10 +68,12 @@ ifapi_json_pcr_select_serialize(
     json_object *jso2;
     for (i1 = 0; i1 < TPM2_PCR_LAST - TPM2_PCR_FIRST; i1++) {
         i2 = i1 + TPM2_PCR_FIRST;
-        if (pcrSelect[i2 / 8] & (BYTE)(1 << (i2 % 8))) {
+        if (pcrSelect[i2 / 8] & (((BYTE)1) << (i2 % 8))) {
             jso2 = json_object_new_int(i2);
             return_if_null(jso2, "Out of memory.", TSS2_FAPI_RC_MEMORY);
-            json_object_array_add(*jso, jso2);
+            if (json_object_array_add(*jso, jso2)) {
+                return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+            }
         }
     }
     return TSS2_RC_SUCCESS;
@@ -119,12 +121,16 @@ ifapi_json_TPMS_PCR_SELECTION_serialize(const TPMS_PCR_SELECTION *in,
     r = ifapi_json_TPMI_ALG_HASH_serialize(in->hash, &jso2);
     return_if_error(r, "Serialize pcr selection");
 
-    json_object_object_add(*jso, "hash", jso2);
+    if (json_object_object_add(*jso, "hash", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_pcr_select_serialize(in->sizeofSelect, &in->pcrSelect[0], &jso2);
     return_if_error(r, "Serialize pcr selection");
 
-    json_object_object_add(*jso, "pcrSelect", jso2);
+    if (json_object_object_add(*jso, "pcrSelect", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -147,12 +153,16 @@ ifapi_json_TPMS_TAGGED_PCR_SELECT_serialize(const TPMS_TAGGED_PCR_SELECT *in,
     r = ifapi_json_TPM2_PT_PCR_serialize(in->tag, &jso2);
     return_if_error(r, "Serialize pcr selection");
 
-    json_object_object_add(*jso, "tag", jso2);
+    if (json_object_object_add(*jso, "tag", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_pcr_select_serialize(in->sizeofSelect, &in->pcrSelect[0], &jso2);
     return_if_error(r, "Serialize pcr selection");
 
-    json_object_object_add(*jso, "pcrSelect", jso2);
+    if (json_object_object_add(*jso, "pcrSelect", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -174,12 +184,16 @@ ifapi_json_TPMS_TAGGED_POLICY_serialize(const TPMS_TAGGED_POLICY *in, json_objec
     r = ifapi_json_TPM2_HANDLE_serialize(in->handle, &jso2);
     return_if_error(r, "Serialize tagged policy");
 
-    json_object_object_add(*jso, "handle", jso2);
+    if (json_object_object_add(*jso, "handle", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMT_HA_serialize(&in->policyHash, &jso2);
     return_if_error(r, "Serialize tagged policy");
 
-    json_object_object_add(*jso, "policyHash", jso2);
+    if (json_object_object_add(*jso, "policyHash", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -201,17 +215,23 @@ ifapi_json_TPMS_ACT_DATA_serialize(const TPMS_ACT_DATA *in, json_object **jso)
     r = ifapi_json_TPM2_HANDLE_serialize(in->handle, &jso2);
     return_if_error(r, "Serialize act data");
 
-    json_object_object_add(*jso, "handle", jso2);
+    if (json_object_object_add(*jso, "handle", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_UINT32_serialize(in->timeout, &jso2);
     return_if_error(r, "Serialize act data");
 
-    json_object_object_add(*jso, "timeout", jso2);
+    if (json_object_object_add(*jso, "timeout", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMA_ACT_serialize(in->attributes, &jso2);
     return_if_error(r, "Serialize act data");
 
-    json_object_object_add(*jso, "attributes", jso2);
+    if (json_object_object_add(*jso, "attributes", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -307,8 +327,12 @@ ifapi_json_UINT64_serialize(UINT64 in, json_object **jso)
     if (!*jso) json_object_put(jso2);
     return_if_null(*jso, "Out of memory.", TSS2_FAPI_RC_MEMORY);
 
-    json_object_array_add(*jso, jso1);
-    json_object_array_add(*jso, jso2);
+    if (json_object_array_add(*jso, jso1)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
+    if (json_object_array_add(*jso, jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
 
     return TSS2_RC_SUCCESS;
 }
@@ -877,7 +901,9 @@ ifapi_json_TPMA_ALGORITHM_serialize(const TPMA_ALGORITHM in, json_object **jso)
             jso_bit = json_object_new_int(0);
         return_if_null(jso_bit, "Out of memory.", TSS2_FAPI_RC_MEMORY);
 
-        json_object_object_add(*jso, tab[i].name, jso_bit);
+        if (json_object_object_add(*jso, tab[i].name, jso_bit)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -922,7 +948,9 @@ ifapi_json_TPMA_OBJECT_serialize(const TPMA_OBJECT in, json_object **jso)
             jso_bit = json_object_new_int(0);
         return_if_null(jso_bit, "Out of memory.", TSS2_FAPI_RC_MEMORY);
 
-        json_object_object_add(*jso, tab[i].name, jso_bit);
+        if (json_object_object_add(*jso, tab[i].name, jso_bit)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -963,13 +991,17 @@ ifapi_json_TPMA_LOCALITY_serialize(const TPMA_LOCALITY in, json_object **jso)
             jso_bit = json_object_new_int(0);
         return_if_null(jso_bit, "Out of memory.", TSS2_FAPI_RC_MEMORY);
 
-        json_object_object_add(*jso, tab[i].name, jso_bit);
+        if (json_object_object_add(*jso, tab[i].name, jso_bit)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     jso_bit_idx = json_object_new_int64((TPMA_LOCALITY_EXTENDED_MASK & input) >>
                                          5);
     return_if_null(jso_bit_idx, "Out of memory.", TSS2_FAPI_RC_MEMORY);
 
-    json_object_object_add(*jso, "Extended", jso_bit_idx);
+    if (json_object_object_add(*jso, "Extended", jso_bit_idx)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
 
     return TSS2_RC_SUCCESS;
 }
@@ -1009,22 +1041,30 @@ ifapi_json_TPMA_CC_serialize(const TPMA_CC in, json_object **jso)
             jso_bit = json_object_new_int(0);
         return_if_null(jso_bit, "Out of memory.", TSS2_FAPI_RC_MEMORY);
 
-        json_object_object_add(*jso, tab[i].name, jso_bit);
+        if (json_object_object_add(*jso, tab[i].name, jso_bit)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     jso_bit_idx = json_object_new_int64((TPMA_CC_COMMANDINDEX_MASK & input) >> 0);
     return_if_null(jso_bit_idx, "Out of memory.", TSS2_FAPI_RC_MEMORY);
 
-    json_object_object_add(*jso, "commandIndex", jso_bit_idx);
+    if (json_object_object_add(*jso, "commandIndex", jso_bit_idx)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
 
     jso_bit_idx = json_object_new_int64((TPMA_CC_CHANDLES_MASK & input) >> 25);
     return_if_null(jso_bit_idx, "Out of memory.", TSS2_FAPI_RC_MEMORY);
 
-    json_object_object_add(*jso, "cHandles", jso_bit_idx);
+    if (json_object_object_add(*jso, "cHandles", jso_bit_idx)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
 
     jso_bit_idx = json_object_new_int64((TPMA_CC_RES_MASK & input) >> 30);
     return_if_null(jso_bit_idx, "Out of memory.", TSS2_FAPI_RC_MEMORY);
 
-    json_object_object_add(*jso, "Res", jso_bit_idx);
+    if (json_object_object_add(*jso, "Res", jso_bit_idx)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
 
     return TSS2_RC_SUCCESS;
 }
@@ -1062,7 +1102,9 @@ ifapi_json_TPMA_ACT_serialize(const TPMA_ACT in, json_object **jso)
             jso_bit = json_object_new_int(0);
         return_if_null(jso_bit, "Out of memory.", TSS2_FAPI_RC_MEMORY);
 
-        json_object_object_add(*jso, tab[i].name, jso_bit);
+        if (json_object_object_add(*jso, tab[i].name, jso_bit)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -1315,13 +1357,17 @@ ifapi_json_TPMT_HA_serialize(const TPMT_HA *in, json_object **jso)
     r = ifapi_json_TPMI_ALG_HASH_serialize(in->hashAlg, &jso2);
     return_if_error(r, "Serialize TPMI_ALG_HASH");
 
-    json_object_object_add(*jso, "hashAlg", jso2);
+    if (json_object_object_add(*jso, "hashAlg", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     if (in->hashAlg != TPM2_ALG_NULL) {
         json_object *jso2 = NULL;
         r = ifapi_json_TPMU_HA_serialize(&in->digest, in->hashAlg, &jso2);
         return_if_error(r, "Serialize TPMU_HA");
 
-        json_object_object_add(*jso, "digest", jso2);
+        if (json_object_object_add(*jso, "digest", jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -1532,17 +1578,23 @@ ifapi_json_TPMT_TK_CREATION_serialize(const TPMT_TK_CREATION *in, json_object **
     r = ifapi_json_TPM2_ST_serialize(in->tag, &jso2);
     return_if_error(r, "Serialize TPM2_ST");
 
-    json_object_object_add(*jso, "tag", jso2);
+    if (json_object_object_add(*jso, "tag", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMI_RH_HIERARCHY_serialize(in->hierarchy, &jso2);
     return_if_error(r, "Serialize TPMI_RH_HIERARCHY");
 
-    json_object_object_add(*jso, "hierarchy", jso2);
+    if (json_object_object_add(*jso, "hierarchy", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_DIGEST_serialize(&in->digest, &jso2);
     return_if_error(r, "Serialize TPM2B_DIGEST");
 
-    json_object_object_add(*jso, "digest", jso2);
+    if (json_object_object_add(*jso, "digest", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -1561,6 +1613,14 @@ ifapi_json_TPMS_ALG_PROPERTY_serialize(const TPMS_ALG_PROPERTY *in, json_object 
     return_if_null(in, "Bad reference.", TSS2_FAPI_RC_BAD_REFERENCE);
 
     TSS2_RC r;
+
+    if ((in->alg == TPM2_ALG_SHA3_256 ||
+         in->alg == TPM2_ALG_SHA3_384 ||
+         in->alg == TPM2_ALG_SHA3_512)) {
+        LOG_WARNING("SHA3 hash algs are not supported by TSS");
+        return TSS2_RC_SUCCESS;
+    }
+
     json_object *jso2;
     if (*jso == NULL)
         *jso = json_object_new_object ();
@@ -1568,12 +1628,16 @@ ifapi_json_TPMS_ALG_PROPERTY_serialize(const TPMS_ALG_PROPERTY *in, json_object 
     r = ifapi_json_TPM2_ALG_ID_serialize(in->alg, &jso2);
     return_if_error(r, "Serialize TPM2_ALG_ID");
 
-    json_object_object_add(*jso, "alg", jso2);
+    if (json_object_object_add(*jso, "alg", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMA_ALGORITHM_serialize(in->algProperties, &jso2);
     return_if_error(r, "Serialize TPMA_ALGORITHM");
 
-    json_object_object_add(*jso, "algProperties", jso2);
+    if (json_object_object_add(*jso, "algProperties", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -1599,12 +1663,16 @@ ifapi_json_TPMS_TAGGED_PROPERTY_serialize(const TPMS_TAGGED_PROPERTY *in, json_o
     r = ifapi_json_TPM2_PT_serialize(in->property, &jso2);
     return_if_error(r, "Serialize TPM2_PT");
 
-    json_object_object_add(*jso, "property", jso2);
+    if (json_object_object_add(*jso, "property", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_UINT32_serialize(in->value, &jso2);
     return_if_error(r, "Serialize UINT32");
 
-    json_object_object_add(*jso, "value", jso2);
+    if (json_object_object_add(*jso, "value", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -1636,7 +1704,9 @@ ifapi_json_TPML_CC_serialize(const TPML_CC *in, json_object **jso)
         r = ifapi_json_TPM2_CC_serialize (in->commandCodes[i], &jso2);
         return_if_error(r, "Serialize TPM2_CC");
 
-        json_object_array_add(*jso, jso2);
+        if (json_object_array_add(*jso, jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -1669,7 +1739,9 @@ ifapi_json_TPML_CCA_serialize(const TPML_CCA *in, json_object **jso)
         r = ifapi_json_TPMA_CC_serialize (in->commandAttributes[i], &jso2);
         return_if_error(r, "Serialize TPMA_CC");
 
-        json_object_array_add(*jso, jso2);
+        if (json_object_array_add(*jso, jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -1702,7 +1774,9 @@ ifapi_json_TPML_HANDLE_serialize(const TPML_HANDLE *in, json_object **jso)
         r = ifapi_json_TPM2_HANDLE_serialize (in->handle[i], &jso2);
         return_if_error(r, "Serialize TPM2_HANDLE");
 
-        json_object_array_add(*jso, jso2);
+        if (json_object_array_add(*jso, jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -1735,7 +1809,9 @@ ifapi_json_TPML_DIGEST_VALUES_serialize(const TPML_DIGEST_VALUES *in, json_objec
         r = ifapi_json_TPMT_HA_serialize (&in->digests[i], &jso2);
         return_if_error(r, "Serialize TPMT_HA");
 
-        json_object_array_add(*jso, jso2);
+        if (json_object_array_add(*jso, jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -1768,7 +1844,9 @@ ifapi_json_TPML_PCR_SELECTION_serialize(const TPML_PCR_SELECTION *in, json_objec
         r = ifapi_json_TPMS_PCR_SELECTION_serialize (&in->pcrSelections[i], &jso2);
         return_if_error(r, "Serialize TPMS_PCR_SELECTION");
 
-        json_object_array_add(*jso, jso2);
+        if (json_object_array_add(*jso, jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -1801,7 +1879,9 @@ ifapi_json_TPML_ALG_PROPERTY_serialize(const TPML_ALG_PROPERTY *in, json_object 
         r = ifapi_json_TPMS_ALG_PROPERTY_serialize (&in->algProperties[i], &jso2);
         return_if_error(r, "Serialize TPMS_ALG_PROPERTY");
 
-        json_object_array_add(*jso, jso2);
+        if (json_object_array_add(*jso, jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -1834,7 +1914,9 @@ ifapi_json_TPML_TAGGED_TPM_PROPERTY_serialize(const TPML_TAGGED_TPM_PROPERTY *in
         r = ifapi_json_TPMS_TAGGED_PROPERTY_serialize (&in->tpmProperty[i], &jso2);
         return_if_error(r, "Serialize TPMS_TAGGED_PROPERTY");
 
-        json_object_array_add(*jso, jso2);
+        if (json_object_array_add(*jso, jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -1867,7 +1949,9 @@ ifapi_json_TPML_TAGGED_PCR_PROPERTY_serialize(const TPML_TAGGED_PCR_PROPERTY *in
         r = ifapi_json_TPMS_TAGGED_PCR_SELECT_serialize (&in->pcrProperty[i], &jso2);
         return_if_error(r, "Serialize TPMS_TAGGED_PCR_SELECT");
 
-        json_object_array_add(*jso, jso2);
+        if (json_object_array_add(*jso, jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -1900,7 +1984,9 @@ ifapi_json_TPML_ECC_CURVE_serialize(const TPML_ECC_CURVE *in, json_object **jso)
         r = ifapi_json_TPM2_ECC_CURVE_serialize (in->eccCurves[i], &jso2);
         return_if_error(r, "Serialize TPM2_ECC_CURVE");
 
-        json_object_array_add(*jso, jso2);
+        if (json_object_array_add(*jso, jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -1933,7 +2019,9 @@ ifapi_json_TPML_TAGGED_POLICY_serialize(const TPML_TAGGED_POLICY *in, json_objec
         r = ifapi_json_TPMS_TAGGED_POLICY_serialize (&in->policies[i], &jso2);
         return_if_error(r, "Serialize TPMS_TAGGED_POLICY");
 
-        json_object_array_add(*jso, jso2);
+        if (json_object_array_add(*jso, jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -1966,7 +2054,9 @@ ifapi_json_TPML_ACT_DATA_serialize(const TPML_ACT_DATA *in, json_object **jso)
         r = ifapi_json_TPMS_ACT_DATA_serialize(&in->actData[i], &jso2);
         return_if_error(r, "Serialize TPMS_ACT_DATA");
 
-        json_object_array_add(*jso, jso2);
+        if (json_object_array_add(*jso, jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -2037,12 +2127,16 @@ ifapi_json_TPMS_CAPABILITY_DATA_serialize(const TPMS_CAPABILITY_DATA *in, json_o
     r = ifapi_json_TPM2_CAP_serialize(in->capability, &jso2);
     return_if_error(r, "Serialize TPM2_CAP");
 
-    json_object_object_add(*jso, "capability", jso2);
+    if (json_object_object_add(*jso, "capability", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMU_CAPABILITIES_serialize(&in->data, in->capability, &jso2);
     return_if_error(r,"Serialize TPMU_CAPABILITIES");
 
-    json_object_object_add(*jso, "data", jso2);
+    if (json_object_object_add(*jso, "data", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -2068,22 +2162,30 @@ ifapi_json_TPMS_CLOCK_INFO_serialize(const TPMS_CLOCK_INFO *in, json_object **js
     r = ifapi_json_UINT64_serialize(in->clock, &jso2);
     return_if_error(r, "Serialize UINT64");
 
-    json_object_object_add(*jso, "clock", jso2);
+    if (json_object_object_add(*jso, "clock", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_UINT32_serialize(in->resetCount, &jso2);
     return_if_error(r, "Serialize UINT32");
 
-    json_object_object_add(*jso, "resetCount", jso2);
+    if (json_object_object_add(*jso, "resetCount", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_UINT32_serialize(in->restartCount, &jso2);
     return_if_error(r, "Serialize UINT32");
 
-    json_object_object_add(*jso, "restartCount", jso2);
+    if (json_object_object_add(*jso, "restartCount", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMI_YES_NO_serialize(in->safe, &jso2);
     return_if_error(r, "Serialize TPMI_YES_NO");
 
-    json_object_object_add(*jso, "safe", jso2);
+    if (json_object_object_add(*jso, "safe", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -2109,12 +2211,16 @@ ifapi_json_TPMS_TIME_INFO_serialize(const TPMS_TIME_INFO *in, json_object **jso)
     r = ifapi_json_UINT64_serialize(in->time, &jso2);
     return_if_error(r, "Serialize UINT64");
 
-    json_object_object_add(*jso, "time", jso2);
+    if (json_object_object_add(*jso, "time", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMS_CLOCK_INFO_serialize(&in->clockInfo, &jso2);
     return_if_error(r, "Serialize TPMS_CLOCK_INFO");
 
-    json_object_object_add(*jso, "clockInfo", jso2);
+    if (json_object_object_add(*jso, "clockInfo", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -2140,12 +2246,16 @@ ifapi_json_TPMS_TIME_ATTEST_INFO_serialize(const TPMS_TIME_ATTEST_INFO *in, json
     r = ifapi_json_TPMS_TIME_INFO_serialize(&in->time, &jso2);
     return_if_error(r, "Serialize TPMS_TIME_INFO");
 
-    json_object_object_add(*jso, "time", jso2);
+    if (json_object_object_add(*jso, "time", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_UINT64_serialize(in->firmwareVersion, &jso2);
     return_if_error(r, "Serialize UINT64");
 
-    json_object_object_add(*jso, "firmwareVersion", jso2);
+    if (json_object_object_add(*jso, "firmwareVersion", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -2171,12 +2281,16 @@ ifapi_json_TPMS_CERTIFY_INFO_serialize(const TPMS_CERTIFY_INFO *in, json_object 
     r = ifapi_json_TPM2B_NAME_serialize(&in->name, &jso2);
     return_if_error(r, "Serialize TPM2B_NAME");
 
-    json_object_object_add(*jso, "name", jso2);
+    if (json_object_object_add(*jso, "name", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_NAME_serialize(&in->qualifiedName, &jso2);
     return_if_error(r, "Serialize TPM2B_NAME");
 
-    json_object_object_add(*jso, "qualifiedName", jso2);
+    if (json_object_object_add(*jso, "qualifiedName", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -2202,12 +2316,16 @@ ifapi_json_TPMS_QUOTE_INFO_serialize(const TPMS_QUOTE_INFO *in, json_object **js
     r = ifapi_json_TPML_PCR_SELECTION_serialize(&in->pcrSelect, &jso2);
     return_if_error(r, "Serialize TPML_PCR_SELECTION");
 
-    json_object_object_add(*jso, "pcrSelect", jso2);
+    if (json_object_object_add(*jso, "pcrSelect", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_DIGEST_serialize(&in->pcrDigest, &jso2);
     return_if_error(r, "Serialize TPM2B_DIGEST");
 
-    json_object_object_add(*jso, "pcrDigest", jso2);
+    if (json_object_object_add(*jso, "pcrDigest", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -2233,22 +2351,30 @@ ifapi_json_TPMS_COMMAND_AUDIT_INFO_serialize(const TPMS_COMMAND_AUDIT_INFO *in, 
     r = ifapi_json_UINT64_serialize(in->auditCounter, &jso2);
     return_if_error(r, "Serialize UINT64");
 
-    json_object_object_add(*jso, "auditCounter", jso2);
+    if (json_object_object_add(*jso, "auditCounter", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2_ALG_ID_serialize(in->digestAlg, &jso2);
     return_if_error(r, "Serialize TPM2_ALG_ID");
 
-    json_object_object_add(*jso, "digestAlg", jso2);
+    if (json_object_object_add(*jso, "digestAlg", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_DIGEST_serialize(&in->auditDigest, &jso2);
     return_if_error(r, "Serialize TPM2B_DIGEST");
 
-    json_object_object_add(*jso, "auditDigest", jso2);
+    if (json_object_object_add(*jso, "auditDigest", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_DIGEST_serialize(&in->commandDigest, &jso2);
     return_if_error(r, "Serialize TPM2B_DIGEST");
 
-    json_object_object_add(*jso, "commandDigest", jso2);
+    if (json_object_object_add(*jso, "commandDigest", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -2274,12 +2400,16 @@ ifapi_json_TPMS_SESSION_AUDIT_INFO_serialize(const TPMS_SESSION_AUDIT_INFO *in, 
     r = ifapi_json_TPMI_YES_NO_serialize(in->exclusiveSession, &jso2);
     return_if_error(r, "Serialize TPMI_YES_NO");
 
-    json_object_object_add(*jso, "exclusiveSession", jso2);
+    if (json_object_object_add(*jso, "exclusiveSession", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_DIGEST_serialize(&in->sessionDigest, &jso2);
     return_if_error(r, "Serialize TPM2B_DIGEST");
 
-    json_object_object_add(*jso, "sessionDigest", jso2);
+    if (json_object_object_add(*jso, "sessionDigest", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -2305,12 +2435,16 @@ ifapi_json_TPMS_CREATION_INFO_serialize(const TPMS_CREATION_INFO *in, json_objec
     r = ifapi_json_TPM2B_NAME_serialize(&in->objectName, &jso2);
     return_if_error(r, "Serialize TPM2B_NAME");
 
-    json_object_object_add(*jso, "objectName", jso2);
+    if (json_object_object_add(*jso, "objectName", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_DIGEST_serialize(&in->creationHash, &jso2);
     return_if_error(r, "Serialize TPM2B_DIGEST");
 
-    json_object_object_add(*jso, "creationHash", jso2);
+    if (json_object_object_add(*jso, "creationHash", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -2336,17 +2470,23 @@ ifapi_json_TPMS_NV_CERTIFY_INFO_serialize(const TPMS_NV_CERTIFY_INFO *in, json_o
     r = ifapi_json_TPM2B_NAME_serialize(&in->indexName, &jso2);
     return_if_error(r, "Serialize TPM2B_NAME");
 
-    json_object_object_add(*jso, "indexName", jso2);
+    if (json_object_object_add(*jso, "indexName", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_UINT16_serialize(in->offset, &jso2);
     return_if_error(r, "Serialize UINT16");
 
-    json_object_object_add(*jso, "offset", jso2);
+    if (json_object_object_add(*jso, "offset", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_MAX_NV_BUFFER_serialize(&in->nvContents, &jso2);
     return_if_error(r, "Serialize TPM2B_MAX_NV_BUFFER");
 
-    json_object_object_add(*jso, "nvContents", jso2);
+    if (json_object_object_add(*jso, "nvContents", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -2425,37 +2565,51 @@ ifapi_json_TPMS_ATTEST_serialize(const TPMS_ATTEST *in, json_object **jso)
     r = ifapi_json_TPM2_GENERATED_serialize(in->magic, &jso2);
     return_if_error(r, "Serialize TPM2_GENERATED");
 
-    json_object_object_add(*jso, "magic", jso2);
+    if (json_object_object_add(*jso, "magic", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMI_ST_ATTEST_serialize(in->type, &jso2);
     return_if_error(r, "Serialize TPMI_ST_ATTEST");
 
-    json_object_object_add(*jso, "type", jso2);
+    if (json_object_object_add(*jso, "type", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_NAME_serialize(&in->qualifiedSigner, &jso2);
     return_if_error(r, "Serialize TPM2B_NAME");
 
-    json_object_object_add(*jso, "qualifiedSigner", jso2);
+    if (json_object_object_add(*jso, "qualifiedSigner", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_DATA_serialize(&in->extraData, &jso2);
     return_if_error(r, "Serialize TPM2B_DATA");
 
-    json_object_object_add(*jso, "extraData", jso2);
+    if (json_object_object_add(*jso, "extraData", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMS_CLOCK_INFO_serialize(&in->clockInfo, &jso2);
     return_if_error(r, "Serialize TPMS_CLOCK_INFO");
 
-    json_object_object_add(*jso, "clockInfo", jso2);
+    if (json_object_object_add(*jso, "clockInfo", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_UINT64_serialize(in->firmwareVersion, &jso2);
     return_if_error(r, "Serialize UINT64");
 
-    json_object_object_add(*jso, "firmwareVersion", jso2);
+    if (json_object_object_add(*jso, "firmwareVersion", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMU_ATTEST_serialize(&in->attested, in->type, &jso2);
     return_if_error(r,"Serialize TPMU_ATTEST");
 
-    json_object_object_add(*jso, "attested", jso2);
+    if (json_object_object_add(*jso, "attested", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -2586,20 +2740,26 @@ ifapi_json_TPMT_SYM_DEF_OBJECT_serialize(const TPMT_SYM_DEF_OBJECT *in, json_obj
     r = ifapi_json_TPMI_ALG_SYM_OBJECT_serialize(in->algorithm, &jso2);
     return_if_error(r, "Serialize TPMI_ALG_SYM_OBJECT");
 
-    json_object_object_add(*jso, "algorithm", jso2);
+    if (json_object_object_add(*jso, "algorithm", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     if (in->algorithm != TPM2_ALG_NULL) {
         json_object *jso2 = NULL;
         r = ifapi_json_TPMU_SYM_KEY_BITS_serialize(&in->keyBits, in->algorithm, &jso2);
         return_if_error(r,"Serialize TPMU_SYM_KEY_BITS");
 
-        json_object_object_add(*jso, "keyBits", jso2);
+        if (json_object_object_add(*jso, "keyBits", jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     if (in->algorithm != TPM2_ALG_NULL) {
         json_object *jso2 = NULL;
         r = ifapi_json_TPMU_SYM_MODE_serialize(&in->mode, in->algorithm, &jso2);
         return_if_error(r,"Serialize TPMU_SYM_MODE");
 
-        json_object_object_add(*jso, "mode", jso2);
+        if (json_object_object_add(*jso, "mode", jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -2626,7 +2786,9 @@ ifapi_json_TPMS_SYMCIPHER_PARMS_serialize(const TPMS_SYMCIPHER_PARMS *in, json_o
     r = ifapi_json_TPMT_SYM_DEF_OBJECT_serialize(&in->sym, &jso2);
     return_if_error(r, "Serialize TPMT_SYM_DEF_OBJECT");
 
-    json_object_object_add(*jso, "sym", jso2);
+    if (json_object_object_add(*jso, "sym", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -2652,7 +2814,9 @@ ifapi_json_TPMS_SCHEME_HASH_serialize(const TPMS_SCHEME_HASH *in, json_object **
     r = ifapi_json_TPMI_ALG_HASH_serialize(in->hashAlg, &jso2);
     return_if_error(r, "Serialize TPMI_ALG_HASH");
 
-    json_object_object_add(*jso, "hashAlg", jso2);
+    if (json_object_object_add(*jso, "hashAlg", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -2678,12 +2842,16 @@ ifapi_json_TPMS_SCHEME_ECDAA_serialize(const TPMS_SCHEME_ECDAA *in, json_object 
     r = ifapi_json_TPMI_ALG_HASH_serialize(in->hashAlg, &jso2);
     return_if_error(r, "Serialize TPMI_ALG_HASH");
 
-    json_object_object_add(*jso, "hashAlg", jso2);
+    if (json_object_object_add(*jso, "hashAlg", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_UINT16_serialize(in->count, &jso2);
     return_if_error(r, "Serialize UINT16");
 
-    json_object_object_add(*jso, "count", jso2);
+    if (json_object_object_add(*jso, "count", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -2739,12 +2907,16 @@ ifapi_json_TPMS_SCHEME_XOR_serialize(const TPMS_SCHEME_XOR *in, json_object **js
     r = ifapi_json_TPMI_ALG_HASH_serialize(in->hashAlg, &jso2);
     return_if_error(r, "Serialize TPMI_ALG_HASH");
 
-    json_object_object_add(*jso, "hashAlg", jso2);
+    if (json_object_object_add(*jso, "hashAlg", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMI_ALG_KDF_serialize(in->kdf, &jso2);
     return_if_error(r, "Serialize TPMI_ALG_KDF");
 
-    json_object_object_add(*jso, "kdf", jso2);
+    if (json_object_object_add(*jso, "kdf", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -2796,13 +2968,17 @@ ifapi_json_TPMT_KEYEDHASH_SCHEME_serialize(const TPMT_KEYEDHASH_SCHEME *in, json
     r = ifapi_json_TPMI_ALG_KEYEDHASH_SCHEME_serialize(in->scheme, &jso2);
     return_if_error(r, "Serialize TPMI_ALG_KEYEDHASH_SCHEME");
 
-    json_object_object_add(*jso, "scheme", jso2);
+    if (json_object_object_add(*jso, "scheme", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     if (in->scheme != TPM2_ALG_NULL) {
         json_object *jso2 = NULL;
         r = ifapi_json_TPMU_SCHEME_KEYEDHASH_serialize(&in->details, in->scheme, &jso2);
         return_if_error(r,"Serialize TPMU_SCHEME_KEYEDHASH");
 
-        json_object_object_add(*jso, "details", jso2);
+        if (json_object_object_add(*jso, "details", jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -2955,13 +3131,17 @@ ifapi_json_TPMT_SIG_SCHEME_serialize(const TPMT_SIG_SCHEME *in, json_object **js
     r = ifapi_json_TPMI_ALG_SIG_SCHEME_serialize(in->scheme, &jso2);
     return_if_error(r, "Serialize TPMI_ALG_SIG_SCHEME");
 
-    json_object_object_add(*jso, "scheme", jso2);
+    if (json_object_object_add(*jso, "scheme", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     if (in->scheme != TPM2_ALG_NULL) {
         json_object *jso2 = NULL;
         r = ifapi_json_TPMU_SIG_SCHEME_serialize(&in->details, in->scheme, &jso2);
         return_if_error(r,"Serialize TPMU_SIG_SCHEME");
 
-        json_object_object_add(*jso, "details", jso2);
+        if (json_object_object_add(*jso, "details", jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -3105,13 +3285,17 @@ ifapi_json_TPMT_KDF_SCHEME_serialize(const TPMT_KDF_SCHEME *in, json_object **js
     r = ifapi_json_TPMI_ALG_KDF_serialize(in->scheme, &jso2);
     return_if_error(r, "Serialize TPMI_ALG_KDF");
 
-    json_object_object_add(*jso, "scheme", jso2);
+    if (json_object_object_add(*jso, "scheme", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     if (in->scheme != TPM2_ALG_NULL) {
         json_object *jso2 = NULL;
         r = ifapi_json_TPMU_KDF_SCHEME_serialize(&in->details, in->scheme, &jso2);
         return_if_error(r,"Serialize TPMU_KDF_SCHEME");
 
-        json_object_object_add(*jso, "details", jso2);
+        if (json_object_object_add(*jso, "details", jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -3211,13 +3395,17 @@ ifapi_json_TPMT_RSA_SCHEME_serialize(const TPMT_RSA_SCHEME *in, json_object **js
     r = ifapi_json_TPMI_ALG_RSA_SCHEME_serialize(in->scheme, &jso2);
     return_if_error(r, "Serialize TPMI_ALG_RSA_SCHEME");
 
-    json_object_object_add(*jso, "scheme", jso2);
+    if (json_object_object_add(*jso, "scheme", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     if (in->scheme != TPM2_ALG_NULL) {
         json_object *jso2 = NULL;
         r = ifapi_json_TPMU_ASYM_SCHEME_serialize(&in->details, in->scheme, &jso2);
         return_if_error(r,"Serialize TPMU_ASYM_SCHEME");
 
-        json_object_object_add(*jso, "details", jso2);
+        if (json_object_object_add(*jso, "details", jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -3264,7 +3452,7 @@ ifapi_json_TPM2B_PUBLIC_KEY_RSA_serialize(const TPM2B_PUBLIC_KEY_RSA *in, json_o
 TSS2_RC
 ifapi_json_TPMI_RSA_KEY_BITS_serialize(const TPMI_RSA_KEY_BITS in, json_object **jso)
 {
-    CHECK_IN_LIST(TPMI_RSA_KEY_BITS, in, 1024, 2048);
+    CHECK_IN_LIST(TPMI_RSA_KEY_BITS, in, 1024, 2048, 3072, 4096);
     return ifapi_json_UINT16_serialize(in, jso);
 }
 
@@ -3320,12 +3508,16 @@ ifapi_json_TPMS_ECC_POINT_serialize(const TPMS_ECC_POINT *in, json_object **jso)
     r = ifapi_json_TPM2B_ECC_PARAMETER_serialize(&in->x, &jso2);
     return_if_error(r, "Serialize TPM2B_ECC_PARAMETER");
 
-    json_object_object_add(*jso, "x", jso2);
+    if (json_object_object_add(*jso, "x", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_ECC_PARAMETER_serialize(&in->y, &jso2);
     return_if_error(r, "Serialize TPM2B_ECC_PARAMETER");
 
-    json_object_object_add(*jso, "y", jso2);
+    if (json_object_object_add(*jso, "y", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -3382,13 +3574,17 @@ ifapi_json_TPMT_ECC_SCHEME_serialize(const TPMT_ECC_SCHEME *in, json_object **js
     r = ifapi_json_TPMI_ALG_ECC_SCHEME_serialize(in->scheme, &jso2);
     return_if_error(r, "Serialize TPMI_ALG_ECC_SCHEME");
 
-    json_object_object_add(*jso, "scheme", jso2);
+    if (json_object_object_add(*jso, "scheme", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     if (in->scheme != TPM2_ALG_NULL) {
         json_object *jso2 = NULL;
         r = ifapi_json_TPMU_ASYM_SCHEME_serialize(&in->details, in->scheme, &jso2);
         return_if_error(r,"Serialize TPMU_ASYM_SCHEME");
 
-        json_object_object_add(*jso, "details", jso2);
+        if (json_object_object_add(*jso, "details", jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -3415,12 +3611,16 @@ ifapi_json_TPMS_SIGNATURE_RSA_serialize(const TPMS_SIGNATURE_RSA *in, json_objec
     r = ifapi_json_TPMI_ALG_HASH_serialize(in->hash, &jso2);
     return_if_error(r, "Serialize TPMI_ALG_HASH");
 
-    json_object_object_add(*jso, "hash", jso2);
+    if (json_object_object_add(*jso, "hash", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_PUBLIC_KEY_RSA_serialize(&in->sig, &jso2);
     return_if_error(r, "Serialize TPM2B_PUBLIC_KEY_RSA");
 
-    json_object_object_add(*jso, "sig", jso2);
+    if (json_object_object_add(*jso, "sig", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -3476,17 +3676,23 @@ ifapi_json_TPMS_SIGNATURE_ECC_serialize(const TPMS_SIGNATURE_ECC *in, json_objec
     r = ifapi_json_TPMI_ALG_HASH_serialize(in->hash, &jso2);
     return_if_error(r, "Serialize TPMI_ALG_HASH");
 
-    json_object_object_add(*jso, "hash", jso2);
+    if (json_object_object_add(*jso, "hash", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_ECC_PARAMETER_serialize(&in->signatureR, &jso2);
     return_if_error(r, "Serialize TPM2B_ECC_PARAMETER");
 
-    json_object_object_add(*jso, "signatureR", jso2);
+    if (json_object_object_add(*jso, "signatureR", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_ECC_PARAMETER_serialize(&in->signatureS, &jso2);
     return_if_error(r, "Serialize TPM2B_ECC_PARAMETER");
 
-    json_object_object_add(*jso, "signatureS", jso2);
+    if (json_object_object_add(*jso, "signatureS", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -3608,13 +3814,17 @@ ifapi_json_TPMT_SIGNATURE_serialize(const TPMT_SIGNATURE *in, json_object **jso)
     r = ifapi_json_TPMI_ALG_SIG_SCHEME_serialize(in->sigAlg, &jso2);
     return_if_error(r, "Serialize TPMI_ALG_SIG_SCHEME");
 
-    json_object_object_add(*jso, "sigAlg", jso2);
+    if (json_object_object_add(*jso, "sigAlg", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     if (in->sigAlg != TPM2_ALG_NULL) {
         json_object *jso2 = NULL;
         r = ifapi_json_TPMU_SIGNATURE_serialize(&in->signature, in->sigAlg, &jso2);
         return_if_error(r,"Serialize TPMU_SIGNATURE");
 
-        json_object_object_add(*jso, "signature", jso2);
+        if (json_object_object_add(*jso, "signature", jso2)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     return TSS2_RC_SUCCESS;
 }
@@ -3717,7 +3927,9 @@ ifapi_json_TPMS_KEYEDHASH_PARMS_serialize(const TPMS_KEYEDHASH_PARMS *in, json_o
     r = ifapi_json_TPMT_KEYEDHASH_SCHEME_serialize(&in->scheme, &jso2);
     return_if_error(r, "Serialize TPMT_KEYEDHASH_SCHEME");
 
-    json_object_object_add(*jso, "scheme", jso2);
+    if (json_object_object_add(*jso, "scheme", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -3743,22 +3955,30 @@ ifapi_json_TPMS_RSA_PARMS_serialize(const TPMS_RSA_PARMS *in, json_object **jso)
     r = ifapi_json_TPMT_SYM_DEF_OBJECT_serialize(&in->symmetric, &jso2);
     return_if_error(r, "Serialize TPMT_SYM_DEF_OBJECT");
 
-    json_object_object_add(*jso, "symmetric", jso2);
+    if (json_object_object_add(*jso, "symmetric", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMT_RSA_SCHEME_serialize(&in->scheme, &jso2);
     return_if_error(r, "Serialize TPMT_RSA_SCHEME");
 
-    json_object_object_add(*jso, "scheme", jso2);
+    if (json_object_object_add(*jso, "scheme", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMI_RSA_KEY_BITS_serialize(in->keyBits, &jso2);
     return_if_error(r, "Serialize TPMI_RSA_KEY_BITS");
 
-    json_object_object_add(*jso, "keyBits", jso2);
+    if (json_object_object_add(*jso, "keyBits", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_UINT32_serialize(in->exponent, &jso2);
     return_if_error(r, "Serialize UINT32");
 
-    json_object_object_add(*jso, "exponent", jso2);
+    if (json_object_object_add(*jso, "exponent", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -3784,22 +4004,30 @@ ifapi_json_TPMS_ECC_PARMS_serialize(const TPMS_ECC_PARMS *in, json_object **jso)
     r = ifapi_json_TPMT_SYM_DEF_OBJECT_serialize(&in->symmetric, &jso2);
     return_if_error(r, "Serialize TPMT_SYM_DEF_OBJECT");
 
-    json_object_object_add(*jso, "symmetric", jso2);
+    if (json_object_object_add(*jso, "symmetric", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMT_ECC_SCHEME_serialize(&in->scheme, &jso2);
     return_if_error(r, "Serialize TPMT_ECC_SCHEME");
 
-    json_object_object_add(*jso, "scheme", jso2);
+    if (json_object_object_add(*jso, "scheme", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMI_ECC_CURVE_serialize(in->curveID, &jso2);
     return_if_error(r, "Serialize TPMI_ECC_CURVE");
 
-    json_object_object_add(*jso, "curveID", jso2);
+    if (json_object_object_add(*jso, "curveID", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMT_KDF_SCHEME_serialize(&in->kdf, &jso2);
     return_if_error(r, "Serialize TPMT_KDF_SCHEME");
 
-    json_object_object_add(*jso, "kdf", jso2);
+    if (json_object_object_add(*jso, "kdf", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -3855,32 +4083,44 @@ ifapi_json_TPMT_PUBLIC_serialize(const TPMT_PUBLIC *in, json_object **jso)
     r = ifapi_json_TPMI_ALG_PUBLIC_serialize(in->type, &jso2);
     return_if_error(r, "Serialize TPMI_ALG_PUBLIC");
 
-    json_object_object_add(*jso, "type", jso2);
+    if (json_object_object_add(*jso, "type", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMI_ALG_HASH_serialize(in->nameAlg, &jso2);
     return_if_error(r, "Serialize TPMI_ALG_HASH");
 
-    json_object_object_add(*jso, "nameAlg", jso2);
+    if (json_object_object_add(*jso, "nameAlg", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMA_OBJECT_serialize(in->objectAttributes, &jso2);
     return_if_error(r, "Serialize TPMA_OBJECT");
 
-    json_object_object_add(*jso, "objectAttributes", jso2);
+    if (json_object_object_add(*jso, "objectAttributes", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_DIGEST_serialize(&in->authPolicy, &jso2);
     return_if_error(r, "Serialize TPM2B_DIGEST");
 
-    json_object_object_add(*jso, "authPolicy", jso2);
+    if (json_object_object_add(*jso, "authPolicy", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMU_PUBLIC_PARMS_serialize(&in->parameters, in->type, &jso2);
     return_if_error(r,"Serialize TPMU_PUBLIC_PARMS");
 
-    json_object_object_add(*jso, "parameters", jso2);
+    if (json_object_object_add(*jso, "parameters", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMU_PUBLIC_ID_serialize(&in->unique, in->type, &jso2);
     return_if_error(r,"Serialize TPMU_PUBLIC_ID");
 
-    json_object_object_add(*jso, "unique", jso2);
+    if (json_object_object_add(*jso, "unique", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -3906,13 +4146,17 @@ ifapi_json_TPM2B_PUBLIC_serialize(const TPM2B_PUBLIC *in, json_object **jso)
     if (ifapi_json_UINT16_serialize(in->size, &jso2))
         return TSS2_FAPI_RC_BAD_VALUE;
 
-    json_object_object_add(*jso, "size", jso2);
+    if (json_object_object_add(*jso, "size", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
 
     jso2 = NULL;
     if (ifapi_json_TPMT_PUBLIC_serialize(&in->publicArea, &jso2))
         return TSS2_FAPI_RC_BAD_VALUE;
 
-    json_object_object_add(*jso, "publicArea", jso2);
+    if (json_object_object_add(*jso, "publicArea", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
 
     return TSS2_RC_SUCCESS;
 }
@@ -4030,14 +4274,18 @@ ifapi_json_TPMA_NV_serialize(const TPMA_NV in, json_object **jso)
             jso_bit = json_object_new_int(0);
         return_if_null(jso_bit, "Out of memory.", TSS2_FAPI_RC_MEMORY);
 
-        json_object_object_add(*jso, tab[i].name, jso_bit);
+        if (json_object_object_add(*jso, tab[i].name, jso_bit)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
     }
     TPM2_NT input2 = (TPMA_NV_TPM2_NT_MASK & input)>>4;
     json_object *jso2 = NULL;
     TSS2_RC r = ifapi_json_TPM2_NT_serialize(input2, &jso2);
     return_if_error(r, "Bad value");
 
-    json_object_object_add(*jso, "TPM2_NT", jso2);
+    if (json_object_object_add(*jso, "TPM2_NT", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
 
     return TSS2_RC_SUCCESS;
 }
@@ -4064,27 +4312,37 @@ ifapi_json_TPMS_NV_PUBLIC_serialize(const TPMS_NV_PUBLIC *in, json_object **jso)
     r = ifapi_json_TPMI_RH_NV_INDEX_serialize(in->nvIndex, &jso2);
     return_if_error(r, "Serialize TPMI_RH_NV_INDEX");
 
-    json_object_object_add(*jso, "nvIndex", jso2);
+    if (json_object_object_add(*jso, "nvIndex", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMI_ALG_HASH_serialize(in->nameAlg, &jso2);
     return_if_error(r, "Serialize TPMI_ALG_HASH");
 
-    json_object_object_add(*jso, "nameAlg", jso2);
+    if (json_object_object_add(*jso, "nameAlg", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMA_NV_serialize(in->attributes, &jso2);
     return_if_error(r, "Serialize TPMA_NV");
 
-    json_object_object_add(*jso, "attributes", jso2);
+    if (json_object_object_add(*jso, "attributes", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_DIGEST_serialize(&in->authPolicy, &jso2);
     return_if_error(r, "Serialize TPM2B_DIGEST");
 
-    json_object_object_add(*jso, "authPolicy", jso2);
+    if (json_object_object_add(*jso, "authPolicy", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_UINT16_serialize(in->dataSize, &jso2);
     return_if_error(r, "Serialize UINT16");
 
-    json_object_object_add(*jso, "dataSize", jso2);
+    if (json_object_object_add(*jso, "dataSize", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -4110,13 +4368,17 @@ ifapi_json_TPM2B_NV_PUBLIC_serialize(const TPM2B_NV_PUBLIC *in, json_object **js
     if (ifapi_json_UINT16_serialize(in->size, &jso2))
         return TSS2_FAPI_RC_BAD_VALUE;
 
-    json_object_object_add(*jso, "size", jso2);
+    if (json_object_object_add(*jso, "size", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
 
     jso2 = NULL;
     if (ifapi_json_TPMS_NV_PUBLIC_serialize(&in->nvPublic, &jso2))
         return TSS2_FAPI_RC_BAD_VALUE;
 
-    json_object_object_add(*jso, "nvPublic", jso2);
+    if (json_object_object_add(*jso, "nvPublic", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
 
     return TSS2_RC_SUCCESS;
 }
@@ -4143,37 +4405,51 @@ ifapi_json_TPMS_CREATION_DATA_serialize(const TPMS_CREATION_DATA *in, json_objec
     r = ifapi_json_TPML_PCR_SELECTION_serialize(&in->pcrSelect, &jso2);
     return_if_error(r, "Serialize TPML_PCR_SELECTION");
 
-    json_object_object_add(*jso, "pcrSelect", jso2);
+    if (json_object_object_add(*jso, "pcrSelect", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_DIGEST_serialize(&in->pcrDigest, &jso2);
     return_if_error(r, "Serialize TPM2B_DIGEST");
 
-    json_object_object_add(*jso, "pcrDigest", jso2);
+    if (json_object_object_add(*jso, "pcrDigest", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPMA_LOCALITY_serialize(in->locality, &jso2);
     return_if_error(r, "Serialize TPMA_LOCALITY");
 
-    json_object_object_add(*jso, "locality", jso2);
+    if (json_object_object_add(*jso, "locality", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2_ALG_ID_serialize(in->parentNameAlg, &jso2);
     return_if_error(r, "Serialize TPM2_ALG_ID");
 
-    json_object_object_add(*jso, "parentNameAlg", jso2);
+    if (json_object_object_add(*jso, "parentNameAlg", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_NAME_serialize(&in->parentName, &jso2);
     return_if_error(r, "Serialize TPM2B_NAME");
 
-    json_object_object_add(*jso, "parentName", jso2);
+    if (json_object_object_add(*jso, "parentName", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_NAME_serialize(&in->parentQualifiedName, &jso2);
     return_if_error(r, "Serialize TPM2B_NAME");
 
-    json_object_object_add(*jso, "parentQualifiedName", jso2);
+    if (json_object_object_add(*jso, "parentQualifiedName", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     jso2 = NULL;
     r = ifapi_json_TPM2B_DATA_serialize(&in->outsideInfo, &jso2);
     return_if_error(r, "Serialize TPM2B_DATA");
 
-    json_object_object_add(*jso, "outsideInfo", jso2);
+    if (json_object_object_add(*jso, "outsideInfo", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
     return TSS2_RC_SUCCESS;
 }
 
@@ -4199,13 +4475,17 @@ ifapi_json_TPM2B_CREATION_DATA_serialize(const TPM2B_CREATION_DATA *in, json_obj
     if (ifapi_json_UINT16_serialize(in->size, &jso2))
         return TSS2_FAPI_RC_BAD_VALUE;
 
-    json_object_object_add(*jso, "size", jso2);
+    if (json_object_object_add(*jso, "size", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
 
     jso2 = NULL;
     if (ifapi_json_TPMS_CREATION_DATA_serialize(&in->creationData, &jso2))
         return TSS2_FAPI_RC_BAD_VALUE;
 
-    json_object_object_add(*jso, "creationData", jso2);
+    if (json_object_object_add(*jso, "creationData", jso2)) {
+        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+    }
 
     return TSS2_RC_SUCCESS;
 }

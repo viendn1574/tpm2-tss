@@ -57,6 +57,14 @@ typedef uint32_t ESYS_TR;
 #define ESYS_TR_RH_ENDORSEMENT 0x10BU
 #define ESYS_TR_RH_PLATFORM    0x10CU
 #define ESYS_TR_RH_PLATFORM_NV 0x10DU
+#define ESYS_TR_RH_FW_OWNER       0x10EU
+#define ESYS_TR_RH_FW_ENDORSEMENT 0x10FU
+#define ESYS_TR_RH_FW_PLATFORM    0x110U
+#define ESYS_TR_RH_FW_NULL        0x111U
+#define ESYS_TR_RH_SVN_OWNER_BASE       0x1010000U
+#define ESYS_TR_RH_SVN_ENDORSEMENT_BASE 0x1020000U
+#define ESYS_TR_RH_SVN_PLATFORM_BASE    0x1030000U
+#define ESYS_TR_RH_SVN_NULL_BASE        0x1040000U
 
 #define ESYS_TR_RH_AUTH_FIRST  0x110U
 #define ESYS_TR_RH_AUTH(x) (ESYS_TR_RH_AUTH_FIRST + (ESYS_TR)(x))
@@ -315,6 +323,58 @@ typedef TSS2_RC
         uint8_t *iv,
         void *userdata);
 
+/** Encrypt data with SM4.
+ *
+ * @param[in] key key used for SM4.
+ * @param[in] tpm_sym_alg SM4 type in TSS2 notation (must be TPM2_ALG_SM4).
+ * @param[in] key_bits Key size in bits.
+ * @param[in] tpm_mode Block cipher mode of opertion in TSS2 notation (CFB).
+ *            For parameter encryption only CFB can be used.
+ * @param[in,out] buffer Data to be encrypted. The encrypted date will be stored
+ *                in this buffer.
+ * @param[in] buffer_size size of data to be encrypted.
+ * @param[in] iv The initialization vector.
+ * @param[in/out] userdata information.
+ * @retval TSS2_RC_SUCCESS on success
+ * @retval USER_DEFINED user defined errors on failure.
+ */
+typedef TSS2_RC
+    (*ESYS_CRYPTO_SM4_ENCRYPT_FNP)(
+        uint8_t *key,
+        TPM2_ALG_ID tpm_sym_alg,
+        TPMI_SM4_KEY_BITS key_bits,
+        TPM2_ALG_ID tpm_mode,
+        uint8_t *buffer,
+        size_t buffer_size,
+        uint8_t *iv,
+        void *userdata);
+
+/** Decrypt data with SM4.
+ *
+ * @param[in] key key used for SM4.
+ * @param[in] tpm_sym_alg SM4 type in TSS2 notation (must be TPM2_ALG_SM4).
+ * @param[in] key_bits Key size in bits.
+ * @param[in] tpm_mode Block cipher mode of opertion in TSS2 notation (CFB).
+ *            For parameter encryption only CFB can be used.
+ * @param[in,out] buffer Data to be decrypted. The decrypted date will be stored
+ *                in this buffer.
+ * @param[in] buffer_size size of data to be encrypted.
+ * @param[in] iv The initialization vector.
+ * @param[in/out] userdata information.
+ * @retval TSS2_RC_SUCCESS on success
+ * @retval USER_DEFINED user defined errors on failure.
+ */
+typedef TSS2_RC
+    (*ESYS_CRYPTO_SM4_DECRYPT_FNP)(
+        uint8_t *key,
+        TPM2_ALG_ID tpm_sym_alg,
+        TPMI_SM4_KEY_BITS key_bits,
+        TPM2_ALG_ID tpm_mode,
+        uint8_t *buffer,
+        size_t buffer_size,
+        uint8_t *iv,
+        void *userdata);
+
 /** Encryption of a buffer using a public (RSA) key.
  *
  * Encrypting a buffer using a public key is used for example during
@@ -367,6 +427,8 @@ struct ESYS_CRYPTO_CALLBACKS {
     ESYS_CRYPTO_GET_ECDH_POINT_FNP get_ecdh_point;
     ESYS_CRYPTO_AES_ENCRYPT_FNP aes_encrypt;
     ESYS_CRYPTO_AES_DECRYPT_FNP aes_decrypt;
+    ESYS_CRYPTO_SM4_ENCRYPT_FNP sm4_encrypt;
+    ESYS_CRYPTO_SM4_DECRYPT_FNP sm4_decrypt;
     ESYS_CRYPTO_INIT_FNP init;
     void *userdata;
 };

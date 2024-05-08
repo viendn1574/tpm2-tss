@@ -63,9 +63,9 @@ ifapi_flush_object(FAPI_CONTEXT *context, ESYS_TR handle)
         if (base_rc(r) == TSS2_BASE_RC_TRY_AGAIN)
             return TSS2_FAPI_RC_TRY_AGAIN;
 
+        context->flush_object_state = FLUSH_INIT;
         return_if_error(r, "FlushContext");
 
-        context->flush_object_state = FLUSH_INIT;
         return TSS2_RC_SUCCESS;
 
     statecasedefault(context->flush_object_state);
@@ -320,14 +320,13 @@ error:
  * @retval TSS2_FAPI_RC_BAD_REFERENCE a invalid null pointer is passed.
  */
 static TSS2_RC
-pop_object_from_list(FAPI_CONTEXT *context, NODE_OBJECT_T **object_list)
+pop_object_from_list(NODE_OBJECT_T **object_list)
 {
     return_if_null(*object_list, "Pop from list.", TSS2_FAPI_RC_BAD_REFERENCE);
 
     NODE_OBJECT_T *head = *object_list;
     NODE_OBJECT_T *next = head->next;
     *object_list = next;
-    ifapi_free_object(context, (void *)&head->object);
     free(head);
     return TSS2_RC_SUCCESS;
 }
@@ -441,6 +440,10 @@ ifapi_set_auth(
         return_if_error(r, "policyAuthCallback");
         if (auth != NULL) {
             authValue.size = strlen(auth);
+            if (authValue.size > sizeof(TPMU_HA)) {
+                return_error2(TSS2_FAPI_RC_BAD_VALUE, "Size of auth value %u > %lu",
+                              authValue.size, sizeof(TPMU_HA));
+            }
             memcpy(&authValue.buffer[0], auth, authValue.size);
         }
 
@@ -740,7 +743,8 @@ ifapi_init_primary_finish(FAPI_CONTEXT *context, TSS2_KEY_TYPE ktype, IFAPI_OBJE
         r = Esys_CreatePrimary_Async(context->esys, hierarchy->public.handle,
                                      (auth_session == ESYS_TR_NONE) ?
                                      ESYS_TR_PASSWORD : auth_session,
-                                     ESYS_TR_NONE, ESYS_TR_NONE,
+                                     ENC_SESSION_IF_POLICY(auth_session),
+                                     ESYS_TR_NONE,
                                      &context->cmd.Provision.inSensitive,
                                      &context->cmd.Provision.public_templ.public,
                                      &context->cmd.Provision.outsideInfo,
@@ -756,38 +760,8 @@ ifapi_init_primary_finish(FAPI_CONTEXT *context, TSS2_KEY_TYPE ktype, IFAPI_OBJE
         if (base_rc(r) == TSS2_BASE_RC_TRY_AGAIN)
             return TSS2_FAPI_RC_TRY_AGAIN;
 
-        /* Retry with authorization callback after trial with null auth */
-        if (number_rc(r) == TPM2_RC_BAD_AUTH
-            && hierarchy->misc.hierarchy.with_auth == TPM2_NO) {
-            char *description;
-            r = ifapi_get_description(hierarchy, &description);
-            return_if_error(r, "Get description");
+        goto_if_error_reset_state(r, "FAPI Provision", error_cleanup);
 
-            r = ifapi_set_auth(context, hierarchy, description);
-            SAFE_FREE(description);
-            goto_if_error_reset_state(r, "CreatePrimary", error_cleanup);
-
-            r = Esys_CreatePrimary_Async(context->esys, hierarchy->public.handle,
-                                         (context->session1 == ESYS_TR_NONE) ?
-                                         ESYS_TR_PASSWORD : context->session1,
-                                         ESYS_TR_NONE, ESYS_TR_NONE,
-                                         &context->cmd.Provision.inSensitive,
-                                         &context->cmd.Provision.public_templ.public,
-                                         &context->cmd.Provision.outsideInfo,
-                                         &context->cmd.Provision.creationPCR);
-            goto_if_error_reset_state(r, "CreatePrimary", error_cleanup);
-
-            if (ktype == TSS2_EK) {
-                context->state = PROVISION_AUTH_EK_AUTH_SENT;
-            } else {
-                context->state = PROVISION_AUTH_SRK_AUTH_SENT;
-            }
-            hierarchy->misc.hierarchy.with_auth = TPM2_YES;
-            return TSS2_FAPI_RC_TRY_AGAIN;
-
-        } else {
-            goto_if_error_reset_state(r, "FAPI Provision", error_cleanup);
-        }
         /* Set EK or SRK handle in context. */
         if (ktype == TSS2_EK) {
             context->ek_handle = primaryHandle;
@@ -943,9 +917,12 @@ ifapi_load_primary_finish(FAPI_CONTEXT *context, ESYS_TR *handle)
         /* Check whether a persistent key was loaded.
            In this case the handle has already been set. */
         if (pkey_object->public.handle != ESYS_TR_NONE) {
-            if (pkey->creationTicket.hierarchy == TPM2_RH_EK) {
+            if (pkey->creationTicket.hierarchy == TPM2_RH_ENDORSEMENT &&
+                strcmp("/EK",
+                       &pkey_object->rel_path[strlen(pkey_object->rel_path)-3]) == 0) {
                 context->ek_persistent = true;
-            } else {
+            } else if (strcmp("/SRK",
+                              &pkey_object->rel_path[strlen(pkey_object->rel_path)-4]) == 0) {
                 context->srk_persistent = true;
             }
             /* It has to be checked whether the persistent handle exists. */
@@ -953,7 +930,7 @@ ifapi_load_primary_finish(FAPI_CONTEXT *context, ESYS_TR *handle)
             return TSS2_FAPI_RC_TRY_AGAIN;
         }
         else {
-            if (pkey->creationTicket.hierarchy == TPM2_RH_EK) {
+            if (pkey->creationTicket.hierarchy == TPM2_RH_ENDORSEMENT) {
                 context->ek_persistent = false;
             } else {
                 context->srk_persistent = false;
@@ -963,8 +940,7 @@ ifapi_load_primary_finish(FAPI_CONTEXT *context, ESYS_TR *handle)
 
     statecase(context->primary_state, PRIMARY_READ_HIERARCHY);
         /* The hierarchy object used for auth_session will be loaded from key store. */
-        if (pkey->creationTicket.hierarchy == TPM2_RH_EK ||
-            (pkey->ek_profile && pkey->creationTicket.hierarchy == TPM2_RH_ENDORSEMENT)) {
+        if (pkey->creationTicket.hierarchy == TPM2_RH_ENDORSEMENT) {
             r = ifapi_keystore_load_async(&context->keystore, &context->io, "/HE");
             return_if_error2(r, "Could not open hierarchy /HE");
         } else if (pkey->creationTicket.hierarchy == TPM2_RH_NULL) {
@@ -984,10 +960,7 @@ ifapi_load_primary_finish(FAPI_CONTEXT *context, ESYS_TR *handle)
         r = ifapi_initialize_object(context->esys, hierarchy);
         goto_if_error_reset_state(r, "Initialize hierarchy object", error_cleanup);
 
-        if (pkey->creationTicket.hierarchy == TPM2_RH_EK) {
-            hierarchy->public.handle = ESYS_TR_RH_ENDORSEMENT;
-        } else if (pkey->creationTicket.hierarchy == TPM2_RH_ENDORSEMENT &&
-                   pkey->ek_profile) {
+        if (pkey->creationTicket.hierarchy == TPM2_RH_ENDORSEMENT) {
             hierarchy->public.handle = ESYS_TR_RH_ENDORSEMENT;
         } else if (pkey->creationTicket.hierarchy == TPM2_RH_NULL) {
             hierarchy->public.handle = ESYS_TR_RH_NULL;
@@ -1046,7 +1019,9 @@ ifapi_load_primary_finish(FAPI_CONTEXT *context, ESYS_TR *handle)
         }
 
         r = Esys_CreatePrimary_Async(context->esys, hierarchy->public.handle,
-                                     auth_session, ESYS_TR_NONE, ESYS_TR_NONE,
+                                     auth_session,
+                                     ENC_SESSION_IF_POLICY(auth_session),
+                                     ESYS_TR_NONE,
                                      &context->createPrimary.inSensitive,
                                      &public,
                                      &context->createPrimary.outsideInfo,
@@ -1069,6 +1044,14 @@ ifapi_load_primary_finish(FAPI_CONTEXT *context, ESYS_TR *handle)
         }
         *handle = pkey_object->public.handle;
         context->primary_state = PRIMARY_INIT;
+
+        /* Check whether the public key corresponds to key in key store. */
+        if (!ifapi_cmp_public_key(outPublic, &pkey_object->misc.key.public)) {
+            goto_error(r, TSS2_FAPI_RC_GENERAL_FAILURE,
+                       "Public key for %s was not created correctly.",
+                       error_cleanup, pkey_object->rel_path);
+        }
+
         break;
 
     statecase(context->primary_state, PRIMARY_VERIFY_PERSISTENT);
@@ -1096,9 +1079,8 @@ ifapi_load_primary_finish(FAPI_CONTEXT *context, ESYS_TR *handle)
         }
         goto_error(r, TSS2_FAPI_RC_KEY_NOT_FOUND ,
                    "The persistent handle 0x%x does not exist. "
-                   "The TPM state and the keystore state do not match."
-,                   error_cleanup, pkey_object->misc.key.persistent_handle);
-        fallthrough;
+                   "The TPM state and the keystore state do not match.",
+                   error_cleanup, pkey_object->misc.key.persistent_handle);
 
     statecasedefault(context->primary_state);
     }
@@ -1147,7 +1129,6 @@ ifapi_session_init(FAPI_CONTEXT *context)
 
     context->session1 = ESYS_TR_NONE;
     context->session2 = ESYS_TR_NONE;
-    context->policy.session = ESYS_TR_NONE;
     context->srk_handle = ESYS_TR_NONE;
     return TSS2_RC_SUCCESS;
 }
@@ -1176,7 +1157,6 @@ ifapi_non_tpm_mode_init(FAPI_CONTEXT *context)
 
     context->session1 = ESYS_TR_NONE;
     context->session2 = ESYS_TR_NONE;
-    context->policy.session = ESYS_TR_NONE;
     context->srk_handle = ESYS_TR_NONE;
     return TSS2_RC_SUCCESS;
 }
@@ -1191,10 +1171,15 @@ ifapi_non_tpm_mode_init(FAPI_CONTEXT *context)
 void
 ifapi_session_clean(FAPI_CONTEXT *context)
 {
-    if (context->policy_session && context->policy_session != ESYS_TR_NONE) {
-        Esys_FlushContext(context->esys, context->policy_session);
-    }
-    if (context->session1 != ESYS_TR_NONE) {
+    TPM2_HANDLE tpm_policy_handle;
+    TPMI_YES_NO moreData;
+    TPMS_CAPABILITY_DATA *capabilityData = NULL;
+    bool handle_found = false;
+
+    if (context->session1 != ESYS_TR_NONE && context->session1 != ESYS_TR_PASSWORD) {
+        if (context->session1 == context->session2) {
+            context->session2 = ESYS_TR_NONE;
+        }
         if (Esys_FlushContext(context->esys, context->session1) != TSS2_RC_SUCCESS) {
             LOG_ERROR("Cleanup session failed.");
         }
@@ -1203,8 +1188,41 @@ ifapi_session_clean(FAPI_CONTEXT *context)
     if (context->session2 != ESYS_TR_NONE) {
         if (Esys_FlushContext(context->esys, context->session2) != TSS2_RC_SUCCESS) {
             LOG_ERROR("Cleanup session failed.");
-            context->session2 = ESYS_TR_NONE;
         }
+        context->session2 = ESYS_TR_NONE;
+    }
+
+    if (context->policy_session &&
+        context->policy_session != ESYS_TR_NONE) {
+        if (Esys_TR_GetTpmHandle(context->esys,  context->policy_session, &tpm_policy_handle)) {
+            LOG_ERROR("Cleanup policy_session could not get TPM handle.");
+        } else {
+            /* Check whether policy session still exists. */
+            if (Esys_GetCapability(context->esys,
+                                   ESYS_TR_NONE, ESYS_TR_NONE, ESYS_TR_NONE,
+                                   TPM2_CAP_HANDLES, TPM2_LOADED_SESSION_FIRST , TPM2_MAX_CAP_HANDLES, &moreData,
+                                   &capabilityData)) {
+                LOG_ERROR("Cleanup policy_session could not check TPM handle.");
+            } else {
+                /* Loop is used because usage of tpm_policy_handle instead of TPM2_LOADED_SESSION_FIRST
+                   for get capability did not work. If the handle is not found and moreData is set
+                   the flush will also be executed. */
+                for (uint32_t  i = 0; i < capabilityData->data.handles.count; i++) {
+                    if (capabilityData->data.handles.handle[i] == tpm_policy_handle) {
+                        handle_found = true;
+                    }
+                }
+                if (handle_found || moreData) {
+                    SAFE_FREE(capabilityData);
+                    if (Esys_FlushContext(context->esys, context->policy_session) != TSS2_RC_SUCCESS) {
+                        LOG_ERROR("Cleanup policy_session failed.");
+                    }
+                } else {
+                    SAFE_FREE(capabilityData);
+                }
+            }
+        }
+        context->policy_session = ESYS_TR_NONE;
     }
     if (!context->srk_persistent && context->srk_handle != ESYS_TR_NONE) {
         if (Esys_FlushContext(context->esys, context->srk_handle) != TSS2_RC_SUCCESS) {
@@ -1234,46 +1252,48 @@ ifapi_cleanup_session(FAPI_CONTEXT *context)
     TSS2_RC r;
 
     /* Policy sessions were closed after successful execution. */
-    context->policy_session = ESYS_TR_NONE;
 
     switch (context->cleanup_state) {
         statecase(context->cleanup_state, CLEANUP_INIT);
             if (context->session1 != ESYS_TR_NONE) {
+                if (context->session1 == context->session2) {
+                    context->session2 = ESYS_TR_NONE;
+                }
                 r = Esys_FlushContext_Async(context->esys, context->session1);
-                try_again_or_error(r, "Flush session.");
+                try_again_or_error_goto(r, "Flush session.", error);
             }
             fallthrough;
 
         statecase(context->cleanup_state, CLEANUP_SESSION1);
             if (context->session1 != ESYS_TR_NONE) {
                 r = Esys_FlushContext_Finish(context->esys);
-                try_again_or_error(r, "Flush session.");
+                try_again_or_error_goto(r, "Flush session.", error);
             }
             context->session1 = ESYS_TR_NONE;
 
             if (context->session2 != ESYS_TR_NONE) {
                 r = Esys_FlushContext_Async(context->esys, context->session2);
-                try_again_or_error(r, "Flush session.");
+                try_again_or_error_goto(r, "Flush session.", error);
             }
             fallthrough;
 
         statecase(context->cleanup_state, CLEANUP_SESSION2);
             if (context->session2 != ESYS_TR_NONE) {
                 r = Esys_FlushContext_Finish(context->esys);
-                try_again_or_error(r, "Flush session.");
+                try_again_or_error_goto(r, "Flush session.", error);
             }
             context->session2 = ESYS_TR_NONE;
 
             if (!context->srk_persistent && context->srk_handle != ESYS_TR_NONE) {
                 r = Esys_FlushContext_Async(context->esys, context->srk_handle);
-                try_again_or_error(r, "Flush SRK.");
+                try_again_or_error_goto(r, "Flush SRK.", error);
             }
             fallthrough;
 
         statecase(context->cleanup_state, CLEANUP_SRK);
             if (!context->srk_persistent && context->srk_handle != ESYS_TR_NONE) {
                 r = Esys_FlushContext_Finish(context->esys);
-                try_again_or_error(r, "Flush SRK.");
+                try_again_or_error_goto(r, "Flush SRK.", error);
 
                 context->srk_handle = ESYS_TR_NONE;
                 context->srk_persistent = false;
@@ -1283,6 +1303,9 @@ ifapi_cleanup_session(FAPI_CONTEXT *context)
 
         statecasedefault(context->state);
     }
+ error:
+    context->cleanup_state = CLEANUP_INIT;
+    return r;
 }
 
 /** Cleanup primary keys in error cases (non asynchronous).
@@ -1321,7 +1344,7 @@ ifapi_primary_clean(FAPI_CONTEXT *context)
  * @param[in] context The FAPI_CONTEXT storing the used handles.
  * @param[in] session_flags The flags to adjust used session and encryption
  *            key. With IFAPI_SESSION1 and IFAPI_SESSION2 the session creation
- *            for sesion1 and session2 can be activated, IFAPI_SESSION_GENEK
+ *            for sesion1 and session2 can be activated, IFAPI_SESSION_GEN_SRK
  *            triggers the creation of the primary for session secret encryption.
  * @param[in] attribute_flags1 The attributes used for session1.
  * @param[in] attribute_flags2 The attributes used for session2.
@@ -1355,7 +1378,10 @@ ifapi_get_sessions_async(FAPI_CONTEXT *context,
     context->session2_attribute_flags = attribute_flags2;
     char *file = NULL;
 
-    if (!(session_flags & IFAPI_SESSION_GENEK)) {
+    if (session_flags & IFAPI_SESSION_USE_SRK) {
+        context->session_state = SESSION_CREATE_SESSION;
+        return TSS2_RC_SUCCESS;
+    } else if (!(session_flags & IFAPI_SESSION_GEN_SRK)) {
         context->srk_handle = ESYS_TR_NONE;
         context->session_state = SESSION_CREATE_SESSION;
         return TSS2_RC_SUCCESS;
@@ -1985,7 +2011,8 @@ ifapi_load_key_finish(FAPI_CONTEXT *context, bool flush_parent)
 
         r = Esys_Load_Async(context->esys, context->loadKey.handle,
                             auth_session,
-                            ESYS_TR_NONE, ESYS_TR_NONE,
+                            ENC_SESSION_IF_POLICY(auth_session),
+                            ESYS_TR_NONE,
                             &private, &key->public);
         goto_if_error(r, "Load async", error_cleanup);
         fallthrough;
@@ -1996,6 +2023,7 @@ ifapi_load_key_finish(FAPI_CONTEXT *context, bool flush_parent)
         goto_if_error_reset_state(r, "Load", error_cleanup);
 
         /* The current parent is flushed if not prohibited by flush parent */
+        context->session2 = ESYS_TR_NONE;
         if (flush_parent && context->loadKey.auth_object.objectType == IFAPI_KEY_OBJ &&
             ! context->loadKey.auth_object.misc.key.persistent_handle) {
             r = Esys_FlushContext(context->esys, context->loadKey.auth_object.public.handle);
@@ -2011,13 +2039,8 @@ ifapi_load_key_finish(FAPI_CONTEXT *context, bool flush_parent)
         IFAPI_OBJECT *top_obj = context->loadKey.key_list->object;
         ifapi_cleanup_ifapi_object(top_obj);
         SAFE_FREE(context->loadKey.key_list->object);
-        r = pop_object_from_list(context, &context->loadKey.key_list);
+        r = pop_object_from_list(&context->loadKey.key_list);
         goto_if_error_reset_state(r, "Pop key failed.", error_cleanup);
-
-        if (context->loadKey.key_list) {
-            /* Object can be cleaned if it's not the last */
-            ifapi_free_object(context, &top_obj);
-        }
 
         context->loadKey.state = LOAD_KEY_LOAD_KEY;
         return TSS2_FAPI_RC_TRY_AGAIN;
@@ -2078,27 +2101,6 @@ get_name_alg(FAPI_CONTEXT *context, IFAPI_OBJECT *object)
     }
 }
 
-/** Check whether policy session has to be flushed.
- *
- * Policy sessions with cleared continue session flag are not flushed in error
- * cases. Therefore the return code will be checked and if a policy session was
- * used the session will be flushed if the command was not executed successfully.
- *
- * @param[in,out] context for storing all state information.
- * @param[in] session the session to be checked whether flush is needed.
- * @param[in] r The return code of the command using the session.
- */
-void
-ifapi_flush_policy_session(FAPI_CONTEXT *context, ESYS_TR session, TSS2_RC r)
-{
-    if (session != context->session1) {
-        /* A policy session was used instead auf the default session. */
-        if (r != TSS2_RC_SUCCESS) {
-            Esys_FlushContext(context->esys, session);
-        }
-    }
-}
-
 /** State machine to authorize a key, a NV object of a hierarchy.
  *
  * @param[in,out] context for storing all state information.
@@ -2134,9 +2136,7 @@ ifapi_authorize_object(FAPI_CONTEXT *context, IFAPI_OBJECT *object, ESYS_TR *ses
     switch (object->authorization_state) {
         statecase(object->authorization_state, AUTH_INIT)
             LOG_TRACE("**STATE** AUTH_INIT");
-
             if (!policy_digest_size(object)) {
-                /* No policy used authorization callbacks have to be called if necessary. */
                 if (object_with_auth(object)) {
                     /* Check whether hierarchy was already authorized. */
                     if (object->objectType != IFAPI_HIERARCHY_OBJ ||
@@ -2150,14 +2150,18 @@ ifapi_authorize_object(FAPI_CONTEXT *context, IFAPI_OBJECT *object, ESYS_TR *ses
                         return_if_error(r, "Set auth value");
                     }
                 }
+            }
+            if (!policy_digest_size(object)) {
                 /* No policy session needed current fapi session can be used */
                 if (context->session1 && context->session1 != ESYS_TR_NONE)
                     *session = context->session1;
                 else
                     /* Use password session if session1 had not been created */
                     *session = ESYS_TR_PASSWORD;
+                context->session2 = ESYS_TR_NONE;
                 break;
             }
+
             /* Save current object to be authorized in context. */
             context->current_auth_object = object;
             r = ifapi_policyutil_execute_prepare(context, get_name_alg(context, object),
@@ -2167,6 +2171,11 @@ ifapi_authorize_object(FAPI_CONTEXT *context, IFAPI_OBJECT *object, ESYS_TR *ses
             /* Next state will switch from prev context to next context. */
             context->policy.util_current_policy = context->policy.util_current_policy->prev;
             object->authorization_state = AUTH_EXEC_POLICY;
+
+            /* Use session for parameter encryption */
+            if (context->session1 != ESYS_TR_PASSWORD) {
+                context->session2 = context->session1;
+            }
             fallthrough;
 
         statecase(object->authorization_state, AUTH_EXEC_POLICY)
@@ -2177,6 +2186,7 @@ ifapi_authorize_object(FAPI_CONTEXT *context, IFAPI_OBJECT *object, ESYS_TR *ses
 
             return_if_error(r, "Execute policy.");
 
+            context->policy_session = *session;
             r = Esys_TRSess_GetAuthRequired(context->esys, *session,
                                             &auth_required);
             return_if_error(r, "GetAuthRequired");
@@ -2204,6 +2214,7 @@ ifapi_authorize_object(FAPI_CONTEXT *context, IFAPI_OBJECT *object, ESYS_TR *ses
 error:
     /* No policy call was executed session can be flushed */
     Esys_FlushContext(context->esys, *session);
+    *session = ESYS_TR_NONE;
     return r;
 }
 
@@ -2281,7 +2292,7 @@ ifapi_nv_write(
         context->nv_cmd.data_idx = 0;
 
         /* Use calloc to ensure zero padding for write buffer. */
-        context->nv_cmd.write_data = calloc(size, 1);
+        context->nv_cmd.write_data = calloc(1, size);
         goto_if_null2(context->nv_cmd.write_data, "Out of memory.", r,
                       TSS2_FAPI_RC_MEMORY,
                       error_cleanup);
@@ -2291,13 +2302,13 @@ ifapi_nv_write(
         /* Prepare reading of the key from keystore. */
         r = ifapi_keystore_load_async(&context->keystore, &context->io,
                                       context->nv_cmd.nvPath);
-        return_if_error2(r, "Could not open: %s", context->nv_cmd.nvPath);
+        goto_if_error2(r, "Could not open: %s", error_cleanup, context->nv_cmd.nvPath);
         fallthrough;
 
     statecase(context->nv_cmd.nv_write_state, NV2_WRITE_READ);
         r = ifapi_keystore_load_finish(&context->keystore, &context->io, object);
         return_try_again(r);
-        return_if_error(r, "read_finish failed");
+        goto_if_error(r, "read_finish failed", error_cleanup);
 
         if (object->objectType != IFAPI_NV_OBJ)
             goto_error(r, TSS2_FAPI_RC_BAD_PATH, "%s is no NV object.", error_cleanup,
@@ -2327,7 +2338,7 @@ ifapi_nv_write(
         context->nv_cmd.auth_index = auth_index;
 
         /* Get A session for authorizing the NV write operation. */
-        r = ifapi_get_sessions_async(context, IFAPI_SESSION_GENEK | IFAPI_SESSION1,
+        r = ifapi_get_sessions_async(context, IFAPI_SESSION_GEN_SRK | IFAPI_SESSION1,
                                          TPMA_SESSION_DECRYPT, 0);
         goto_if_error(r, "Create sessions", error_cleanup);
 
@@ -2345,12 +2356,14 @@ ifapi_nv_write(
         r = ifapi_authorize_object(context, auth_object, &auth_session);
         FAPI_SYNC(r, "Authorize NV object.", error_cleanup);
 
+        context->nv_cmd.auth_session = auth_session;
+
         /* Prepare the writing to NV ram. */
         r = Esys_NV_Write_Async(context->esys,
                                 context->nv_cmd.auth_index,
                                 nv_index,
                                 auth_session,
-                                context->session2,
+                                ENC_SESSION_IF_POLICY(auth_session),
                                 ESYS_TR_NONE,
                                 aux_data,
                                 context->nv_cmd.data_idx);
@@ -2375,7 +2388,7 @@ ifapi_nv_write(
                 IFAPI_OBJECT *auth_object = &context->nv_cmd.auth_object;
                 char *description;
                 r = ifapi_get_description(auth_object, &description);
-                return_if_error(r, "Get description");
+                goto_if_error(r, "Get description", error_cleanup);
                 r = ifapi_set_auth(context, auth_object, description);
                 SAFE_FREE(description);
                 goto_if_error_reset_state(r, " Fapi_NvWrite_Finish", error_cleanup);
@@ -2384,10 +2397,8 @@ ifapi_nv_write(
                 r = Esys_NV_Write_Async(context->esys,
                                         context->nv_cmd.auth_index,
                                         nv_index,
-                                        (!context->policy.session
-                                         || context->policy.session == ESYS_TR_NONE) ? context->session1 :
-                                        context->policy.session,
-                                        context->session2,
+                                        context->nv_cmd.auth_session,
+                                        ENC_SESSION_IF_POLICY(context->nv_cmd.auth_session),
                                         ESYS_TR_NONE,
                                         aux_data,
                                         context->nv_cmd.data_idx);
@@ -2421,7 +2432,7 @@ ifapi_nv_write(
                                     context->nv_cmd.auth_index,
                                     nv_index,
                                     auth_session,
-                                    context->session2,
+                                    ENC_SESSION_IF_POLICY(auth_session),
                                     ESYS_TR_NONE,
                                     aux_data,
                                     context->nv_cmd.data_idx);
@@ -2458,16 +2469,16 @@ ifapi_nv_write(
 
         LOG_DEBUG("success");
         r = TSS2_RC_SUCCESS;
-
-        context->nv_cmd.nv_write_state = NV2_WRITE_INIT;
         break;
 
     statecasedefault(context->nv_cmd.nv_write_state);
     }
 
 error_cleanup:
+    context->session2 = ESYS_TR_NONE;
     SAFE_FREE(nv_file_name);
     SAFE_FREE(context->nv_cmd.write_data);
+    context->nv_cmd.nv_write_state = NV2_WRITE_INIT;
     return r;
 }
 
@@ -2550,11 +2561,12 @@ ifapi_nv_read(
             aux_size = *numBytes;
 
         /* Prepare the reading from NV ram. */
+
         r = Esys_NV_Read_Async(context->esys,
                                context->nv_cmd.auth_index,
                                nv_index,
                                session,
-                               ESYS_TR_NONE,
+                               ENC_SESSION_IF_POLICY(session),
                                ESYS_TR_NONE,
                                aux_size,
                                0);
@@ -2616,7 +2628,7 @@ ifapi_nv_read(
                                    context->nv_cmd.auth_index,
                                    nv_index,
                                    session,
-                                   ESYS_TR_NONE,
+                                   ENC_SESSION_IF_POLICY(session),
                                    ESYS_TR_NONE,
                                    aux_size,
                                    context->nv_cmd.data_idx);
@@ -2626,7 +2638,6 @@ ifapi_nv_read(
             return TSS2_FAPI_RC_TRY_AGAIN;
         } else {
             *size = context->nv_cmd.data_idx;
-            context->nv_cmd.nv_read_state = NV_READ_INIT;
             LOG_DEBUG("success");
             r = TSS2_RC_SUCCESS;
             break;
@@ -2650,7 +2661,6 @@ ifapi_nv_read(
 
         if (capabilityData->data.handles.count == 0 ||
             capabilityData->data.handles.handle[0] != context->nv_cmd.tpm_handle) {
-            context->nv_cmd.nv_read_state = NV_READ_INIT;
             *size = 0;
             break;
         }
@@ -2687,7 +2697,9 @@ ifapi_nv_read(
     }
 
 error_cleanup:
+    context->session2 = ESYS_TR_NONE;
     SAFE_FREE(capabilityData);
+    context->nv_cmd.nv_read_state = NV_READ_INIT;
     return r;
 }
 
@@ -2720,7 +2732,7 @@ ifapi_get_random(FAPI_CONTEXT *context, size_t numBytes, uint8_t **data)
     switch (context->get_random_state) {
     statecase(context->get_random_state, GET_RANDOM_INIT);
         context->get_random.numBytes = numBytes;
-        context->get_random.data = calloc(context->get_random.numBytes, 1);
+        context->get_random.data = calloc(1, context->get_random.numBytes);
         context->get_random.idx = 0;
         return_if_null(context->get_random.data, "FAPI out of memory.",
                        TSS2_FAPI_RC_MEMORY);
@@ -2834,8 +2846,9 @@ ifapi_load_key(
 
         /* Prepare the session creation. */
         r = ifapi_get_sessions_async(context,
-                                     IFAPI_SESSION_GENEK | IFAPI_SESSION1,
-                                     TPMA_SESSION_DECRYPT, 0);
+                                     IFAPI_SESSION_GEN_SRK | IFAPI_SESSION1,
+                                     TPMA_SESSION_DECRYPT | TPMA_SESSION_ENCRYPT,
+                                     0);
         goto_if_error_reset_state(r, "Create sessions", error_cleanup);
         fallthrough;
 
@@ -2859,7 +2872,6 @@ ifapi_load_key(
         return_try_again(r);
         goto_if_error_reset_state(r, " Load key.", error_cleanup);
 
-        context->loadKey.prepare_state = PREPARE_LOAD_KEY_INIT;
         break;
 
     statecase(context->loadKey.prepare_state, PREPARE_LOAD_KEY_INIT_KEY);
@@ -2875,6 +2887,7 @@ ifapi_load_key(
     }
 
 error_cleanup:
+    context->loadKey.prepare_state = PREPARE_LOAD_KEY_INIT;
     return r;
 }
 
@@ -2947,9 +2960,8 @@ ifapi_key_sign(
         context->Key_Sign.handle = sig_key_object->public.handle;
 
         r = ifapi_authorize_object(context, sig_key_object, &session);
-        FAPI_SYNC(r, "Authorize signature key.", cleanup);
-
-        context->policy.session = session;
+        return_try_again(r);
+        goto_if_error(r, "Authorize signing key", cleanup);
 
         r = ifapi_get_sig_scheme(context, sig_key_object, padding, digest, &sig_scheme);
         goto_if_error(r, "Get signature scheme", cleanup);
@@ -2958,7 +2970,8 @@ ifapi_key_sign(
         r = Esys_Sign_Async(context->esys,
                             context->Key_Sign.handle,
                             session,
-                            ESYS_TR_NONE, ESYS_TR_NONE,
+                            ENC_SESSION_IF_POLICY(session),
+                            ESYS_TR_NONE,
                             digest,
                             &sig_scheme,
                             &hash_validation);
@@ -2970,7 +2983,7 @@ ifapi_key_sign(
         r = Esys_Sign_Finish(context->esys,
                              &context->Key_Sign.signature);
         return_try_again(r);
-        ifapi_flush_policy_session(context, context->policy.session, r);
+        context->session2 = ESYS_TR_NONE;
         goto_if_error(r, "Error: Sign", cleanup);
 
         /* Prepare the flushing of the signing key. */
@@ -3006,7 +3019,6 @@ ifapi_key_sign(
                 strdup_check(*certificate, "", r, cleanup);
             }
         }
-        context->Key_Sign.state = SIGN_INIT;
         LOG_TRACE("success");
         r = TSS2_RC_SUCCESS;
         break;
@@ -3018,6 +3030,8 @@ cleanup:
     if (context->Key_Sign.handle != ESYS_TR_NONE)
         Esys_FlushContext(context->esys, context->Key_Sign.handle);
     ifapi_cleanup_ifapi_object(context->Key_Sign.key_object);
+    context->Key_Sign.state = SIGN_INIT;
+
     return r;
 }
 
@@ -3492,7 +3506,7 @@ ifapi_key_create(
                    context->policy.hash_size);
         }
         r = ifapi_get_sessions_async(context,
-                                     IFAPI_SESSION_GENEK | IFAPI_SESSION1,
+                                     IFAPI_SESSION_GEN_SRK | IFAPI_SESSION1,
                                      TPMA_SESSION_ENCRYPT | TPMA_SESSION_DECRYPT, 0);
         goto_if_error_reset_state(r, "Create sessions", error_cleanup);
         fallthrough;
@@ -3537,7 +3551,8 @@ ifapi_key_create(
 
         r = Esys_Create_Async(context->esys, context->loadKey.auth_object.public.handle,
                               auth_session,
-                              ESYS_TR_NONE, ESYS_TR_NONE,
+                              ENC_SESSION_IF_POLICY(auth_session),
+                              ESYS_TR_NONE,
                               &context->cmd.Key_Create.inSensitive,
                               &context->cmd.Key_Create.public_templ.public,
                               &context->cmd.Key_Create.outsideInfo,
@@ -3549,6 +3564,8 @@ ifapi_key_create(
         r = Esys_Create_Finish(context->esys, &outPrivate, &outPublic, &creationData,
                                &creationHash, &creationTicket);
         try_again_or_error_goto(r, "Key create finish", error_cleanup);
+
+        context->session2 = ESYS_TR_NONE;
 
         /* Prepare object for serialization */
         object->system = context->cmd.Key_Create.public_templ.system;
@@ -3599,7 +3616,8 @@ ifapi_key_create(
 
             r = Esys_Load_Async(context->esys, context->loadKey.handle,
                                 auth_session,
-                                ESYS_TR_NONE, ESYS_TR_NONE,
+                                ENC_SESSION_IF_POLICY(auth_session),
+                                ESYS_TR_NONE,
                                 &private,
                                 &object->misc.key.public);
             goto_if_error(r, "Load key.", error_cleanup);
@@ -3613,6 +3631,7 @@ ifapi_key_create(
             return_try_again(r);
             goto_if_error_reset_state(r, "Load", error_cleanup);
         }
+        context->session2 = ESYS_TR_NONE;
         /* Prepare Flushing of key used for authorization */
         if (!context->loadKey.auth_object.misc.key.persistent_handle) {
             r = Esys_FlushContext_Async(context->esys, context->loadKey.auth_object.public.handle);
@@ -3655,7 +3674,8 @@ ifapi_key_create(
             /* Prepare making the loaded key permanent. */
             r = Esys_EvictControl_Async(context->esys, hierarchy->public.handle,
                                         context->loadKey.handle,
-                                        auth_session, ESYS_TR_NONE,
+                                        auth_session,
+                                        ESYS_TR_NONE,
                                         ESYS_TR_NONE,
                                         object->misc.key.persistent_handle);
             goto_if_error(r, "Error Esys EvictControl", error_cleanup);
@@ -3680,6 +3700,8 @@ ifapi_key_create(
             r = ifapi_flush_object(context, context->loadKey.handle);
             return_try_again(r);
             goto_if_error(r, "Flush key", error_cleanup);
+
+            context->loadKey.handle = ESYS_TR_NONE;
         }
 
         fallthrough;
@@ -3874,7 +3896,8 @@ ifapi_change_auth_hierarchy(
                                            (auth_session
                                             && auth_session != ESYS_TR_NONE) ?
                                            auth_session : ESYS_TR_PASSWORD,
-                                           ESYS_TR_NONE, ESYS_TR_NONE,
+                                           ENC_SESSION_IF_POLICY(auth_session),
+                                           ESYS_TR_NONE,
                                            newAuthValue);
         return_if_error(r, "HierarchyChangeAuth");
         fallthrough;
@@ -3918,6 +3941,7 @@ ifapi_change_auth_hierarchy(
     statecasedefault(context->hierarchy_state);
     }
 error:
+    context->hierarchy_state = HIERARCHY_CHANGE_AUTH_INIT;
     return r;
 }
 
@@ -4024,7 +4048,8 @@ ifapi_change_policy_hierarchy(
                                         (auth_session
                                          && auth_session != ESYS_TR_NONE) ?
                                         auth_session : ESYS_TR_PASSWORD,
-                                        ESYS_TR_NONE, ESYS_TR_NONE,
+                                        ENC_SESSION_IF_POLICY(auth_session),
+                                        ESYS_TR_NONE,
                                         &context->cmd.Provision.policy_digest,
                                         context->cmd.Provision.policy_digest.size ?
                                         context->profiles.default_profile.nameAlg :
@@ -4106,32 +4131,6 @@ ifapi_free_objects(FAPI_CONTEXT *context)
         free_node = node;
         node = node->next;
         free(free_node);
-    }
-}
-
-/** Free ifapi a object stored in the context.
- *
- * @param[in,out] context The FAPI_CONTEXT.
- * @param[in,out] object The object which should be removed from the
- *                the linked list stored in context.
- */
-void
-ifapi_free_object(FAPI_CONTEXT *context, IFAPI_OBJECT **object)
-{
-    NODE_OBJECT_T *node;
-    NODE_OBJECT_T **update_ptr;
-
-    for (node = context->object_list,
-             update_ptr = &context->object_list;
-             node != NULL;
-         update_ptr = &node->next, node = node->next) {
-        if (node->object == object) {
-            *update_ptr = node->next;
-            SAFE_FREE(node->object);
-            SAFE_FREE(node);
-            *object = NULL;
-            return;
-        }
     }
 }
 
@@ -4757,7 +4756,7 @@ ifapi_create_primary(
         }
 
         r = ifapi_get_sessions_async(context,
-                                     IFAPI_SESSION_GENEK | IFAPI_SESSION1,
+                                     IFAPI_SESSION_GEN_SRK | IFAPI_SESSION1,
                                      TPMA_SESSION_ENCRYPT | TPMA_SESSION_DECRYPT, 0);
         goto_if_error_reset_state(r, "Create sessions", error_cleanup);
 
@@ -4794,7 +4793,8 @@ ifapi_create_primary(
 
         r = Esys_CreatePrimary_Async(context->esys, hierarchy->public.handle,
                                      auth_session,
-                                     ESYS_TR_NONE, ESYS_TR_NONE,
+                                     ENC_SESSION_IF_POLICY(auth_session),
+                                     ESYS_TR_NONE,
                                      &context->cmd.Key_Create.inSensitive,
                                      &context->cmd.Key_Create.public_templ.public,
                                      &context->cmd.Key_Create.outsideInfo,
@@ -4811,6 +4811,7 @@ ifapi_create_primary(
         try_again_or_error_goto(r, "Create primary.", error_cleanup);
 
         /* Prepare object for serialization */
+        context->session2 = ESYS_TR_NONE;
         object->system = context->cmd.Key_Create.public_templ.system;
         object->objectType = IFAPI_KEY_OBJ;
         object->misc.key.public = *outPublic;
@@ -4845,13 +4846,15 @@ ifapi_create_primary(
 
     statecase(context->cmd.Key_Create.state, KEY_CREATE_PRIMARY_WAIT_FOR_AUTHORIZE2);
         if (template->persistent_handle) {
+            object->misc.key.persistent_handle = template->persistent_handle;
             r = ifapi_authorize_object(context, hierarchy, &auth_session);
             FAPI_SYNC(r, "Authorize hierarchy.", error_cleanup);
 
             /* Prepare making the created primary permanent. */
             r = Esys_EvictControl_Async(context->esys, hierarchy->public.handle,
                                         context->cmd.Key_Create.handle,
-                                        auth_session, ESYS_TR_NONE,
+                                        auth_session,
+                                        ESYS_TR_NONE,
                                         ESYS_TR_NONE,
                                         object->misc.key.persistent_handle);
             goto_if_error(r, "Error Esys EvictControl", error_cleanup);
@@ -4873,6 +4876,8 @@ ifapi_create_primary(
         r = ifapi_flush_object(context, context->cmd.Key_Create.handle);
         return_try_again(r);
         goto_if_error(r, "Flush key", error_cleanup);
+
+        context->cmd.Key_Create.handle = ESYS_TR_NONE;
 
         fallthrough;
 

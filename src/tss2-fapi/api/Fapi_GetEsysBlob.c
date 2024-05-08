@@ -145,6 +145,9 @@ Fapi_GetEsysBlob_Async(
     check_not_null(context);
     check_not_null(path);
 
+    /* Cleanup command context. */
+    memset(&context->cmd, 0, sizeof(IFAPI_CMD_STATE));
+
     /* Helpful alias pointers */
     IFAPI_GetEsysBlob * command = &(context->cmd.GetEsysBlob);
     IFAPI_OBJECT *object = &command->object;
@@ -334,10 +337,6 @@ Fapi_GetEsysBlob_Finish(
             SAFE_FREE(key_context);
             goto_if_error(r, "Marshaling context", error_cleanup);
 
-            /* Cleanup policy session if an error did occur. */
-            ifapi_flush_policy_session(context, context->policy.session, r);
-            goto_if_error(r, "Cleanup policy session", error_cleanup);
-
             /* Flush current object used for blob computation. */
             if (!key_object->misc.key.persistent_handle) {
                 r = Esys_FlushContext_Async(context->esys, key_object->public.handle);
@@ -401,5 +400,6 @@ error_cleanup:
     ifapi_cleanup_ifapi_object(&context->loadKey.auth_object);
     ifapi_cleanup_ifapi_object(context->loadKey.key_object);
     ifapi_cleanup_ifapi_object(&context->createPrimary.pkey_object);
+    context->state = _FAPI_STATE_INIT;
     return r;
 }

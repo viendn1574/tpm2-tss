@@ -22,7 +22,7 @@
 #include "fapi_crypto.h"
 #include "fapi_policy.h"
 #include "ifapi_curl.h"
-#include "ifapi_get_intl_cert.h"
+#include "ifapi_get_web_cert.h"
 #include "ifapi_helpers.h"
 #include "tss2_mu.h"
 
@@ -36,6 +36,9 @@
 #define ECC_EK_NONCE_NV_INDEX 0x01c0000b
 #define ECC_EK_TEMPLATE_NV_INDEX 0x01c0000c
 #define ECC_SM2_EK_TEMPLATE_NV_INDEX 0x01c0001b
+
+#define FAPI_TEST_ROOT_CERT_FILE "./ca/root-ca/root-ca.cert.pem"
+#define FAPI_TEST_INT_CERT_FILE "./ca/intermed-ca/intermed-ca.cert.pem"
 
 /** Error cleanup of provisioning
  *
@@ -452,7 +455,6 @@ Fapi_Provision_Finish(FAPI_CONTEXT *context)
                 context->state = PROVISION_PREPARE_GET_CAP_AUTH_STATE;
                 return TSS2_FAPI_RC_TRY_AGAIN;
             }
-            fallthrough;
 
         statecase(context->state, PROVISION_INIT);
 
@@ -509,6 +511,16 @@ Fapi_Provision_Finish(FAPI_CONTEXT *context)
 
             command->auth_state =  (*capabilityData)->data.tpmProperties.tpmProperty[0].value;
             SAFE_FREE(*capabilityData);
+
+            if (command->auth_state & TPMA_PERMANENT_ENDORSEMENTAUTHSET) {
+                hierarchy_he->misc.hierarchy.with_auth = TPM2_YES;
+            }
+            if (command->auth_state & TPMA_PERMANENT_OWNERAUTHSET) {
+                hierarchy_hs->misc.hierarchy.with_auth = TPM2_YES;
+            }
+            if (command->auth_state & TPMA_PERMANENT_LOCKOUTAUTHSET) {
+                hierarchy_lockout->misc.hierarchy.with_auth = TPM2_YES;
+            }
 
             /* Check the TPM capabilities for the persistent handle. */
             if (command->public_templ.persistent_handle) {
@@ -891,6 +903,16 @@ Fapi_Provision_Finish(FAPI_CONTEXT *context)
 #ifdef SELF_GENERATED_CERTIFICATE
 #pragma message ( "*** Allow self generated certifcate ***" )
             root_ca_file = getenv("FAPI_TEST_ROOT_CERT");
+
+            if (root_ca_file && strcasecmp(root_ca_file, "self") == 0) {
+                /* The self signed root cert will be used as intermediate certificate. */
+                context->state = PROVISION_PREPARE_READ_INT_CERT;
+                return TSS2_FAPI_RC_TRY_AGAIN;
+            }
+
+            if (!root_ca_file && ifapi_io_path_exists(FAPI_TEST_ROOT_CERT_FILE)) {
+                root_ca_file = FAPI_TEST_ROOT_CERT_FILE;
+            }
 #endif
             if (!root_ca_file) {
                 context->state = PROVISION_EK_CHECK_CERT;
@@ -917,6 +939,9 @@ Fapi_Provision_Finish(FAPI_CONTEXT *context)
 #ifdef SELF_GENERATED_CERTIFICATE
 #pragma message ( "*** Allow self generated certifcate ***" )
             int_ca_file = getenv("FAPI_TEST_INT_CERT");
+            if (!int_ca_file && ifapi_io_path_exists(FAPI_TEST_INT_CERT_FILE)) {
+                int_ca_file = FAPI_TEST_INT_CERT_FILE;
+            }
 #endif
             if (!int_ca_file) {
                 context->state = PROVISION_EK_CHECK_CERT;
@@ -924,7 +949,8 @@ Fapi_Provision_Finish(FAPI_CONTEXT *context)
             }
             r = ifapi_io_read_async(&context->io, int_ca_file);
             return_try_again(r);
-            goto_if_error2(r, "Reading certificate %s", error_cleanup, int_ca_file);
+            goto_if_error2(r, "Reading certificate %s", error_cleanup,
+                           getenv("FAPI_TEST_INT_CERT"));
 
 	        fallthrough;
 
@@ -980,7 +1006,8 @@ Fapi_Provision_Finish(FAPI_CONTEXT *context)
         statecase(context->state, PROVISION_INIT_SRK);
             /* Create session which will be used for SRK generation. */
             context->srk_handle = context->ek_handle;
-            r = ifapi_get_sessions_async(context, IFAPI_SESSION1, 0, 0);
+            r = ifapi_get_sessions_async(context, IFAPI_SESSION_USE_SRK | IFAPI_SESSION1,
+                                         TPMA_SESSION_DECRYPT, 0);
             goto_if_error_reset_state(r, "Create sessions", error_cleanup);
 
             fallthrough;
@@ -1001,9 +1028,9 @@ Fapi_Provision_Finish(FAPI_CONTEXT *context)
                 if (command->auth_state & TPMA_PERMANENT_LOCKOUTAUTHSET) {
                     hierarchy_lockout->misc.hierarchy.with_auth = TPM2_YES;
                     r = ifapi_get_description(hierarchy_lockout, &description);
-                    return_if_error(r, "Get description");
+                    goto_if_error(r, "Get description", error_cleanup);
                     r = ifapi_set_auth(context, hierarchy_lockout, description);
-                    return_if_error(r, "Set auth value");
+                    goto_if_error(r, "Set auth value", error_cleanup);
                 } else {
                     hierarchy_lockout->misc.hierarchy.with_auth = TPM2_NO;
                 }
@@ -1021,7 +1048,9 @@ Fapi_Provision_Finish(FAPI_CONTEXT *context)
 
             /* Prepare the setting of the dictionary attack parameters. */
             r = Esys_DictionaryAttackParameters_Async(context->esys, ESYS_TR_RH_LOCKOUT,
-                       auth_session, ESYS_TR_NONE, ESYS_TR_NONE,
+                       auth_session,
+                       ESYS_TR_NONE,
+                       ESYS_TR_NONE,
                        defaultProfile->newMaxTries, defaultProfile->newRecoveryTime,
                        defaultProfile->lockoutRecovery);
             goto_if_error(r, "Error Esys_DictionaryAttackParameters",
@@ -1180,7 +1209,8 @@ Fapi_Provision_Finish(FAPI_CONTEXT *context)
             try_again_or_error_goto(r, "Cleanup", error_cleanup);
 
             /* Create session which will be used for parameter encryption. */
-            r = ifapi_get_sessions_async(context, IFAPI_SESSION1, 0, 0);
+            r = ifapi_get_sessions_async(context, IFAPI_SESSION_USE_SRK | IFAPI_SESSION1,
+                                         TPMA_SESSION_DECRYPT, 0);
             goto_if_error_reset_state(r, "Create sessions", error_cleanup);
 
             fallthrough;
@@ -1362,7 +1392,7 @@ Fapi_Provision_Finish(FAPI_CONTEXT *context)
             /* Finish writing the endorsement hierarchy to the key store */
             r = ifapi_keystore_store_finish(&context->io);
             return_try_again(r);
-            return_if_error_reset_state(r, "write_finish failed");
+            goto_if_error_reset_state(r, "write_finish failed", error_cleanup);
 
             /* Write all endorsement hierarchies. */
             command->hierarchy = hierarchy_he;
@@ -1566,13 +1596,15 @@ Fapi_Provision_Finish(FAPI_CONTEXT *context)
             return_try_again(r);
             goto_if_error_reset_state(r, "GetCapablity_Finish", error_cleanup);
 
-            if ((*capabilityData)->data.tpmProperties.tpmProperty[0].value == VENDOR_INTC) {
+            if ((*capabilityData)->data.tpmProperties.tpmProperty[0].value == VENDOR_INTC ||
+                (*capabilityData)->data.tpmProperties.tpmProperty[0].value == VENDOR_AMD) {
                 /* Get INTEL certificate for EK public hash via web */
                 uint8_t *cert_buffer = NULL;
                 size_t cert_size;
                 TPM2B_PUBLIC public;
-                r = ifapi_get_intl_ek_certificate(context, &pkey->public, &cert_buffer,
-                                                  &cert_size);
+                r = ifapi_get_web_ek_certificate(context, &pkey->public,
+                                (*capabilityData)->data.tpmProperties.tpmProperty[0].value,
+                                &cert_buffer, &cert_size);
                 goto_if_error_reset_state(r, "Get certificates", error_cleanup);
 
                 r = ifapi_cert_to_pem(cert_buffer, cert_size, &command->pem_cert,
@@ -1580,6 +1612,11 @@ Fapi_Provision_Finish(FAPI_CONTEXT *context)
                 SAFE_FREE(cert_buffer);
                 goto_if_error_reset_state(r, "Convert certificate buffer to PEM.",
                                           error_cleanup);
+
+                 r = ifapi_curl_verify_ek_cert(NULL, NULL, command->pem_cert);
+                 goto_if_error_reset_state(r, "Verify EK certificate.",
+                                           error_cleanup);
+
             } else {
                 /* No certificate was stored in the TPM and ek_cert_less was not set.*/
                 goto_error(r, TSS2_FAPI_RC_NO_CERT,
@@ -1634,6 +1671,7 @@ error_cleanup:
         }
         SAFE_FREE(command->pathlist);
     }
+    context->state = _FAPI_STATE_INIT;
     LOG_TRACE("finished");
     return r;
 }

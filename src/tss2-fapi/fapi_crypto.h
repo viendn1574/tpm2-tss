@@ -123,4 +123,22 @@ ifapi_base64encode(
     size_t buffer_size,
     char** b64_data);
 
+TSS2_RC
+ifapi_rsa_encrypt(
+    const char *pem_key,
+    const TPMT_RSA_DECRYPT *rsa_decrypt_scheme,
+    const uint8_t *plainText,
+    size_t plainTextSize,
+    uint8_t  **cipherText,
+    size_t *cipherTextSize);
+
+TSS2_RC
+ifapi_openssl_load_private(
+    const char *pem_key,
+    const char *passin,
+    const char *object_auth,
+    TPM2B_PUBLIC *template,
+    TPM2B_PUBLIC *pub,
+    TPM2B_SENSITIVE *priv);
+
 #endif /* FAPI_CRYPTO_H */

@@ -273,7 +273,7 @@ Fapi_NvIncrement_Finish(
 
         /* Prepare the session for authorization */
         r = ifapi_get_sessions_async(context,
-            IFAPI_SESSION_GENEK | IFAPI_SESSION1,
+            IFAPI_SESSION_GEN_SRK | IFAPI_SESSION1,
             0, 0);
         goto_if_error_reset_state(r, "Create sessions", error_cleanup);
 
@@ -297,7 +297,8 @@ Fapi_NvIncrement_Finish(
         r = Esys_NV_Increment_Async(context->esys,  command->auth_index,
                                     nvIndex,
                                     auth_session,
-                                    ESYS_TR_NONE, ESYS_TR_NONE);
+                                    ESYS_TR_NONE,
+                                    ESYS_TR_NONE);
         goto_if_error_reset_state(r, " Fapi_NvIncrement_Async", error_cleanup);
 
         fallthrough;
@@ -335,7 +336,6 @@ Fapi_NvIncrement_Finish(
         r = ifapi_cleanup_session(context);
         try_again_or_error_goto(r, "Cleanup", error_cleanup);
 
-        context->state = _FAPI_STATE_INIT;
         break;
 
     statecasedefault(context->state);
@@ -350,6 +350,7 @@ error_cleanup:
     SAFE_FREE(command->nvPath);
     SAFE_FREE(jso);
     ifapi_session_clean(context);
+    context->state = _FAPI_STATE_INIT;
     LOG_TRACE("finished");
     return r;
 }

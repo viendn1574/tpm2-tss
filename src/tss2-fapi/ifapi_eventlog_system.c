@@ -99,7 +99,6 @@ bool digest2_accumulator_callback(TCG_DIGEST2 const *digest, size_t size,
 bool foreach_digest2(
     tpm2_eventlog_context *ctx,
     UINT32 event_type,
-    unsigned pcr_index,
     TCG_DIGEST2 const *digest,
     size_t count,
     size_t size) {
@@ -110,7 +109,6 @@ bool foreach_digest2(
     }
 
     bool ret = true;
-    TSS2_RC r;
 
     size_t i, j;
     for (i = 0; i < count; i++) {
@@ -124,36 +122,6 @@ bool foreach_digest2(
         if (size < sizeof(*digest) + alg_size) {
             LOG_ERROR("insufficient size for digest buffer");
             return false;
-        }
-
-        uint8_t *pcr = NULL;
-        if (pcr_index > TPM2_MAX_PCRS) {
-            LOG_ERROR("PCR%d > max %d", pcr_index, TPM2_MAX_PCRS);
-            return false;
-        } else if (alg == TPM2_ALG_SHA1) {
-            pcr = ctx->sha1_pcrs[pcr_index];
-            ctx->sha1_used |= (1 << pcr_index);
-        } else if (alg == TPM2_ALG_SHA256) {
-            pcr = ctx->sha256_pcrs[pcr_index];
-            ctx->sha256_used |= (1 << pcr_index);
-        } else if (alg == TPM2_ALG_SHA384) {
-            pcr = ctx->sha384_pcrs[pcr_index];
-            ctx->sha384_used |= (1 << pcr_index);
-        } else if (alg == TPM2_ALG_SHA512) {
-            pcr = ctx->sha512_pcrs[pcr_index];
-            ctx->sha512_used |= (1 << pcr_index);
-        } else if (alg == TPM2_ALG_SM3_256) {
-            pcr = ctx->sm3_256_pcrs[pcr_index];
-            ctx->sm3_256_used |= (1 << pcr_index);
-        } else {
-            LOG_WARNING("PCR%d algorithm %d unsupported", pcr_index, alg);
-        }
-        if (pcr) {
-            r = ifapi_extend_pcr(alg, pcr, digest->Digest, alg_size);
-            if (r) {
-                LOG_ERROR("PCR%d extend failed", pcr_index);
-                return false;
-            }
         }
 
         if (event_type == EV_NO_ACTION) {
@@ -236,6 +204,21 @@ bool parse_event2body(TCG_EVENT2 const *event, UINT32 type) {
             /* what about the device path? */
         }
         break;
+    /* TCG PC Client Platform Firmware Profile Specification Level 00 Version 1.05 Revision 23 section 10.4.1 */
+    case EV_EFI_HCRTM_EVENT:
+        {
+            const char hcrtm_data[] = "HCRTM";
+            size_t len = strlen(hcrtm_data);
+            BYTE *data = (BYTE *)event->Event;
+            if (event->EventSize != len ||
+                    strncmp((const char *)data, hcrtm_data, len)) {
+                LOG_ERROR("HCRTM Event Data MUST be the string: \"%s\"", hcrtm_data);
+                return false;
+            }
+        }
+        break;
+
+
     }
 
     return true;
@@ -259,7 +242,7 @@ bool parse_event2(TCG_EVENT_HEADER2 const *eventhdr, size_t buf_size,
         .data = digests_size,
         .digest2_cb = digest2_accumulator_callback,
     };
-    ret = foreach_digest2(&ctx, eventhdr->EventType, eventhdr->PCRIndex,
+    ret = foreach_digest2(&ctx, eventhdr->EventType,
                           eventhdr->Digests, eventhdr->DigestCount,
                           buf_size - sizeof(*eventhdr));
     if (ret != true) {
@@ -283,11 +266,8 @@ bool parse_event2(TCG_EVENT_HEADER2 const *eventhdr, size_t buf_size,
     return true;
 }
 
-bool parse_sha1_log_event(tpm2_eventlog_context *ctx, TCG_EVENT const *event, size_t size,
+bool parse_sha1_log_event(TCG_EVENT const *event, size_t size,
                           size_t *event_size) {
-
-    uint8_t *pcr = NULL;
-    TSS2_RC r;
 
     /* enough size for the 1.2 event structure */
     if (size < sizeof(*event)) {
@@ -299,16 +279,6 @@ bool parse_sha1_log_event(tpm2_eventlog_context *ctx, TCG_EVENT const *event, si
         return false;
     }
     *event_size = sizeof(*event);
-
-    pcr = ctx->sha1_pcrs[ event->pcrIndex];
-    if (pcr) {
-        r = ifapi_extend_pcr(TPM2_ALG_SHA1, pcr, &event->digest[0], 20);
-        if (r) {
-            LOG_ERROR("PCR%d extend failed", event->pcrIndex);
-            return false;
-        }
-        ctx->sha1_used |= (1 << event->pcrIndex);
-    }
 
     /* buffer size must be sufficient to hold event and event data */
     if (size < sizeof(*event) + (sizeof(event->event[0]) *
@@ -339,7 +309,7 @@ bool foreach_sha1_log_event(tpm2_eventlog_context *ctx, TCG_EVENT const *eventhd
          eventhdr = (TCG_EVENT*)((uintptr_t)eventhdr + event_size),
          size -= event_size) {
 
-        ret = parse_sha1_log_event(ctx, eventhdr, size, &event_size);
+        ret = parse_sha1_log_event(eventhdr, size, &event_size);
         if (!ret) {
             return ret;
         }
@@ -408,7 +378,7 @@ bool foreach_event2(tpm2_eventlog_context *ctx, TCG_EVENT_HEADER2 const *eventhd
         }
 
         /* digest callback foreach digest */
-        ret = foreach_digest2(ctx, eventhdr->EventType, eventhdr->PCRIndex,
+        ret = foreach_digest2(ctx, eventhdr->EventType,
                               eventhdr->Digests, eventhdr->DigestCount, digests_size);
         if (ret != true) {
             return false;
@@ -566,6 +536,7 @@ ifapi_json_TCG_EVENT_TYPE_deserialize_txt(json_object *jso,
     const char *token = json_object_get_string(jso);
 
     check_oom(token);
+    LOG_TRACE("TCG Event: %s", token);
 
     if (get_number(token, &i64)) {
         *out = (IFAPI_EVENT_TYPE) i64;
@@ -605,6 +576,7 @@ TSS2_RC
 ifapi_json_TCG_EVENT_TYPE_deserialize(json_object *jso, IFAPI_EVENT_TYPE *out)
 {
     LOG_TRACE("call");
+
     return ifapi_json_TCG_EVENT_TYPE_deserialize_txt(jso, out);
 }
 
@@ -632,7 +604,7 @@ check_out_string(const IFAPI_FIRMWARE_EVENT *in, const char *string) {
  *
  * @param[in]  jso the json object to be deserialized.
  * @param[out] out the deserialzed binary object.
- * @param[out] verify swithc whether the digest can be verified.
+ * @param[out] verify switch whether the digest can be verified.
  * @retval TSS2_RC_SUCCESS if the function call was a success.
  * @retval TSS2_FAPI_RC_BAD_VALUE if the json object can't be deserialized.
  * @retval TSS2_FAPI_RC_BAD_REFERENCE a invalid null pointer is passed.
@@ -660,6 +632,8 @@ ifapi_json_IFAPI_FIRMWARE_EVENT_deserialize(
     r =  ifapi_json_TCG_EVENT_TYPE_deserialize (jso2, &event_type);
     return_if_error(r,"BAD VALUE");
 
+    out->event_type = event_type;
+
     if (!ifapi_get_sub_object(jso, "event_data", &jso2)) {
         LOG_ERROR("Bad value");
         return TSS2_FAPI_RC_BAD_VALUE;
@@ -682,6 +656,7 @@ ifapi_json_IFAPI_FIRMWARE_EVENT_deserialize(
                used as digest. */
             SAFE_FREE(out->data.buffer);
             out->data.buffer = calloc(1, 4);
+            check_oom(out->data.buffer);
             out->data.size = 4;
             /* hash of 0x00000001 will be used as digest. */
             out->data.buffer[3] = 1;
@@ -714,7 +689,10 @@ ifapi_json_IFAPI_FIRMWARE_EVENT_deserialize(
         event_type == EV_IPL_PARTITION_DATA ||
         event_type == EV_NONHOST_CODE ||
         event_type == EV_NONHOST_CONFIG ||
-        event_type == EV_EFI_RUNTIME_SERVICES_DRIVER) {
+        event_type == EV_EFI_RUNTIME_SERVICES_DRIVER ||
+        /* Verification not possible. (TODO check) */
+        event_type == EV_EFI_HCRTM_EVENT ||
+        event_type == EV_EFI_VARIABLE_BOOT) {
         *verify = false;
     } else if (
         /* Verification is possible. (TODO check) */
@@ -725,12 +703,10 @@ ifapi_json_IFAPI_FIRMWARE_EVENT_deserialize(
         event_type == EV_EFI_VARIABLE_AUTHORITY ||
         /* Verification is possible. */
         event_type == EV_S_CRTM_VERSION ||
-        event_type == EV_EFI_HCRTM_EVENT ||
         event_type == EV_SEPARATOR ||
         event_type == EV_EFI_VARIABLE_DRIVER_CONFIG ||
         event_type == EV_EFI_GPT_EVENT ||
         event_type == EV_PLATFORM_CONFIG_FLAGS ||
-        event_type == EV_EFI_VARIABLE_BOOT ||
         event_type == EV_EFI_ACTION) {
         *verify = true;
     } else {

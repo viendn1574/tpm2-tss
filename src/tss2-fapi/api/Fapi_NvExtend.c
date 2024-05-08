@@ -174,6 +174,9 @@ Fapi_NvExtend_Async(
     check_not_null(nvPath);
     check_not_null(data);
 
+    /* Cleanup command context. */
+    memset(&context->cmd, 0, sizeof(IFAPI_CMD_STATE));
+
     /* Check for maximum allowed dataSize. */
     if (dataSize > 1024) {
         LOG_ERROR("dataSize exceeds allowed maximum of 1024. dataSize = %zi", dataSize);
@@ -315,7 +318,7 @@ Fapi_NvExtend_Finish(
 
         /* Start a session for authorization. */
         r = ifapi_get_sessions_async(context,
-                                     IFAPI_SESSION_GENEK | IFAPI_SESSION1,
+                                     IFAPI_SESSION_GEN_SRK | IFAPI_SESSION1,
                                      TPMA_SESSION_DECRYPT, 0);
         goto_if_error_reset_state(r, "Create sessions", error_cleanup);
 
@@ -349,7 +352,7 @@ Fapi_NvExtend_Finish(
                                  command->auth_index,
                                  nvIndex,
                                  auth_session,
-                                 ESYS_TR_NONE,
+                                 ENC_SESSION_IF_POLICY(auth_session),
                                  ESYS_TR_NONE,
                                  auxData);
         goto_if_error_reset_state(r, " Fapi_NvExtend_Async", error_cleanup);
@@ -370,7 +373,7 @@ Fapi_NvExtend_Finish(
         /* Compute Digest of the current event */
         hashAlg = object->misc.nv.public.nvPublic.nameAlg;
         r = ifapi_crypto_hash_start(&cryptoContext, hashAlg);
-        return_if_error(r, "crypto hash start");
+        goto_if_error(r, "crypto hash start", error_cleanup);
 
         HASH_UPDATE_BUFFER(cryptoContext,
                            &auxData->buffer[0], auxData->size,
@@ -380,7 +383,7 @@ Fapi_NvExtend_Finish(
                                      (uint8_t *)
                                      &event->digests.digests[0].digest,
                                      &hashSize);
-        return_if_error(r, "crypto hash finish");
+        goto_if_error(r, "crypto hash finish", error_cleanup);
 
         event->digests.digests[0].hashAlg = hashAlg;
         event->digests.count = 1;
@@ -407,7 +410,9 @@ Fapi_NvExtend_Finish(
             /* libjson-c does not deliver an array if array has only one element */
             if (jsoType != json_type_array) {
                 json_object *jsonArray = json_object_new_array();
-                json_object_array_add(jsonArray, command->jso_event_log);
+                if (json_object_array_add(jsonArray, command->jso_event_log)) {
+                    return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+                }
                 command->jso_event_log = jsonArray;
             }
         } else {
@@ -420,7 +425,9 @@ Fapi_NvExtend_Finish(
         r = ifapi_json_IFAPI_EVENT_serialize(&command->pcr_event, &jso);
         goto_if_error(r, "Error serialize event", error_cleanup);
 
-        json_object_array_add(command->jso_event_log, jso);
+        if (json_object_array_add(command->jso_event_log, jso)) {
+            return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "Could not add json object.");
+        }
         SAFE_FREE(object->misc.nv.event_log);
         strdup_check(object->misc.nv.event_log,
             json_object_to_json_string_ext(command->jso_event_log,
@@ -448,7 +455,7 @@ Fapi_NvExtend_Finish(
         /* Finish writing the NV object to the key store */
         r = ifapi_keystore_store_finish(&context->io);
         return_try_again(r);
-        return_if_error_reset_state(r, "write_finish failed");
+        goto_if_error(r, "write_finish failed", error_cleanup);
         fallthrough;
 
     statecase(context->state, NV_EXTEND_CLEANUP)
@@ -456,7 +463,6 @@ Fapi_NvExtend_Finish(
         r = ifapi_cleanup_session(context);
         try_again_or_error_goto(r, "Cleanup", error_cleanup);
 
-        context->state = _FAPI_STATE_INIT;
         r = TSS2_RC_SUCCESS;
 
         break;
@@ -483,5 +489,6 @@ error_cleanup:
     SAFE_FREE(object->misc.nv.event_log);
     ifapi_session_clean(context);
     LOG_TRACE("finished");
+    context->state = _FAPI_STATE_INIT;
     return r;
 }

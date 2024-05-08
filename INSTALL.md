@@ -7,7 +7,7 @@ following sections describe them for the supported platforms.
 
 ## GNU/Linux:
 * GNU Autoconf
-* GNU Autoconf Archive, version >= 2017.03.21
+* GNU Autoconf Archive, version >= 2019.01.06
 * GNU Automake
 * GNU Libtool
 * C compiler
@@ -18,6 +18,8 @@ following sections describe them for the supported platforms.
 * libcurl development libraries
 * Access Control List utility (acl)
 * JSON C Development library
+* Package libusb-1.0-0-dev
+
 
 The following are dependencies only required when building test suites.
 * Integration test suite (see ./configure option --enable-integration):
@@ -54,12 +56,19 @@ $ sudo apt -y install \
   libjson-c-dev \
   libini-config-dev \
   libcurl4-openssl-dev \
-  libuuid-dev \
-  libltdl-dev
+  uuid-dev \
+  libltdl-dev \
+  libusb-1.0-0-dev \
+  libftdi-dev
 ```
 Note: In some Ubuntu versions, the lcov and autoconf-archive packages are incompatible with each other. It is recommended to download autoconf-archive directly from upstream and copy `ax_code_coverage.m4` and `ax_prog_doxygen.m4` to the `m4/` subdirectory of your tpm2-tss directory.
 
 ### Fedora
+
+libtool automake autoconf and autoconf-archive should be installed:
+```
+$ sudo dnf install libtool automake autoconf autoconf-archive
+```
 
 There is a package already, so the package build dependencies information can be
 used to make sure that the needed packages to compile from source are installed:
@@ -67,17 +76,21 @@ used to make sure that the needed packages to compile from source are installed:
 ```
 $ sudo dnf builddep tpm2-tss
 ```
+If you want to install a version from 4.0.0 and the default version of the release
+is lower than this version you have to install libuuid-devel additionally:
+
+```
+$ sudo dnf install libuuid-devel
+```
 
 ## Windows
-Windows dlls built using the Clang/LLVM "Platform Toolset" are currently
-prototypes. We have only tested using Visual Studio 2017 with the Universal
-C Runtime (UCRT) version 10.0.16299.0. Building the type marshaling library
-(tss2-mu.dll) and the system API (tss2-sapi.dll) should be as simple as
-loading the tpm2-tss solution (tpm2-tss.sln) with a compatible and properly
-configured version of Visual Studio 2017 and pressing the 'build' button.
+Windows dlls are built using the LLVM (clang-cl) toolset. We have only tested
+using Visual Studio 2019, but Visual Studio 2022 should also be supported.
+Building should be as simple as loading the tpm2-tss solution (tpm2-tss.sln) with
+a compatible and properly configured version of Visual Studio 2019+ and pressing the 'build' button.
 
 ### References
-Visual Studio 2017 with "Clang for Windows": https://blogs.msdn.microsoft.com/vcblog/2017/03/07/use-any-c-compiler-with-visual-studio/
+Visual Studio 2019+ with "Clang for Windows": https://learn.microsoft.com/en-us/cpp/build/clang-support-msbuild
 Universal CRT overview & setup instructions: https://docs.microsoft.com/en-us/cpp/porting/upgrade-your-code-to-the-universal-crt
 
 # Building From Source
@@ -165,6 +178,12 @@ $ sudo udevadm control --reload-rules && sudo udevadm trigger
 If this doesn't work on your distro please consult your distro's
 documentation for UDEVADM(8).
 
+Users who should have access to the TPM and the FAPI keystore should be
+included in the tss group.
+​```
+ sudo usermod -aG tss <username>
+ ```
+
 ## ldconfig
 
 It may be necessary to run ldconfig (as root) to update the run-time
@@ -208,3 +227,40 @@ $ make doxygen-doc
 The generated documentation will appear here:
 * doxygen-doc/html HTML format (start with file doxygen-doc/html/index.html)
 * doxygen-doc/rtf/refman.rtf RTF format
+
+# Building for embedded
+
+The libraries SYS, ESYS, MU, RC, tctildr, tcti-spi-helper, tcti-i2c-helper
+can also be build for embedded devices. The following is an example to build
+for cortex-m4:
+```
+./bootstrap
+./configure \
+        --disable-fapi \
+        --disable-esys \
+        --disable-policy \
+        --disable-tcti-cmd \
+        --disable-tcti-device \
+        --disable-tcti-libtpms \
+        --disable-tcti-mssim \
+        --disable-tcti-pcap \
+        --disable-tcti-spi-lt2go \
+        --disable-tcti-spi-ftdi \
+        --disable-tcti-swtpm \
+        --disable-doxygen-doc \
+        --enable-nodl \
+        --host=arm-none-eabi \
+        --prefix=/home/afuchs/tpm2-software/INSTALL.uC \
+        CFLAGS='-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mthumb' \
+        LDFLAGS='--specs=nosys.specs'
+make
+```
+
+## Test operating systems in the CI
+
+* ubuntu-20.04
+* fedora-32
+* opensuse-leap
+* ubuntu-22.04
+* alpine-3.15
+* FreeBSD

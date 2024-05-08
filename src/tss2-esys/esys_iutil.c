@@ -382,6 +382,38 @@ iesys_handle_to_tpm_handle(ESYS_TR esys_handle, TPM2_HANDLE * tpm_handle)
         *tpm_handle = TPM2_RH_PLATFORM_NV;
         return TPM2_RC_SUCCESS;
     }
+    if (esys_handle == ESYS_TR_RH_FW_OWNER) {
+        *tpm_handle = TPM2_RH_FW_OWNER;
+        return TPM2_RC_SUCCESS;
+    }
+    if (esys_handle == ESYS_TR_RH_FW_ENDORSEMENT) {
+        *tpm_handle = TPM2_RH_FW_ENDORSEMENT;
+        return TPM2_RC_SUCCESS;
+    }
+    if (esys_handle == ESYS_TR_RH_FW_PLATFORM) {
+        *tpm_handle = TPM2_RH_FW_PLATFORM;
+        return TPM2_RC_SUCCESS;
+    }
+    if (esys_handle == ESYS_TR_RH_FW_NULL) {
+        *tpm_handle = TPM2_RH_FW_NULL;
+        return TPM2_RC_SUCCESS;
+    }
+    if ((esys_handle & 0xFFFF0000) == ESYS_TR_RH_SVN_OWNER_BASE) {
+        *tpm_handle = TPM2_RH_SVN_OWNER_BASE + (esys_handle & 0x0000FFFF);
+        return TPM2_RC_SUCCESS;
+    }
+    if ((esys_handle & 0xFFFF0000) == ESYS_TR_RH_SVN_ENDORSEMENT_BASE) {
+        *tpm_handle = TPM2_RH_SVN_ENDORSEMENT_BASE + (esys_handle & 0x0000FFFF);
+        return TPM2_RC_SUCCESS;
+    }
+    if ((esys_handle & 0xFFFF0000) == ESYS_TR_RH_SVN_PLATFORM_BASE) {
+        *tpm_handle = TPM2_RH_SVN_PLATFORM_BASE + (esys_handle & 0x0000FFFF);
+        return TPM2_RC_SUCCESS;
+    }
+    if ((esys_handle & 0xFFFF0000) == ESYS_TR_RH_SVN_NULL_BASE) {
+        *tpm_handle = TPM2_RH_SVN_NULL_BASE + (esys_handle & 0x0000FFFF);
+        return TPM2_RC_SUCCESS;
+    }
     if (esys_handle >= ESYS_TR_RH_ACT_FIRST &&
         esys_handle <= ESYS_TR_RH_ACT_LAST) {
         *tpm_handle = TPM2_RH_ACT_0 + (esys_handle - ESYS_TR_RH_ACT_FIRST);
@@ -392,7 +424,7 @@ iesys_handle_to_tpm_handle(ESYS_TR esys_handle, TPM2_HANDLE * tpm_handle)
         *tpm_handle = TPM2_NV_AC_FIRST + (esys_handle - ESYS_TR_RH_AC_FIRST);
         return TPM2_RC_SUCCESS;
     }
-    LOG_ERROR("Error: Esys invalid ESAPI handle (%x).", esys_handle);
+    LOG_ERROR("Error: Esys invalid ESAPI handle (%"PRIx32").", esys_handle);
     return TSS2_ESYS_RC_BAD_VALUE;
 }
 
@@ -413,7 +445,7 @@ iesys_is_platform_handle(ESYS_TR handle) {
     case TPM2_RH_PLATFORM_NV:
     case TPM2_RH_ENDORSEMENT:
     case TPM2_RH_NULL:
-        LOG_WARNING("Convert handle from TPM2_RH to ESYS_TR, got: 0x%x",
+        LOG_WARNING("Convert handle from TPM2_RH to ESYS_TR, got: 0x%"PRIx32,
                 handle);
         return true;
     default:
@@ -574,7 +606,7 @@ iesys_gen_caller_nonces(ESYS_CONTEXT * esys_context)
         r = iesys_crypto_get_random2b(&esys_context->crypto_backend,
                 &session->rsrc.misc.rsrc_session.nonceCaller,
                 session->rsrc.misc.rsrc_session.nonceCaller.size);
-        return_if_error(r, "Error: computing caller nonce (%x).");
+        return_if_error(r, "Error: computing caller nonce.");
     }
     return TSS2_RC_SUCCESS;
 }
@@ -612,7 +644,7 @@ iesys_update_session_flags(ESYS_CONTEXT * esys_context,
         rsrc_session->sessionAttributes &= ~(TPMA_SESSION_ENCRYPT);
     }
 
-    LOG_DEBUG("Session Attrs 0x%x orig 0x%x",
+    LOG_DEBUG("Session Attrs 0x%"PRIx32" orig 0x%"PRIx32,
 	      rsrc_session->sessionAttributes,
 	      rsrc_session->origSessionAttributes);
 }
@@ -633,7 +665,7 @@ iesys_restore_session_flags(ESYS_CONTEXT *esys_context)
         if (session == NULL)
             continue;
         IESYS_SESSION *rsrc_session = &session->rsrc.misc.rsrc_session;
-        LOG_DEBUG("Orig Session %i Attrs 0x%x, altered Attrs x%x", i,
+        LOG_DEBUG("Orig Session %i Attrs 0x%"PRIx8", altered Attrs x%"PRIx8, i,
                   rsrc_session->origSessionAttributes,
                   rsrc_session->sessionAttributes);
 
@@ -745,6 +777,31 @@ iesys_encrypt_param(ESYS_CONTEXT * esys_context,
                         &encrypt_buffer[0], paramSize,
                         &symKey[aes_off]);
                 return_if_error(r, "AES encryption not possible");
+            } else if (symDef->algorithm == TPM2_ALG_SM4) {
+                /* SM4 encryption with key derived with KDFa */
+                if (symDef->mode.sm4 != TPM2_ALG_CFB) {
+                    return_error(TSS2_ESYS_RC_BAD_VALUE,
+                                 "Invalid symmetric mode (must be CFB)");
+                }
+                r = iesys_crypto_KDFa(&esys_context->crypto_backend, rsrc_session->authHash,
+                                      &rsrc_session->sessionValue[0],
+                                      rsrc_session->sizeSessionValue, "CFB",
+                                      &rsrc_session->nonceCaller,
+                                      &rsrc_session->nonceTPM,
+                                      symDef->keyBits.sm4 + SM4_BLOCK_SIZE_IN_BYTES * 8,
+                                      NULL, &symKey[0], FALSE);
+                return_if_error(r, "while computing KDFa");
+
+                size_t sm4_off = ( symDef->keyBits.sm4 + 7) / 8;
+                r = iesys_crypto_sm4_encrypt(
+                        &esys_context->crypto_backend,
+                        &symKey[0],
+                        symDef->algorithm,
+                        symDef->keyBits.sm4,
+                        symDef->mode.sm4,
+                        &encrypt_buffer[0], paramSize,
+                        &symKey[sm4_off]);
+                return_if_error(r, "SM4 encryption not possible");
             }
             /* XOR obfuscation of parameter */
             else if (symDef->algorithm == TPM2_ALG_XOR) {
@@ -760,7 +817,7 @@ iesys_encrypt_param(ESYS_CONTEXT * esys_context,
 
             } else {
                 return_error(TSS2_ESYS_RC_BAD_VALUE,
-                             "Invalid symmetric algorithm (should be XOR or AES)");
+                             "Invalid symmetric algorithm (should be XOR, AES, or SM4)");
             }
             r = Tss2_Sys_SetDecryptParam(esys_context->sys, paramSize,
                                          &encrypt_buffer[0]);
@@ -850,6 +907,43 @@ iesys_decrypt_param(ESYS_CONTEXT * esys_context)
 
         r = Tss2_Sys_SetEncryptParam(esys_context->sys, p2BSize, &plaintext[0]);
         return_if_error(r, "Setting plaintext");
+    } else if (symDef->algorithm == TPM2_ALG_SM4) {
+        /* Parameter decryption with a symmetric SM4 key derived by KDFa */
+        if (symDef->mode.sm4 != TPM2_ALG_CFB) {
+            return_error(TSS2_ESYS_RC_BAD_VALUE,
+                         "Invalid symmetric mode (must be CFB)");
+        }
+        LOGBLOB_DEBUG(&rsrc_session->sessionKey.buffer[0],
+                      rsrc_session->sessionKey.size,
+                      "IESYS encrypt session key");
+
+        r = iesys_crypto_KDFa(&esys_context->crypto_backend, rsrc_session->authHash,
+                              &rsrc_session->sessionValue[0],
+                              rsrc_session->sizeSessionValue,
+                              "CFB", &rsrc_session->nonceTPM,
+                              &rsrc_session->nonceCaller,
+                              symDef->keyBits.sm4
+                              + SM4_BLOCK_SIZE_IN_BYTES * 8, NULL,
+                              &symKey[0], FALSE);
+        return_if_error(r, "KDFa error");
+        LOGBLOB_DEBUG(&symKey[0],
+                      ((symDef->keyBits.sm4 +
+                        SM4_BLOCK_SIZE_IN_BYTES * 8) + 7) / 8,
+                      "IESYS encrypt KDFa key");
+
+        size_t sm4_off = ( symDef->keyBits.sm4 + 7) / 8;
+        r = iesys_crypto_sm4_decrypt(
+            &esys_context->crypto_backend,
+            &symKey[0],
+            symDef->algorithm,
+            symDef->keyBits.sm4,
+            symDef->mode.sm4,
+            &plaintext[0], p2BSize,
+            &symKey[sm4_off]);
+        return_if_error(r, "Decryption error");
+
+        r = Tss2_Sys_SetEncryptParam(esys_context->sys, p2BSize, &plaintext[0]);
+        return_if_error(r, "Setting plaintext");
     } else if (symDef->algorithm == TPM2_ALG_XOR) {
         /* Parameter decryption with XOR obfuscation */
         r = iesys_xor_parameter_obfuscation(&esys_context->crypto_backend,
@@ -866,7 +960,7 @@ iesys_decrypt_param(ESYS_CONTEXT * esys_context)
         return_if_error(r, "Setting plaintext");
     } else {
         return_error(TSS2_ESYS_RC_BAD_VALUE,
-                     "Invalid symmetric algorithm (should be XOR or AES)");
+                     "Invalid symmetric algorithm (should be XOR, AES, or SM4)");
     }
     return TSS2_RC_SUCCESS;
 }
@@ -1104,7 +1198,7 @@ esys_GetResourceObject(ESYS_CONTEXT * esys_context,
     /* All objects with a TR-handle larger than ESYS_TR_MIN_OBJECT must have
        been initialized previously. Therefore the TR handle was erroneous. */
     if (esys_handle >= ESYS_TR_MIN_OBJECT) {
-        LOG_ERROR("Error: Esys handle does not exist (%x).",
+        LOG_ERROR("Error: Esys handle does not exist (0x%08"PRIx32").",
                   TSS2_ESYS_RC_BAD_TR);
         return TSS2_ESYS_RC_BAD_TR;
     }
@@ -1591,11 +1685,28 @@ iesys_tpm_error(TSS2_RC r)
              (r & TSS2_RC_LAYER_MASK) == TSS2_RESMGR_RC_LAYER));
 }
 
+/** Remove trailing spaces includes auth value.
+ *
+ * Trailing zeros will be removed.
+ *
+ * @param[in,out] auth_value The auth value to be adapted.
+ */
+void iesys_strip_trailing_zeros(TPM2B_DIGEST *digest)
+{
+    /* Remove trailing zeroes */
+    if (digest) {
+        while (digest->size > 0 &&
+               digest->buffer[digest->size - 1] == 0) {
+            digest->size--;
+        }
+    }
+}
 
-/** Replace auth value with Hash for long auth values.
+/** Adapt auth value.
  *
  * if the size of auth value exceeds hash_size the auth value
  * will be replaced with the hash of the auth value.
+ * Trailing zeros will be removed.
  *
  * @param[in,out] auth_value The auth value to be adapted.
  * @param[in] hash_alg The hash alg used for adaption.
@@ -1606,37 +1717,46 @@ iesys_tpm_error(TSS2_RC r)
  *         computation.
  */
 TSS2_RC
-iesys_hash_long_auth_values(
+iesys_adapt_auth_value(
     ESYS_CRYPTO_CALLBACKS *crypto_cb,
     TPM2B_AUTH *auth_value,
     TPMI_ALG_HASH hash_alg)
 {
-    TSS2_RC r;
+    TSS2_RC r = TSS2_RC_SUCCESS;
     ESYS_CRYPTO_CONTEXT_BLOB *cryptoContext;
     TPM2B_AUTH hash2b;
     size_t hash_size;
 
-    r = iesys_crypto_hash_get_digest_size(hash_alg, &hash_size);
-    return_if_error(r, "Get digest size.");
+    /* Remove trailing zeroes */
+    iesys_strip_trailing_zeros(auth_value);
 
-    if (auth_value && auth_value->size > hash_size) {
-        /* The auth value has to be adapted. */
-        r = iesys_crypto_hash_start(crypto_cb,
-                &cryptoContext, hash_alg);
-        return_if_error(r, "crypto hash start");
+    if (hash_alg) {
+        r = iesys_crypto_hash_get_digest_size(hash_alg, &hash_size);
+        return_if_error(r, "Get digest size.");
 
-        r = iesys_crypto_hash_update(crypto_cb,
-                cryptoContext, &auth_value->buffer[0],
-                auth_value->size);
-        goto_if_error(r, "crypto hash update", error_cleanup);
+        if (auth_value && auth_value->size > hash_size) {
+            /* The auth value has to be adapted. */
+            r = iesys_crypto_hash_start(crypto_cb,
+                     &cryptoContext, hash_alg);
+            return_if_error(r, "crypto hash start");
 
-        r = iesys_crypto_hash_finish(crypto_cb,
-                &cryptoContext, &hash2b.buffer[0], &hash_size);
-        goto_if_error(r, "crypto hash finish", error_cleanup);
+            r = iesys_crypto_hash_update(crypto_cb,
+                    cryptoContext, &auth_value->buffer[0],
+                    auth_value->size);
+            goto_if_error(r, "crypto hash update", error_cleanup);
 
-        memcpy(&auth_value->buffer[0], &hash2b.buffer[0], hash_size);
-        auth_value->size = hash_size;
+            r = iesys_crypto_hash_finish(crypto_cb,
+                    &cryptoContext, &hash2b.buffer[0], &hash_size);
+            goto_if_error(r, "crypto hash finish", error_cleanup);
+
+            memcpy(&auth_value->buffer[0], &hash2b.buffer[0], hash_size);
+            auth_value->size = hash_size;
+
+            /* Remove trailing zeroes */
+            iesys_strip_trailing_zeros(auth_value);
+        }
     }
+
     return r;
 
  error_cleanup:

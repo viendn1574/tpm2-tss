@@ -179,11 +179,19 @@ Fapi_Encrypt_Async(
     check_not_null(keyPath);
     check_not_null(plainText);
 
+    /* Cleanup command context. */
+    memset(&context->cmd, 0, sizeof(IFAPI_CMD_STATE));
+
     /* Helpful alias pointers */
     IFAPI_Data_EncryptDecrypt * command = &(context->cmd.Data_EncryptDecrypt);
 
     r = ifapi_session_init(context);
     return_if_error(r, "Initialize Encrypt");
+
+    if (strncmp(keyPath, "/ext", 4) == 0) {
+        r = ifapi_non_tpm_mode_init(context);
+        return_if_error(r, "Initialize RSA Encrypt with OpenSSL");
+    }
 
     /* Copy parameters to context for use during _Finish. */
     uint8_t *inData = malloc(plainTextSize);
@@ -259,7 +267,7 @@ Fapi_Encrypt_Finish(
 
     /* Helpful alias pointers */
     IFAPI_Data_EncryptDecrypt * command = &context->cmd.Data_EncryptDecrypt;
-    IFAPI_OBJECT *encKeyObject;
+    TPM2B_PUBLIC *public;
     TPM2B_PUBLIC_KEY_RSA *tpmCipherText = NULL;
 
     switch (context->state) {
@@ -271,17 +279,26 @@ Fapi_Encrypt_Finish(
             return_try_again(r);
             goto_if_error_reset_state(r, " FAPI create session", error_cleanup);
 
+            if (strncmp(command->keyPath, "/ext", 4) == 0) {
+                /* Load the key for enryption from the keystore. */
+                r = ifapi_keystore_load_async(&context->keystore, &context->io, command->keyPath);
+                goto_if_error2(r, "Could not open: %s", error_cleanup, command->keyPath);
+
+                context->state = DATA_ENCRYPT_WAIT_FOR_EXT_KEY;
+                return TSS2_FAPI_RC_TRY_AGAIN;
+            }
+
             /* Initialize a session used for authorization and parameter encryption. */
             r = ifapi_get_sessions_async(context,
-                                         IFAPI_SESSION_GENEK | IFAPI_SESSION1,
+                                         IFAPI_SESSION_GEN_SRK | IFAPI_SESSION1,
                                          TPMA_SESSION_ENCRYPT | TPMA_SESSION_DECRYPT, 0);
             goto_if_error_reset_state(r, "Create sessions", error_cleanup);
 
             fallthrough;
 
         statecase(context->state, DATA_ENCRYPT_WAIT_FOR_SESSION);
-        r = ifapi_get_sessions_finish(context, &context->profiles.default_profile,
-                                      context->profiles.default_profile.nameAlg);
+            r = ifapi_get_sessions_finish(context, &context->profiles.default_profile,
+                                          context->profiles.default_profile.nameAlg);
             return_try_again(r);
             goto_if_error(r, "Get session.", error_cleanup);
 
@@ -298,13 +315,13 @@ Fapi_Encrypt_Finish(
             return_try_again(r);
             goto_if_error_reset_state(r, " Load key.", error_cleanup);
 
-            encKeyObject = command->key_object;
+            public = &command->key_object->misc.key.public;
 
-            if (encKeyObject->misc.key.public.publicArea.type == TPM2_ALG_RSA) {
+            if (public->publicArea.type == TPM2_ALG_RSA) {
                 TPM2B_DATA null_data = { .size = 0, .buffer = {} };
                 TPM2B_PUBLIC_KEY_RSA *rsa_message = (TPM2B_PUBLIC_KEY_RSA *)&context->aux_data;
                 size_t key_size =
-                    encKeyObject->misc.key.public.publicArea.parameters.rsaDetail.keyBits / 8;
+                    public->publicArea.parameters.rsaDetail.keyBits / 8;
                 if (context->cmd.Data_EncryptDecrypt.in_dataSize > key_size) {
                     goto_error_reset_state(r, TSS2_FAPI_RC_BAD_VALUE,
                                            "Size to big for RSA encryption.", error_cleanup);
@@ -328,13 +345,13 @@ Fapi_Encrypt_Finish(
                 goto_if_error(r, "Error esys rsa encrypt", error_cleanup);
 
                 context-> state = DATA_ENCRYPT_WAIT_FOR_RSA_ENCRYPTION;
-            } else if (encKeyObject->misc.key.public.publicArea.type == TPM2_ALG_ECC) {
+            } else if (public->publicArea.type == TPM2_ALG_ECC) {
                 goto_error(r, TSS2_FAPI_RC_NOT_IMPLEMENTED,
                            "ECC Encryption not yet supported", error_cleanup);
             } else {
                 goto_error(r, TSS2_FAPI_RC_NOT_IMPLEMENTED,
                            "Unsupported algorithm (%" PRIu16 ")",
-                           error_cleanup, encKeyObject->misc.key.public.publicArea.type);
+                           error_cleanup, public->publicArea.type);
             }
             fallthrough;
 
@@ -360,7 +377,8 @@ Fapi_Encrypt_Finish(
             SAFE_FREE(tpmCipherText);
 
             /* Flush the key from the TPM. */
-            if (!command->key_object->misc.key.persistent_handle) {
+            if (strncmp(command->keyPath, "/ext", 4) == 0 ||
+                !command->key_object->misc.key.persistent_handle) {
                 r = Esys_FlushContext_Async(context->esys,
                                         command->key_handle);
                 goto_if_error(r, "Error: FlushContext", error_cleanup);
@@ -368,7 +386,8 @@ Fapi_Encrypt_Finish(
             fallthrough;
 
         statecase(context->state, DATA_ENCRYPT_WAIT_FOR_FLUSH);
-            if (!command->key_object->misc.key.persistent_handle) {
+            if (strncmp(command->keyPath, "/ext", 4) == 0 ||
+                !command->key_object->misc.key.persistent_handle) {
                 r = Esys_FlushContext_Finish(context->esys);
                 return_try_again(r);
 
@@ -387,6 +406,28 @@ Fapi_Encrypt_Finish(
                 *cipherTextSize = command->cipherTextSize;
             break;
 
+        statecase(context->state, DATA_ENCRYPT_WAIT_FOR_EXT_KEY)
+            command->key_object = ifapi_allocate_object(context);
+            goto_if_null2(command->key_object, "Allocating key", r,
+                          TSS2_FAPI_RC_MEMORY, error_cleanup);
+
+            r = ifapi_keystore_load_finish(&context->keystore, &context->io,
+                                   command->key_object);
+            return_try_again(r);
+            return_if_error_reset_state(r, "read_finish failed");
+
+            r = ifapi_rsa_encrypt(command->key_object->misc.ext_pub_key.pem_ext_public,
+                                  &command->profile->rsa_decrypt_scheme,
+                                  command->in_data, command->in_dataSize,
+                                  &command->cipherText, &command->cipherTextSize);
+
+            goto_if_error_reset_state(r, "rsa encrypt with openssl.", error_cleanup);
+
+            *cipherText = command->cipherText;
+            if (cipherTextSize)
+                *cipherTextSize = command->cipherTextSize;
+            break;
+
         statecasedefault(context->state);
     }
 
@@ -394,7 +435,8 @@ Fapi_Encrypt_Finish(
 
 error_cleanup:
     /* Cleanup any intermediate results and state stored in the context. */
-    if (command->key_handle != ESYS_TR_NONE)
+    if (command->key_handle != ESYS_TR_NONE &&
+        command->key_object && !command->key_object->misc.key.persistent_handle)
         Esys_FlushContext(context->esys,  command->key_handle);
     if (r)
         SAFE_FREE(command->cipherText);

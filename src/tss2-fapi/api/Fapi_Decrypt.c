@@ -168,6 +168,9 @@ Fapi_Decrypt_Async(
     check_not_null(keyPath);
     check_not_null(cipherText);
 
+    /* Cleanup command context. */
+    memset(&context->cmd, 0, sizeof(IFAPI_CMD_STATE));
+
     /* Helpful alias pointers */
     IFAPI_Data_EncryptDecrypt * command = &(context->cmd.Data_EncryptDecrypt);
 
@@ -265,7 +268,7 @@ Fapi_Decrypt_Finish(
 
             /* Initialize a session used for authorization and parameter encryption. */
             r = ifapi_get_sessions_async(context,
-                                         IFAPI_SESSION_GENEK | IFAPI_SESSION1,
+                                         IFAPI_SESSION_GEN_SRK | IFAPI_SESSION1,
                                          TPMA_SESSION_ENCRYPT | TPMA_SESSION_DECRYPT, 0);
             goto_if_error_reset_state(r, "Create sessions", error_cleanup);
 
@@ -315,7 +318,9 @@ Fapi_Decrypt_Finish(
             /* Decrypt the actual data. */
             r = Esys_RSA_Decrypt_Async(context->esys,
                                        context->cmd.Data_EncryptDecrypt.key_handle,
-                                       command->auth_session, ESYS_TR_NONE, ESYS_TR_NONE,
+                                       command->auth_session,
+                                       ENC_SESSION_IF_POLICY(command->auth_session),
+                                       ESYS_TR_NONE,
                                        aux_data,
                                        &command->profile->rsa_decrypt_scheme,
                                        &null_data);
@@ -407,6 +412,6 @@ error_cleanup:
     ifapi_cleanup_ifapi_object(&context->createPrimary.pkey_object);
     ifapi_cleanup_ifapi_object(&context->loadKey.auth_object);
     ifapi_cleanup_ifapi_object(context->loadKey.key_object);
-
+    context->state = _FAPI_STATE_INIT;
     return r;
 }

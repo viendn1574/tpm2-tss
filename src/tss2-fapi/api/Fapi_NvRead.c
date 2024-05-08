@@ -162,6 +162,9 @@ Fapi_NvRead_Async(
     check_not_null(context);
     check_not_null(nvPath);
 
+    /* Cleanup command context. */
+    memset(&context->cmd, 0, sizeof(IFAPI_CMD_STATE));
+
     /* Helpful alias pointers */
     IFAPI_NV_Cmds * command = &context->nv_cmd;
 
@@ -284,7 +287,7 @@ Fapi_NvRead_Finish(
 
         /* Prepare session for authorization and data encryption. */
         r = ifapi_get_sessions_async(context,
-                                     IFAPI_SESSION_GENEK | IFAPI_SESSION1,
+                                     IFAPI_SESSION_GEN_SRK | IFAPI_SESSION1,
                                      TPMA_SESSION_ENCRYPT, 0);
         goto_if_error_reset_state(r, "Create sessions", error_cleanup);
 
@@ -330,7 +333,6 @@ Fapi_NvRead_Finish(
         *data = command->rdata;
         if (size)
             *size = command->size;
-        context->state = _FAPI_STATE_INIT;
         break;
 
     statecasedefault(context->state);
@@ -345,6 +347,7 @@ error_cleanup:
     SAFE_FREE(command->nvPath);
     //SAFE_FREE(context->nv_cmd.tes);
     ifapi_session_clean(context);
+    context->state = _FAPI_STATE_INIT;
     LOG_TRACE("finished");
     return r;
 }

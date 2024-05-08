@@ -2,6 +2,10 @@
 /*
  * Copyright 2020 Fraunhofer SIT. All rights reserved.
  */
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <errno.h>
 #include <fcntl.h>
 #include <inttypes.h>
@@ -18,9 +22,11 @@
 #include "tss2_mu.h"
 #include "tcti-common.h"
 #include "tcti-spi-helper.h"
-#include "util/io.h"
+#include "util/tss2_endian.h"
 #define LOGMODULE tcti
 #include "util/log.h"
+
+#define TIMEOUT_B 2000 // The default timeout value as specified in the TCG spec
 
 static inline TSS2_RC spi_tpm_helper_delay_ms(TSS2_TCTI_SPI_HELPER_CONTEXT* ctx, int milliseconds)
 {
@@ -155,12 +161,12 @@ static void spi_tpm_helper_log_register_access(enum TCTI_SPI_HELPER_REGISTER_ACC
     char* access_str = (access == TCTI_SPI_HELPER_REGISTER_READ) ? "READ" : "WRITE";
 
     if (err != NULL) {
-        LOG_ERROR("%s register %#02x (%zu bytes) %s", access_str, reg_number, cnt, err);
+        LOG_ERROR("%s register %#02"PRIx32" (%zu bytes) %s", access_str, reg_number, cnt, err);
     } else {
 #if MAXLOGLEVEL < LOGL_TRACE
         (void) buffer;
 #else
-        LOGBLOB_TRACE(buffer, cnt, "%s register %#02x (%zu bytes)", access_str, reg_number, cnt);
+        LOGBLOB_TRACE(buffer, cnt, "%s register %#02"PRIx32" (%zu bytes)", access_str, reg_number, cnt);
 #endif
     }
 #endif
@@ -312,7 +318,7 @@ static uint32_t spi_tpm_helper_read_sts_reg(TSS2_TCTI_SPI_HELPER_CONTEXT* ctx)
 {
     uint32_t status = 0;
     spi_tpm_helper_read_reg(ctx, TCTI_SPI_HELPER_TPM_STS_REG, &status, sizeof(status));
-    return status;
+    return LE_TO_HOST_32(status);
 }
 
 static void spi_tpm_helper_write_sts_reg(TSS2_TCTI_SPI_HELPER_CONTEXT* ctx, uint32_t status)
@@ -545,7 +551,7 @@ TSS2_RC tcti_spi_helper_receive (TSS2_TCTI_CONTEXT* tcti_context, size_t *respon
     // Verify that there is still data to read
     uint32_t status = spi_tpm_helper_read_sts_reg(ctx);
     if ((status & expected_status_bits) != expected_status_bits) {
-        LOG_ERROR("Unexpected intermediate status %#x",status);
+        LOG_ERROR("Unexpected intermediate status %#"PRIx32,status);
         return TSS2_TCTI_RC_IO_ERROR;
     }
 
@@ -558,7 +564,7 @@ TSS2_RC tcti_spi_helper_receive (TSS2_TCTI_CONTEXT* tcti_context, size_t *respon
     // Verify that there is no more data available
     status = spi_tpm_helper_read_sts_reg(ctx);
     if ((status & expected_status_bits) != TCTI_SPI_HELPER_TPM_STS_VALID) {
-        LOG_ERROR("Unexpected final status %#x", status);
+        LOG_ERROR("Unexpected final status %#"PRIx32, status);
         return TSS2_TCTI_RC_IO_ERROR;
     }
 
@@ -613,11 +619,19 @@ TSS2_RC tcti_spi_helper_transmit (TSS2_TCTI_CONTEXT *tcti_ctx, size_t size, cons
         return TSS2_TCTI_RC_BAD_VALUE;
     }
 
-    LOGBLOB_DEBUG (cmd_buf, size, "Sending command with TPM_CC %#x and size %" PRIu32,
+    LOGBLOB_DEBUG (cmd_buf, size, "Sending command with TPM_CC %#"PRIx32" and size %" PRIu32,
                header.code, header.size);
 
     // Tell TPM to expect command
     spi_tpm_helper_write_sts_reg(ctx, TCTI_SPI_HELPER_TPM_STS_COMMAND_READY);
+
+    // Wait until ready bit is set by TPM device
+    uint32_t expected_status_bits = TCTI_SPI_HELPER_TPM_STS_COMMAND_READY;
+    rc = spi_tpm_helper_wait_for_status(ctx, expected_status_bits, expected_status_bits, TIMEOUT_B);
+    if (rc != TSS2_RC_SUCCESS) {
+        LOG_ERROR("Failed waiting for TPM to become ready");
+        return rc;
+    }
 
     // Send command
     spi_tpm_helper_fifo_transfer(ctx, (void*)cmd_buf, size, TCTI_SPI_HELPER_FIFO_TRANSMIT);
@@ -666,14 +680,13 @@ TSS2_RC Tss2_Tcti_Spi_Helper_Init (TSS2_TCTI_CONTEXT* tcti_context, size_t* size
         return TSS2_RC_SUCCESS;
     }
 
-    if (*size < sizeof (TSS2_TCTI_SPI_HELPER_CONTEXT)) {
-        return TSS2_TCTI_RC_INSUFFICIENT_BUFFER;
-    }
-
     if (!platform_conf) {
         return TSS2_TCTI_RC_BAD_VALUE;
     }
 
+    if (*size < sizeof (TSS2_TCTI_SPI_HELPER_CONTEXT)) {
+        return TSS2_TCTI_RC_INSUFFICIENT_BUFFER;
+    }
 
     // Init TCTI context
     TSS2_TCTI_MAGIC (tcti_context) = TCTI_SPI_HELPER_MAGIC;
@@ -724,14 +737,23 @@ TSS2_RC Tss2_Tcti_Spi_Helper_Init (TSS2_TCTI_CONTEXT* tcti_context, size_t* size
         return TSS2_TCTI_RC_IO_ERROR;
     }
 
-    // Wait up to 200ms for TPM to become ready
+    // Wait up to TIMEOUT_B for TPM to become ready
     LOG_DEBUG("Waiting for TPM to become ready...");
     uint32_t expected_status_bits = TCTI_SPI_HELPER_TPM_STS_COMMAND_READY;
-    rc = spi_tpm_helper_wait_for_status(ctx, expected_status_bits, expected_status_bits, 200);
+    rc = spi_tpm_helper_wait_for_status(ctx, expected_status_bits, expected_status_bits, TIMEOUT_B);
+    if (rc == TSS2_TCTI_RC_TRY_AGAIN) {
+        /*
+         * TPM did not auto transition into ready state,
+         * write 1 to commandReady to start the transition.
+         */
+        spi_tpm_helper_write_sts_reg(ctx, TCTI_SPI_HELPER_TPM_STS_COMMAND_READY);
+        rc = spi_tpm_helper_wait_for_status(ctx, expected_status_bits, expected_status_bits, TIMEOUT_B);
+    }
     if (rc != TSS2_RC_SUCCESS) {
         LOG_ERROR("Failed waiting for TPM to become ready");
         return rc;
     }
+
     LOG_DEBUG("TPM is ready");
 
     // Get rid

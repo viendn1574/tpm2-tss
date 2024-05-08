@@ -66,10 +66,16 @@ ifapi_crypto_context_free(IFAPI_CRYPTO_CONTEXT *ctx)
     if (!ctx)
         return;
 
-    EVP_MD_CTX_destroy(ctx->osslContext);
+    if (ctx->osslContext) {
+        EVP_MD_CTX_destroy(ctx->osslContext);
+    }
 #if OPENSSL_VERSION_NUMBER >= 0x30000000L
-    EVP_MD_free(ctx->osslHashAlgorithm);
-    OSSL_LIB_CTX_free(ctx->libctx);
+    if (ctx->osslHashAlgorithm) {
+        EVP_MD_free(ctx->osslHashAlgorithm);
+    }
+    if (ctx->libctx) {
+        OSSL_LIB_CTX_free(ctx->libctx);
+    }
 #endif
     SAFE_FREE(ctx);
 }
@@ -544,7 +550,7 @@ ossl_ecc_pub_from_tpm(const TPM2B_PUBLIC *tpmPublicKey, EVP_PKEY **evpPublicKey)
     case TPM2_ECC_NIST_P521:
         curveId = NID_secp521r1;
         break;
-#if OPENSSL_VERSION_NUMBER >= 0x10101000L
+#ifdef NID_sm2
     case TPM2_ECC_SM2_P256:
         curveId = NID_sm2;
         break;
@@ -786,7 +792,7 @@ ifapi_hmac_sig_to_tpm(
 
     tpmSignature->sigAlg = TPM2_ALG_HMAC;
     tpmSignature->signature.hmac.hashAlg = hashAlgorithm;
-    memcpy(&tpmSignature->signature.hmac.digest.sha1, signature, signatureSize);
+    memcpy(&tpmSignature->signature.hmac.digest.sha512, signature, signatureSize);
     return TSS2_RC_SUCCESS;
 }
 
@@ -1195,7 +1201,7 @@ get_ecc_tpm2b_public_from_evp(
     case NID_secp521r1:
         tpmCurveId = TPM2_ECC_NIST_P521;
         break;
-#if OPENSSL_VERSION_NUMBER >= 0x10101000L
+#ifdef NID_sm2
     case NID_sm2:
         tpmCurveId = TPM2_ECC_SM2_P256;
         break;
@@ -1659,11 +1665,11 @@ ifapi_crypto_hash_start(IFAPI_CRYPTO_CONTEXT_BLOB **context,
     }
 
     *context = (IFAPI_CRYPTO_CONTEXT_BLOB *) mycontext;
-
     return TSS2_RC_SUCCESS;
 
 cleanup:
     ifapi_crypto_context_free(mycontext);
+    *context = NULL;
     return r;
 }
 
@@ -1715,6 +1721,8 @@ TSS2_RC
 ifapi_crypto_hash_finish(IFAPI_CRYPTO_CONTEXT_BLOB **context,
                          uint8_t *digest, size_t *digestSize)
 {
+    TSS2_RC r = TSS2_RC_SUCCESS;
+
     /* Check for NULL parameters */
     return_if_null(context, "context is NULL", TSS2_FAPI_RC_BAD_REFERENCE);
     return_if_null(digest, "digest is NULL", TSS2_FAPI_RC_BAD_REFERENCE);
@@ -1727,12 +1735,12 @@ ifapi_crypto_hash_finish(IFAPI_CRYPTO_CONTEXT_BLOB **context,
     IFAPI_CRYPTO_CONTEXT *mycontext = *context;
     if (1 != EVP_DigestFinal_ex(mycontext->osslContext, digest,
                                 &computedDigestSize)) {
-        return_error(TSS2_FAPI_RC_GENERAL_FAILURE, "OSSL error.");
+        goto_error(r, TSS2_FAPI_RC_GENERAL_FAILURE, "OSSL error.", cleanup);
     }
 
     if (computedDigestSize != mycontext->hashSize) {
-        return_error(TSS2_FAPI_RC_GENERAL_FAILURE,
-                     "Invalid size computed by EVP_DigestFinal_ex");
+        goto_error(r, TSS2_FAPI_RC_GENERAL_FAILURE,
+                   "Invalid size computed by EVP_DigestFinal_ex", cleanup);
     }
 
     LOGBLOB_DEBUG(digest, mycontext->hashSize, "finish hash");
@@ -1741,11 +1749,13 @@ ifapi_crypto_hash_finish(IFAPI_CRYPTO_CONTEXT_BLOB **context,
         *digestSize = mycontext->hashSize;
     }
 
+ cleanup:
+
     /* Finalize the hash context */
     ifapi_crypto_context_free(mycontext);
     *context = NULL;
 
-    return TSS2_RC_SUCCESS;
+    return r;
 }
 
 /**
@@ -1762,9 +1772,8 @@ ifapi_crypto_hash_abort(IFAPI_CRYPTO_CONTEXT_BLOB **context)
         LOG_DEBUG("Null-Pointer passed");
         return;
     }
-    IFAPI_CRYPTO_CONTEXT *mycontext = (IFAPI_CRYPTO_CONTEXT *) * context;
 
-    ifapi_crypto_context_free(mycontext);
+    ifapi_crypto_context_free(*context);
     *context = NULL;
 }
 
@@ -2081,7 +2090,7 @@ ifapi_base64encode(uint8_t *buffer, size_t buffer_size, char** b64_data) {
                    cleanup);
     }
 
-    BIO_flush(bio);
+    (void) BIO_flush(bio);
     BIO_get_mem_ptr(bio, &b64_mem);
     goto_if_null2(b64_mem, "Out of memory.", r, TSS2_FAPI_RC_MEMORY, cleanup);
 
@@ -2099,4 +2108,291 @@ ifapi_base64encode(uint8_t *buffer, size_t buffer_size, char** b64_data) {
         BIO_free_all(bio);
 
     return r;
+}
+
+/** Openssl rsa encryption with OAEP padding.
+ *
+ * @param[in] pem_key The public RSA key.
+ * @param[in] rsa_decrypt_scheme The padding scheme.
+ * @param[in] plainText The data to be encrypted.
+ *  @param[in] plainTextSize The size of the data to be encrypted.
+ * @param[out] cipherText The encrypted data.
+ * @param[out] cipherTextSize The size of the encrypted data.
+ *
+ * @retval TSS2_RC_SUCCESS on success
+ * @retval TSS2_FAPI_RC_GENERAL_FAILURE if an error occurs in the crypto library
+ * @retval TSS2_FAPI_RC_MEMORY if memory could not be allocated
+ */
+TSS2_RC
+ifapi_rsa_encrypt(const char *pem_key,
+                  const TPMT_RSA_DECRYPT *rsa_decrypt_scheme,
+                  const uint8_t *plainText,
+                  size_t plainTextSize,
+                  uint8_t  **cipherText,
+                  size_t *cipherTextSize) {
+    EVP_PKEY_CTX *ctx = NULL;
+    EVP_PKEY *publicKey = NULL;
+    BIO *bufio = NULL;
+    TSS2_RC r;
+    const EVP_MD *evp_md;
+
+    /* Convert the pem key to an OpenSSL object */
+    bufio = BIO_new_mem_buf((void *)pem_key, strlen(pem_key));
+    goto_if_null(bufio, "Out of memory.", TSS2_FAPI_RC_MEMORY, cleanup);
+
+    publicKey = PEM_read_bio_PUBKEY(bufio, NULL, NULL, NULL);
+    goto_if_null(publicKey, "PEM format could not be decoded.",
+                 TSS2_FAPI_RC_MEMORY, cleanup);
+
+    if (EVP_PKEY_type(EVP_PKEY_id(publicKey)) == EVP_PKEY_RSA) {
+        if (rsa_decrypt_scheme->scheme == TPM2_ALG_OAEP) {
+            switch (rsa_decrypt_scheme->details.oaep.hashAlg) {
+            case TPM2_ALG_SHA1:
+                evp_md = EVP_sha1();
+                break;
+            case TPM2_ALG_SHA256:
+                evp_md = EVP_sha256();
+                break;
+            case TPM2_ALG_SHA384:
+                evp_md = EVP_sha384();
+                break;
+            case TPM2_ALG_SHA512:
+                evp_md = EVP_sha512();
+                break;
+#if HAVE_EVP_SM3 && !defined(OPENSSL_NO_SM3)
+            case TPM2_ALG_SM3_256:
+                evp_md = EVP_sm3();
+                break;
+#endif
+            default:
+                goto_error(r, TSS2_FAPI_RC_BAD_VALUE, "Invalid hash alg.",
+                               cleanup);
+            }
+        } else {
+            LOG_WARNING("OEAP (sha256) will be used for encryption padding.");
+            evp_md = EVP_sha256();
+        }
+
+        ctx = EVP_PKEY_CTX_new(publicKey, NULL);
+        goto_if_null(ctx, "EVP_PKEY_CTX_new.", TSS2_FAPI_RC_GENERAL_FAILURE,
+                     cleanup);
+        if (EVP_PKEY_encrypt_init(ctx) <= 0 ||
+            EVP_PKEY_CTX_set_rsa_padding(ctx, RSA_PKCS1_OAEP_PADDING) <= 0 ||
+            EVP_PKEY_CTX_set_rsa_oaep_md(ctx, evp_md) <= 0 ||
+            EVP_PKEY_CTX_set_rsa_mgf1_md(ctx, evp_md) <= 0) {
+            goto_error(r, TSS2_FAPI_RC_GENERAL_FAILURE, "EVP init encrypt.",
+                       cleanup);
+        }
+
+        /* Determine buffer length */
+        if (EVP_PKEY_encrypt(ctx, NULL, cipherTextSize, plainText, plainTextSize) <= 0) {
+            goto_error(r, TSS2_FAPI_RC_GENERAL_FAILURE, "EVP encrypt determine size.",
+                                   cleanup);
+        }
+
+        *cipherText = OPENSSL_malloc(*cipherTextSize);
+        if (EVP_PKEY_encrypt(ctx, *cipherText, cipherTextSize, plainText, plainTextSize) <= 0) {
+            goto_error(r, TSS2_FAPI_RC_GENERAL_FAILURE, "EVP encrypt.",
+                       cleanup);
+        }
+        r = TSS2_RC_SUCCESS;
+    } else {
+        goto_error(r, TSS2_FAPI_RC_BAD_VALUE, "No RSA public key.",
+                               cleanup);
+    }
+
+ cleanup:
+    if (bufio)
+        BIO_free(bufio);
+    if (publicKey)
+        EVP_PKEY_free(publicKey);
+    if (ctx)
+        OSSL_FREE(ctx, EVP_PKEY_CTX);
+    return r;
+}
+
+static bool
+load_private_RSA_from_key(EVP_PKEY *key,
+                          TPM2B_SENSITIVE *priv) {
+
+    bool result = false;
+#if OPENSSL_VERSION_NUMBER < 0x30000000L
+    const BIGNUM *p = NULL; /* the private key exponent */
+
+    RSA *k = EVP_PKEY_get0_RSA(key);
+    if (!k) {
+        LOG_ERROR("Could not retrieve RSA key");
+        goto out;
+    }
+    RSA_get0_factors(k, &p, NULL);
+#else
+    BIGNUM *p = NULL; /* the private key exponent */
+
+    int rc = EVP_PKEY_get_bn_param(key, OSSL_PKEY_PARAM_RSA_FACTOR1, &p);
+    if (!rc) {
+        LOG_ERROR("Could not read private key");
+        goto out;
+    }
+#endif
+
+    TPMT_SENSITIVE *sa = &priv->sensitiveArea;
+
+    sa->sensitiveType = TPM2_ALG_RSA;
+
+    TPM2B_PRIVATE_KEY_RSA *pkr = &sa->sensitive.rsa;
+
+    unsigned priv_bytes = BN_num_bytes(p);
+    if (priv_bytes > sizeof(pkr->buffer)) {
+        LOG_ERROR("Expected prime \"d\" to be less than or equal to %zu,"
+                " got: %u", sizeof(pkr->buffer), priv_bytes);
+        goto out;
+    }
+
+    pkr->size = priv_bytes;
+
+    int success = BN_bn2bin(p, pkr->buffer);
+    if (!success) {
+        ERR_print_errors_fp(stderr);
+        LOG_ERROR("Could not copy private exponent \"d\"");
+        goto out;
+    }
+    result = true;
+out:
+#if OPENSSL_VERSION_NUMBER < 0x30000000L
+    /* k,p point to internal structrues and must not be freed after use */
+#else
+    BN_free(p);
+#endif
+    return result;
+}
+
+static TSS2_RC
+load_RSA_key(EVP_PKEY *key,
+             TPM2B_PUBLIC *pub,
+             TPM2B_SENSITIVE *priv) {
+    TSS2_RC rc = TSS2_RC_SUCCESS;
+
+    bool loaded_priv = load_private_RSA_from_key(key, priv);
+    if (!loaded_priv) {
+        return TSS2_FAPI_RC_GENERAL_FAILURE;
+    }
+
+    rc = get_rsa_tpm2b_public_from_evp(key, pub);
+    EVP_PKEY_free(key);
+    return rc;
+}
+
+static bool
+load_private_ECC_from_key(EVP_PKEY *key,
+                          TPM2B_SENSITIVE *priv) {
+    bool result = false;
+    /*
+     * private data
+     */
+    priv->sensitiveArea.sensitiveType = TPM2_ALG_ECC;
+
+    TPM2B_ECC_PARAMETER *p = &priv->sensitiveArea.sensitive.ecc;
+
+#if OPENSSL_VERSION_NUMBER < 0x30000000L
+    EC_KEY *k = EVP_PKEY_get0_EC_KEY(key);
+    if (!k) {
+        LOG_ERROR("Could not retrieve ECC key");
+        goto out;
+    }
+
+    const EC_GROUP *group = EC_KEY_get0_group(k);
+    const BIGNUM *b = EC_KEY_get0_private_key(k);
+    unsigned priv_bytes = (EC_GROUP_get_degree(group) + 7) / 8;
+#else
+    BIGNUM *b = NULL; /* the private key exponent */
+
+    int rc = EVP_PKEY_get_bn_param(key, OSSL_PKEY_PARAM_PRIV_KEY, &b);
+    if (!rc) {
+        LOG_ERROR("Could not read ECC private key");
+        goto out;
+    }
+    unsigned priv_bytes = (EVP_PKEY_bits(key) + 7) / 8;
+#endif
+
+    if (priv_bytes > sizeof(p->buffer)) {
+        LOG_ERROR("Expected ECC private portion to be less than or equal to %zu,"
+                  " got: %u", sizeof(p->buffer), priv_bytes);
+        goto out;
+    }
+
+    p->size = BN_bn2binpad(b, p->buffer, priv_bytes);
+    if (p->size != priv_bytes) {
+        goto out;
+    }
+    result = true;
+out:
+#if OPENSSL_VERSION_NUMBER < 0x30000000L
+    /* k,b point to internal structrues and must not be freed after use */
+#else
+    BN_free(b);
+#endif
+    return result;
+}
+
+static TSS2_RC
+load_ECC_key(EVP_PKEY *key,
+             TPM2B_PUBLIC *pub,
+             TPM2B_SENSITIVE *priv) {
+    TSS2_RC rc = TSS2_RC_SUCCESS;
+
+    if (!load_private_ECC_from_key(key, priv)) {
+        rc = TSS2_FAPI_RC_GENERAL_FAILURE;
+        goto out;
+    }
+    rc = get_ecc_tpm2b_public_from_evp(key, pub);
+    if (rc) {
+        goto out;
+    }
+out:
+    EVP_PKEY_free(key);
+    return rc;
+}
+
+TSS2_RC
+ifapi_openssl_load_private(const char *pem_key,
+                          const char *passin,
+                          const char *object_auth,
+                          TPM2B_PUBLIC *template,
+                          TPM2B_PUBLIC *pub,
+                          TPM2B_SENSITIVE *priv) {
+    *pub = *template;
+    BIO *bio = NULL;
+    EVP_PKEY *key = NULL;
+    TSS2_RC rc = TSS2_RC_SUCCESS;
+    (void)object_auth;
+
+    /* Create a key from PEM string. */
+    bio = BIO_new_mem_buf(pem_key, -1);
+
+    if (!bio) {
+        LOG_ERROR("Error creating BIO.");
+        return TSS2_FAPI_RC_GENERAL_FAILURE;
+    }
+
+    key = PEM_read_bio_PrivateKey(bio,NULL,NULL, (void *) passin);
+
+    if (!key) {
+        LOG_ERROR("Creation of key from PEM string failed.");
+        BIO_free_all(bio);
+        return TSS2_FAPI_RC_GENERAL_FAILURE;
+    }
+
+    switch (template->publicArea.type) {
+    case TPM2_ALG_RSA:
+        rc = load_RSA_key(key, pub, priv);
+        break;
+    case TPM2_ALG_ECC:
+        rc = load_ECC_key(key, pub, priv);
+        break;
+    default:
+        LOG_ERROR("Cannot handle algorithm, got: 0x%x", template->publicArea.type);
+        rc = TSS2_FAPI_RC_GENERAL_FAILURE;
+    }
+    BIO_free_all(bio);
+    return rc;
 }

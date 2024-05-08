@@ -67,9 +67,9 @@ Esys_TR_Serialize(ESYS_CONTEXT * esys_context,
  * stored on disk for later use by a different program or context.
  * An object can be deserialized using Esys_TR_Deserialize.
  * @param esys_context [in,out] The ESYS_CONTEXT.
- * @param esys_handle [out] The ESYS_TR object to deserialize.
  * @param buffer [in] The buffer containing the metadata of the ESYS_TR object.
  * @param buffer_size [in] The size of the buffer parameter.
+ * @param esys_handle [out] The ESYS_TR object to deserialize.
  * @retval TSS2_RC_SUCCESS on Success.
  * @retval TSS2_ESYS_RC_MEMORY if the object can not be allocated.
  * @retval TSS2_ESYS_RC_INSUFFICIENT_BUFFER if the buffer for unmarshalling.
@@ -284,6 +284,9 @@ Esys_TR_FromTPMPublic_Finish(ESYS_CONTEXT * esys_context, ESYS_TR * object)
         } else {
             if (objectHandleNode->rsrc.name.size != name->size ||
                 memcmp(&objectHandleNode->rsrc.name.name[0], &name->name[0], name->size) != 0) {
+                SAFE_FREE(public);
+                SAFE_FREE(name);
+                SAFE_FREE(qualifiedName);
                 goto_error(r, TSS2_ESYS_RC_GENERAL_FAILURE,
                            "Name mismatch between two calls of Esys_TR_FromTPMPublic",
                            error_cleanup);
@@ -313,6 +316,7 @@ Esys_TR_FromTPMPublic_Finish(ESYS_CONTEXT * esys_context, ESYS_TR * object)
         return_if_error(r, "Error TR FromTPMPublic");
         return TSS2_ESYS_RC_TRY_AGAIN;
     } else {
+        objectHandleNode->reference_count++;
         *object = objectHandle;
         return TSS2_RC_SUCCESS;
     }
@@ -425,13 +429,17 @@ Esys_TR_Close(ESYS_CONTEXT * esys_context, ESYS_TR * object)
          node != NULL;
          update_ptr = &node->next, node = node->next) {
         if (node->esys_handle == *object) {
+            if (node->reference_count > 1) {
+                node->reference_count--;
+                return TSS2_RC_SUCCESS;
+            }
             *update_ptr = node->next;
             SAFE_FREE(node);
             *object = ESYS_TR_NONE;
             return TSS2_RC_SUCCESS;
         }
     }
-    LOG_ERROR("Error: Esys handle does not exist (%x).", TSS2_ESYS_RC_BAD_TR);
+    LOG_ERROR("Error: Esys handle does not exist (0x%08"PRIx32").", TSS2_ESYS_RC_BAD_TR);
     return TSS2_ESYS_RC_BAD_TR;
 }
 
@@ -479,14 +487,20 @@ Esys_TR_SetAuth(ESYS_CONTEXT * esys_context, ESYS_TR esys_handle,
             name_alg = esys_object->rsrc.misc.rsrc_key_pub.publicArea.nameAlg;
         } else if (esys_object->rsrc.rsrcType == IESYSC_NV_RSRC) {
             name_alg = esys_object->rsrc.misc.rsrc_nv_pub.nvPublic.nameAlg;
+        } else {
+            name_alg = TPM2_ALG_NULL;
         }
         esys_object->auth = *authValue;
-        /* Adapt auth value to hash for large auth values. */
+
+        /* Adapt auth value. */
         if (name_alg != TPM2_ALG_NULL) {
-            r = iesys_hash_long_auth_values(&esys_context->crypto_backend,
+            r = iesys_adapt_auth_value(&esys_context->crypto_backend,
                     &esys_object->auth, name_alg);
             return_if_error(r, "Hashing overlength authValue failed.");
+        } else {
+            iesys_strip_trailing_zeros(&esys_object->auth);
         }
+
     }
     return TSS2_RC_SUCCESS;
 }

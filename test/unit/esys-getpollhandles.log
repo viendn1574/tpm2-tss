@@ -1,6 +1,0 @@
-[==========] Running 1 test(s).
-[ RUN      ] test_GetPollHandles
-[       OK ] test_GetPollHandles
-[==========] 1 test(s) run.
-[  PASSED  ] 1 test(s).
-PASS test/unit/esys-getpollhandles (exit status: 0)

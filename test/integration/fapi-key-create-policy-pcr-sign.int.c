@@ -104,7 +104,7 @@ test_fapi_key_create_policy_pcr_sign(FAPI_CONTEXT *context)
         "  \"description\":\"Description pol_16_0\"," \
         "  \"policyDigests\":[" \
         "    {" \
-        "      \"hashAlg\":\"SHA384\"," \
+        "      \"hashAlg\":\"sha384\"," \
         "      \"digest\":\"c1923346b6d44a154b58b57b4327ee70c29ac536f9209d94880de6834f370587846a2834e3e88af61efd8679fcccedd5\"" \
         "    }" \
         "  ]," \
@@ -113,14 +113,14 @@ test_fapi_key_create_policy_pcr_sign(FAPI_CONTEXT *context)
         "      \"type\":\"POLICYPCR\"," \
         "      \"policyDigests\":[" \
         "        {" \
-        "          \"hashAlg\":\"SHA384\"," \
+        "          \"hashAlg\":\"sha384\"," \
         "          \"digest\":\"c1923346b6d44a154b58b57b4327ee70c29ac536f9209d94880de6834f370587846a2834e3e88af61efd8679fcccedd5\"" \
         "        }" \
         "      ]," \
         "      \"pcrs\":[" \
         "        {" \
         "          \"pcr\":16," \
-        "          \"hashAlg\":\"SHA256\"," \
+        "          \"hashAlg\":\"sha256\"," \
         "          \"digest\":\"0000000000000000000000000000000000000000000000000000000000000000\"" \
         "        }" \
         "      ]" \
@@ -178,15 +178,15 @@ test_fapi_key_create_policy_pcr_sign(FAPI_CONTEXT *context)
         "  \"description\":\"Description pol_16_0\"," \
         "  \"policyDigests\":[" \
         "    { " \
-        "         \"hashAlg\":\"SHA384\"," \
+        "         \"hashAlg\":\"sha384\"," \
         "         \"digest\":\"c1923346b6d44a154b58b57b4327ee70c29ac536f9209d94880de6834f370587846a2834e3e88af61efd8679fcccedd5\"" \
         "     }," \
         "    {" \
-        "      \"hashAlg\":\"SHA256\"," \
+        "      \"hashAlg\":\"sha256\"," \
         "      \"digest\":\"bff2d58e9813f97cefc14f72ad8133bc7092d652b7c877959254af140c841f36\"" \
         "    }," \
         "    {" \
-        "      \"hashAlg\":\"SHA1\"," \
+        "      \"hashAlg\":\"sha1\"," \
         "      \"digest\":\"eab0d71ae6088009cbd0b50729fde69eb453649c\"" \
         "    }"                                                        \
         "  ]," \
@@ -195,22 +195,22 @@ test_fapi_key_create_policy_pcr_sign(FAPI_CONTEXT *context)
         "      \"type\":\"POLICYPCR\"," \
         "      \"policyDigests\":[" \
         "    { "                           \
-        "         \"hashAlg\":\"SHA384\"," \
+        "         \"hashAlg\":\"sha384\"," \
         "         \"digest\":\"c1923346b6d44a154b58b57b4327ee70c29ac536f9209d94880de6834f370587846a2834e3e88af61efd8679fcccedd5\"" \
         "     }," \
         "        {" \
-        "          \"hashAlg\":\"SHA256\"," \
+        "          \"hashAlg\":\"sha256\"," \
         "          \"digest\":\"bff2d58e9813f97cefc14f72ad8133bc7092d652b7c877959254af140c841f36\"" \
         "        }," \
         "        {" \
-        "          \"hashAlg\":\"SHA1\"," \
+        "          \"hashAlg\":\"sha1\"," \
         "          \"digest\":\"eab0d71ae6088009cbd0b50729fde69eb453649c\"" \
         "        }" \
         "      ]," \
         "      \"pcrs\":[" \
         "        {" \
         "          \"pcr\":16," \
-        "          \"hashAlg\":\"SHA256\"," \
+        "          \"hashAlg\":\"sha256\"," \
         "          \"digest\":\"0000000000000000000000000000000000000000000000000000000000000000\"" \
         "        }" \
         "      ]" \
@@ -281,7 +281,7 @@ test_fapi_key_create_policy_pcr_sign(FAPI_CONTEXT *context)
     ASSERT(policy != NULL);
     LOG_INFO("\nTEST_JSON\nPolicy_sha256:\n%s\nEND_JSON", policy);
 
-    if (strcmp(FAPI_PROFILE, "P_ECC384") == 0) {
+    if (strcmp(FAPI_PROFILE, "P_ECC384") == 0 || strcmp(FAPI_PROFILE, "P_RSA3072") == 0) {
         CHECK_JSON(policy, policy_sha384_check, error);
     } else {
         CHECK_JSON(policy, policy_sha256_check, error);
@@ -296,7 +296,7 @@ test_fapi_key_create_policy_pcr_sign(FAPI_CONTEXT *context)
     goto_if_error(r, "Error Fapi_ExportPolicy", error);
     ASSERT(policy != NULL);
     LOG_INFO("\nTEST_JSON\nPolicy export1:\n%s\nEND_JSON", policy);
-    if (strcmp(FAPI_PROFILE, "P_ECC384") == 0) {
+    if (strcmp(FAPI_PROFILE, "P_ECC384") == 0 || strcmp(FAPI_PROFILE, "P_RSA3072") == 0) {
         CHECK_JSON(policy, policy_sha384_export_check, error)
     } else {
         CHECK_JSON(policy, policy_sha256_export_check, error)
@@ -427,7 +427,7 @@ test_fapi_key_create_policy_pcr_sign(FAPI_CONTEXT *context)
     goto_if_error(r, "Error Fapi_ExportPolicy", error);
     ASSERT(policy != NULL);
 
-    if (strcmp(FAPI_PROFILE, "P_ECC384") == 0) {
+        if (strcmp(FAPI_PROFILE, "P_ECC384") == 0 || strcmp(FAPI_PROFILE, "P_RSA3072") == 0){
         CHECK_JSON(policy, policy_sha384_check, error);
     } else {
         CHECK_JSON(policy, policy_sha256_check, error);

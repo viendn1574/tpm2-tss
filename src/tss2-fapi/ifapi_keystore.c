@@ -6,10 +6,10 @@
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
-#include <dirent.h>
-#include <ctype.h>
 #endif
 
+#include <dirent.h>
+#include <ctype.h>
 #include "ifapi_io.h"
 #include "ifapi_helpers.h"
 #include "ifapi_keystore.h"
@@ -1771,6 +1771,14 @@ ifapi_check_provisioned(
     char *end_profile;
 
     *ok = false;
+
+    /* No profile in path, test can be skipped. */
+    if (ifapi_path_type_p(rel_path, IFAPI_NV_PATH) ||
+        ifapi_path_type_p(rel_path, IFAPI_POLICY_PATH) ||
+        ifapi_path_type_p(rel_path, IFAPI_EXT_PATH)) {
+        *ok = true;
+        return TSS2_RC_SUCCESS;
+    }
 
     /* First expand path in user directory  */
     r = expand_path(keystore, rel_path, &directory);

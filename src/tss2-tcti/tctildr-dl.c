@@ -48,6 +48,11 @@ struct {
         .description = "Access libtss2-tcti-device.so.0 with /dev/tpm0",
     },
     {
+        .file = "libtss2-tcti-device.so.0",
+        .conf = "/dev/tcm0",
+        .description = "Access libtss2-tcti-device.so.0 with /dev/tcm0",
+    },
+    {
         .file = "libtss2-tcti-swtpm.so.0",
         .description = "Access to libtss2-tcti-swtpm.so",
     },
@@ -78,65 +83,40 @@ TSS2_RC
 handle_from_name(const char *file,
                  void **handle)
 {
-    char *file_xfrm = NULL;
     size_t size;
-    size_t len;
+    char file_xfrm[PATH_MAX];
+    const char *formats[] = {
+        /* <name> */
+        "%s",
+        /* libtss2-tcti-<name>.so.0 */
+        FMT_TCTI_PREFIX "%s" FMT_LIB_SUFFIX_0,
+        /* libtss2-tcti-<name>.so */
+        FMT_TCTI_PREFIX "%s" FMT_LIB_SUFFIX,
+        /* libtss2-<name>.so.0 */
+        FMT_TSS_PREFIX "%s" FMT_LIB_SUFFIX_0,
+        /* libtss2-<name>.so */
+        FMT_TSS_PREFIX "%s" FMT_LIB_SUFFIX,
+    };
 
     if (handle == NULL) {
         return TSS2_TCTI_RC_BAD_REFERENCE;
     }
-    *handle = dlopen(file, RTLD_NOW);
-    if (*handle != NULL) {
-        return TSS2_RC_SUCCESS;
-    } else {
-        LOG_DEBUG("Could not load TCTI file: \"%s\": %s", file, dlerror());
+
+    for (size_t i = 0; i < ARRAY_SIZE(formats); i++) {
+        size = snprintf(file_xfrm, sizeof(file_xfrm), formats[i], file);
+        if (size >= sizeof(file_xfrm)) {
+            LOG_ERROR("TCTI name truncated in transform.");
+            return TSS2_TCTI_RC_BAD_VALUE;
+        }
+        *handle = dlopen(file_xfrm, RTLD_NOW);
+        if (*handle != NULL) {
+            return TSS2_RC_SUCCESS;
+        } else {
+            LOG_DEBUG("Could not load TCTI file \"%s\": %s", file, dlerror());
+        }
     }
 
-    len = snprintf(NULL, 0, TCTI_NAME_TEMPLATE_0, file);
-    if (len >= PATH_MAX) {
-        LOG_ERROR("TCTI name truncated in transform.");
-        return TSS2_TCTI_RC_BAD_VALUE;
-    }
-    file_xfrm = calloc(len + 1, sizeof(char));
-    if (file_xfrm == NULL) {
-        return TSS2_TCTI_RC_MEMORY;
-    }
-    /* 'name' alone didn't work, try libtss2-tcti-<name>.so.0 */
-    size = snprintf(file_xfrm,
-                    len + 1,
-                    TCTI_NAME_TEMPLATE_0,
-                    file);
-    if (size >= (len + 1)) {
-        LOG_ERROR("TCTI name truncated in transform.");
-        SAFE_FREE(file_xfrm);
-        return TSS2_TCTI_RC_BAD_VALUE;
-    }
-    *handle = dlopen(file_xfrm, RTLD_NOW);
-    if (*handle != NULL) {
-        SAFE_FREE(file_xfrm);
-        return TSS2_RC_SUCCESS;
-    } else {
-        LOG_DEBUG("Could not load TCTI file \"%s\": %s", file, dlerror());
-    }
-    /* libtss2-tcti-<name>.so.0 didn't work, try libtss2-tcti-<name>.so */
-    size = snprintf(file_xfrm,
-                    len + 1,
-                    TCTI_NAME_TEMPLATE,
-                    file);
-    if (size >= (len + 1)) {
-        LOG_ERROR("TCTI name truncated in transform.");
-        SAFE_FREE(file_xfrm);
-        return TSS2_TCTI_RC_BAD_VALUE;
-    }
-    *handle = dlopen(file_xfrm, RTLD_NOW);
-    if (*handle == NULL) {
-        LOG_DEBUG("Failed to load TCTI for name \"%s\": %s", file, dlerror());
-        SAFE_FREE(file_xfrm);
-        return TSS2_TCTI_RC_NOT_SUPPORTED;
-    }
-
-    SAFE_FREE(file_xfrm);
-    return TSS2_RC_SUCCESS;
+    return TSS2_TCTI_RC_NOT_SUPPORTED;
 }
 TSS2_RC
 tcti_from_file(const char *file,
@@ -202,7 +182,14 @@ get_info_default(const TSS2_TCTI_INFO **info,
         return TSS2_TCTI_RC_IO_ERROR;
 #else
     size_t i;
+    if (ARRAY_SIZE(tctis) == 0) {
+        LOG_ERROR("No default TCTIs configured during compilation");
+        return TSS2_TCTI_RC_IO_ERROR;
+    }
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wtype-limits"
     for (i = 0; i < ARRAY_SIZE(tctis); i++) {
+#pragma GCC diagnostic pop
         name = tctis[i].file;
         LOG_DEBUG("name: %s", name);
         if (name == NULL) {
@@ -256,7 +243,14 @@ tctildr_get_default(TSS2_TCTI_CONTEXT ** tcticontext, void **dlhandle)
     TSS2_RC r;
     size_t i;
 
+    if (ARRAY_SIZE(tctis) == 0) {
+        LOG_ERROR("No default TCTIs configured during compilation");
+        return TSS2_TCTI_RC_IO_ERROR;
+    }
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wtype-limits"
     for (i = 0; i < ARRAY_SIZE(tctis); i++) {
+#pragma GCC diagnostic pop
         LOG_DEBUG("Attempting to connect using standard TCTI: %s",
                   tctis[i].description);
         r = tcti_from_file(tctis[i].file, tctis[i].conf, tcticontext,

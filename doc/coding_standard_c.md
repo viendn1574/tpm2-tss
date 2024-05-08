@@ -15,7 +15,7 @@ compiler [2].
 
 It is worth noting however that this code base has yet to run into a compiler
 warning that wasn't the authors fault. It is likely that if you do find
-yourself disabling `-` you're probably doing something wrong.
+yourself disabling `-Werror` you're probably doing something wrong.
 
 ## Comments
 There are two acceptable commenting styles: block, line.  Block comments

@@ -100,6 +100,16 @@ struct {
         .conf = "/dev/tpm0",
         .description = "Access to /dev/tpm0",
     },
+    {
+        .names = {
+            "libtss2-tcti-device.so.0",
+            "libtss2-tcti-device.so",
+            "device",
+        },
+        .init = Tss2_Tcti_Device_Init,
+        .conf = "/dev/tcm0",
+        .description = "Access to /dev/tcm0",
+    },
 #endif /* TCTI_DEVICE */
 #endif /* _WIN32 */
 #ifdef TCTI_SWTPM
@@ -137,7 +147,14 @@ tctildr_get_default(TSS2_TCTI_CONTEXT ** tcticontext, void **dlhandle)
     }
     *tcticontext = NULL;
 
+    if (ARRAY_SIZE(tctis) == 0) {
+        LOG_ERROR("No default TCTIs configured during compilation");
+        return TSS2_TCTI_RC_IO_ERROR;
+    }
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wtype-limits"
     for (size_t i = 0; i < ARRAY_SIZE(tctis); i++) {
+#pragma GCC diagnostic pop
         LOG_DEBUG("Attempting to connect using standard TCTI: %s",
                   tctis[i].description);
         rc = tcti_from_init (tctis[i].init,
@@ -168,7 +185,14 @@ tctildr_get_tcti (const char *name,
         return tctildr_get_default (tcti, data);
     }
 
+    if (ARRAY_SIZE(tctis) == 0) {
+        LOG_ERROR("No default TCTIs configured during compilation");
+        return TSS2_TCTI_RC_IO_ERROR;
+    }
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wtype-limits"
     for (size_t i = 0; i < ARRAY_SIZE(tctis); ++i) {
+#pragma GCC diagnostic pop
         for (size_t j = 0; j < NAME_ARRAY_SIZE; ++j) {
             if (strcmp (name, tctis[i].names[j]))
                 continue;

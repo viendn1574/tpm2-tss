@@ -333,7 +333,7 @@ Fapi_Quote_Finish(
 
             /* Get a session for authorization of the quote operation. */
             r = ifapi_get_sessions_async(context,
-                                         IFAPI_SESSION_GENEK | IFAPI_SESSION1,
+                                         IFAPI_SESSION_GEN_SRK | IFAPI_SESSION1,
                                          TPMA_SESSION_DECRYPT, 0);
             goto_if_error_reset_state(r, "Create sessions", error_cleanup);
 
@@ -371,7 +371,9 @@ Fapi_Quote_Finish(
 
             /* Perform the Quote operation. */
             r = Esys_Quote_Async(context->esys, command->handle,
-                                 auth_session, ESYS_TR_NONE, ESYS_TR_NONE,
+                                 auth_session,
+                                 ENC_SESSION_IF_POLICY(auth_session),
+                                 ESYS_TR_NONE,
                                  &command->qualifyingData,
                                  &command->key_object->misc.key.signing_scheme,
                                  &command->pcr_selection);
@@ -392,16 +394,20 @@ Fapi_Quote_Finish(
             goto_if_error(r, "Error: PCR_Quote", error_cleanup);
 
             /* Flush the key used for the quote. */
-            r = Esys_FlushContext_Async(context->esys, command->handle);
-            goto_if_error(r, "Error: FlushContext", error_cleanup);
+            if (!command->key_object->misc.key.persistent_handle) {
+                r = Esys_FlushContext_Async(context->esys, command->handle);
+                goto_if_error(r, "Error: FlushContext", error_cleanup);
+            }
             command->handle = ESYS_TR_NONE;
 
             fallthrough;
 
         statecase(context->state, PCR_QUOTE_WAIT_FOR_FLUSH);
-            r = Esys_FlushContext_Finish(context->esys);
-            return_try_again(r);
-            goto_if_error(r, "Error: Sign", error_cleanup);
+           if (!command->key_object->misc.key.persistent_handle) {
+               r = Esys_FlushContext_Finish(context->esys);
+               return_try_again(r);
+               goto_if_error(r, "Error: Sign", error_cleanup);
+           }
 
             sig_key_object = command->key_object;
             /* Convert the TPM-encoded signature into something useful for the caller. */
@@ -415,12 +421,13 @@ Fapi_Quote_Finish(
                signed by the TPM. */
             r = ifapi_compute_quote_info(sig_key_object,
                                          command->tpm_quoted,
+                                         &command->fapi_quote_info,
                                          quoteInfo);
             goto_if_error(r, "Create compute quote info.", error_cleanup);
 
             /* Return the key's certificate if requested. */
             if (certificate) {
-                strdup_check(*certificate, sig_key_object->misc.key.certificate, r, error_cleanup);
+                strdup_check(command->certificate, sig_key_object->misc.key.certificate, r, error_cleanup);
             }
 
             /* If the pcrLog was not requested, the operation is done. */
@@ -438,7 +445,9 @@ Fapi_Quote_Finish(
             fallthrough;
 
         statecase(context->state, PCR_QUOTE_READ_EVENT_LIST);
-            r = ifapi_eventlog_get_finish(&context->eventlog, &context->io,
+            r = ifapi_eventlog_get_finish(&context->eventlog,
+                                          &command->fapi_quote_info,
+                                          &context->io,
                                           &command->pcrLog);
             return_try_again(r);
             goto_if_error(r, "Error getting event log", error_cleanup);
@@ -451,9 +460,10 @@ Fapi_Quote_Finish(
 
             if (pcrLog)
                 *pcrLog = command->pcrLog;
+            if (certificate)
+                *certificate = command->certificate;
             *signature = command->signature;
             *signatureSize = command->signatureSize;
-            context->state = _FAPI_STATE_INIT;
             break;
 
         statecasedefault(context->state);
@@ -466,6 +476,8 @@ error_cleanup:
     SAFE_FREE(command->keyPath);
     SAFE_FREE(command->pcrList);
     if (r) {
+        SAFE_FREE(command->certificate);
+        SAFE_FREE(command->quoteInfo);
         SAFE_FREE(command->pcrLog);
         SAFE_FREE(command->signature);
     }
@@ -477,6 +489,7 @@ error_cleanup:
     if (command->handle != ESYS_TR_NONE) {
         Esys_FlushContext(context->esys, command->handle);
     }
+    context->state = _FAPI_STATE_INIT;
     LOG_TRACE("finished");
     return r;
 }

@@ -361,7 +361,7 @@ TSS2_RC ifapi_read_pcr(
             for (i = 0; i < profile_selection->count; i++) {
                 for (pcr = 0; pcr < TPM2_MAX_PCRS; pcr++) {
                     uint8_t byte_idx = pcr / 8;
-                    uint8_t flag = 1 << (pcr % 8);
+                    uint8_t flag = ((uint8_t)1) << (pcr % 8);
                     /* Check whether PCR is used. */
                     if ((flag & profile_selection->pcrSelections[i].pcrSelect[byte_idx]) &&
                         (flag & pcr_selection->selections.pcr_select.pcrSelect[byte_idx])) {
@@ -1132,7 +1132,7 @@ search_policy(
             }
         }
         /* Extend linked list.*/
-        policy_object = calloc(sizeof(struct POLICY_LIST), 1);
+        policy_object = calloc(1, sizeof(struct POLICY_LIST));
         return_if_null(policy_object, "Out of memory.", TSS2_FAPI_RC_MEMORY);
 
         strdup_check(policy_object->path, context->fsearch.current_path, r, cleanup);

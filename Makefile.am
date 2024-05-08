@@ -55,9 +55,16 @@ GITIGNOREFILES = ""
 if AUTOCONF_CODE_COVERAGE_2019_01_06
 include $(top_srcdir)/aminclude_static.am
 clean-local: code-coverage-clean
+	-rm -r -f $(top_builddir)/ca
 distclean-local: code-coverage-dist-clean
+	-rm -r -f $(top_builddir)/ca
 else
 @CODE_COVERAGE_RULES@
+clean-local:
+	-rm -r -f $(top_builddir)/ca
+distclean-local:
+	-rm -r -f $(top_builddir)/ca
+
 endif
 GITIGNOREFILES += $(TSS_GITIGNOREFILES)
 CODE_COVERAGE_DIRECTORY = $(top_builddir)/src $(top_builddir)/test
@@ -205,7 +212,7 @@ EXTRA_DIST += \
     CONTRIBUTING.md \
     INSTALL.md \
     LICENSE \
-    MAINTAINERS \
+    MAINTAINERS.md \
     README.md \
     RELEASE.md \
     VERSION
@@ -248,6 +255,12 @@ tss2_HEADERS = \
 libutil = libutil.la
 noinst_LTLIBRARIES += $(libutil)
 libutil_la_SOURCES = $(UTIL_SRC)
+
+if ENABLE_UTIL_IO
+libutilio = libutil-io.la
+noinst_LTLIBRARIES += $(libutilio)
+libutil_io_la_SOURCES = $(UTIL_IO_SRC)
+endif
 
 ### TCG TSS Marshaling/Unmarshaling spec library ###
 libtss2_mu = src/tss2-mu/libtss2-mu.la
@@ -301,7 +314,7 @@ pkgconfig_DATA += lib/tss2-tcti-device.pc
 if HAVE_LD_VERSION_SCRIPT
 src_tss2_tcti_libtss2_tcti_device_la_LDFLAGS  = -Wl,--version-script=$(srcdir)/lib/tss2-tcti-device.map
 endif # HAVE_LD_VERSION_SCRIPT
-src_tss2_tcti_libtss2_tcti_device_la_LIBADD   = $(libtss2_mu) $(libutil)
+src_tss2_tcti_libtss2_tcti_device_la_LIBADD   = $(libtss2_mu) $(libutil) $(libutilio)
 src_tss2_tcti_libtss2_tcti_device_la_SOURCES  = \
     src/tss2-tcti/tcti-common.c \
     src/tss2-tcti/tcti-device.c
@@ -318,7 +331,7 @@ pkgconfig_DATA += lib/tss2-tcti-swtpm.pc
 if HAVE_LD_VERSION_SCRIPT
 src_tss2_tcti_libtss2_tcti_swtpm_la_LDFLAGS  = -Wl,--version-script=$(srcdir)/lib/tss2-tcti-swtpm.map
 endif # HAVE_LD_VERSION_SCRIPT
-src_tss2_tcti_libtss2_tcti_swtpm_la_LIBADD   = $(libtss2_mu) $(libutil)
+src_tss2_tcti_libtss2_tcti_swtpm_la_LIBADD   = $(libtss2_mu) $(libutil) $(libutilio)
 src_tss2_tcti_libtss2_tcti_swtpm_la_SOURCES  = \
     src/tss2-tcti/tcti-common.c \
     src/tss2-tcti/tcti-swtpm.c \
@@ -336,7 +349,7 @@ pkgconfig_DATA += lib/tss2-tcti-mssim.pc
 if HAVE_LD_VERSION_SCRIPT
 src_tss2_tcti_libtss2_tcti_mssim_la_LDFLAGS  = -Wl,--version-script=$(srcdir)/lib/tss2-tcti-mssim.map
 endif # HAVE_LD_VERSION_SCRIPT
-src_tss2_tcti_libtss2_tcti_mssim_la_LIBADD   = $(libtss2_mu) $(libutil)
+src_tss2_tcti_libtss2_tcti_mssim_la_LIBADD   = $(libtss2_mu) $(libutil) $(libutilio)
 src_tss2_tcti_libtss2_tcti_mssim_la_SOURCES  = \
     src/tss2-tcti/tcti-common.c \
     src/tss2-tcti/tcti-mssim.c
@@ -355,7 +368,7 @@ pkgconfig_DATA += lib/tss2-tcti-pcap.pc
 if HAVE_LD_VERSION_SCRIPT
 src_tss2_tcti_libtss2_tcti_pcap_la_LDFLAGS  = -Wl,--version-script=$(srcdir)/lib/tss2-tcti-pcap.map
 endif # HAVE_LD_VERSION_SCRIPT
-src_tss2_tcti_libtss2_tcti_pcap_la_LIBADD   = $(libtss2_tctildr) $(libtss2_mu) $(libutil)
+src_tss2_tcti_libtss2_tcti_pcap_la_LIBADD   = $(libtss2_tctildr) $(libtss2_mu) $(libutil) $(libutilio)
 src_tss2_tcti_libtss2_tcti_pcap_la_SOURCES  = \
     src/tss2-tcti/tcti-common.c \
     src/tss2-tcti/tcti-pcap-builder.c \
@@ -408,8 +421,6 @@ libtss2_tcti_spi_helper = src/tss2-tcti/libtss2-tcti-spi-helper.la
 tss2_HEADERS += $(srcdir)/include/tss2/tss2_tcti_spi_helper.h
 lib_LTLIBRARIES += $(libtss2_tcti_spi_helper)
 pkgconfig_DATA += lib/tss2-tcti-spi-helper.pc
-EXTRA_DIST += lib/tss2-tcti-spi-helper.map \
-              lib/tss2-tcti-spi-helper.def
 
 if HAVE_LD_VERSION_SCRIPT
 if !UNIT
@@ -422,6 +433,120 @@ src_tss2_tcti_libtss2_tcti_spi_helper_la_SOURCES  = \
     src/tss2-tcti/tcti-spi-helper.c \
     src/tss2-tcti/tcti-spi-helper.h
 endif # ENABLE_TCTI_SPI_HELPER
+EXTRA_DIST += lib/tss2-tcti-spi-helper.map \
+              lib/tss2-tcti-spi-helper.def
+
+# tcti library for letstrust-tpm2go usb tpm
+if ENABLE_TCTI_SPI_LTT2GO
+libtss2_tcti_spi_ltt2go = src/tss2-tcti/libtss2-tcti-spi-ltt2go.la
+tss2_HEADERS += $(srcdir)/include/tss2/tss2_tcti_spi_ltt2go.h
+lib_LTLIBRARIES += $(libtss2_tcti_spi_ltt2go)
+pkgconfig_DATA += lib/tss2-tcti-spi-ltt2go.pc
+
+src_tss2_tcti_libtss2_tcti_spi_ltt2go_la_LDFLAGS  = -lusb-1.0
+
+if HAVE_LD_VERSION_SCRIPT
+src_tss2_tcti_libtss2_tcti_spi_ltt2go_la_LDFLAGS  += -Wl,--version-script=$(srcdir)/lib/tss2-tcti-spi-ltt2go.map
+endif # HAVE_LD_VERSION_SCRIPT
+src_tss2_tcti_libtss2_tcti_spi_ltt2go_la_LIBADD   = $(libutil) $(libtss2_mu) $(libtss2_tcti_spi_helper)
+src_tss2_tcti_libtss2_tcti_spi_ltt2go_la_SOURCES  = \
+    src/tss2-tcti/tcti-common.c \
+    src/tss2-tcti/tcti-spi-ltt2go.c \
+    src/tss2-tcti/tcti-spi-ltt2go.h
+endif # ENABLE_TCTI_SPI_LTT2GO
+EXTRA_DIST += lib/tss2-tcti-spi-ltt2go.map \
+              lib/tss2-tcti-spi-ltt2go.def
+
+# tcti library for letstrust-tpm2go usb tpm
+if ENABLE_TCTI_SPIDEV
+libtss2_tcti_spidev = src/tss2-tcti/libtss2-tcti-spidev.la
+tss2_HEADERS += $(srcdir)/include/tss2/tss2_tcti_spidev.h
+lib_LTLIBRARIES += $(libtss2_tcti_spidev)
+pkgconfig_DATA += lib/tss2-tcti-spidev.pc
+
+src_tss2_tcti_libtss2_tcti_spidev_la_LDFLAGS  =
+
+if HAVE_LD_VERSION_SCRIPT
+src_tss2_tcti_libtss2_tcti_spidev_la_LDFLAGS  += -Wl,--version-script=$(srcdir)/lib/tss2-tcti-spidev.map
+endif # HAVE_LD_VERSION_SCRIPT
+src_tss2_tcti_libtss2_tcti_spidev_la_LIBADD   = $(libutil) $(libtss2_mu) $(libtss2_tcti_spi_helper)
+src_tss2_tcti_libtss2_tcti_spidev_la_SOURCES  = \
+    src/tss2-tcti/tcti-common.c \
+    src/tss2-tcti/tcti-spidev.c
+endif # ENABLE_TCTI_SPIDEV
+EXTRA_DIST += lib/tss2-tcti-spidev.map \
+              lib/tss2-tcti-spidev.def
+
+# tcti library for ftdi connected tpm
+if ENABLE_TCTI_SPI_FTDI
+libtss2_tcti_spi_ftdi = src/tss2-tcti/libtss2-tcti-spi-ftdi.la
+tss2_HEADERS += $(srcdir)/include/tss2/tss2_tcti_spi_ftdi.h
+lib_LTLIBRARIES += $(libtss2_tcti_spi_ftdi)
+pkgconfig_DATA += lib/tss2-tcti-spi-ftdi.pc
+
+src_tss2_tcti_libtss2_tcti_spi_ftdi_la_CFLAGS  = $(AM_CFLAGS) $(LIBFTDI_CFLAGS) -Wno-deprecated-declarations
+src_tss2_tcti_libtss2_tcti_spi_ftdi_la_LDFLAGS  = $(LIBFTDI_LIBS)
+if HAVE_LD_VERSION_SCRIPT
+src_tss2_tcti_libtss2_tcti_spi_ftdi_la_LDFLAGS  += -Wl,--version-script=$(srcdir)/lib/tss2-tcti-spi-ftdi.map
+endif # HAVE_LD_VERSION_SCRIPT
+src_tss2_tcti_libtss2_tcti_spi_ftdi_la_LIBADD   = $(libutil) $(libtss2_mu) $(libtss2_tcti_spi_helper)
+src_tss2_tcti_libtss2_tcti_spi_ftdi_la_SOURCES  = \
+    src/tss2-tcti/mpsse/support.c \
+    src/tss2-tcti/mpsse/support.h \
+    src/tss2-tcti/mpsse/mpsse.c \
+    src/tss2-tcti/mpsse/mpsse.h \
+    src/tss2-tcti/tcti-common.c \
+    src/tss2-tcti/tcti-spi-ftdi.c \
+    src/tss2-tcti/tcti-spi-ftdi.h
+endif # ENABLE_TCTI_SPI_FTDI
+EXTRA_DIST += lib/tss2-tcti-spi-ftdi.map \
+              lib/tss2-tcti-spi-ftdi.def
+
+# tcti library for i2c connected tpms
+if ENABLE_TCTI_I2C_HELPER
+libtss2_tcti_i2c_helper = src/tss2-tcti/libtss2-tcti-i2c-helper.la
+tss2_HEADERS += $(srcdir)/include/tss2/tss2_tcti_i2c_helper.h
+lib_LTLIBRARIES += $(libtss2_tcti_i2c_helper)
+pkgconfig_DATA += lib/tss2-tcti-i2c-helper.pc
+
+if HAVE_LD_VERSION_SCRIPT
+if !UNIT
+src_tss2_tcti_libtss2_tcti_i2c_helper_la_LDFLAGS  = -Wl,--version-script=$(srcdir)/lib/tss2-tcti-i2c-helper.map
+endif # UNIT
+endif # HAVE_LD_VERSION_SCRIPT
+src_tss2_tcti_libtss2_tcti_i2c_helper_la_LIBADD   = $(libutil) $(libtss2_mu)
+src_tss2_tcti_libtss2_tcti_i2c_helper_la_SOURCES  = \
+    src/tss2-tcti/tcti-common.c \
+    src/tss2-tcti/tcti-i2c-helper.c \
+    src/tss2-tcti/tcti-i2c-helper.h
+endif # ENABLE_TCTI_I2C_HELPER
+EXTRA_DIST += lib/tss2-tcti-i2c-helper.map \
+              lib/tss2-tcti-i2c-helper.def
+
+# tcti library for ftdi connected tpm
+if ENABLE_TCTI_I2C_FTDI
+libtss2_tcti_i2c_ftdi = src/tss2-tcti/libtss2-tcti-i2c-ftdi.la
+tss2_HEADERS += $(srcdir)/include/tss2/tss2_tcti_i2c_ftdi.h
+lib_LTLIBRARIES += $(libtss2_tcti_i2c_ftdi)
+pkgconfig_DATA += lib/tss2-tcti-i2c-ftdi.pc
+
+src_tss2_tcti_libtss2_tcti_i2c_ftdi_la_CFLAGS  = $(AM_CFLAGS) $(LIBFTDI_CFLAGS) -Wno-deprecated-declarations
+src_tss2_tcti_libtss2_tcti_i2c_ftdi_la_LDFLAGS  = $(LIBFTDI_LIBS)
+if HAVE_LD_VERSION_SCRIPT
+src_tss2_tcti_libtss2_tcti_i2c_ftdi_la_LDFLAGS  += -Wl,--version-script=$(srcdir)/lib/tss2-tcti-i2c-ftdi.map
+endif # HAVE_LD_VERSION_SCRIPT
+src_tss2_tcti_libtss2_tcti_i2c_ftdi_la_LIBADD   = $(libutil) $(libtss2_mu) $(libtss2_tcti_i2c_helper)
+src_tss2_tcti_libtss2_tcti_i2c_ftdi_la_SOURCES  = \
+    src/tss2-tcti/mpsse/support.c \
+    src/tss2-tcti/mpsse/support.h \
+    src/tss2-tcti/mpsse/mpsse.c \
+    src/tss2-tcti/mpsse/mpsse.h \
+    src/tss2-tcti/tcti-common.c \
+    src/tss2-tcti/tcti-i2c-ftdi.c \
+    src/tss2-tcti/tcti-i2c-ftdi.h
+endif # ENABLE_TCTI_I2C_FTDI
+EXTRA_DIST += lib/tss2-tcti-i2c-ftdi.map \
+              lib/tss2-tcti-i2c-ftdi.def
 
 ### TCG TSS SYS spec library ###
 libtss2_sys = src/tss2-sys/libtss2-sys.la
@@ -483,10 +608,10 @@ else
 src_tss2_esys_libtss2_esys_la_LIBADD += $(LIBADD_DL)
 src_tss2_esys_libtss2_esys_la_SOURCES += src/tss2-tcti/tctildr-dl.c src/tss2-tcti/tctildr-dl.h
 endif
+endif # ESYS
 EXTRA_DIST += lib/tss2-esys.map \
               lib/tss2-esys.def \
               src/tss2-esys/tss2-esys.vcxproj
-endif #ESYS
 
 ### TCG TSS error decoding spec library ###
 libtss2_rc = src/tss2-rc/libtss2-rc.la
@@ -508,8 +633,9 @@ lib_LTLIBRARIES += $(libtss2_policy)
 pkgconfig_DATA += lib/tss2-policy.pc
 
 src_tss2_policy_libtss2_policy_la_CFLAGS = $(AM_CFLAGS) -I$(srcdir)/src/tss2-policy -I$(srcdir)/src/tss2-fapi \
-    $(JSONC_CFLAGS)
-src_tss2_policy_libtss2_policy_la_LIBADD  = $(libtss2_esys) $(libtss2_mu) $(libutil) $(JSONC_LIBS) $(UUID_LIBS)
+    $(JSONC_CFLAGS) $(UUID_CFLAGS) $(CRYPTO_CFLAGS)
+src_tss2_policy_libtss2_policy_la_LIBADD  = $(libtss2_esys) $(libtss2_mu) $(libutil) $(JSONC_LIBS) $(UUID_LIBS) \
+	$(CRYPTO_LIBS)
 
 if HAVE_LD_VERSION_SCRIPT
 src_tss2_policy_libtss2_policy_la_LDFLAGS = -Wl,--version-script=$(srcdir)/lib/tss2-policy.map
@@ -535,9 +661,8 @@ src_tss2_policy_libtss2_policy_la_SOURCES = $(TSS2_POLICY_SRC) \
     src/tss2-fapi/ifapi_policy_json_serialize.c \
     src/tss2-fapi/ifapi_keystore.c \
     src/tss2-fapi/ifapi_policy_store.c
-
+endif # POLICY
 EXTRA_DIST += lib/tss2-policy.map lib/tss2-policy.def
-endif
 
 ### TCG TSS FAPI spec library ###
 if FAPI
@@ -563,10 +688,14 @@ fapi-config.json: dist/fapi-config.json.in
 		-e 's|[@]sysmeasurements@|$(sysmeasurements)|g' \
 		< "$<" > "$@"
 
+if SYSD_SYSUSERS
 sysusers_DATA = dist/sysusers.d/tpm2-tss.conf
-tmpfiles_DATA = tpm2-tss-fapi.conf
+endif
 
+if SYSD_TMPFILES
+tmpfiles_DATA = tpm2-tss-fapi.conf
 CLEANFILES += tpm2-tss-fapi.conf
+endif
 
 # We have to do this ourselves, in order to get absolute paths
 tpm2-tss-fapi.conf: dist/tmpfiles.d/tpm2-tss-fapi.conf.in
@@ -577,7 +706,9 @@ tpm2-tss-fapi.conf: dist/tmpfiles.d/tpm2-tss-fapi.conf.in
 
 fapiprofilesdir = @sysconfdir@/tpm2-tss/fapi-profiles
 fapiprofiles_DATA = dist/fapi-profiles/P_RSA2048SHA256.json \
-                    dist/fapi-profiles/P_ECCP256SHA256.json
+                    dist/fapi-profiles/P_ECCP256SHA256.json \
+                    dist/fapi-profiles/P_RSA3072SHA384.json \
+                    dist/fapi-profiles/P_ECCP384SHA384.json
 
 libtss2_fapi = src/tss2-fapi/libtss2-fapi.la
 tss2_HEADERS += $(srcdir)/include/tss2/tss2_fapi.h
@@ -587,6 +718,8 @@ EXTRA_DIST +=  \
     dist/fapi-config.json.in \
     dist/fapi-profiles/P_RSA2048SHA256.json \
     dist/fapi-profiles/P_ECCP256SHA256.json \
+    dist/fapi-profiles/P_RSA3072SHA384.json \
+    dist/fapi-profiles/P_ECCP384SHA384.json \
     dist/sysusers.d/tpm2-tss.conf \
     dist/tmpfiles.d/tpm2-tss-fapi.conf.in \
     doc/fapi-config.md \
@@ -664,13 +797,15 @@ EXTRA_DIST +=  \
     test/data/fapi/eventlog/sml-ima-ng-sha1-invalidated.b64 \
     test/data/fapi/eventlog/sml-ima-ng-sha1-invalidated.b64 \
     test/data/fapi/eventlog/sml-ima-sig-sha256-invalidated.b64 \
-    test/data/fapi/eventlog/sml-ima-sha1-invalidated.b64
+    test/data/fapi/eventlog/sml-ima-sha1-invalidated.b64 \
+    test/data/fapi/eventlog/binary_measurements_hcrtm.b64
 
 src_tss2_fapi_libtss2_fapi_la_LIBADD  = $(libtss2_sys) $(libtss2_mu) $(libtss2_esys) \
     $(libutil) $(libtss2_tctildr)
 
 src_tss2_fapi_libtss2_fapi_la_SOURCES = $(TSS2_FAPI_SRC)
-src_tss2_fapi_libtss2_fapi_la_CFLAGS  = $(AM_CFLAGS) -I$(srcdir)/src/tss2-fapi $(CRYPTO_CFLAGS) $(JSONC_CFLAGS) $(CURL_CFLAGS)
+src_tss2_fapi_libtss2_fapi_la_CFLAGS  = $(AM_CFLAGS) -I$(srcdir)/src/tss2-fapi $(CRYPTO_CFLAGS) $(JSONC_CFLAGS) \
+                                        $(UUID_CFLAGS)
 src_tss2_fapi_libtss2_fapi_la_LDFLAGS = $(AM_LDFLAGS) $(CRYPTO_LIBS) $(JSONC_LIBS) $(CURL_LIBS) $(UUID_LIBS)
 if HAVE_LD_VERSION_SCRIPT
 src_tss2_fapi_libtss2_fapi_la_LDFLAGS += -Wl,--version-script=$(srcdir)/lib/tss2-fapi.map
@@ -772,7 +907,7 @@ define make_fapi_dirs
 endef
 
 define set_fapi_permissions
-    if test -z "${DESTDIR}"; then \ e
+    if test -z "${DESTDIR}"; then \
         ($(call set_tss_permissions,$(DESTDIR)$(runstatedir)/tpm2-tss)) && \
         ($(call set_tss_permissions,$(DESTDIR)$(localstatedir)/lib/tpm2-tss)) \
     fi
@@ -805,6 +940,12 @@ man7_MANS = \
     man/man7/tss2-tcti-swtpm.7 \
     man/man7/tss2-tcti-mssim.7 \
     man/man7/tss2-tcti-cmd.7 \
+    man/man7/tss2-tcti-spidev.7 \
+    man/man7/tss2-tcti-spi-helper.7 \
+    man/man7/tss2-tcti-spi-ltt2go.7 \
+    man/man7/tss2-tcti-spi-ftdi.7 \
+    man/man7/tss2-tcti-i2c-helper.7 \
+    man/man7/tss2-tcti-i2c-ftdi.7 \
     man/man7/tss2-tctildr.7
 
 if FAPI
@@ -864,6 +1005,15 @@ uninstall-local:
 		[ -L Tss2_TctiLdr_Initialize_Ex.3 ] && \
 			rm -f Tss2_TctiLdr_Initialize_Ex.3 || true
 
+prepare-check:
+if INIT_CA
+	$(top_srcdir)/script/ekca/init_ca.sh $(top_builddir)
+	@echo "Build CI in:" 1>&2
+	@echo $(top_builddir) 1>&2
+endif
+
+check: prepare-check
+
 EXTRA_DIST += \
     doc/doxygen.dox \
     doc/coding_standard_c.md \
@@ -880,14 +1030,23 @@ EXTRA_DIST += \
     man/Tss2_TctiLdr_Initialize.3.in \
     man/tss2-tcti-pcap.7.in \
     man/tss2-tcti-device.7.in \
-    man/man7/tss2-tcti-swtpm.7 \
+    man/tss2-tcti-swtpm.7.in \
     man/tss2-tcti-mssim.7.in \
     man/tss2-tcti-cmd.7.in \
+    man/tss2-tcti-spidev.7.in \
+    man/tss2-tcti-spi-helper.7.in \
+    man/tss2-tcti-spi-ltt2go.7.in \
+    man/tss2-tcti-spi-ftdi.7.in \
+    man/tss2-tcti-i2c-helper.7.in \
+    man/tss2-tcti-i2c-ftdi.7.in \
     man/tss2-tctildr.7.in
 
 CLEANFILES += \
     $(man3_MANS) \
-    $(man7_MANS)
+    $(man7_MANS) \
+    $(top_builddir)/ca
+
+DISTCLEANFILES += $(top_builddir)/ca
 
 # function to transform man .in files to man pages
 # $1: target

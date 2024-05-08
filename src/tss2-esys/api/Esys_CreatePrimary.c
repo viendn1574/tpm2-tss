@@ -208,7 +208,7 @@ Esys_CreatePrimary_Async(
     return_state_if_error(r, _ESYS_STATE_INIT, "Check session usage");
     store_input_parameters (esysContext, inSensitive);
     if (inPublic) {
-        r = iesys_hash_long_auth_values(
+        r = iesys_adapt_auth_value(
             &esysContext->crypto_backend,
             &esysContext->in.CreatePrimary.inSensitive->sensitive.userAuth,
              inPublic->publicArea.nameAlg);
@@ -344,24 +344,24 @@ Esys_CreatePrimary_Finish(
     if (r != TSS2_RC_SUCCESS)
         return r;
 
-    loutPublic = calloc(sizeof(TPM2B_PUBLIC), 1);
+    loutPublic = calloc(1, sizeof(TPM2B_PUBLIC));
     if (loutPublic == NULL) {
         goto_error(r, TSS2_ESYS_RC_MEMORY, "Out of memory", error_cleanup);
     }
     if (creationData != NULL) {
-        *creationData = calloc(sizeof(TPM2B_CREATION_DATA), 1);
+        *creationData = calloc(1, sizeof(TPM2B_CREATION_DATA));
         if (*creationData == NULL) {
             goto_error(r, TSS2_ESYS_RC_MEMORY, "Out of memory", error_cleanup);
         }
     }
     if (creationHash != NULL) {
-        *creationHash = calloc(sizeof(TPM2B_DIGEST), 1);
+        *creationHash = calloc(1, sizeof(TPM2B_DIGEST));
         if (*creationHash == NULL) {
             goto_error(r, TSS2_ESYS_RC_MEMORY, "Out of memory", error_cleanup);
         }
     }
     if (creationTicket != NULL) {
-        *creationTicket = calloc(sizeof(TPMT_TK_CREATION), 1);
+        *creationTicket = calloc(1, sizeof(TPMT_TK_CREATION));
         if (*creationTicket == NULL) {
             goto_error(r, TSS2_ESYS_RC_MEMORY, "Out of memory", error_cleanup);
         }

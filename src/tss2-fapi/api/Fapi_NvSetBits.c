@@ -281,8 +281,8 @@ Fapi_NvSetBits_Finish(
 
         /* Prepare session for authorization */
         r = ifapi_get_sessions_async(context,
-                                     IFAPI_SESSION_GENEK | IFAPI_SESSION1,
-                                     0, 0);
+                                     IFAPI_SESSION_GEN_SRK | IFAPI_SESSION1,
+                                     TPMA_SESSION_DECRYPT, 0);
         goto_if_error_reset_state(r, "Create sessions", error_cleanup);
 
         fallthrough;
@@ -336,7 +336,7 @@ Fapi_NvSetBits_Finish(
         /* Finish writing the NV object to the key store */
         r = ifapi_keystore_store_finish(&context->io);
         return_try_again(r);
-        return_if_error_reset_state(r, "write_finish failed");
+        goto_if_error(r, "write_finish failed", error_cleanup);
 
         fallthrough;
 
@@ -345,9 +345,7 @@ Fapi_NvSetBits_Finish(
         r = ifapi_cleanup_session(context);
         try_again_or_error_goto(r, "Cleanup", error_cleanup);
 
-        context->state = _FAPI_STATE_INIT;
         LOG_DEBUG("success");
-
         break;
 
     statecasedefault(context->state);
@@ -362,6 +360,7 @@ error_cleanup:
     ifapi_cleanup_ifapi_object(&context->loadKey.auth_object);
     ifapi_cleanup_ifapi_object(context->loadKey.key_object);
     ifapi_cleanup_ifapi_object(&context->createPrimary.pkey_object);
+    context->state = _FAPI_STATE_INIT;
     LOG_TRACE("finished");
     return r;
 }

@@ -10,6 +10,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+#include <inttypes.h>
 #include "tss2_tpm2_types.h"
 #ifdef __cplusplus
 extern "C" {
@@ -19,7 +20,7 @@ extern "C" {
 
 #define ARRAY_LEN(x) (sizeof(x)/sizeof(x[0]))
 
-#define TPM2_ERROR_FORMAT "%s%s (0x%08x)"
+#define TPM2_ERROR_FORMAT "%s%s (0x%08"PRIx32")"
 #define TPM2_ERROR_TEXT(r) "Error", "Code", r
 #define SIZE_OF_ARY(ary) (sizeof(ary) / sizeof(ary[0]))
 

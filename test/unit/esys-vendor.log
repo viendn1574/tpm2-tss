@@ -1,6 +1,0 @@
-[==========] Running 1 test(s).
-[ RUN      ] ptt_property_1_count_1024
-[       OK ] ptt_property_1_count_1024
-[==========] 1 test(s) run.
-[  PASSED  ] 1 test(s).
-PASS test/unit/esys-vendor (exit status: 0)

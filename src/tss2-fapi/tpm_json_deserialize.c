@@ -34,9 +34,11 @@ json_object*
 ifapi_parse_json(const char *jstring) {
     json_object *jso = NULL;
     enum json_tokener_error jerr;
+#if MAXLOGLEVEL > 0
     int line = 1;
     int line_offset = 0;
     int char_pos;
+#endif
     struct json_tokener* tok = json_tokener_new();
     if (!tok) {
         LOG_ERROR("Could not allocate json tokener");
@@ -45,6 +47,7 @@ ifapi_parse_json(const char *jstring) {
     jso = json_tokener_parse_ex(tok, jstring, -1);
     jerr = json_tokener_get_error(tok);
     if (jerr != json_tokener_success) {
+#if MAXLOGLEVEL > 0
         for (char_pos = 0; char_pos <= tok->char_offset; char_pos++) {
             if (jstring[char_pos] == '\n') {
                 line++;
@@ -55,6 +58,7 @@ ifapi_parse_json(const char *jstring) {
         }
         LOG_ERROR("Invalid JSON at line %i column %i: %s.", line, line_offset,
                   json_tokener_error_desc(jerr));
+#endif
         json_tokener_free(tok);
         return NULL;
     }
@@ -316,7 +320,7 @@ ifapi_json_pcr_selection_deserialize(
         r = get_number_from_json(json_object_array_get_idx(jso, i), &n);
         return_if_error(r, "Bad PCR value");
         n_byte = n / 8;
-        pcrSelect[n_byte] |= (BYTE)(1 << (n % 8));
+        pcrSelect[n_byte] |= ((BYTE)1) << (n % 8);
         if (n_byte > *sizeofSelect)
             *sizeofSelect = n_byte;
     }
@@ -694,6 +698,7 @@ ifapi_json_TPM2_GENERATED_deserialize(json_object *jso, TPM2_GENERATED *out)
     const char *s = json_object_get_string(jso);
     const char *str = strip_prefix(s, "TPM_", "TPM2_", "GENERATED_", NULL);
     LOG_TRACE("called for %s parsing %s", s, str);
+    TSS2_RC r;
 
     if (str) {
         for (size_t i = 0; i < sizeof(tab) / sizeof(tab[0]); i++) {
@@ -703,8 +708,14 @@ ifapi_json_TPM2_GENERATED_deserialize(json_object *jso, TPM2_GENERATED *out)
             }
         }
     }
-
-    return ifapi_json_UINT32_deserialize(jso, out);
+    r = ifapi_json_UINT32_deserialize(jso, out);
+    return_if_error(r, "Could not deserialize UINT32");
+    if (*out != TPM2_GENERATED_VALUE) {
+        return_error2(TSS2_FAPI_RC_BAD_VALUE,
+                      "Value %x not equal TPM self generated value %x",
+                      *out, TPM2_GENERATED_VALUE);
+    }
+    return TSS2_RC_SUCCESS;
 }
 
 /** Deserialize a TPM2_ALG_ID json object.
@@ -3578,7 +3589,7 @@ ifapi_json_TPMI_RSA_KEY_BITS_deserialize(json_object *jso,
         TPMI_RSA_KEY_BITS *out)
 {
     SUBTYPE_FILTER(TPMI_RSA_KEY_BITS, UINT16,
-        1024, 2048);
+        1024, 2048, 3072, 4096);
 }
 
 /** Deserialize a TPM2B_ECC_PARAMETER json object.

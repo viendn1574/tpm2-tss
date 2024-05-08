@@ -394,9 +394,14 @@ iesys_cryptossl_hmac_start(ESYS_CRYPTO_CONTEXT_BLOB ** context,
 
 #if OPENSSL_VERSION_NUMBER < 0x10101000L
     if (!(hkey = EVP_PKEY_new_mac_key(EVP_PKEY_HMAC, NULL, key, size))) {
-#else
+#elif OPENSSL_VERSION_NUMBER < 0x30000000L
     /* this is preferred, but available since OpenSSL 1.1.1 only */
     if (!(hkey = EVP_PKEY_new_raw_private_key(EVP_PKEY_HMAC, NULL, key, size))) {
+#else
+    /* this is nessecary from OpenSSL 3.0.0 to avoid using the TPM2 provider using
+     * OpenSSL in a circular dependency */
+    if (!(hkey = EVP_PKEY_new_raw_private_key_ex(mycontext->hash.ossl_libctx,
+                                                 "HMAC", NULL, key, size))) {
 #endif
         goto_error(r, TSS2_ESYS_RC_GENERAL_FAILURE,
                    "Failed to create HMAC key", cleanup);
@@ -919,7 +924,7 @@ iesys_cryptossl_get_ecdh_point(TPM2B_PUBLIC *key,
         curveId = NID_secp521r1;
         key_size = 66;
         break;
-#if OPENSSL_VERSION_NUMBER >= 0x10101000L
+#ifdef NID_sm2
     case TPM2_ECC_SM2_P256:
         curveId = NID_sm2;
         key_size = 32;
@@ -1212,6 +1217,164 @@ iesys_cryptossl_sym_aes_decrypt(uint8_t * key,
     return r;
 }
 
+#if HAVE_EVP_SM4_CFB && !defined(OPENSSL_NO_SM4)
+/** Encrypt data with SM4.
+ *
+ * @param[in] key key used for SM4.
+ * @param[in] tpm_sym_alg SM4 type in TSS2 notation (must be TPM2_ALG_SM4).
+ * @param[in] key_bits Key size in bits.
+ * @param[in] tpm_mode Block cipher mode of opertion in TSS2 notation (CFB).
+ *            For parameter encryption only CFB can be used.
+ * @param[in,out] buffer Data to be encrypted. The encrypted date will be stored
+ *                in this buffer.
+ * @param[in] buffer_size size of data to be encrypted.
+ * @param[in] iv The initialization vector.
+ * @retval TSS2_RC_SUCCESS on success, or TSS2_ESYS_RC_BAD_VALUE and
+ * @retval TSS2_ESYS_RC_BAD_REFERENCE for invalid parameters,
+ * @retval TSS2_ESYS_RC_GENERAL_FAILURE for errors of the crypto library.
+ */
+TSS2_RC
+iesys_cryptossl_sym_sm4_encrypt(uint8_t * key,
+                                TPM2_ALG_ID tpm_sym_alg,
+                                TPMI_SM4_KEY_BITS key_bits,
+                                TPM2_ALG_ID tpm_mode,
+                                uint8_t * buffer,
+                                size_t buffer_size,
+                                uint8_t * iv,
+                                void *userdata)
+{
+    UNUSED(userdata);
+
+    TSS2_RC r = TSS2_RC_SUCCESS;
+    const EVP_CIPHER  *cipher_alg = NULL;
+    EVP_CIPHER_CTX *ctx = NULL;
+    int cipher_len;
+
+    if (key == NULL || buffer == NULL) {
+        return_error(TSS2_ESYS_RC_BAD_REFERENCE, "Bad reference");
+    }
+
+    LOGBLOB_TRACE(buffer, buffer_size, "IESYS SM4 input");
+
+    if (key_bits == 128 && tpm_mode == TPM2_ALG_CFB)
+        cipher_alg = EVP_sm4_cfb128();
+    else {
+        goto_error(r, TSS2_ESYS_RC_BAD_VALUE,
+                   "SM4 algorithm not implemented or illegal mode (CFB expected).",
+                   cleanup);
+    }
+
+    if (tpm_sym_alg != TPM2_ALG_SM4) {
+        goto_error(r, TSS2_ESYS_RC_BAD_VALUE,
+                   "SM4 encrypt called with wrong algorithm.", cleanup);
+    }
+
+    /* Create and initialize the context */
+    if(!(ctx = EVP_CIPHER_CTX_new())) {
+        goto_error(r, TSS2_ESYS_RC_GENERAL_FAILURE,
+                   "Initialize cipher context", cleanup);
+    }
+
+    if (1 != EVP_EncryptInit(ctx, cipher_alg, key, iv)) {
+        goto_error(r, TSS2_ESYS_RC_GENERAL_FAILURE,
+                   "Initialize cipher operation", cleanup);
+    }
+
+    /* Perform the encryption */
+    if (1 != EVP_EncryptUpdate(ctx, buffer, &cipher_len, buffer, buffer_size)) {
+        goto_error(r, TSS2_ESYS_RC_GENERAL_FAILURE, "Encrypt update", cleanup);
+    }
+
+    if (1 != EVP_EncryptFinal(ctx, buffer, &cipher_len)) {
+        goto_error(r, TSS2_ESYS_RC_GENERAL_FAILURE, "Encrypt final", cleanup);
+    }
+    LOGBLOB_TRACE(buffer, buffer_size, "IESYS SM4 output");
+
+cleanup:
+
+    OSSL_FREE(ctx,EVP_CIPHER_CTX);
+
+    return r;
+}
+
+/** Decrypt data with SM4.
+ *
+ * @param[in] key key used for SM4.
+ * @param[in] tpm_sym_alg SM4 type in TSS2 notation (must be TPM2_ALG_SM4).
+ * @param[in] key_bits Key size in bits.
+ * @param[in] tpm_mode Block cipher mode of opertion in TSS2 notation (CFB).
+ *            For parameter encryption only CFB can be used.
+ * @param[in,out] buffer Data to be decrypted. The decrypted date will be stored
+ *                in this buffer.
+ * @param[in] buffer_size size of data to be encrypted.
+ * @param[in] iv The initialization vector.
+ * @retval TSS2_RC_SUCCESS on success, or TSS2_ESYS_RC_BAD_VALUE and
+ * @retval TSS2_ESYS_RC_BAD_REFERENCE for invalid parameters,
+ * @retval TSS2_ESYS_RC_GENERAL_FAILURE for errors of the crypto library.
+ */
+TSS2_RC
+iesys_cryptossl_sym_sm4_decrypt(uint8_t * key,
+                                TPM2_ALG_ID tpm_sym_alg,
+                                TPMI_SM4_KEY_BITS key_bits,
+                                TPM2_ALG_ID tpm_mode,
+                                uint8_t * buffer,
+                                size_t buffer_size,
+                                uint8_t * iv,
+                                void *userdata)
+{
+    UNUSED(userdata);
+
+    TSS2_RC r = TSS2_RC_SUCCESS;
+    const EVP_CIPHER *cipher_alg = NULL;
+    EVP_CIPHER_CTX *ctx = NULL;
+    int cipher_len = 0;
+
+    if (key == NULL || buffer == NULL) {
+        return_error(TSS2_ESYS_RC_BAD_REFERENCE, "Bad reference");
+    }
+
+    if (tpm_sym_alg != TPM2_ALG_SM4) {
+        goto_error(r, TSS2_ESYS_RC_BAD_VALUE,
+                   "SM4 decrypt called with wrong algorithm.", cleanup);
+    }
+
+    if (key_bits == 128 && tpm_mode == TPM2_ALG_CFB)
+        cipher_alg = EVP_sm4_cfb128();
+    else {
+        goto_error(r, TSS2_ESYS_RC_BAD_VALUE,
+                   "SM4 algorithm not implemented or illegal mode (CFB expected).",
+                   cleanup);
+    }
+
+    /* Create and initialize the context */
+    if(!(ctx = EVP_CIPHER_CTX_new())) {
+        goto_error(r, TSS2_ESYS_RC_GENERAL_FAILURE,
+                   "Initialize cipher context", cleanup);
+    }
+
+    LOGBLOB_TRACE(buffer, buffer_size, "IESYS SM4 input");
+
+    if (1 != EVP_DecryptInit(ctx, cipher_alg, key, iv)) {
+        goto_error(r, TSS2_ESYS_RC_GENERAL_FAILURE,
+                   "Initialize cipher operation", cleanup);
+    }
+
+    /* Perform the decryption */
+    if (1 != EVP_DecryptUpdate(ctx, buffer, &cipher_len, buffer, buffer_size)) {
+        goto_error(r, TSS2_ESYS_RC_GENERAL_FAILURE, "Encrypt update", cleanup);
+    }
+
+    if (1 != EVP_DecryptFinal(ctx, buffer, &cipher_len)) {
+        goto_error(r, TSS2_ESYS_RC_GENERAL_FAILURE, "Encrypt final", cleanup);
+    }
+    LOGBLOB_TRACE(buffer, buffer_size, "IESYS SM4 output");
+
+cleanup:
+
+    OSSL_FREE(ctx,EVP_CIPHER_CTX);
+    return r;
+}
+#endif
 
 /** Initialize OpenSSL crypto backend.
  *

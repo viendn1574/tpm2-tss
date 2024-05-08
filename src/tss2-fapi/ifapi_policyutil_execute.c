@@ -42,17 +42,20 @@ new_policy(
     IFAPI_POLICY_EXEC_CTX *pol_exec_ctx;
     IFAPI_POLICY_EXEC_CB_CTX *pol_exec_cb_ctx;
 
-    *current_policy = calloc(sizeof(IFAPI_POLICYUTIL_STACK), 1);
+    *current_policy = calloc(1, sizeof(IFAPI_POLICYUTIL_STACK));
     if (!*current_policy) {
         return_error(TSS2_FAPI_RC_MEMORY, "Out of memory");
     }
 
-    pol_exec_ctx = calloc(sizeof(IFAPI_POLICY_EXEC_CTX), 1);
+    pol_exec_ctx = calloc(1, sizeof(IFAPI_POLICY_EXEC_CTX));
     if (!pol_exec_ctx) {
         SAFE_FREE(*current_policy);
         return_error(TSS2_FAPI_RC_MEMORY, "Out of memory");
     }
     (*current_policy)->pol_exec_ctx = pol_exec_ctx;
+    /* Save address of encryption session to disable encryption if
+       policy cp hash is executed. */
+    pol_exec_ctx->enc_session = &context->session2;
     pol_exec_ctx->callbacks.cbauth = ifapi_policyeval_cbauth;
     pol_exec_ctx->callbacks.cbauth_userdata = context;
     pol_exec_ctx->callbacks.cbload = ifapi_policyeval_cbload_key;
@@ -70,7 +73,7 @@ new_policy(
     pol_exec_ctx->callbacks.cbaction = ifapi_policy_action;
     pol_exec_ctx->callbacks.cbaction_userdata = context;
 
-    pol_exec_cb_ctx = calloc(sizeof(IFAPI_POLICY_EXEC_CB_CTX), 1);
+    pol_exec_cb_ctx = calloc(1, sizeof(IFAPI_POLICY_EXEC_CB_CTX));
     if (!pol_exec_cb_ctx) {
         SAFE_FREE(*current_policy);
         return_error(TSS2_FAPI_RC_MEMORY, "Out of memory");
@@ -119,8 +122,14 @@ create_session(
 
     case WAIT_FOR_CREATE_SESSION:
         r = Esys_StartAuthSession_Finish(context->esys, session);
-        if (r != TSS2_RC_SUCCESS)
+        if (r == TSS2_FAPI_RC_TRY_AGAIN) {
             return r;
+        }
+        if (r != TSS2_RC_SUCCESS) {
+            context->policy.create_session_state = CREATE_SESSION_INIT;
+            return r;
+        }
+
         context->policy.create_session_state = CREATE_SESSION_INIT;
         break;
 
@@ -280,8 +289,6 @@ ifapi_policyutil_execute(FAPI_CONTEXT *context, ESYS_TR *session)
                 goto_if_error(r, "Create policy session", error);
 
                 pol_util_ctx->pol_exec_ctx->session = pol_util_ctx->policy_session;
-                /* Save policy session for cleanup in error case. */
-                context->policy_session = pol_util_ctx->policy_session;
             } else {
                 pol_util_ctx->pol_exec_ctx->session = *session;
             }
@@ -295,6 +302,18 @@ ifapi_policyutil_execute(FAPI_CONTEXT *context, ESYS_TR *session)
                 context->policy.util_current_policy = pol_util_ctx->prev;
                 return TSS2_FAPI_RC_TRY_AGAIN;
             }
+
+            if (r) {
+                /* Cleanup stack */
+                IFAPI_POLICYUTIL_STACK  *utl_ctx = pol_util_ctx->prev;
+                while (utl_ctx) {
+                    if (utl_ctx->pol_exec_ctx->session ==  pol_util_ctx->pol_exec_ctx->session) {
+                        utl_ctx->pol_exec_ctx->session = ESYS_TR_NONE;
+                    }
+                    utl_ctx = utl_ctx->prev;
+                }
+                pol_util_ctx->pol_exec_ctx->session = ESYS_TR_NONE;
+            }
             goto_if_error(r, "Execute policy.", error);
 
             break;
@@ -302,6 +321,7 @@ ifapi_policyutil_execute(FAPI_CONTEXT *context, ESYS_TR *session)
         statecasedefault(pol_util_ctx->state);
     }
     *session = pol_util_ctx->policy_session;
+    pol_util_ctx->state = POLICY_UTIL_INIT;
 
     pol_util_ctx = pol_util_ctx->prev;
 
@@ -314,6 +334,7 @@ ifapi_policyutil_execute(FAPI_CONTEXT *context, ESYS_TR *session)
     return r;
 
 error:
+    pol_util_ctx->state = POLICY_UTIL_INIT;
     pol_util_ctx = pol_util_ctx->prev;
     if (context->policy.util_current_policy)
         clear_current_policy(context);

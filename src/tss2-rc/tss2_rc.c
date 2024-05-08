@@ -7,6 +7,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
+#include <inttypes.h>
 
 #include "tss2_rc.h"
 #include "tss2_sys.h"
@@ -116,7 +117,7 @@ tss2_rc_layer_number_get(TSS2_RC rc)
 static inline UINT8
 tpm2_rc_fmt1_N_get(TPM2_RC rc)
 {
-    return ((rc & (0xF << 8)) >> 8);
+    return ((rc & (((TPM2_RC)0xF) << 8)) >> 8);
 }
 
 /**
@@ -150,7 +151,7 @@ tpm2_rc_fmt1_N_is_handle(TPM2_RC rc)
 static inline UINT8
 tpm2_rc_fmt1_P_get(TPM2_RC rc)
 {
-    return ((rc & (1 << 6)) >> 6);
+    return ((rc & (((TPM2_RC)1) << 6)) >> 6);
 }
 
 static inline UINT8
@@ -168,19 +169,19 @@ tpm2_rc_fmt0_error_get(TPM2_RC rc)
 static inline UINT8
 tpm2_rc_tpm_fmt0_V_get(TPM2_RC rc)
 {
-    return ((rc & (1 << 8)) >> 8);
+    return ((rc & (((TPM2_RC)1) << 8)) >> 8);
 }
 
 static inline UINT8
 tpm2_rc_fmt0_T_get(TPM2_RC rc)
 {
-    return ((rc & (1 << 10)) >> 8);
+    return ((rc & (((TPM2_RC)1) << 10)) >> 8);
 }
 
 static inline UINT8
 tpm2_rc_fmt0_S_get(TSS2_RC rc)
 {
-    return ((rc & (1 << 11)) >> 8);
+    return ((rc & (((TPM2_RC)1) << 11)) >> 8);
 }
 
 /**
@@ -289,6 +290,10 @@ tss2_fmt1_err_strs_get(TSS2_RC error)
         "curve not supported",
         /* 0x27 - TPM2_RC_ECC_POINT */
         "point is not on the required curve",
+        /* 0x28 - TPM2_RC_FW_LIMITED */
+        "the command requires the firmware secret but the firmware secret is unavailable",
+        /* 0x29 - TPM2_RC_SVN_LIMITED */
+        "the command requires the firmware SVN secret but the firmware SVN secret is unavailable"
     };
 
     if (error < ARRAY_LEN(fmt1_err_strs)) {
@@ -641,7 +646,7 @@ tpm2_err_handler_fmt1(TPM2_RC rc)
     if (m) {
         catbuf(buf, "%s", m);
     } else {
-        catbuf(buf, "unknown error num: 0x%X", errnum);
+        catbuf(buf, "unknown error num: 0x%"PRIX8, errnum);
     }
 
     return buf;
@@ -663,7 +668,7 @@ tpm2_err_handler_fmt0(TSS2_RC rc)
     if (tpm2_rc_tpm_fmt0_V_get(rc)) {
         /* TCG specific error code */
         if (tpm2_rc_fmt0_T_get(rc)) {
-            catbuf(buf, "Vendor specific error: 0x%X", errnum);
+            catbuf(buf, "Vendor specific error: 0x%"PRIX8, errnum);
             return buf;
         }
 
@@ -691,7 +696,7 @@ tpm2_err_handler_fmt0(TSS2_RC rc)
 static inline UINT8
 tss2_rc_layer_format_get(TSS2_RC rc)
 {
-    return ((rc & (1 << 7)) >> 7);
+    return ((rc & (((TPM2_RC)1) << 7)) >> 7);
 }
 
 /**
@@ -884,7 +889,7 @@ unknown_layer_handler(TSS2_RC rc)
     static __thread char buf[32];
 
     clearbuf(buf);
-    catbuf(buf, "0x%X", rc);
+    catbuf(buf, "0x%"PRIX32, rc);
 
     return buf;
 }
@@ -992,14 +997,14 @@ Tss2_RC_Decode(TSS2_RC rc)
         if (e) {
             catbuf(buf, "%s", e);
         } else {
-            catbuf(buf, "0x%X", err_bits);
+            catbuf(buf, "0x%"PRIX16, err_bits);
         }
     } else {
         /*
          * we don't want to drop any bits if we don't know what to do with it
-         * so drop the layer byte since we we already have that.
+         * so just send the whole thing.
          */
-        const char *e = unknown_layer_handler(rc >> 8);
+        const char *e = unknown_layer_handler(rc);
         assert(e);
         catbuf(buf, "%s", e);
     }
@@ -1076,7 +1081,7 @@ Tss2_RC_DecodeInfoError(TSS2_RC_INFO *info)
     if (m) {
         catbuf(buf, "%s", m);
     } else {
-        catbuf(buf, "0x%X", info->error);
+        catbuf(buf, "0x%"PRIX32, info->error);
     }
 
     return buf;

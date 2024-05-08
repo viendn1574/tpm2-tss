@@ -182,6 +182,9 @@ Fapi_ExportKey_Async(
     check_not_null(context);
     check_not_null(pathOfKeyToDuplicate);
 
+    /* Cleanup command context. */
+    memset(&context->cmd, 0, sizeof(IFAPI_CMD_STATE));
+
     /* Helpful alias pointers */
     IFAPI_ExportKey * command = &context->cmd.ExportKey;
 
@@ -391,7 +394,8 @@ Fapi_ExportKey_Finish(
                                      command->key_object->public.handle,
                                      command->handle_ext_key,
                                      auth_session,
-                                     ESYS_TR_NONE, ESYS_TR_NONE,
+                                     ENC_SESSION_IF_POLICY(auth_session),
+                                     ESYS_TR_NONE,
                                      &encryptionKey, &symmetric);
             goto_if_error(r, "Duplicate", cleanup);
 
@@ -426,6 +430,8 @@ Fapi_ExportKey_Finish(
             return_try_again(r);
             goto_if_error(r, "Flush key", cleanup);
 
+            command->key_object->public.handle = ESYS_TR_NONE;
+
             fallthrough;
 
         statecase(context->state, EXPORT_KEY_WAIT_FOR_FLUSH2);
@@ -433,6 +439,8 @@ Fapi_ExportKey_Finish(
             r = ifapi_flush_object(context, command->handle_ext_key);
             return_try_again(r);
             goto_if_error(r, "Flush key", cleanup);
+
+            command->handle_ext_key = ESYS_TR_NONE;
 
             fallthrough;
 

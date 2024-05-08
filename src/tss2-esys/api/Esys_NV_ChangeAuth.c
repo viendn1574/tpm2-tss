@@ -159,6 +159,8 @@ Esys_NV_ChangeAuth_Async(
               esysContext, nvIndex, newAuth);
     TSS2L_SYS_AUTH_COMMAND auths;
     RSRC_NODE_T *nvIndexNode;
+    TPM2B_AUTH *authCopy;
+    TPMI_ALG_HASH hashAlg;
 
     /* Check context, sequence correctness and set state to error for now */
     if (esysContext == NULL) {
@@ -174,25 +176,32 @@ Esys_NV_ChangeAuth_Async(
     r = check_session_feasibility(shandle1, shandle2, shandle3, 1);
     return_state_if_error(r, _ESYS_STATE_INIT, "Check session usage");
     store_input_parameters(esysContext, nvIndex, newAuth);
+    authCopy = &esysContext->in.HierarchyChangeAuth.newAuth;
 
     /* Retrieve the metadata objects for provided handles */
     r = esys_GetResourceObject(esysContext, nvIndex, &nvIndexNode);
     return_state_if_error(r, _ESYS_STATE_INIT, "nvIndex unknown.");
 
+    if (!nvIndexNode) {
+        LOG_ERROR("NV Object for Esys handle %x not found.", nvIndex);
+        esysContext->state = _ESYS_STATE_INIT;
+        return TSS2_FAPI_RC_BAD_VALUE;
+    }
+
+    hashAlg = nvIndexNode->rsrc.misc.rsrc_nv_pub.nvPublic.nameAlg;
+    r = iesys_adapt_auth_value(&esysContext->crypto_backend, authCopy, hashAlg);
+    return_state_if_error(r, _ESYS_STATE_INIT, "Adapt auth value");
+
     /* Initial invocation of SAPI to prepare the command buffer with parameters */
     r = Tss2_Sys_NV_ChangeAuth_Prepare(esysContext->sys,
-                                       (nvIndexNode == NULL) ? TPM2_RH_NULL
-                                        : nvIndexNode->rsrc.handle, newAuth);
+                                       nvIndexNode->rsrc.handle, newAuth);
     return_state_if_error(r, _ESYS_STATE_INIT, "SAPI Prepare returned error.");
 
     /* Calculate the cpHash Values */
     r = init_session_tab(esysContext, shandle1, shandle2, shandle3);
     return_state_if_error(r, _ESYS_STATE_INIT, "Initialize session resources");
-    if (nvIndexNode != NULL)
-        iesys_compute_session_value(esysContext->session_tab[0],
-                &nvIndexNode->rsrc.name, &nvIndexNode->auth);
-    else
-        iesys_compute_session_value(esysContext->session_tab[0], NULL, NULL);
+    iesys_compute_session_value(esysContext->session_tab[0],
+                                &nvIndexNode->rsrc.name, &nvIndexNode->auth);
 
     iesys_compute_session_value(esysContext->session_tab[1], NULL, NULL);
     iesys_compute_session_value(esysContext->session_tab[2], NULL, NULL);

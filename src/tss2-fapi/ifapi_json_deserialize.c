@@ -952,6 +952,7 @@ get_event_hash(
         LOG_TRACE("false");
         return TSS2_FAPI_RC_BAD_VALUE;
     };
+
  error_cleanup:
     return r;
 }
@@ -1032,6 +1033,7 @@ check_event_digest(
     return TSS2_RC_SUCCESS;
 
 error_cleanup:
+    ifapi_crypto_hash_abort(&cryptoContext);
     return r;
 }
 
@@ -1078,6 +1080,7 @@ ifapi_json_IFAPI_EVENT_deserialize(
     } else {
         out->recnum = 0;
     }
+    LOG_TRACE("Event num %"PRIu32, out->recnum);
 
     if (!ifapi_get_sub_object(jso, "pcr", &jso2)) {
         LOG_ERROR("Field \"pcr\" not found.");

@@ -15,7 +15,7 @@ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])]) #Backward compatible setti
 
 AC_CONFIG_HEADERS([config.h])
 
-AC_CONFIG_FILES([Makefile Doxyfile lib/tss2-sys.pc lib/tss2-esys.pc lib/tss2-mu.pc lib/tss2-tcti-device.pc lib/tss2-tcti-mssim.pc lib/tss2-tcti-swtpm.pc lib/tss2-tcti-pcap.pc lib/tss2-tcti-libtpms.pc lib/tss2-rc.pc lib/tss2-tctildr.pc lib/tss2-fapi.pc lib/tss2-tcti-cmd.pc lib/tss2-policy.pc lib/tss2-tcti-spi-helper.pc])
+AC_CONFIG_FILES([Makefile Doxyfile lib/tss2-sys.pc lib/tss2-esys.pc lib/tss2-mu.pc lib/tss2-tcti-device.pc lib/tss2-tcti-mssim.pc lib/tss2-tcti-swtpm.pc lib/tss2-tcti-pcap.pc lib/tss2-tcti-libtpms.pc lib/tss2-rc.pc lib/tss2-tctildr.pc lib/tss2-fapi.pc lib/tss2-tcti-cmd.pc lib/tss2-policy.pc lib/tss2-tcti-spi-helper.pc lib/tss2-tcti-spi-ltt2go.pc lib/tss2-tcti-spidev.pc lib/tss2-tcti-spi-ftdi.pc lib/tss2-tcti-i2c-helper.pc lib/tss2-tcti-i2c-ftdi.pc])
 
 # propagate configure arguments to distcheck
 AC_SUBST([DISTCHECK_CONFIGURE_FLAGS],[$ac_configure_args])
@@ -29,6 +29,7 @@ AC_PROG_CC
 AC_PROG_CXX
 AC_PROG_LN_S
 AC_USE_SYSTEM_EXTENSIONS
+AC_C_BIGENDIAN
 LT_INIT()
 LT_LIB_DLLOAD
 PKG_INSTALLDIR()
@@ -151,7 +152,7 @@ AS_IF([test "x$enable_fapi_async_tests" = "xyes"],
     [AC_MSG_WARN("FAPI compiled with asynchronous spinning testing. NOT FOR PRODUCTION!")])
 
 AC_ARG_ENABLE([policy],
-            [AS_HELP_STRING([--enable-policy],
+            [AS_HELP_STRING([--disable-policy],
                             [build the tss2-policy library (default is yes)])],
             [enable_policy=$enableval],
             [enable_policy=yes])
@@ -191,6 +192,9 @@ AS_IF([test "x$enable_esys" = xyes],
            AC_CHECK_LIB(crypto,[EVP_sm3], [
                AC_DEFINE([HAVE_EVP_SM3], [1], [Support EVP_sm3 in openssl])],
                 [])
+           AC_CHECK_LIB(crypto, [EVP_sm4_cfb128], [
+               AC_DEFINE([HAVE_EVP_SM4_CFB], [1], [Support EVP_sm4_cfb in openssl])],
+                [])
            TSS2_ESYS_CFLAGS_CRYPTO="$CRYPTO_CFLAGS"
            TSS2_ESYS_LDFLAGS_CRYPTO="$CRYPTO_LIBS"
        ], [test "x$with_crypto" = xmbed], [
@@ -214,7 +218,7 @@ AS_IF([test "x$enable_policy" != xno && test "x$with_crypto" != "xossl"],
     [AC_MSG_ERROR([libpolicy has to be compiled with OpenSSL])])
 
 AS_IF([test "x$enable_fapi" = xyes -o "x$enable_policy" = xyes ],
-      [PKG_CHECK_MODULES([JSONC], [json-c])])
+      [PKG_CHECK_MODULES([JSONC], [json-c >= 0.13])])
 
 AS_IF([test "x$enable_fapi" = xyes ],
       [PKG_CHECK_MODULES([CURL], [libcurl])])
@@ -222,6 +226,13 @@ AC_CHECK_LIB([curl], [curl_url_strerror], [AC_DEFINE([HAVE_CURL_URL_STRERROR],[1
 
 AS_IF([test "x$enable_fapi" = xyes -o "x$enable_policy" = xyes ],
       [PKG_CHECK_MODULES([UUID], [uuid])])
+
+AC_ARG_ENABLE([util-io],
+              [AS_HELP_STRING([--disable-util-io],
+              [don't build the util-io])],,
+              [enable_util_io=yes])
+
+AM_CONDITIONAL(ENABLE_UTIL_IO, test "x$enable_util_io" = "xyes")
 
 AC_ARG_WITH([tctidefaultmodule],
             [AS_HELP_STRING([--with-tctidefaultmodule],
@@ -295,6 +306,90 @@ AM_CONDITIONAL([ENABLE_TCTI_SPI_HELPER], [test "x$enable_tcti_spi_helper" != xno
 AS_IF([test "x$enable_tcti_spi_helper" = "xyes"],
 	[AC_DEFINE([TCTI_SPI_HELPER],[1], [TCTI HELPER FOR SPI BASED ACCESS TO TPM2 DEVICE])])
 
+AC_ARG_ENABLE([tcti-spi-ltt2go],
+            [AS_HELP_STRING([--disable-tcti-spi-ltt2go],
+                            [don't build the tcti-spi-ltt2go module])],
+            [AS_IF([test "x$enable_tcti_spi_ltt2go" = "xyes"],
+                   [PKG_CHECK_MODULES([LIBUSB], [libusb-1.0],
+                        [AC_CHECK_HEADER(libusb-1.0/libusb.h,
+                                [enable_tcti_spi_ltt2go=yes],
+                                [enable_tcti_spi_ltt2go=no] [AC_MSG_ERROR([libusb-1.0 library header is missing.])])],
+                        [enable_tcti_spi_ltt2go=no] [AC_MSG_ERROR([libusb-1.0 library is missing.])])],
+                   [AS_IF([test "x$enable_tcti_spi_ltt2go" = "xno"],
+                          [enable_tcti_spi_ltt2go=no])])],
+            [PKG_CHECK_MODULES([LIBUSB], [libusb-1.0],
+                   [AC_CHECK_HEADER(libusb-1.0/libusb.h,
+                         [enable_tcti_spi_ltt2go=yes],
+                         [enable_tcti_spi_ltt2go=no])],
+                   [enable_tcti_spi_ltt2go=no])])
+
+
+AM_CONDITIONAL([ENABLE_TCTI_SPI_LTT2GO], [test "x$enable_tcti_spi_ltt2go" != xno])
+
+AS_IF([test "x$enable_tcti_spi_ltt2go" = "xyes"],
+    AC_DEFINE([TCTI_SPI_LTT2GO],[1], [TCTI FOR USB BASED ACCESS TO LETSTRUST-TPM2GO]))
+
+AC_ARG_ENABLE([tcti-spidev],
+            [AS_HELP_STRING([--disable-tcti-spidev],
+                            [don't build the tcti-spidev module; Default: Auto])],,
+            [enable_tcti_spidev=auto])
+AS_IF([test "x$enable_tcti_spidev" = "xauto"],
+    AC_CHECK_HEADER(linux/ioctl.h,
+        [enable_tcti_spidev=yes],
+        [enable_tcti_spidev=no]))
+AM_CONDITIONAL([ENABLE_TCTI_SPIDEV], [test "x$enable_tcti_spidev" != xno])
+AS_IF([test "x$enable_tcti_spidev" = "xyes"],
+    AC_DEFINE([TCTI_SPIDEV],[1], [TCTI FOR SPIDEV BASED ACCESS TO TPM]))
+
+PKG_CHECK_MODULES([LIBFTDI],
+                  [libftdi],
+                  [AC_DEFINE(LIBFTDI_VERSION, [0], [libftdi version 0.x])]
+                  [have_libftdi=yes],
+                  [PKG_CHECK_MODULES([LIBFTDI],
+                                     [libftdi1],
+                                     [AC_DEFINE(LIBFTDI_VERSION, [1], [libftdi version 1.x])]
+                                     [have_libftdi=yes],
+                                     [have_libftdi=no])])
+
+AC_ARG_ENABLE([tcti-spi-ftdi],
+              [AS_HELP_STRING([--disable-tcti-spi-ftdi],
+                              [don't build the tcti-spi-ftdi module])],
+              [AS_IF([test "x$enable_tcti_spi_ftdi" = "xyes"],
+                     [AS_IF([test "x$have_libftdi" != "xyes"],
+                            [AC_MSG_ERROR([libftdi/libftdi1 library is missing.])])])],
+              [AS_IF([test "x$have_libftdi" = "xyes"],
+                     [enable_tcti_spi_ftdi=yes],
+                     [enable_tcti_spi_ftdi=no])])
+
+AM_CONDITIONAL([ENABLE_TCTI_SPI_FTDI], [test "x$enable_tcti_spi_ftdi" != xno])
+
+AS_IF([test "x$enable_tcti_spi_ftdi" = "xyes"],
+    AC_DEFINE([TCTI_SPI_FTDI],[1], [TCTI FOR USB BASED ACCESS TO SPI BASED TPM OVER THE FTDI MPSSE USB TO SPI BRIDGE]))
+
+AC_ARG_ENABLE([tcti-i2c-helper],
+            [AS_HELP_STRING([--disable-tcti-i2c-helper],
+                            [don't build the tcti-i2c-helper module])],,
+            [enable_tcti_i2c_helper=yes])
+
+AM_CONDITIONAL([ENABLE_TCTI_I2C_HELPER], [test "x$enable_tcti_i2c_helper" != xno])
+AS_IF([test "x$enable_tcti_i2c_helper" = "xyes"],
+	[AC_DEFINE([TCTI_I2C_HELPER],[1], [TCTI HELPER FOR I2C BASED ACCESS TO TPM2 DEVICE])])
+
+AC_ARG_ENABLE([tcti-i2c-ftdi],
+              [AS_HELP_STRING([--disable-tcti-i2c-ftdi],
+                              [don't build the tcti-i2c-ftdi module])],
+              [AS_IF([test "x$enable_tcti_i2c_ftdi" = "xyes"],
+                     [AS_IF([test "x$have_libftdi" != "xyes"],
+                            [AC_MSG_ERROR([libftdi/libftdi1 library is missing.])])])],
+              [AS_IF([test "x$have_libftdi" = "xyes"],
+                     [enable_tcti_i2c_ftdi=yes],
+                     [enable_tcti_i2c_ftdi=no])])
+
+AM_CONDITIONAL([ENABLE_TCTI_I2C_FTDI], [test "x$enable_tcti_i2c_ftdi" != xno])
+
+AS_IF([test "x$enable_tcti_i2c_ftdi" = "xyes"],
+    AC_DEFINE([TCTI_I2C_FTDI],[1], [TCTI FOR USB BASED ACCESS TO I2C BASED TPM OVER THE FTDI MPSSE USB TO I2C BRIDGE]))
+
 AC_ARG_ENABLE([tcti-fuzzing],
             [AS_HELP_STRING([--enable-tcti-fuzzing],
                             [build the tcti-fuzzing module])],,
@@ -329,13 +424,8 @@ dnl ---------  Physical TPM device for testing -----------------------
 
 AC_ARG_WITH([device],
             [AS_HELP_STRING([--with-device=<device>],[TPM device for testing])],
-            [AS_IF([test -w "$with_device" && test -r "$with_device"],
-                   [AC_MSG_RESULT([success])
-                    AX_NORMALIZE_PATH([with_device])
-                    with_device_set=yes],
-                   [AC_MSG_ERROR([TPM device provided does not exist or is not writable])])],
+            [with_device_set=yes],
             [with_device_set=no])
-AM_CONDITIONAL([TESTDEVICE],[test "x$with_device_set" = xyes])
 
 AC_ARG_WITH([devicetests],
             [AS_HELP_STRING([--with-devicetests=<case>],[Comma-separated values of possible tests: destructive,mandatory,optional] default is mandatory)],
@@ -363,6 +453,27 @@ AM_CONDITIONAL([DEVICEMANDATORY],[test "x$enable_device_mandatory" = "xyes"])
 #
 # enable integration tests and check for simulator binary
 #
+
+AC_ARG_WITH([integrationtcti],
+            [AS_HELP_STRING([--with-integrationtcti=<tcti>],[TCTI used for testing])],
+            [AS_IF([test x"$with_device_set" = "xyes"],
+                   [AC_MSG_ERROR([with-device defines already the used TCTI"])],
+                   [AS_IF([test "xdevice:" = x$(echo $with_integrationtcti | sed 's/\(device:\).*/\1/') ],
+                          [ with_device=$(echo $with_integrationtcti | sed 's/^device\://')
+                            with_device_set=yes
+                            integration_tcti=$with_integrationtcti],
+                          [ integration_tcti=$with_integrationtcti])])],
+            [integration_tcti=none])
+
+AM_CONDITIONAL([TESTDEVICE],[test "x$with_device_set" = xyes])
+
+AS_IF([test "xyes" = x"$with_device_set"],
+      [ AS_IF([test -w "$with_device" && test -r "$with_device"],
+            [AC_MSG_RESULT([success])
+                     AX_NORMALIZE_PATH([with_device])
+                     w th_device_set=yes],
+            [AC_MSG_ERROR([TPM device provided does not exist or is not writable])]) ])
+
 AC_ARG_ENABLE([integration],
     [AS_HELP_STRING([--enable-integration],
         [build and execute integration tests])],,
@@ -391,12 +502,9 @@ AS_IF([test "x$enable_integration" = "xyes"],
        AC_CHECK_HEADER(uthash.h, [], [AC_MSG_ERROR([Can not find uthash.h. Please install uthash-dev])])
 
        # choose tcti for testing and look for TPM simulator binary
-       integration_tcti="none"
-       integration_args=""
        AS_IF([test "x$with_device_set" = xyes],
              [# use device if --with-device was passed
-              integration_tcti=device
-              integration_args="--device=$with_device"
+              integration_tcti=device:$with_device
               AC_MSG_WARN([Using physical TPM for integration testing])])
        AS_IF([test "x$integration_tcti" = "xnone" && test "x$enable_tcti_swtpm" != xyes && test "x$enable_tcti_mssim" != xyes],
              [AC_MSG_ERROR([No suitable TCTI for testing enabled. Please use option --enable-tcti-swtpm (recommended) or --enable-tcti-mssim (fallback) to enable a suitable TCTI or disable testing with --disable-integration.])])
@@ -417,7 +525,6 @@ AS_IF([test "x$enable_integration" = "xyes"],
        AS_IF([test "x$integration_tcti" = "xnone"],
              [AC_MSG_ERROR([No simulator executable found in PATH for testing TCTI.])])
        AC_SUBST([INTEGRATION_TCTI], [$integration_tcti])
-       AC_SUBST([INTEGRATION_ARGS], [$integration_args])
        AC_SUBST([ENABLE_INTEGRATION], [$enable_integration])])
 AM_CONDITIONAL([ENABLE_INTEGRATION],[test "x$enable_integration" = "xyes"])
 #
@@ -516,7 +623,7 @@ AS_IF([test "x$enable_defaultflags" = "xyes"],
       ADD_COMPILER_FLAG([-Wextra])
       ADD_COMPILER_FLAG([-Wformat-security])
       AS_IF([test "x$ax_is_release" = "xno"],
-          [ADD_COMPILER_FLAG([-])])
+          [ADD_COMPILER_FLAG([-Werror])])
       ADD_COMPILER_FLAG([-fstack-protector-all])
       ADD_COMPILER_FLAG([-fpic])
       ADD_COMPILER_FLAG([-fPIC])
@@ -545,14 +652,16 @@ AS_IF([test "x$enable_self_generated_certificate" = xyes],
 	[AC_DEFINE([SELF_GENERATED_CERTIFICATE], [1], [Allow usage of self generated root certificate])],
 	[AS_IF([test "x$integration_tcti" != "xdevice"], [AC_DEFINE([FAPI_TEST_EK_CERT_LESS], [1], [Perform integration tests without EK certificate verification])])])
 
+AM_CONDITIONAL([INIT_CA], [test "x$enable_self_generated_certificate" = xyes])
+
 AS_IF([test "x$enable_integration" = "xyes" && test "x$enable_self_generated_certificate" != "xyes" && test "x$integration_tcti" != "xdevice"],
       [AC_MSG_WARN([Running integration tests without EK certificate verification, use --enable-self-generated-certificate for full test coverage])])
 
 # Check for systemd helper tools used by make install
 AC_CHECK_PROG(systemd_sysusers, systemd-sysusers, yes)
-AM_CONDITIONAL(SYSD_SYSUSERS, test "x$systemd_sysusers" = "xyes")
+AM_CONDITIONAL([SYSD_SYSUSERS], [test "x$systemd_sysusers" = "xyes" && test "x$sysusersdir" != "xno"])
 AC_CHECK_PROG(systemd_tmpfiles, systemd-tmpfiles, yes)
-AM_CONDITIONAL(SYSD_TMPFILES, test "x$systemd_tmpfiles" = "xyes")
+AM_CONDITIONAL([SYSD_TMPFILES], [test "x$systemd_tmpfiles" = "xyes" && test "x$tmpfilesdir" != "xno"])
 
 # Check all tools used by make install
 AS_IF([test "$HOSTOS" = "Linux" && test "x$systemd_sysusers" != "xyes"],
@@ -641,4 +750,8 @@ AC_MSG_RESULT([
     userstatedir:       [\$HOME/]$with_userstatedir
     sysmeasurements:    $sysmeasurements
     imameasurements:    $imameasurements
+    tcti_spi_ltt2go      $enable_tcti_spi_ltt2go
+    tcti_spidev         $enable_tcti_spidev
+    tcti_spi_ftdi       $enable_tcti_spi_ftdi
+    tcti_i2c_ftdi       $enable_tcti_i2c_ftdi
 ])

@@ -188,7 +188,7 @@ Fapi_ChangeAuth_Async(
     /* Get a session for further authorizing and integrity checking the
        subsequent ChangeAuth calls. */
     r = ifapi_get_sessions_async(context,
-                                 IFAPI_SESSION_GENEK | IFAPI_SESSION1,
+                                 IFAPI_SESSION_GEN_SRK | IFAPI_SESSION1,
                                  TPMA_SESSION_DECRYPT, 0);
     goto_if_error_reset_state(r, "Create sessions", error_cleanup);
 
@@ -352,7 +352,8 @@ Fapi_ChangeAuth_Finish(
                     command->handle,
                     context->loadKey.parent_handle,
                     auth_session,
-                    ESYS_TR_NONE, ESYS_TR_NONE,
+                    ENC_SESSION_IF_POLICY(auth_session),
+                    ESYS_TR_NONE,
                     &command->newAuthValue);
             goto_if_error(r, "Error: Sign", error_cleanup);
 
@@ -444,7 +445,6 @@ Fapi_ChangeAuth_Finish(
             r = ifapi_cleanup_session(context);
             try_again_or_error_goto(r, "Cleanup", error_cleanup);
 
-            context->state = _FAPI_STATE_INIT;
             LOG_TRACE("success");
             break;
 
@@ -481,7 +481,7 @@ Fapi_ChangeAuth_Finish(
             r = Esys_NV_ChangeAuth_Async(context->esys,
                     command->object.public.handle,
                     auth_session,
-                    ESYS_TR_NONE,
+                    ENC_SESSION_IF_POLICY(auth_session),
                     ESYS_TR_NONE,
                     &command->newAuthValue);
             goto_if_error(r, "Error: NV_ChangeAuth", error_cleanup);
@@ -608,5 +608,6 @@ error_cleanup:
         SAFE_FREE(command->pathlist);
     }
     LOG_TRACE("finished");
+    context->state = _FAPI_STATE_INIT;
     return r;
 }
