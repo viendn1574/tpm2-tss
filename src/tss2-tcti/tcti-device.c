@@ -40,6 +40,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/select.h>
 #ifdef __VXWORKS__
 #include <sys/poll.h>
 #else
@@ -56,6 +57,7 @@
 #include "util/aux_util.h"
 #define LOGMODULE tcti
 #include "util/log.h"
+#include <linux/i2c-dev.h>
 
 static char *default_conf[] = {
 #ifdef __VXWORKS__
@@ -130,6 +132,24 @@ tcti_device_transmit (
     tcti_common->state = TCTI_STATE_RECEIVE;
     return TSS2_RC_SUCCESS;
 }
+
+static void msleep(uint32_t ms)
+{
+  fd_set r, w, e;
+  struct timeval tv;
+  int ret;
+
+  FD_ZERO(&r);
+  FD_ZERO(&w);
+  FD_ZERO(&e);
+  tv.tv_sec = 0;
+  tv.tv_usec = ms * 1000;
+
+  ret = select(0, &r, &w, &e, &tv);
+  (void)ret;
+}
+
+
 /*
  * This receive function deviates from the spec a bit. Calling this function
  * with a NULL 'tctiContext' parameter *should* result in the required size for
@@ -175,35 +195,70 @@ tcti_device_receive (
 
     if (!response_buffer) {
         if (!tcti_common->partial_read_supported) {
-            LOG_DEBUG("Partial read not supported ");
+            LOG_ERROR("Partial read not supported ");
             *response_size = 4096;
             return TSS2_RC_SUCCESS;
         } else {
             /* Read the header only and get the response size out of it */
-            LOG_DEBUG("Partial read - reading response size");
+            LOG_ERROR("Partial read - reading response size");
             fds.fd = tcti_dev->fd;
             fds.events = POLLIN;
 
-            rc_poll = poll(&fds, nfds, timeout);
-            if (rc_poll < 0) {
-                LOG_ERROR ("Failed to poll for response from fd %d, got errno %d: %s",
-               tcti_dev->fd, errno, strerror(errno));
+            // rc_poll = poll(&fds, nfds, timeout);
+            // if (rc_poll < 0) {
+            //     LOG_ERROR ("Failed to poll for response from fd %d, got errno %d: %s",
+            //    tcti_dev->fd, errno, strerror(errno));
+            //     return TSS2_TCTI_RC_IO_ERROR;
+            // } else if (rc_poll == 0) {
+            //     LOG_INFO ("Poll timed out on fd %d.", tcti_dev->fd);
+            //     return TSS2_TCTI_RC_TRY_AGAIN;
+            // } else if (fds.revents == POLLIN) {
+            //     TEMP_RETRY (size, read (tcti_dev->fd, header, TPM_HEADER_SIZE));
+            //     if (size < 0 || size != TPM_HEADER_SIZE) {
+            //         LOG_ERROR ("Failed to get response size fd %d, got errno %d: %s",
+            //                tcti_dev->fd, errno, strerror (errno));
+            //         return TSS2_TCTI_RC_IO_ERROR;
+            //     }
+            // } else {
+            //     LOG_ERROR ("Header could not be received");
+            //     return TSS2_TCTI_RC_GENERAL_FAILURE;
+            // }
+
+# if 1
+	    {
+	      int wc = 0;
+	      for (;;) {
+		uint8_t prebuff[2] = {0xff, 0xff};
+
+		TEMP_RETRY (size, read (tcti_dev->fd, prebuff, 1));
+		if (prebuff[0] == 0xff) {
+		  msleep(50);
+		  wc++;
+		  continue;
+		}
+		header[0] = prebuff[0];
+
+		TEMP_RETRY (size, read (tcti_dev->fd, &header[1], TPM_HEADER_SIZE-1));
+		if (size < 0 || size != TPM_HEADER_SIZE-1) {
+		  LOG_ERROR ("Failed to get response size fd %d, got errno %d: %s",
+			     tcti_dev->fd, errno, strerror (errno));
+		  return TSS2_TCTI_RC_IO_ERROR;
+		}
+		LOG_ERROR ("%s(%d): header read in spin-wait wc: %d - %d mS", 
+			   __func__, __LINE__, wc, wc*50);
+		break;
+	      }
+	    }
+# else
+            msleep(3000);
+            TEMP_RETRY (size, read (tcti_dev->fd, header, TPM_HEADER_SIZE));
+            if (size < 0 || size != TPM_HEADER_SIZE) {
+                LOG_ERROR ("Failed to get response size fd %d, got errno %d: %s",
+                        tcti_dev->fd, errno, strerror (errno));
                 return TSS2_TCTI_RC_IO_ERROR;
-            } else if (rc_poll == 0) {
-                LOG_INFO ("Poll timed out on fd %d.", tcti_dev->fd);
-                return TSS2_TCTI_RC_TRY_AGAIN;
-            } else if (fds.revents == POLLIN) {
-                TEMP_RETRY (size, read (tcti_dev->fd, header, TPM_HEADER_SIZE));
-                if (size < 0 || size != TPM_HEADER_SIZE) {
-                    LOG_ERROR ("Failed to get response size fd %d, got errno %d: %s",
-                           tcti_dev->fd, errno, strerror (errno));
-                    return TSS2_TCTI_RC_IO_ERROR;
-                }
-            } else {
-                LOG_ERROR ("Header could not be received");
-                return TSS2_TCTI_RC_GENERAL_FAILURE;
             }
-            LOG_DEBUG("Partial read - received header");
+# endif
+            LOG_ERROR("Partial read - received header");
             rc = Tss2_MU_UINT32_Unmarshal(header, TPM_HEADER_SIZE,
                                           &offset, &partial_size);
             if (rc != TSS2_RC_SUCCESS) {
@@ -244,29 +299,48 @@ tcti_device_receive (
     fds.fd = tcti_dev->fd;
     fds.events = POLLIN;
 
-    rc_poll = poll(&fds, nfds, timeout);
-    if (rc_poll < 0) {
-        LOG_ERROR ("Failed to poll for response from fd %d, got errno %d: %s",
-                   tcti_dev->fd, errno, strerror (errno));
-        return TSS2_TCTI_RC_IO_ERROR;
-    } else if (rc_poll == 0) {
-        LOG_INFO ("Poll timed out on fd %d.", tcti_dev->fd);
-        return TSS2_TCTI_RC_TRY_AGAIN;
-    } else if (fds.revents == POLLIN) {
-        if (tcti_common->partial == true) {
-            memcpy(response_buffer, &tcti_common->header, TPM_HEADER_SIZE);
-            TEMP_RETRY (size, read (tcti_dev->fd, response_buffer +
-                        TPM_HEADER_SIZE, *response_size - TPM_HEADER_SIZE));
-        } else {
-            TEMP_RETRY (size, read (tcti_dev->fd, response_buffer,
-                                    *response_size));
-        }
-        if (size < 0) {
-            LOG_ERROR ("Failed to read response from fd %d, got errno %d: %s",
-               tcti_dev->fd, errno, strerror (errno));
-            return TSS2_TCTI_RC_IO_ERROR;
-        }
+    // rc_poll = poll(&fds, nfds, timeout);
+    // if (rc_poll < 0) {
+    //     LOG_ERROR ("Failed to poll for response from fd %d, got errno %d: %s",
+    //                tcti_dev->fd, errno, strerror (errno));
+    //     return TSS2_TCTI_RC_IO_ERROR;
+    // } else if (rc_poll == 0) {
+    //     LOG_INFO ("Poll timed out on fd %d.", tcti_dev->fd);
+    //     return TSS2_TCTI_RC_TRY_AGAIN;
+    // } else if (fds.revents == POLLIN) {
+    //     if (tcti_common->partial == true) {
+    //         memcpy(response_buffer, &tcti_common->header, TPM_HEADER_SIZE);
+    //         TEMP_RETRY (size, read (tcti_dev->fd, response_buffer +
+    //                     TPM_HEADER_SIZE, *response_size - TPM_HEADER_SIZE));
+    //     } else {
+    //         TEMP_RETRY (size, read (tcti_dev->fd, response_buffer,
+    //                                 *response_size));
+    //     }
+    //     if (size < 0) {
+    //         LOG_ERROR ("Failed to read response from fd %d, got errno %d: %s",
+    //            tcti_dev->fd, errno, strerror (errno));
+    //         return TSS2_TCTI_RC_IO_ERROR;
+    //     }
+    // }
+
+    msleep(3000);
+    if (tcti_common->partial == true) {
+        memcpy(response_buffer, &tcti_common->header, TPM_HEADER_SIZE);
+        TEMP_RETRY (size, read (tcti_dev->fd, response_buffer +
+                    TPM_HEADER_SIZE, *response_size - TPM_HEADER_SIZE));
+    } else {
+      uint32_t bff;
+        TEMP_RETRY (size, read (tcti_dev->fd, response_buffer,
+                                *response_size));
+	memcpy(&bff, response_buffer, 4);
+	LOG_ERROR("%s(%d): attempt to read response_size got: 0x%08x", __func__, __LINE__, bff);
     }
+    if (size < 0) {
+        LOG_ERROR ("Failed to read response from fd %d, got errno %d: %s",
+            tcti_dev->fd, errno, strerror (errno));
+        return TSS2_TCTI_RC_IO_ERROR;
+    }
+
     if (size == 0) {
         LOG_WARNING ("Got EOF instead of response.");
         rc = TSS2_TCTI_RC_NO_CONNECTION;
@@ -386,10 +460,19 @@ tcti_device_set_locality (
 
 static int open_tpm (
     const char* pathname) {
+        int file;
+        int addr = 0x4d;
 #ifdef __VXWORKS__
         return open (pathname, O_RDWR | O_NONBLOCK, (S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP));
 #else
-        return open (pathname, O_RDWR | O_NONBLOCK);
+        file = open (pathname, O_RDWR | O_NONBLOCK); /* for i2c, why nonblock ? */
+	LOG_ERROR("%s(%d): fd: %d path: %s",
+		  __func__, __LINE__,
+		  file, pathname);
+        if (ioctl(file, I2C_SLAVE, addr) < 0) {
+            LOG_TRACE("Failed to acquire bus access and/or talk to slave.\n");
+        }
+        return file;
 #endif
 }
 
@@ -466,6 +549,7 @@ Tss2_Tcti_Device_Init (
     uint8_t rsp[20] = {0};
     struct pollfd fds;
     int rc_poll, nfds = 1;
+    int wc = 0;
 
     ssize_t sz = write_all (tcti_dev->fd, cmd, sizeof(cmd));
     if (sz < 0 || sz != sizeof(cmd)) {
@@ -477,36 +561,92 @@ Tss2_Tcti_Device_Init (
 
     fds.fd = tcti_dev->fd;
     fds.events = POLLIN;
-    rc_poll = poll(&fds, nfds, 1000); /* Wait 1 sec */
-    if (rc_poll < 0 || rc_poll == 0) {
-        LOG_ERROR ("Failed to poll for response from fd %d, rc %d, errno %d: %s",
-                   tcti_dev->fd, rc_poll, errno, strerror(errno));
+    // rc_poll = poll(&fds, nfds, 1000); /* Wait 1 sec */
+    // if (rc_poll < 0 || rc_poll == 0) {
+    //     LOG_ERROR ("Failed to poll for response from fd %d, rc %d, errno %d: %s",
+    //                tcti_dev->fd, rc_poll, errno, strerror(errno));
+    //     close_tpm (&tcti_dev->fd);
+    //     return TSS2_TCTI_RC_IO_ERROR;
+    // } else if (fds.revents == POLLIN) {
+    //     TEMP_RETRY (sz, read (tcti_dev->fd, rsp, TPM_HEADER_SIZE));
+    //     if (sz < 0 || sz != TPM_HEADER_SIZE) {
+    //         LOG_ERROR ("Failed to read response header fd %d, got errno %d: %s",
+    //                    tcti_dev->fd, errno, strerror (errno));
+    //         close_tpm (&tcti_dev->fd);
+    //         return TSS2_TCTI_RC_IO_ERROR;
+    //     }
+    // }
+
+    /*
+      PJA:
+    */
+# if 1
+    for (;;) {
+      uint8_t prebuff[2] = {0xff, 0xff};
+
+      TEMP_RETRY (sz, read (tcti_dev->fd, prebuff, 1));
+      if (prebuff[0] == 0xff) {
+	msleep(50);
+	wc++;
+	continue;
+      }
+      rsp[0] = prebuff[0];
+      TEMP_RETRY (sz, read (tcti_dev->fd, &rsp[1], TPM_HEADER_SIZE-1));
+      if (sz < 0 || sz != (TPM_HEADER_SIZE-1)) {
+        LOG_ERROR ("Failed to read response header fd %d, got errno %d: %s",
+		   tcti_dev->fd, errno, strerror (errno));
         close_tpm (&tcti_dev->fd);
         return TSS2_TCTI_RC_IO_ERROR;
-    } else if (fds.revents == POLLIN) {
-        TEMP_RETRY (sz, read (tcti_dev->fd, rsp, TPM_HEADER_SIZE));
-        if (sz < 0 || sz != TPM_HEADER_SIZE) {
-            LOG_ERROR ("Failed to read response header fd %d, got errno %d: %s",
-                       tcti_dev->fd, errno, strerror (errno));
-            close_tpm (&tcti_dev->fd);
-            return TSS2_TCTI_RC_IO_ERROR;
-        }
+      }
+      LOG_ERROR ("Header read in spin-wait wc: %d - %d mS", wc, wc*50);
+      break;
     }
+# else
+    msleep(1000);
+    TEMP_RETRY (sz, read (tcti_dev->fd, rsp, TPM_HEADER_SIZE));
+    if (sz < 0 || sz != TPM_HEADER_SIZE) {
+        LOG_ERROR ("Failed to read response header fd %d, got errno %d: %s",
+                    tcti_dev->fd, errno, strerror (errno));
+        close_tpm (&tcti_dev->fd);
+        return TSS2_TCTI_RC_IO_ERROR;
+    }
+# endif
+
     LOG_DEBUG ("Header read, reading rest of response");
     fds.fd = tcti_dev->fd;
     fds.events = POLLIN;
     sz = 0;
-    rc_poll = poll(&fds, nfds, 1000); /* Wait 1 sec */
-    if (rc_poll < 0) {
-        LOG_DEBUG ("Failed to poll for response from fd %d, rc %d, errno %d: %s",
-                   tcti_dev->fd, rc_poll, errno, strerror(errno));
+    // rc_poll = poll(&fds, nfds, 1000); /* Wait 1 sec */
+    // if (rc_poll < 0) {
+    //     LOG_DEBUG ("Failed to poll for response from fd %d, rc %d, errno %d: %s",
+    //                tcti_dev->fd, rc_poll, errno, strerror(errno));
+    //     close_tpm (&tcti_dev->fd);
+    //     return TSS2_TCTI_RC_IO_ERROR;
+	// } else if (rc_poll == 0) {
+    //     LOG_ERROR ("timeout waiting for response from fd %d", tcti_dev->fd);
+    // } else if (fds.revents == POLLIN) {
+    //     TEMP_RETRY (sz, read (tcti_dev->fd, rsp + TPM_HEADER_SIZE,
+    //                 sizeof(rsp) - TPM_HEADER_SIZE));
+    // }
+    msleep(1000);
+    TEMP_RETRY (sz, read (tcti_dev->fd, rsp + TPM_HEADER_SIZE,
+            sizeof(rsp) - TPM_HEADER_SIZE));
+    if (sz <= 0) {
+        /* partial read not supported. Reset the connection */
+        LOG_DEBUG ("Failed to get response tail fd %d, got errno %d: %s",
+                   tcti_dev->fd, errno, strerror (errno));
+        tcti_common->partial_read_supported = 0;
         close_tpm (&tcti_dev->fd);
-        return TSS2_TCTI_RC_IO_ERROR;
-	} else if (rc_poll == 0) {
-        LOG_ERROR ("timeout waiting for response from fd %d", tcti_dev->fd);
-    } else if (fds.revents == POLLIN) {
-        TEMP_RETRY (sz, read (tcti_dev->fd, rsp + TPM_HEADER_SIZE,
-                    sizeof(rsp) - TPM_HEADER_SIZE));
+        tcti_dev->fd = open_tpm (used_conf);
+        if (tcti_dev->fd < 0) {
+            LOG_ERROR ("Failed to open specified TCTI device file %s: %s",
+                       used_conf, strerror (errno));
+            return TSS2_TCTI_RC_IO_ERROR;
+        }
+    } else {
+        /* partial read supported. */
+        LOG_DEBUG ("Read the rest - partial read supported");
+        tcti_common->partial_read_supported = 1;
     }
 
     if (sz <= 0) {
